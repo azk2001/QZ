@@ -14,11 +14,11 @@ namespace GameMain
         public readonly string text;
 
 
-        private loadingtext_c( tab_file_data.line_data file)
+        private loadingtext_c( TabFileData.LineData file)
         {
-            id= file.get_content_int("id");
-            minLevel= file.get_content_int("minLevel");
-            text= file.get_content_str("text");
+            id= file.GetContentInt("id");
+            minLevel= file.GetContentInt("minLevel");
+            text= file.GetContentStr("text");
         }
 
 
@@ -58,13 +58,13 @@ namespace GameMain
         
 
 
-        public static void LoadTxt(tab_file_data file)
+        public static void LoadTxt(TabFileData file)
         {
-            List<tab_file_data.line_data> list = file.get_line_data();
+            List<TabFileData.LineData> list = file.GetLineData();
             for (int i = 0, max = list.Count; i < max; i++)
             {
-                tab_file_data.line_data data = list[i];
-                int id = data.get_content_int("id");
+                TabFileData.LineData data = list[i];
+                int id = data.GetContentInt("id");
                 if (gInfoDic.ContainsKey(id))
                 {
                      Debug.LogError("loadingtext_c配置表id重复:"+id);

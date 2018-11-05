@@ -26,21 +26,16 @@ public class BuffBase : BattleBase
 
 		isUpdate = true;
 		buffType = mBuffParam.buffId;
-		string prefabName = c_mapResPath.GetThis (buffParam.prefabId).name;
 
-		buffPrefab = BattleBuffRoot.instance.SpwanPrefab (prefabName);
 		buffController = buffPrefab.GetComponent<BuffController> ();
 		buffController.buffStaticId = buffStaticId;
 		buffController.buffTypeId = buffType;
 		buffPrefab.position = position;
 
 		this.position = position;
-		markPosition = MapManager.instance.PositionToMark (position);
 
 		isInvincible = true;
 		invincibleDataTime = 0;
-
-		MapManager.instance.SetMapItemMark (markPosition,true,MapMarkValue.buff);
 
 		return OnInitConfig(mBuffParam.textParam);
 	}
@@ -90,8 +85,6 @@ public class BuffBase : BattleBase
 		isUpdate = false;
 		BattleBuffRoot.instance.DeSpwan (buffPrefab);
 		BuffManager.instance.RemoveBuff (mBuffStaticId);
-
-		MapManager.instance.SetMapItemMark (markPosition,false,MapMarkValue.buff);
 
 	}
 

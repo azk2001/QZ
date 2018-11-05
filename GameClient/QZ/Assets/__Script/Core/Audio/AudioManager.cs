@@ -34,36 +34,7 @@ public class AudioManager
     private float _backVolume = 1;
     public void Play(int id, Vector3 playPosition, bool isLoop = false)
     {
-		c_audioPlaySet audioSet = c_audioPlaySet.GetThis (id);
-		if (audioSet != null)
-        {
-			c_sfx curSfx = c_sfx.GetThis(audioSet.pathId);
-
-            string path = curSfx.path;
-            AudioClip clip = Resources.Load<AudioClip>(path);
-
-			Transform transWave = AudioRoot.instance.spwanPool.GetSpwanPrefab("AudioWave"+audioSet.wave);
-
-			if(transWave!= null)
-			{
-				transWave.gameObject.SetActive(true);
-
-				Transform transGroup = transWave.Find("AudioGroup"+audioSet.group);
-
-				transGroup.position = playPosition;
-
-				AudioSource audioSource = transGroup.GetComponent<AudioSource>();
-				if(audioSource == null)
-					audioSource = transGroup.gameObject.AddComponent<AudioSource>();
-
-	            audioSource.loop = isLoop;
-	            audioSource.clip = clip;
-	            audioSource.Play();
-				audioSource.volume = audioSet.value;
-
-				allAudioDic[id] = audioSource;
-			}
-        }
+	
     }
     public void Stop(int id)
     {

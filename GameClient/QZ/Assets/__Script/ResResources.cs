@@ -20,7 +20,6 @@ public class ResResources
 		o.transform.parent = transParent;
 		o.transform.localScale = Vector3.one;
 		o.transform.localEulerAngles = Vector3.zero;
-		mi.itemPrefab = ResResources.LoadAssetRes(resPath, o.transform);
 
 		return o;
 	}
@@ -35,8 +34,7 @@ public class ResResources
 			GameObject g = GameObject.CreatePrimitive (PrimitiveType.Cube);
 			g.transform.parent = o.transform;
 			g.transform.localPosition = Vector3.zero;
-
-			mi.itemPrefab = g.transform;
+            
 		}
 
 		return o;

@@ -51,10 +51,7 @@ public class BuffManager
 
 		buffTypeDic [staticId] = bb;
 		buffTypeList.Add (bb);
-
-		Vector2 markPosition = MapManager.instance.PositionToMark (position);
-		markPositionBuffType [markPosition] = bb;
-
+        
 		return bb;
 	}
 
@@ -71,8 +68,6 @@ public class BuffManager
 		buffTypeDic [staticId] = bb;
 		buffTypeList.Add (bb);
 
-		Vector2 markPosition = MapManager.instance.PositionToMark (position);
-		markPositionBuffType [markPosition] = bb;
 		return bb;
 	}
 

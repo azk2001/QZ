@@ -130,7 +130,7 @@ public class IInvokeList<DATA>
             }
         }
 
-        Debuger.LogError("没有找到 objectCode:{0}, 可能重复调用了RemoveListener");
+        Debug.LogError("没有找到 objectCode:{0}, 可能重复调用了RemoveListener");
         return false;
     }
 }

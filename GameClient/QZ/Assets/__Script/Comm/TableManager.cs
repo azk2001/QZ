@@ -52,7 +52,7 @@ namespace GameMain
                 {
                     TextAsset textAsset = textAssetList[i] as TextAsset;
 
-                    tab_file_data data = tab_file.parse(textAsset.text, loadStartList[name], name);
+                    TabFileData data = TabFile.parse(textAsset.text, loadStartList[name], name);
 
                     LoadTxt(name, data);
 
@@ -77,7 +77,7 @@ namespace GameMain
             index = 0;
         }
 
-        public void LoadTxt(string name, tab_file_data data)
+        public void LoadTxt(string name, TabFileData data)
         {
             switch (name)
             {

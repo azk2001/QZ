@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QZ", "QZ.csproj", "{CF977418-08C1-D44E-D04A-168F39972C50}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QZ.Editor", "QZ.Editor.csproj", "{0904761A-8B82-0C94-D119-BE29B2F3A704}"

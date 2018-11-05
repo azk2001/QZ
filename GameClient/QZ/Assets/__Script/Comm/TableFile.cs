@@ -3,144 +3,145 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public class tab_file_data
+public class TabFileData
 {
-    public bool contain_line(string __key)
+    public bool ContainLine(string key)
     {
-        return _data.ContainsKey(__key);
+        return data.ContainsKey(key);
     }
 
-    public int get_content_int(string __key, string __col_name)
+    public int GetContentInt(string key, string colName)
     {
-        if (!_data.ContainsKey(__key))
+        if (!data.ContainsKey(key))
         {
-            Debug.LogError(string.Format("parse failed! key:{0}", __key));
+            Debug.LogError(string.Format("parse failed! key:{0}", key));
             return 0;
         }
 
-        string ___str = _data[__key].get_content_str(__col_name);
+        string str = data[key].GetContentStr(colName);
 
-        int ___res = 0;
+        int res = 0;
 
-        if (!___str.TryToInt(out ___res))
+        if (!str.TryToInt(out res))
         {
-            Debug.LogError(string.Format("parse failed! key:{0} col:{1}", __key, __col_name));
+            Debug.LogError(string.Format("parse failed! key:{0} col:{1}", key, colName));
         }
 
-        return ___res;
+        return res;
     }
 
-    public float get_content_float(string __key, string __col_name)
+    public float GetContentFloat(string key, string colName)
     {
-        if (!_data.ContainsKey(__key))
+        if (!data.ContainsKey(key))
         {
-            Debug.LogError(string.Format("parse failed! key:{0}", __key));
+            Debug.LogError(string.Format("parse failed! key:{0}", key));
             return 0;
         }
 
-        string ___str = _data[__key].get_content_str(__col_name);
+        string str = data[key].GetContentStr(colName);
 
-        double ___res = 0;
+        float res = 0;
 
-        if (!___str.TryToDouble(out ___res))
+        if (!str.TryToFloat(out res))
         {
-            Debug.LogError(string.Format("parse failed! key:{0} col:{1}", __key, __col_name));
+            Debug.LogError(string.Format("parse failed! key:{0} col:{1}", key, colName));
         }
 
-        return (float)___res;
+        return res;
     }
 
-    public string get_content_str(string __key, string __col_name)
+
+    public string GetContentStr(string key, string colName)
     {
-        if (!_data.ContainsKey(__key))
+        if (!data.ContainsKey(key))
         {
-            Debug.LogError(string.Format("parse failed! key:{0}", __key));
+            Debug.LogError(string.Format("parse failed! key:{0}", key));
             return string.Empty;
         }
 
-        string ___str = _data[__key].get_content_str(__col_name);
+        string str = data[key].GetContentStr(colName);
 
-        return ___str;
+        return str;
     }
 
-    public List<tab_file_data.line_data> get_line_data()
+    public List<TabFileData.LineData> GetLineData()
     {
-        return _line_data;
+        return linedataList;
     }
 
-    public class line_data
+    public class LineData
     {
-        public line_data(string[] __col_name, string[] __line_data)
+        public LineData(string[] colName, string[] lineData)
         {
-            for (int i = 0; i < __col_name.Length; i++)
+            for (int i = 0; i < colName.Length; i++)
             {
                 try
                 {
-                    _data.Add(__col_name[i], __line_data[i]);
+                    data.Add(colName[i], lineData[i]);
                 }
                 catch
                 {
-                    Debug.LogError("列名重复：" + __col_name[i]);
+                    Debug.LogError("列名重复：" + colName[i]);
                 }
             }
         }
 
-        public string get_content_str(string __col_name)
+        public string GetContentStr(string colName)
         {
-            if (!_data.ContainsKey(__col_name))
+            if (!data.ContainsKey(colName))
             {
-                Debug.LogError(string.Format("parse failed! col:{0}", __col_name));
+                Debug.LogError(string.Format("parse failed! col:{0}", colName));
                 return string.Empty;
             }
 
-            return _data[__col_name];
+            return data[colName];
         }
 
-        public int get_content_int(string __col_name)
+        public int GetContentInt(string colName)
         {
-            if (!_data.ContainsKey(__col_name))
+            if (!data.ContainsKey(colName))
             {
-                Debug.LogError(string.Format("parse failed! col:{0}", __col_name));
+                Debug.LogError(string.Format("parse failed! col:{0}", colName));
                 return 0;
             }
 
-            int ___res = 0;
+            int res = 0;
 
-            if (!_data[__col_name].TryToInt(out ___res))
+            if (!data[colName].TryToInt(out res))
             {
-                Debug.LogError(string.Format("not TryToInt! col:{0}", __col_name));
+                Debug.LogError(string.Format("not TryToInt! col:{0}", colName));
             }
 
-            return ___res;
+            return res;
         }
 
-        public int get_content_int(string __col_name, int defaultValue)
+        public int GetContentInt(string colName, int defaultValue)
         {
-            if (!_data.ContainsKey(__col_name))
+            if (!data.ContainsKey(colName))
             {
-                Debug.LogError(string.Format("parse failed! col:{0}", __col_name));
+                Debug.LogError(string.Format("parse failed! col:{0}", colName));
                 return 0;
             }
 
-            int ___res = 0;
+            int res = 0;
 
-            if (!_data[__col_name].TryToInt(out ___res))
+            if (!data[colName].TryToInt(out res))
             {
-                Debug.LogError(string.Format("not TryToInt! col:{0}", __col_name));
-                ___res = defaultValue;
+                Debug.LogError(string.Format("not TryToInt! col:{0}", colName));
+                res = defaultValue;
             }
 
-            return ___res;
+            return res;
         }
         public int[] GetIntArr(string colName)
         {
             List<int> tempData = new List<int>();
-            var itor = _data.Keys.GetEnumerator();
+            var itor = data.Keys.GetEnumerator();
             while (itor.MoveNext())
             {
                 if (itor.Current != null && itor.Current.StartsWith(colName))
                 {
-                    int value = get_content_int(itor.Current, int.MinValue);
+                    int value = GetContentInt(itor.Current, int.MinValue);
                     if (value != int.MinValue)
                     {
                         tempData.Add(value);
@@ -150,97 +151,97 @@ public class tab_file_data
             itor.Dispose();
             return tempData.ToArray();
         }
-        public float get_content_float(string __col_name)
+        public float GetContentFloat(string colName)
         {
-            if (!_data.ContainsKey(__col_name))
+            if (!data.ContainsKey(colName))
             {
-                Debug.LogError(string.Format("parse failed! col:{0}", __col_name));
+                Debug.LogError(string.Format("parse failed! col:{0}", colName));
                 return 0.0f;
             }
 
-            double ___res = 0;
-            if (!_data[__col_name].TryToDouble(out ___res))
+            float res = 0;
+            if (!data[colName].TryToFloat(out res))
             {
-                Debug.LogError(string.Format("not TryToFloat! col:{0}", __col_name));
+                Debug.LogError(string.Format("not TryToFloat! col:{0}", colName));
             }
-            return (float)___res;
+            return (float)res;
 
         }
 
-        public Dictionary<string, string> _data = new Dictionary<string, string>();
+        public Dictionary<string, string> data = new Dictionary<string, string>();
     }
 
     // -----------------------------------------------------------
 
-    public void add_line(string[] __line_data)
+    public void AddLine(string[] lineData)
     {
-        if (_col_name == null)
+        if (colName == null)
             return;
 
-        line_data ___line_data = new line_data(_col_name, __line_data);
+        LineData linedata = new LineData(colName, lineData);
 
-        if (_data.ContainsKey(__line_data[0]))
+        if (data.ContainsKey(lineData[0]))
         {
-            Debug.LogError(string.Format("same key!  tab:{0}  name:{1}", _tab_name, __line_data[0]));
+            Debug.LogError(string.Format("same key!  tab:{0}  name:{1}", tabName, lineData[0]));
         }
         try
         {
-            _data.Add(__line_data[0], ___line_data);
+            data.Add(lineData[0], linedata);
         }
         catch
         {
-            Debug.LogError("key not add:" + __line_data[0]);
+            Debug.LogError("key not add:" + lineData[0]);
         }
 
-        _line_data.Add(___line_data);
+        linedataList.Add(linedata);
     }
 
-    public string _tab_name = "";
+    public string tabName = "";
 
-    public string[] _col_name = null;
+    public string[] colName = null;
 
-    private Dictionary<string, line_data> _data = new Dictionary<string, line_data>();
-    private List<line_data> _line_data = new List<line_data>();
+    private Dictionary<string, LineData> data = new Dictionary<string, LineData>();
+    private List<LineData> linedataList = new List<LineData>();
 }
 
-public static class tab_file
+public static class TabFile
 {
-    public static tab_file_data parse(string __txt, int __igron_line = 2, string __tab_name = "")
+    public static TabFileData parse(string txt, int igronLine = 2, string tabName = "")
     {
-        tab_file_data ___data = new tab_file_data();
+        TabFileData data = new TabFileData();
 
-        ___data._tab_name = __tab_name;
+        data.tabName = tabName;
 
-        string[] ___str_line = __txt.Split('\n');
+        string[] strLine = txt.Split('\n');
 
-        string ___line_temp = null;
+        string lineTemp = null;
 
-        ___line_temp = ___str_line[0].TrimEnd("\r".ToCharArray());
-        ___data._col_name = ___line_temp.Split(("\t").ToCharArray());
+        lineTemp = strLine[0].TrimEnd("\r".ToCharArray());
+        data.colName = lineTemp.Split(("\t").ToCharArray());
 
-        string[] ___line_split = null;
+        string[] lineSplit = null;
 
-        for (int i = __igron_line; i < ___str_line.Length; i++)
+        for (int i = igronLine; i < strLine.Length; i++)
         {
-            ___line_temp = ___str_line[i].TrimEnd("\r".ToCharArray());
+            lineTemp = strLine[i].TrimEnd("\r".ToCharArray());
 
-            if (___line_temp.Equals(""))
+            if (lineTemp.Equals(""))
                 continue;
 
-            ___line_split = ___line_temp.Split(("\t").ToCharArray());
+            lineSplit = lineTemp.Split(("\t").ToCharArray());
 
-            if (___data._col_name.Length != ___line_split.Length)
+            if (data.colName.Length != lineSplit.Length)
             {
                 Debug.LogError("invalid data! line_data::line_data");
             }
             else
             {
-                ___data.add_line(___line_split);
+                data.AddLine(lineSplit);
             }
         }
-
-        //        System.GC.Collect();
+        
         Resources.UnloadUnusedAssets();
-        return ___data;
+
+        return data;
     }
 }

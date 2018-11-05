@@ -132,7 +132,6 @@ public class UITable : MonoBehaviour
 
     public List<UITableItem> SetTableNum(List<UITableStyle> tableStyle, bool includeInactive, bool itemEqualStyle = false)
     {
-        transform.AddChilden(tableStyle.Count, true);
         List<UITableItem> tableItems = new List<UITableItem>();
 
         TransformCache.GetComponentsInChildren<UITableItem>(includeInactive, tableItems);
