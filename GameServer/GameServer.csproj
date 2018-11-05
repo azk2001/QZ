@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47FBA46F-38A9-4F14-BEDC-B748C25A7DAF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GameServer</RootNamespace>
+    <AssemblyName>GameServer</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>F:\新建文件夹\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\output\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\output\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BattleRooms\AccountData\AccountData.cs" />
+    <Compile Include="BattleRooms\AccountData\AccountDataManager.cs" />
+    <Compile Include="BattleRooms\NetPlayer\NetPlayerManager.cs" />
+    <Compile Include="BattleRooms\Room\RoomManager.cs" />
+    <Compile Include="Config\TableData\chaosrcore_b.cs" />
+    <Compile Include="Config\TableData\chaoticdata_b.cs" />
+    <Compile Include="Config\TableData\battleroominit_b.cs" />
+    <Compile Include="BattleRooms\Room\RoomBase.cs" />
+    <Compile Include="BattleRooms\NetPlayer\NetPlayerData.cs" />
+    <Compile Include="BsVsClient\BattleCore\BattleCore.cs" />
+    <Compile Include="BsVsClient\BattleCore\GameFinishData.cs" />
+    <Compile Include="NetServer\BattleProtocol\BattleProtocol.cs" />
+    <Compile Include="NetServer\BattleProtocol\BattleProtocolEvent.cs" />
+    <Compile Include="NetServer\BattleProtocol\ProtocolBattleManager.cs" />
+    <Compile Include="NetServer\BattleProtocol\ProtocolSroc.cs" />
+    <Compile Include="NetServer\BattleProtocol\SyncCoreGameUnit.cs" />
+    <Compile Include="BsVsClient\EventListenerManager.cs" />
+    <Compile Include="BsVsClient\ExtensionMethods\FloatExtensionMethods.cs" />
+    <Compile Include="BsVsClient\ExtensionMethods\IntExtensionMethods.cs" />
+    <Compile Include="BsVsClient\ExtensionMethods\StringExtensionMethods.cs" />
+    <Compile Include="BsVsClient\Map\ElementGroup.cs" />
+    <Compile Include="BsVsClient\Map\ElementManager.cs" />
+    <Compile Include="BsVsClient\Map\ElementParam.cs" />
+    <Compile Include="BsVsClient\Map\ElementWave.cs" />
+    <Compile Include="BsVsClient\Map\GroupBirthTrigger.cs" />
+    <Compile Include="BsVsClient\Map\LoadSaveMap.cs" />
+    <Compile Include="BsVsClient\Map\WaveBirthTrigger.cs" />
+    <Compile Include="BsVsClient\GameUnit\GameUnit.cs" />
+    <Compile Include="BattleRooms\NetPlayer\NetPlayer.cs" />
+    <Compile Include="BsVsClient\GameUnit\GameUnitManager.cs" />
+    <Compile Include="BsVsClient\GlobalData.cs" />
+    <Compile Include="BsVsClient\System\Color.cs" />
+    <Compile Include="BsVsClient\System\Mathf.cs" />
+    <Compile Include="BsVsClient\System\MyDebug.cs" />
+    <Compile Include="BsVsClient\System\Random.cs" />
+    <Compile Include="BsVsClient\System\Transform.cs" />
+    <Compile Include="BsVsClient\System\Vector3.cs" />
+    <Compile Include="BsVsClient\SingleTon_Class.cs" />
+    <Compile Include="Config\TableData\dungeon_b.cs" />
+    <Compile Include="Config\TableData\horoscopeatt_b.cs" />
+    <Compile Include="Config\TableData\monster_b.cs" />
+    <Compile Include="Config\TableData\monsterrevise_b.cs" />
+    <Compile Include="Config\TableData\TableManager.cs" />
+    <Compile Include="Config\TableData\tab_file.cs" />
+    <Compile Include="NetServer\BytesReader.cs" />
+    <Compile Include="NetServer\bytes_writer.cs" />
+    <Compile Include="NetServer\Net\NetClientBase.cs" />
+    <Compile Include="NetServer\Net\NetServerBase.cs" />
+    <Compile Include="NetServer\Net\SocketManager.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BsVsClient\BattleCore\VictoryCondition.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="bin\Debug\BattleServer.exe.config" />
+    <None Include="bin\Release\BattleServer.exe.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\BattleServer.exe" />
+    <Content Include="bin\Debug\BattleServer.pdb" />
+    <Content Include="bin\Debug\bs.xml" />
+    <Content Include="bin\Debug\Config\MapXml\160001.xml" />
+    <Content Include="bin\Debug\Config\MapXml\510003.xml" />
+    <Content Include="bin\Debug\Config\MapXml\800001.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Debug\Config\MapXml\800002.xml" />
+    <Content Include="bin\Debug\Config\MapXml\810001.xml" />
+    <Content Include="bin\Debug\Config\Txt\battleroominit_b.txt" />
+    <Content Include="bin\Debug\Config\Txt\chaosrcore_b.txt" />
+    <Content Include="bin\Debug\Config\Txt\chaoticdata_b.txt" />
+    <Content Include="bin\Debug\Config\Txt\dungeon_b.txt" />
+    <Content Include="bin\Debug\Config\Txt\horoscopeatt_b.txt" />
+    <Content Include="bin\Debug\Config\Txt\monsterrevise_b.txt" />
+    <Content Include="bin\Debug\Config\Txt\monster_b.txt" />
+    <Content Include="bin\Debug\obs.xml" />
+    <Content Include="bin\Release\BattleServer.exe" />
+    <Content Include="bin\Release\BattleServer.pdb" />
+    <Content Include="bin\Release\bs.xml" />
+    <Content Include="bin\Release\Config\MapXml\160001.xml" />
+    <Content Include="bin\Release\Config\MapXml\510003.xml" />
+    <Content Include="bin\Release\Config\MapXml\800001.xml" />
+    <Content Include="bin\Release\Config\MapXml\800002.xml" />
+    <Content Include="bin\Release\Config\MapXml\810001.xml" />
+    <Content Include="bin\Release\Config\Txt\battleroominit_b.txt" />
+    <Content Include="bin\Release\Config\Txt\chaosrcore_b.txt" />
+    <Content Include="bin\Release\Config\Txt\chaoticdata_b.txt" />
+    <Content Include="bin\Release\Config\Txt\dungeon_b.txt" />
+    <Content Include="bin\Release\Config\Txt\horoscopeatt_b.txt" />
+    <Content Include="bin\Release\Config\Txt\monsterrevise_b.txt" />
+    <Content Include="bin\Release\Config\Txt\monster_b.txt" />
+    <Content Include="Config\MapXml\510003.xml" />
+    <Content Include="Config\MapXml\800001.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>echo $(TargetDir)
+copy $(TargetFileName) Over$(TargetFileName)
+copy $(TargetFileName).config Over$(TargetFileName).config
+copy $(TargetName).pdb Over$(TargetName).pdb
+:xcopy $(TargetDir)*.* F:\Trunk\Bin\Server\version_1\battlesever /i /s /y</PostBuildEvent>
+  </PropertyGroup>
+</Project>

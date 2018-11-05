@@ -1,0 +1,329 @@
+<XML>
+  <Element>
+    <Wave objectNeme="wave_1" curWave="1" elementTriggerType="lastOutTime" sponsorWave="0" sponsorGroup="0" loopNum="1" position="261.01;22.69;256.67" rotation="0;0;0" scale="1;1;1">
+      <ElementTriggerType lastOutTime="0" />
+      <Group enemyName="group_player_1" curWave="1" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="player" position="264.76;22.64;254.19" rotation="0;0;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="260.88;22.69;252.61" rotation="0;0;0" scale="1;1;1" elementId="1002" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_player_2" curWave="1" curGroup="2" loopNum="1" isNeglect="False" lastGroup="0" elementType="player" position="263.67;22.69;257.41" rotation="0;0;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="259.79;22.69;255.83" rotation="0;0;0" scale="1;1;1" elementId="1002" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_player_3" curWave="1" curGroup="3" loopNum="1" isNeglect="False" lastGroup="0" elementType="player" position="262.51;22.69;260.66" rotation="0;0;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="258.64;22.69;259.07" rotation="0;0;0" scale="1;1;1" elementId="1002" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_2" curWave="2" elementTriggerType="lastOutTime" sponsorWave="0" sponsorGroup="0" loopNum="1" position="238.33;20.45;248.25" rotation="0;59.59;0" scale="1;1;1">
+      <ElementTriggerType lastOutTime="0" />
+      <Group enemyName="group_monster_1" curWave="2" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="monster" position="244.44;20.46;245.75" rotation="0;59.59;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="246.22;20.47;245.86" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="244.77;20.5;248.05" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="242.96;20.48;250.38" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="240.72;20.46;247.08" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="241.8;20.45;244.52" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="2" curGroup="2" loopNum="1" isNeglect="False" lastGroup="1" elementType="monster" position="212.86;20.34;231.72" rotation="0;59.59;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="3" />
+        <ElementParam position="230.25;20.45;241.8" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="228.83;20.45;244" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="227;20.46;246.33" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="224.75;20.48;243.02" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="225.85;20.47;240.47" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_3" curWave="2" curGroup="3" loopNum="1" isNeglect="False" lastGroup="2" elementType="monster" position="196.61;16.09;222.35" rotation="0;59.59;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="2" />
+        <ElementParam position="214.02;16.2;232.44" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="212.6;16.64;234.63" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="210.77;16.67;236.97" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="208.52;16.12;233.66" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="209.61;16.11;231.11" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_3" curWave="3" elementTriggerType="lastOutTime" sponsorWave="2" sponsorGroup="3" loopNum="1" position="188.97;16.11;228.5" rotation="0;268.79;0" scale="0.98;1;0.98">
+      <ElementTriggerType lastOutTime="0" />
+      <Group enemyName="group_monster_1" curWave="3" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="monster" position="164.63;16.09;221.33" rotation="0;268.79;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="193.61;16.12;227.08" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="192.19;16.12;229.25" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="190.36;16.11;231.61" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="188.11;16.11;228.27" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="189.21;16.1;225.75" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="3" curGroup="2" loopNum="1" isNeglect="False" lastGroup="1" elementType="monster" position="156.33;17.03;234.11" rotation="0;268.79;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="3" />
+        <ElementParam position="192;15.22;238.16" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="190.58;17.19;240.36" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="188.75;15.18;242.71" rotation="0;59.59;0" scale="1;1;1" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="186.5;15.22;239.38" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="187.47;15.18;235.36" rotation="0;59.59;0" scale="1;1;1" elementId="8000026" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_4" curWave="4" elementTriggerType="lastOutTime" sponsorWave="3" sponsorGroup="2" loopNum="1" position="177.27;16.09;228.24" rotation="0;0;0" scale="1.75;1;1.75">
+      <ElementTriggerType lastOutTime="0" />
+      <Group enemyName="group_monster_1" curWave="4" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="monster" position="177.27;16.09;228.24" rotation="0;0;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="179.08;16.09;229.83" rotation="0;0;0" scale="1;1;1" elementId="8000031" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="4" curGroup="2" loopNum="1" isNeglect="True" lastGroup="0" elementType="monster" position="177.27;16.09;228.24" rotation="0;0;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="192.44;16.12;228.44" rotation="0;59.59;0" scale="0.56;1;0.56" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="191.02;16.12;230.63" rotation="0;59.59;0" scale="0.56;1;0.56" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="189.19;16.09;232.99" rotation="0;59.59;0" scale="0.56;1;0.56" elementId="8000023" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="186.94;16.11;229.66" rotation="0;59.59;0" scale="0.56;1;0.56" elementId="8000026" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="187.91;16.1;225.63" rotation="0;59.59;0" scale="0.56;1;0.56" elementId="8000026" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_eventTrigger_4" curWave="4" curGroup="4" loopNum="1" isNeglect="False" lastGroup="1" elementType="eventTrigger" position="177.27;16.09;228.24" rotation="0;0;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="177.27;16.09;228.24" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="SetObstruct" eventValue="21;1;0" />
+      </Group>
+      <Group enemyName="group_eventTrigger_5" curWave="4" curGroup="5" loopNum="1" isNeglect="False" lastGroup="1" elementType="eventTrigger" position="177.27;16.09;228.24" rotation="0;0;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="0" />
+        <ElementParam position="177.27;16.09;228.24" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="PlayAnimation" eventValue="4;1;atk_1" />
+      </Group>
+      <Group enemyName="group_eventTrigger_6" curWave="4" curGroup="6" loopNum="1" isNeglect="False" lastGroup="5" elementType="eventTrigger" position="177.27;16.1;228.24" rotation="0;0;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="0" />
+        <ElementParam position="177.27;16.09;228.24" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="BirthBoosAnimation" eventValue=";4;1" />
+      </Group>
+      <Group enemyName="group_eventTrigger_7" curWave="4" curGroup="7" loopNum="1" isNeglect="False" lastGroup="1" elementType="eventTrigger" position="177.27;16.09;228.24" rotation="0;0;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="177.27;16.09;228.24" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="MapGuide" eventValue="1;5;1" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_5" curWave="5" elementTriggerType="lastOutTime" sponsorWave="4" sponsorGroup="1" loopNum="1" position="152.66;17.67;240.57" rotation="0;268.79;0" scale="0.98;1;0.98">
+      <ElementTriggerType lastOutTime="0" />
+      <Group enemyName="group_monster_1" curWave="5" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="monster" position="154.05;17.54;240.58" rotation="0;268.79;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="149.33;18.03;243.11" rotation="0;268.79;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="149.66;17.98;241.13" rotation="0;268.79;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="149.41;18.01;238.44" rotation="0;268.79;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="149.5;18;236.47" rotation="0;268.79;0" scale="1;1;1" elementId="8000027" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="149.5;18;236.47" rotation="0;268.79;0" scale="1;1;1" elementId="8000027" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="5" curGroup="2" loopNum="1" isNeglect="False" lastGroup="1" elementType="monster" position="171.75;16.28;235.41" rotation="0;89.19;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="3" />
+        <ElementParam position="160.97;15.22;232.97" rotation="0;89.19;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="160.66;16.29;234.96" rotation="0;89.19;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="160.91;16.48;237.63" rotation="0;89.19;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="164.52;16.03;235.5" rotation="0;89.19;0" scale="1;1;1" elementId="8000027" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="164.46;16.18;237.66" rotation="0;89.19;0" scale="1;1;1" elementId="8000027" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="130.97;18.89;228.97" rotation="0;89.19;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="130.49;15.06;230.27" rotation="0;89.19;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="130.74;16.37;232.97" rotation="0;89.19;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="134.36;16.25;230.85" rotation="0;89.19;0" scale="1;1;1" elementId="8000027" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="134.27;18.59;233" rotation="0;89.19;0" scale="1;1;1" elementId="8000027" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_4" curWave="5" curGroup="4" loopNum="1" isNeglect="False" lastGroup="1" elementType="monster" position="173.41;16.18;234.13" rotation="0;89.19;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="3" />
+        <ElementParam position="130.97;18.89;228.97" rotation="0;89.19;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="130.49;15.06;230.27" rotation="0;89.19;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="130.75;16.37;232.97" rotation="0;89.19;0" scale="1;1;1" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="134.36;16.25;230.85" rotation="0;89.19;0" scale="1;1;1" elementId="8000027" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="134.27;18.59;233" rotation="0;89.19;0" scale="1;1;1" elementId="8000027" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_eventTrigger_3" curWave="5" curGroup="3" loopNum="1" isNeglect="False" lastGroup="1" elementType="eventTrigger" position="152.66;17.67;240.57" rotation="0;0;0" scale="0.98;1;0.98" aiStart="True" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="0" />
+        <ElementParam position="138.05;18.51;227.55" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="MapGuide" eventValue="0;5;1" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_6" curWave="6" elementTriggerType="lastOutTime" sponsorWave="5" sponsorGroup="4" loopNum="1" position="122.69;19.77;228.5" rotation="0;268.79;0" scale="2.25;1;2.25">
+      <ElementTriggerType lastOutTime="0" />
+      <Group enemyName="group_monster_1" curWave="6" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="monster" position="133.16;19.12;223.77" rotation="0;316.76;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="117.79;20.28;215.63" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="117.3;15.06;216.94" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="117.58;16.37;219.63" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="121.18;16.26;217.5" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000027" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="120.69;20.04;220.63" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000027" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="6" curGroup="2" loopNum="1" isNeglect="False" lastGroup="1" elementType="monster" position="97.76;20.44;192.19" rotation="0;234.02;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="3" />
+        <ElementParam position="114.26;20.32;200.97" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="113.76;15.06;202.27" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="114.05;16.37;204.97" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="117.65;16.25;202.83" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000027" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="117.58;20.37;204.99" rotation="0;89.19;0" scale="0.43;1;0.43" elementId="8000027" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_eventTrigger_4" curWave="6" curGroup="4" loopNum="1" isNeglect="False" lastGroup="3" elementType="eventTrigger" position="152.66;17.67;240.57" rotation="0;0;0" scale="0.4;1;0.4" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="138.05;18.51;227.55" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="MapGuide" eventValue="1;7;1" />
+      </Group>
+      <Group enemyName="group_monster_3" curWave="6" curGroup="3" loopNum="1" isNeglect="False" lastGroup="2" elementType="monster" position="108.25;20.12;199.88" rotation="0;305.07;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="2" />
+        <ElementParam position="115.48;20.6;187.75" rotation="0;160.25;0" scale="0.43;1;0.43" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="118.41;20.8;188.97" rotation="0;160.25;0" scale="0.43;1;0.43" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="120.87;20.9;190.16" rotation="0;160.25;0" scale="0.43;1;0.43" elementId="8000024" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="117.68;20.67;185.02" rotation="0;160.25;0" scale="0.43;1;0.43" elementId="8000027" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="121.66;20.55;186.8" rotation="0;160.25;0" scale="0.43;1;0.43" elementId="8000027" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_7" curWave="7" elementTriggerType="radius" sponsorWave="1" sponsorGroup="1" loopNum="1" position="100.22;20.44;187.44" rotation="0;43.18;0" scale="1.75;1;1.75">
+      <ElementTriggerType radius="6" />
+      <Group enemyName="group_monster_1" curWave="7" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="monster" position="100.22;20.44;187.44" rotation="0;43.18;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="100.22;20.44;187.44" rotation="0;43.18;0" scale="1;1;1" elementId="8000032" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="7" curGroup="2" loopNum="1" isNeglect="True" lastGroup="1" elementType="monster" position="121.55;20.71;190.27" rotation="0;43.18;0" scale="1;1;1" aiStart="True" elementTriggerType="lastBossHp">
+        <ElementTriggerType lastBossHp="75" />
+        <ElementParam position="105.26;20.44;188.66" rotation="0;0;0" scale="0.56;1;0.56" elementId="8000029" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="100.23;20.44;193.77" rotation="0;0;0" scale="0.56;1;0.56" elementId="8000029" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_3" curWave="7" curGroup="3" loopNum="1" isNeglect="True" lastGroup="1" elementType="monster" position="114.62;20.62;200.85" rotation="0;43.18;0" scale="1;1;1" aiStart="True" elementTriggerType="lastBossHp">
+        <ElementTriggerType lastBossHp="45" />
+        <ElementParam position="100.55;20.44;182.61" rotation="0;0;0" scale="0.56;1;0.56" elementId="8000029" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="94.61;20.44;187.33" rotation="0;0;0" scale="0.56;1;0.56" elementId="8000029" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_eventTrigger_4" curWave="7" curGroup="4" loopNum="1" isNeglect="True" lastGroup="1" elementType="eventTrigger" position="100.22;20.44;187.44" rotation="0;43.18;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="100.22;20.44;187.44" rotation="0;43.18;0" scale="1;1;1" elementId="1" eventKey="SetObstruct" eventValue="22;1;0" />
+        <ElementParam position="100.22;20.44;187.44" rotation="0;43.18;0" scale="1;1;1" elementId="1" eventKey="SetObstruct" eventValue="23;1;0" />
+      </Group>
+      <Group enemyName="group_eventTrigger_5" curWave="7" curGroup="5" loopNum="1" isNeglect="True" lastGroup="1" elementType="eventTrigger" position="100.22;20.45;187.44" rotation="0;43.18;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="0" />
+        <ElementParam position="100.22;20.44;187.44" rotation="0;43.18;0" scale="1;1;1" elementId="1" eventKey="PlayAnimation" eventValue="7;1;atk_1" />
+      </Group>
+      <Group enemyName="group_eventTrigger_6" curWave="7" curGroup="6" loopNum="1" isNeglect="True" lastGroup="5" elementType="eventTrigger" position="100.22;20.44;187.44" rotation="0;43.18;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="0" />
+        <ElementParam position="100.22;20.44;187.44" rotation="0;43.18;0" scale="1;1;1" elementId="1" eventKey="BirthBoosAnimation" eventValue=";7;1" />
+      </Group>
+      <Group enemyName="group_eventTrigger_7" curWave="7" curGroup="7" loopNum="1" isNeglect="True" lastGroup="1" elementType="eventTrigger" position="100.22;20.44;187.44" rotation="0;43.18;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="100.22;20.44;187.44" rotation="0;43.18;0" scale="1;1;1" elementId="1" eventKey="MapGuide" eventValue="1;8;1" />
+        <ElementParam position="100.22;20.44;187.44" rotation="0;43.18;0" scale="0.99;1;0.99" elementId="1" eventKey="FinishGroup" eventValue="6;3" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_8" curWave="8" elementTriggerType="radius" sponsorWave="1" sponsorGroup="1" loopNum="1" position="127.87;20.61;177.86" rotation="0;268.79;0" scale="0.98;1;0.98">
+      <ElementTriggerType radius="8.06" />
+      <Group enemyName="group_monster_1" curWave="8" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="monster" position="137.77;20.53;159.83" rotation="0;268.79;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="127.83;20.48;168.33" rotation="0;160.25;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="130.77;20.45;169.55" rotation="0;160.25;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="133.22;20.4;170.75" rotation="0;160.25;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="130.05;20.45;165.61" rotation="0;160.25;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="134;20.38;167.38" rotation="0;160.25;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="8" curGroup="2" loopNum="1" isNeglect="False" lastGroup="1" elementType="monster" position="124.79;20.44;149.1" rotation="0;23.35;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="3" />
+        <ElementParam position="146.83;20.51;156.8" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="149.77;20.47;158" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="151.97;20.45;159.13" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="149.05;20.48;154.07" rotation="0;160.26;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="153.02;20.47;155.85" rotation="0;160.26;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_eventTrigger_3" curWave="8" curGroup="3" loopNum="1" isNeglect="True" lastGroup="1" elementType="eventTrigger" position="122.76;19.78;223.47" rotation="0;0;0" scale="0.99;1;0.99" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="122.76;19.78;223.47" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="MapGuide" eventValue="1;9;1" />
+      </Group>
+      <Group enemyName="group_eventTrigger_4" curWave="8" curGroup="4" loopNum="1" isNeglect="True" lastGroup="1" elementType="eventTrigger" position="122.76;20.62;223.47" rotation="0;0;0" scale="0.98;1;0.98" aiStart="True" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="0" />
+        <ElementParam position="122.76;19.78;223.47" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="MapGuide" eventValue="0;8;1" />
+      </Group>
+      <Group enemyName="group_monster_5" curWave="8" curGroup="5" loopNum="1" isNeglect="False" lastGroup="2" elementType="monster" position="108.51;20.5;142.27" rotation="0;23.35;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="3" />
+        <ElementParam position="130.55;20.44;149.97" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="133.5;20.45;151.19" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="135.7;20.45;152.3" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="132.78;20.54;147.25" rotation="0;160.26;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="136.75;20.45;149.02" rotation="0;160.26;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_6" curWave="8" curGroup="6" loopNum="1" isNeglect="False" lastGroup="5" elementType="monster" position="128;20.44;148.6" rotation="0;23.35;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="3" />
+        <ElementParam position="150.04;20.48;156.3" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="152.97;20.46;157.5" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="155.17;20.46;158.63" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="152.25;20.48;153.57" rotation="0;160.26;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="156.22;20.35;155.35" rotation="0;160.26;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_9" curWave="9" elementTriggerType="radius" sponsorWave="1" sponsorGroup="1" loopNum="1" position="152.33;20.59;145.36" rotation="0;268.79;0" scale="0.98;1;0.98">
+      <ElementTriggerType radius="14.9" />
+      <Group enemyName="group_monster_1" curWave="9" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="monster" position="167.47;20.68;135.27" rotation="0;268.79;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="147.63;20.47;141.3" rotation="0;160.25;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="150.58;20.52;142.52" rotation="0;160.25;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="152.77;20.61;143.63" rotation="0;160.25;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="149.94;20.51;139.33" rotation="0;160.25;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="153.83;20.62;140.36" rotation="0;160.25;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="9" curGroup="2" loopNum="1" isNeglect="False" lastGroup="1" elementType="monster" position="153.69;20.38;117.69" rotation="0;23.35;0" scale="1;1;1" aiStart="True" elementTriggerType="lastElementNum">
+        <ElementTriggerType lastElementNum="3" />
+        <ElementParam position="149.63;20.45;131.8" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="152.58;20.48;133" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="154.77;20.53;134.13" rotation="0;160.26;0" scale="1;1;1" elementId="8000025" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="151.94;20.48;129.83" rotation="0;160.26;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+        <ElementParam position="155.83;20.5;130.85" rotation="0;160.26;0" scale="1;1;1" elementId="8000028" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_eventTrigger_3" curWave="9" curGroup="3" loopNum="1" isNeglect="True" lastGroup="1" elementType="eventTrigger" position="149.63;20.53;162.6" rotation="0;0;0" scale="0.99;1;0.99" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="159.5;17.35;146.88" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="MapGuide" eventValue="1;10;1" />
+      </Group>
+      <Group enemyName="group_eventTrigger_4" curWave="9" curGroup="4" loopNum="1" isNeglect="True" lastGroup="1" elementType="eventTrigger" position="152.33;20.59;145.36" rotation="0;0;0" scale="0.98;1;0.98" aiStart="True" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="0" />
+        <ElementParam position="152.33;20.59;145.36" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="MapGuide" eventValue="0;9;1" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_10" curWave="10" elementTriggerType="lastOutTime" sponsorWave="9" sponsorGroup="2" loopNum="1" position="156.25;20.55;122.66" rotation="0;0;0" scale="1.75;1;1.75">
+      <ElementTriggerType lastOutTime="0" />
+      <Group enemyName="group_monster_1" curWave="10" curGroup="1" loopNum="1" isNeglect="False" lastGroup="0" elementType="monster" position="156.25;20.55;122.66" rotation="0;0;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="160.02;20.71;125.16" rotation="0;0;0" scale="1;1;1" elementId="8000033" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="10" curGroup="2" loopNum="1" isNeglect="True" lastGroup="1" elementType="monster" position="149.25;20.51;148.3" rotation="0;0;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="149.25;20.51;148.3" rotation="0;38.52;0" scale="1;1;1" elementId="8000033" eventKey="TimeLine" eventValue="" />
+      </Group>
+      <Group enemyName="group_eventTrigger_4" curWave="10" curGroup="4" loopNum="1" isNeglect="True" lastGroup="1" elementType="eventTrigger" position="156.25;20.55;122.66" rotation="0;0;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="0" />
+        <ElementParam position="156.25;20.55;122.66" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="PlayAnimation" eventValue="10;1;atk_1" />
+      </Group>
+      <Group enemyName="group_eventTrigger_5" curWave="10" curGroup="5" loopNum="1" isNeglect="True" lastGroup="5" elementType="eventTrigger" position="156.25;20.55;122.66" rotation="0;0;0" scale="0.55;1;0.55" aiStart="True" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="0" />
+        <ElementParam position="156.25;20.55;122.66" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="BirthBoosAnimation" eventValue=";10;1" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_20" curWave="20" elementTriggerType="lastStartTime" sponsorWave="1" sponsorGroup="1" loopNum="1" position="265.13;22.69;259.1" rotation="0;73.12;0" scale="8.89;1;1">
+      <ElementTriggerType lastStartTime="0" />
+      <Group enemyName="group_obstruct_1" curWave="20" curGroup="1" loopNum="1" isNeglect="True" lastGroup="0" elementType="obstruct" position="265.13;22.69;259.1" rotation="0;73.12;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="265.13;22.69;259.1" rotation="0;73.12;0" scale="1;1;1" elementId="10002" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_21" curWave="21" elementTriggerType="lastStartTime" sponsorWave="1" sponsorGroup="1" loopNum="1" position="173.61;16.19;234.41" rotation="0;102.01;0" scale="10.1;1;0.98">
+      <ElementTriggerType lastStartTime="0" />
+      <Group enemyName="group_obstruct_1" curWave="21" curGroup="1" loopNum="1" isNeglect="True" lastGroup="0" elementType="obstruct" position="173.61;16.19;234.41" rotation="0;102.01;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="173.61;16.19;234.41" rotation="0;102.01;0" scale="1;1;1" elementId="10002" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_22" curWave="22" elementTriggerType="lastStartTime" sponsorWave="1" sponsorGroup="1" loopNum="1" position="118.87;20.47;182.71" rotation="0;161.1;0" scale="-8.51;1;1">
+      <ElementTriggerType lastStartTime="0" />
+      <Group enemyName="group_obstruct_1" curWave="22" curGroup="1" loopNum="1" isNeglect="True" lastGroup="0" elementType="obstruct" position="118.87;20.47;182.71" rotation="0;161.1;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="118.87;20.48;182.71" rotation="0;161.1;0" scale="1;1;1" elementId="10002" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_23" curWave="23" elementTriggerType="lastStartTime" sponsorWave="7" sponsorGroup="1" loopNum="1" position="109.65;20.51;191.41" rotation="0;80.51;0" scale="11.5;1;1">
+      <ElementTriggerType lastStartTime="0" />
+      <Group enemyName="group_obstruct_1" curWave="23" curGroup="1" loopNum="1" isNeglect="True" lastGroup="0" elementType="obstruct" position="109.65;20.51;191.41" rotation="0;80.51;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="109.65;20.51;191.41" rotation="0;80.51;0" scale="1;1;1" elementId="10002" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_24" curWave="24" elementTriggerType="lastStartTime" sponsorWave="10" sponsorGroup="1" loopNum="1" position="129.36;20.47;172.16" rotation="0;150.1;0" scale="9.39;1;1">
+      <ElementTriggerType lastStartTime="0" />
+      <Group enemyName="group_obstruct_1" curWave="24" curGroup="1" loopNum="1" isNeglect="True" lastGroup="0" elementType="obstruct" position="129.36;20.47;172.16" rotation="0;150.1;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="129.36;20.48;172.16" rotation="0;150.1;0" scale="1;1;1" elementId="10002" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_25" curWave="25" elementTriggerType="lastStartTime" sponsorWave="1" sponsorGroup="1" loopNum="1" position="122.4;20.44;152.61" rotation="0;55.02;0" scale="9.31;1;1">
+      <ElementTriggerType lastStartTime="0" />
+      <Group enemyName="group_obstruct_1" curWave="25" curGroup="1" loopNum="1" isNeglect="True" lastGroup="0" elementType="obstruct" position="122.4;20.44;152.61" rotation="0;55.02;0" scale="1;1;1" aiStart="True" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="122.4;20.44;152.61" rotation="0;55.02;0" scale="1;1;1" elementId="10002" eventKey="TimeLine" eventValue="" />
+      </Group>
+    </Wave>
+  </Element>
+</XML>
