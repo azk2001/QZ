@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbe4d0bb8eef494f991b6eae1e84cee, type: 3}
+  m_Name: spr_first
+  m_EditorClassIdentifier: 
+  spriteNum: 0
+  spriteList:
+  - name: artletter_jueshishenbing
+    sprite: {fileID: 21300000, guid: 2c51b171c517df34fbe122755ef1c1ec, type: 3}
+    texture: {fileID: 2800000, guid: 2c51b171c517df34fbe122755ef1c1ec, type: 3}
+  - name: artletter_shouchong
+    sprite: {fileID: 21300000, guid: 60a11192f8839e54e847c4420697e99a, type: 3}
+    texture: {fileID: 2800000, guid: 60a11192f8839e54e847c4420697e99a, type: 3}
+  - name: artletter_shouchongzaili
+    sprite: {fileID: 21300000, guid: deb60f6db911dc84aafc41a429608d72, type: 3}
+    texture: {fileID: 2800000, guid: deb60f6db911dc84aafc41a429608d72, type: 3}
+  - name: img_beijing
+    sprite: {fileID: 21300000, guid: a50de68d06ec2234fbb17d475ea245f5, type: 3}
+    texture: {fileID: 2800000, guid: a50de68d06ec2234fbb17d475ea245f5, type: 3}
+  - name: artletter_ciri
+    sprite: {fileID: 21300000, guid: e1675f7edb6727a40a70c6a2be1f0cef, type: 3}
+    texture: {fileID: 2800000, guid: e1675f7edb6727a40a70c6a2be1f0cef, type: 3}
+  - name: artletter_ciridenglu
+    sprite: {fileID: 21300000, guid: e925051ce29517b4fbe645569973d435, type: 3}
+    texture: {fileID: 2800000, guid: e925051ce29517b4fbe645569973d435, type: 3}
+  - name: artletter_jueshimeiren
+    sprite: {fileID: 21300000, guid: 9a148afc358b40e46b05d4cc80666019, type: 3}
+    texture: {fileID: 2800000, guid: 9a148afc358b40e46b05d4cc80666019, type: 3}
+  - name: artletter_qianwangchongzhi
+    sprite: {fileID: 21300000, guid: ddea9c11fbe6ccf4289783abab96d952, type: 3}
+    texture: {fileID: 2800000, guid: ddea9c11fbe6ccf4289783abab96d952, type: 3}

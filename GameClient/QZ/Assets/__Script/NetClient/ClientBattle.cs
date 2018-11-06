@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-public delegate void VoidBoolDelegate(bool flag);
 
 public class ClientBattle
 {
@@ -23,6 +22,7 @@ public class ClientBattle
     private VoidBoolDelegate onConnect = null;
 
     private SocketInst _socketInst = new SocketInst();
+
     public SocketInst socketInst
     {
         get

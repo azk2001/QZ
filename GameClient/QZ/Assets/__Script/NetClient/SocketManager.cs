@@ -4,7 +4,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Runtime.Remoting.Messaging;
+using UnityEngine;
 
 public delegate void OnReceiveSocketData(byte[] bytes);
 
@@ -59,7 +59,7 @@ public class SocketData
 
             if (receiveUnncompressLen == -1)
             {
-                Console.WriteLine("uncompress error!");
+                Debug.LogError("uncompress error!");
                 return;
             }
 
@@ -71,7 +71,7 @@ public class SocketData
     public void DebugLog()
     {
         string str = BitConverter.ToString(receiveBytes, sizeof(short), (totalLen - sizeof(short)));
-        Console.WriteLine("msg : " + str);
+        Debug.LogError("msg : " + str);
     }
 
     public short totalLen = 0;
@@ -164,7 +164,7 @@ public class SocketInst
             if (socket == null || !socket.Connected)
             {
                 _isConnected = false;
-                Console.WriteLine("connection is invalid!" + socket + "   " + socket.Connected);
+                Debug.LogError("connection is invalid!" + socket + "   " + socket.Connected);
                 return;
             }
 
@@ -173,7 +173,7 @@ public class SocketInst
         catch (Exception e)
         {
             _isConnected = false;
-            Console.WriteLine(e);
+            Debug.LogError(e);
         }
     }
 
@@ -202,7 +202,7 @@ public class SocketInst
         {
             if (socket.Connected)
             {
-                //Console.WriteLine("_socket.Close ();1");
+                //Debug.LogError("_socket.Close ();1");
                 socket.Close();
             }
             socket = null;
@@ -236,9 +236,9 @@ public class SocketInst
             */
 
             //花生壳导致的新的解析
-            IAsyncResult __result = socket.BeginConnect(ipAddress, port, new AsyncCallback(OnConnectSucc), socket);
+            IAsyncResult result = socket.BeginConnect(ipAddress, port, new AsyncCallback(OnConnectSucc), socket);
 
-            bool succ = __result.AsyncWaitHandle.WaitOne(5000, true);
+            bool succ = result.AsyncWaitHandle.WaitOne(5000, true);
 
             if (!succ)
             {
@@ -247,7 +247,7 @@ public class SocketInst
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+            Debug.LogError(e.Message);
 
             OnConnectFailed();
         }
@@ -273,7 +273,7 @@ public class SocketInst
 
                 if (receiveLength > 0)
                 {
-                   // Console.WriteLine("recv: " + __receive_length);
+                   // Debug.LogError("recv: " + __receive_length);
 
                     _data_buffer.AddBuffer(tmpReceiveCompressBuff, receiveLength, this);
                     SocketData data = null;
@@ -310,7 +310,7 @@ public class SocketInst
             // Complete the connection.  
             client.EndConnect(result);
 
-            Console.WriteLine("connect succ!");
+            Debug.Log("connect succ!");
 
             if (receiveThread == null)
             {
@@ -322,7 +322,7 @@ public class SocketInst
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+            Debug.LogError(e.Message);
         }
     }
 
@@ -348,7 +348,7 @@ public class SocketInst
     {
         Close();
 
-        Console.WriteLine(string.Format("reconnect.  {0}", System.DateTime.Now));
+        Debug.LogError(string.Format("reconnect.  {0}", System.DateTime.Now));
 
         if (threadConnect == null)
         {

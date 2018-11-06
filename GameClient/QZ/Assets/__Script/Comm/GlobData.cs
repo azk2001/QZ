@@ -17,6 +17,7 @@ public delegate void VoidTransDelegate(Transform val);
 public delegate void VoidIntStringDelegate(int val, string arg);
 public delegate Vector3 Vector3Delegate();
 public delegate void VoidByteDelegate(byte[] arg);
+public delegate void VoidBoolDelegate(bool flag);
 
 public delegate void VoidStrBoolDelegate(string str, bool isTrue);
 

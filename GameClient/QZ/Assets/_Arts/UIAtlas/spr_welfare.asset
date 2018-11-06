@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbe4d0bb8eef494f991b6eae1e84cee, type: 3}
+  m_Name: spr_welfare
+  m_EditorClassIdentifier: 
+  spriteNum: 12
+  spriteList:
+  - name: btn_go
+    sprite: {fileID: 21300000, guid: d379195d3cb4d3e4087bad0eae69f83b, type: 3}
+    texture: {fileID: 2800000, guid: d379195d3cb4d3e4087bad0eae69f83b, type: 3}
+  - name: img_di
+    sprite: {fileID: 21300000, guid: 9d769f250a54aeb41bd0d9918b1acce8, type: 3}
+    texture: {fileID: 2800000, guid: 9d769f250a54aeb41bd0d9918b1acce8, type: 3}
+  - name: img_fengexian
+    sprite: {fileID: 21300000, guid: c0b89fb36f0e8be4e90e3adfcb2d28f5, type: 3}
+    texture: {fileID: 2800000, guid: c0b89fb36f0e8be4e90e3adfcb2d28f5, type: 3}
+  - name: img_zhizheng
+    sprite: {fileID: 21300000, guid: 5aceab174050eaf489512315db52dd40, type: 3}
+    texture: {fileID: 2800000, guid: 5aceab174050eaf489512315db52dd40, type: 3}
+  - name: img_zhuanpan
+    sprite: {fileID: 21300000, guid: 7a8500d11f2251b4385df6484cf5f7f8, type: 3}
+    texture: {fileID: 2800000, guid: 7a8500d11f2251b4385df6484cf5f7f8, type: 3}
+  - name: img_guanggao
+    sprite: {fileID: 21300000, guid: d834805d7e7d34045aa381a7af40c34f, type: 3}
+    texture: {fileID: 2800000, guid: d834805d7e7d34045aa381a7af40c34f, type: 3}
+  - name: img_xuanze
+    sprite: {fileID: 21300000, guid: b4ad8fdbee826ca4681e1bce66d487a2, type: 3}
+    texture: {fileID: 2800000, guid: b4ad8fdbee826ca4681e1bce66d487a2, type: 3}
+  - name: img_jiemianfenge
+    sprite: {fileID: 21300000, guid: 5e2968fbab319db4585b4a6c321fc7ca, type: 3}
+    texture: {fileID: 2800000, guid: 5e2968fbab319db4585b4a6c321fc7ca, type: 3}
+  - name: img_weixuanze
+    sprite: {fileID: 21300000, guid: 82a84b7051d5826429b29dd94fb192c9, type: 3}
+    texture: {fileID: 2800000, guid: 82a84b7051d5826429b29dd94fb192c9, type: 3}
+  - name: img_anniu
+    sprite: {fileID: 21300000, guid: 4f4c7627493348d4dbe1c0f56323e723, type: 3}
+    texture: {fileID: 2800000, guid: 4f4c7627493348d4dbe1c0f56323e723, type: 3}
+  - name: img_weixuanzeshu
+    sprite: {fileID: 21300000, guid: 9cd4f5b97088a294db9bb2c4f63afb5e, type: 3}
+    texture: {fileID: 2800000, guid: 9cd4f5b97088a294db9bb2c4f63afb5e, type: 3}
+  - name: img_xuanzeshu
+    sprite: {fileID: 21300000, guid: 407c44577b4fb3c409f2720cf835ff12, type: 3}
+    texture: {fileID: 2800000, guid: 407c44577b4fb3c409f2720cf835ff12, type: 3}

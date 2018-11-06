@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbe4d0bb8eef494f991b6eae1e84cee, type: 3}
+  m_Name: spr_confraternity
+  m_EditorClassIdentifier: 
+  spriteNum: 12
+  spriteList:
+  - name: img_fengge
+    sprite: {fileID: 21300000, guid: 09ce1fe4d5a2e5b42b1db964844fff36, type: 3}
+    texture: {fileID: 2800000, guid: 09ce1fe4d5a2e5b42b1db964844fff36, type: 3}
+  - name: img_fenggexian
+    sprite: {fileID: 21300000, guid: fb90771a20201c647af9edfb98dc92b4, type: 3}
+    texture: {fileID: 2800000, guid: fb90771a20201c647af9edfb98dc92b4, type: 3}
+  - name: img_soushuo
+    sprite: {fileID: 21300000, guid: 46a1b579d5675ff4b94fb473aa1d1fdb, type: 3}
+    texture: {fileID: 2800000, guid: 46a1b579d5675ff4b94fb473aa1d1fdb, type: 3}
+  - name: img_ziji
+    sprite: {fileID: 21300000, guid: f156ac7268402d342b7752bd8a5573e1, type: 3}
+    texture: {fileID: 2800000, guid: f156ac7268402d342b7752bd8a5573e1, type: 3}
+  - name: img_xuanzhong1
+    sprite: {fileID: 21300000, guid: c16ec7107d6cd504ca5ee58d1c453d9a, type: 3}
+    texture: {fileID: 2800000, guid: c16ec7107d6cd504ca5ee58d1c453d9a, type: 3}
+  - name: img_banghui
+    sprite: {fileID: 21300000, guid: 3426e32d914aed24482fd3b7a0a3e31b, type: 3}
+    texture: {fileID: 2800000, guid: 3426e32d914aed24482fd3b7a0a3e31b, type: 3}
+  - name: img_banghuixuanzhong
+    sprite: {fileID: 21300000, guid: 768d84c8457e1054cb93815c98d16ae9, type: 3}
+    texture: {fileID: 2800000, guid: 768d84c8457e1054cb93815c98d16ae9, type: 3}
+  - name: img_liebiao
+    sprite: {fileID: 21300000, guid: 1cf3527bf6bb83e4db15effbf85be8e1, type: 3}
+    texture: {fileID: 2800000, guid: 1cf3527bf6bb83e4db15effbf85be8e1, type: 3}
+  - name: img_liebiaoxuanzhong
+    sprite: {fileID: 21300000, guid: 9edd01e3b7c5b164eb784999fd4d49ec, type: 3}
+    texture: {fileID: 2800000, guid: 9edd01e3b7c5b164eb784999fd4d49ec, type: 3}
+  - name: btn_banghuishangdian
+    sprite: {fileID: 21300000, guid: 458b0d5f1c8d5184abc06a25bbbc07b3, type: 3}
+    texture: {fileID: 2800000, guid: 458b0d5f1c8d5184abc06a25bbbc07b3, type: 3}
+  - name: btn_banghuijianshe
+    sprite: {fileID: 21300000, guid: 4632c983f24b0df4db269c828ffe5a1f, type: 3}
+    texture: {fileID: 2800000, guid: 4632c983f24b0df4db269c828ffe5a1f, type: 3}
+  - name: img_zidongjiaru
+    sprite: {fileID: 21300000, guid: c17802cf355faf942be6e28cefae4cf3, type: 3}
+    texture: {fileID: 2800000, guid: c17802cf355faf942be6e28cefae4cf3, type: 3}
