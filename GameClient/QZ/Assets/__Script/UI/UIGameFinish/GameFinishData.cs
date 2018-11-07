@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace GameMain
 {
-    public class GameFinishData : SingleTon_Class<GameFinishData>
+    public class GameFinishData : SingleClass<GameFinishData>
     {
 
     }

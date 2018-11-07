@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Click3DObject : SingleTon_Class<Click3DObject>
+public class Click3DObject : SingleClass<Click3DObject>
 {
 
     private Vector3 inputPosition = Vector3.zero;

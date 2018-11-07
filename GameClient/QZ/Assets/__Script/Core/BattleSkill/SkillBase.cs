@@ -69,7 +69,7 @@ public class SkillBase
 
     protected virtual void OnEnd(GameUnit actor)
     {
-        BattleSkillManager.instance.SkillEnd(this);
+        SkillManager.Instance.SkillEnd(this);
     }
 }
 

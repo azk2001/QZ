@@ -18,7 +18,7 @@ namespace GameMain
     /// <summary>
     /// UI管理器
     /// </summary>
-    public class UIManager : SingleTon_Class<UIManager>
+    public class UIManager : SingleClass<UIManager>
     {
 
         private Dictionary<eUIName, UIBase> allUIList = new Dictionary<eUIName, UIBase>();  //当前缓存的UI;

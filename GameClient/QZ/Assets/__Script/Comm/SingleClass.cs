@@ -84,11 +84,11 @@ public class singleton<T> : MonoBehaviour where T : MonoBehaviour
 }
 
 
-public class SingleTon_Class<T> where T : SingleTon_Class<T>, new()
+public class SingleClass<T> where T : SingleClass<T>, new()
 {
     private static T instance;
 
-    protected SingleTon_Class()
+    protected SingleClass()
     {
 
     }

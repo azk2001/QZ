@@ -7,7 +7,7 @@ using UnityEngine;
 namespace GameMain
 {
 
-    public class TableManager : SingleTon_Class<TableManager>
+    public class TableManager : SingleClass<TableManager>
     {
 
         //其实界面加载配置表

@@ -235,6 +235,7 @@ public class UnitController : MonoBehaviour
 		isMove = false;
     }
 
+    //朝着指定方向移动
     public void MoveDirection(Vector3 direction)
     {
         moveDirection = direction.normalized;
@@ -250,6 +251,7 @@ public class UnitController : MonoBehaviour
         }
     }
 
+    //朝着指定点移动
     public void MoveToPosition(Vector3 position, Vector3 _directionCache = default(Vector3))
     {
         directionCache = _directionCache;
@@ -289,24 +291,12 @@ public class UnitController : MonoBehaviour
         }
     }
 
-	public void PlayAnimation(string aniName,eHorseCarType horseCarType)
+	public void PlayAnimation(string aniName)
 	{
 		if (mAnimator == null)
 			return;
-		int layerIndex = 0;
 
-		switch (horseCarType) {
-		case eHorseCarType.none:
-			layerIndex = mAnimator.GetLayerIndex ("BaseLayer");
-			break;
-		case eHorseCarType.horseCar:
-			layerIndex = mAnimator.GetLayerIndex ("HoresCarLayer");
-			break;
-		case eHorseCarType.max:
-			break;
-		}
-
-		mAnimator.Play(aniName,layerIndex);
+		mAnimator.Play(aniName);
 	}
 
     public void PlayAnimation(string param, bool flag)
@@ -324,6 +314,7 @@ public class UnitController : MonoBehaviour
 
         mAnimator.SetInteger(param, val);
     }
+
     public void PlayAnimation(string param, float val)
     {
         if (mAnimator == null)

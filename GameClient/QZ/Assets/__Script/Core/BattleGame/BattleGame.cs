@@ -57,7 +57,7 @@ public class BattleGame : MonoBehaviour {
 	public void BattleEnd()
 	{
 		BuffManager.instance.RemoveAll ();
-		GameUnitManager.instance.RemoveAllGameUnit ();
+		GameUnitManager.Instance.RemoveAllGameUnit ();
 		PlayerController.instance.OnRemovePlayerController();
 		
 		BattleBuffRoot.instance.DeSpwanAll ();
