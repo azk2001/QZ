@@ -13,272 +13,269 @@ public enum eUIDepth
     ui_max = 6,		//最顶层UI; 类似断线重连;	深度区间（600-699）;
 }
 
-namespace GameMain
+//UI基础管理类;
+public abstract class UIBase
 {
-    //UI基础管理类;
-    public abstract class UIBase
+    private GameObject _gameObject = null;
+
+    private bool tweenAni = true;
+
+    /// <summary>
+    /// UI GameObject;
+    /// </summary>
+    public GameObject gameObject
     {
-        private GameObject _gameObject = null;
-
-        private bool tweenAni = true;
-
-        /// <summary>
-        /// UI GameObject;
-        /// </summary>
-		public GameObject gameObject
+        get
         {
-            get
-            {
-                return _gameObject;
-            }
+            return _gameObject;
         }
+    }
 
-        private UIGameObjectList _gameObjectList = null;
+    private UIGameObjectList _gameObjectList = null;
 
-        public UIGameObjectList gameObjectList
+    public UIGameObjectList gameObjectList
+    {
+        get
         {
-            get
-            {
-                return _gameObjectList;
-            }
+            return _gameObjectList;
         }
+    }
 
-        /// <summary>
-        /// 是否隐藏;
-        /// </summary>
-		public bool isHide
+    /// <summary>
+    /// 是否隐藏;
+    /// </summary>
+    public bool isHide
+    {
+        get
         {
-            get
+            return gameObject.activeSelf == false;
+        }
+        set
+        {
+            if (gameObject != null)
             {
-                return gameObject.activeSelf == false;
-            }
-            set
-            {
-                if (gameObject != null)
+                if (value)
                 {
-                    if (value)
+                    if (TweenAni)
                     {
-                        if (TweenAni)
+                        if (Img_Mask != null)
                         {
-                            if (Img_Mask != null)
+                            Img_Mask.DOScale(0, 0);
+                        }
+                        DOTween.To(() => gameObject.transform.localScale, x => gameObject.transform.localScale = x, Vector3.zero, 0.2f).OnComplete
+                            (() =>
                             {
-                                Img_Mask.DOScale(0, 0);
-                            }
-                            DOTween.To(() => gameObject.transform.localScale, x => gameObject.transform.localScale = x, Vector3.zero, 0.2f).OnComplete
-                                (() =>
-                                {
-                                    gameObject.SetActive(false);
-                                });
-                        }
-                        else
-                        {
-                            gameObject.SetActive(false);
-                        }
+                                gameObject.SetActive(false);
+                            });
                     }
                     else
                     {
-                        gameObject.SetActive(true);
+                        gameObject.SetActive(false);
                     }
-
                 }
-            }
-        }
-
-        /// <summary>
-        /// UI深度;
-        /// </summary>
-        public abstract eUIDepth uiDepth { get; }
-
-        /// <summary>
-        /// 是否常显;
-        /// </summary>
-        public abstract bool showing { get; }
-
-        public virtual bool TweenAni
-        {
-            get
-            {
-                return tweenAni;
-            }
-        }
-
-        /// <summary>
-        /// 主接收点击事件;
-        /// </summary>
-        protected GraphicRaycaster graphic = null;
-
-
-        protected UIBase()
-        {
-            EventListenerManager.AddListener((int)EventEnum.getHint, OnGetRootHintSystem);
-        }
-
-
-        /// <summary>
-        /// Init 在UI初始化的时候调用;
-        /// </summary>
-        /// <param name="obj">UI 的 GameObcject</param>
-        public virtual void OnInit()
-        {
-            if (TweenAni)
-            {
-                if (Img_Mask != null)
+                else
                 {
-                    Img_Mask.DOScale(1, 0).SetDelay(0.1f);
+                    gameObject.SetActive(true);
                 }
-                DOTween.To(() => gameObject.transform.localScale, x => gameObject.transform.localScale = x, Vector3.one,
-                    0.2f);
+
             }
-            else
+        }
+    }
+
+    /// <summary>
+    /// UI深度;
+    /// </summary>
+    public abstract eUIDepth uiDepth { get; }
+
+    /// <summary>
+    /// 是否常显;
+    /// </summary>
+    public abstract bool showing { get; }
+
+    public virtual bool TweenAni
+    {
+        get
+        {
+            return tweenAni;
+        }
+    }
+
+    /// <summary>
+    /// 主接收点击事件;
+    /// </summary>
+    protected GraphicRaycaster graphic = null;
+
+
+    protected UIBase()
+    {
+        EventListenerManager.AddListener((int)EventEnum.getHint, OnGetRootHintSystem);
+    }
+
+
+    /// <summary>
+    /// Init 在UI初始化的时候调用;
+    /// </summary>
+    /// <param name="obj">UI 的 GameObcject</param>
+    public virtual void OnInit()
+    {
+        if (TweenAni)
+        {
+            if (Img_Mask != null)
             {
-                gameObject.transform.localScale = Vector3.one;
+                Img_Mask.DOScale(1, 0).SetDelay(0.1f);
             }
+            DOTween.To(() => gameObject.transform.localScale, x => gameObject.transform.localScale = x, Vector3.one,
+                0.2f);
         }
-
-        /// <summary>
-        /// 设置UI的深度
-        /// </summary>
-        /// <param name="depth"></param>
-        public void SetDepth(int depth)
+        else
         {
-            Canvas canvas = gameObjectList.GetComponent<Canvas>();
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = depth;
-
-            graphic = gameObjectList.GetComponent<GraphicRaycaster>();
-            graphic.ignoreReversedGraphics = false;
-            //  graphic.
-
+            gameObject.transform.localScale = Vector3.one;
         }
+    }
 
-        //点击事件返回统一处理;
-        private void OnUIEventTrigger(params object[] args)
+    /// <summary>
+    /// 设置UI的深度
+    /// </summary>
+    /// <param name="depth"></param>
+    public void SetDepth(int depth)
+    {
+        Canvas canvas = gameObjectList.GetComponent<Canvas>();
+        canvas.overrideSorting = true;
+        canvas.sortingOrder = depth;
+
+        graphic = gameObjectList.GetComponent<GraphicRaycaster>();
+        graphic.ignoreReversedGraphics = false;
+        //  graphic.
+
+    }
+
+    //点击事件返回统一处理;
+    private void OnUIEventTrigger(params object[] args)
+    {
+        UIEventParam eventParam = (UIEventParam)args[0];
+
+        switch (eventParam.eventType)
         {
-            UIEventParam eventParam = (UIEventParam)args[0];
-
-            switch (eventParam.eventType)
-            {
-                case EventIdentity.uiStart:
-                    OnStart();
-                    break;
-                case EventIdentity.uiDestroy:
-                    OnDestroy();
-                    break;
-                case EventIdentity.uiEnable:
-                    OnEnable();
-                    break;
-                case EventIdentity.uiDisable:
-                    OnDisable();
-                    break;
-                case EventIdentity.uiClick:
-                    OnClick(eventParam.gameobject);
-                    break;
-                case EventIdentity.uiLongClick:
-                    OnLongClick(eventParam.gameobject);
-                    break;
-                case EventIdentity.uiPress:
-                    OnPress(eventParam.gameobject);
-                    break;
-                case EventIdentity.uiRelease:
-                    OnRelease(eventParam.gameobject);
-                    break;
-            }
+            case EventIdentity.uiStart:
+                OnStart();
+                break;
+            case EventIdentity.uiDestroy:
+                OnDestroy();
+                break;
+            case EventIdentity.uiEnable:
+                OnEnable();
+                break;
+            case EventIdentity.uiDisable:
+                OnDisable();
+                break;
+            case EventIdentity.uiClick:
+                OnClick(eventParam.gameobject);
+                break;
+            case EventIdentity.uiLongClick:
+                OnLongClick(eventParam.gameobject);
+                break;
+            case EventIdentity.uiPress:
+                OnPress(eventParam.gameobject);
+                break;
+            case EventIdentity.uiRelease:
+                OnRelease(eventParam.gameobject);
+                break;
         }
+    }
 
-        public Transform Img_Mask = null;
-        /// <summary>
-        /// GameObject Awake;
-        /// </summary>
-        /// <param name="obj">GameObject</param>
-        public virtual void OnAwake(GameObject obj)
-        {
-            _gameObject = obj;
-            _gameObjectList = _gameObject.GetComponent<UIGameObjectList>();
+    public Transform Img_Mask = null;
+    /// <summary>
+    /// GameObject Awake;
+    /// </summary>
+    /// <param name="obj">GameObject</param>
+    public virtual void OnAwake(GameObject obj)
+    {
+        _gameObject = obj;
+        _gameObjectList = _gameObject.GetComponent<UIGameObjectList>();
 
-            EventListenerManager.AddListener(gameObject.GetInstanceID(), OnUIEventTrigger);
-        }
+        EventListenerManager.AddListener(gameObject.GetInstanceID(), OnUIEventTrigger);
+    }
 
-        /// <summary>
-        /// GameObject Start;
-        /// </summary>
-        public virtual void OnStart()
-        {
+    /// <summary>
+    /// GameObject Start;
+    /// </summary>
+    public virtual void OnStart()
+    {
 
-        }
+    }
 
-        /// <summary>
-        /// GameObject Destroy;
-        /// </summary>
-        public virtual void OnDestroy()
-        {
-            EventListenerManager.RemoveListener(gameObject.GetInstanceID(), OnUIEventTrigger);
-        }
+    /// <summary>
+    /// GameObject Destroy;
+    /// </summary>
+    public virtual void OnDestroy()
+    {
+        EventListenerManager.RemoveListener(gameObject.GetInstanceID(), OnUIEventTrigger);
+    }
 
-        /// <summary>
-        /// GameObject Enable;
-        /// </summary>
-        public virtual void OnEnable()
-        {
+    /// <summary>
+    /// GameObject Enable;
+    /// </summary>
+    public virtual void OnEnable()
+    {
 
-        }
+    }
 
-        /// <summary>
-        /// GameObejct Disable;
-        /// </summary>
-        public virtual void OnDisable()
-        {
+    /// <summary>
+    /// GameObejct Disable;
+    /// </summary>
+    public virtual void OnDisable()
+    {
 
-        }
+    }
 
-        /// <summary>
-        /// 点击事件;
-        /// </summary>
-        /// <param name="clickObject">点击的 GameObject</param>
-        public virtual void OnClick(GameObject clickObject)
-        {
+    /// <summary>
+    /// 点击事件;
+    /// </summary>
+    /// <param name="clickObject">点击的 GameObject</param>
+    public virtual void OnClick(GameObject clickObject)
+    {
 
-        }
+    }
 
-        /// <summary>
-        /// 长按事件,只触发1次;
-        /// </summary>
-        /// <param name="clickObject">点击的 GameObject</param>
-        public virtual void OnLongClick(GameObject clickObject)
-        {
+    /// <summary>
+    /// 长按事件,只触发1次;
+    /// </summary>
+    /// <param name="clickObject">点击的 GameObject</param>
+    public virtual void OnLongClick(GameObject clickObject)
+    {
 
-        }
+    }
 
-        /// <summary>
-        /// 触碰事件;
-        /// </summary>
-        /// <param name="clickObject">点击的 GameObject</param>
-        public virtual void OnPress(GameObject clickObject)
-        {
+    /// <summary>
+    /// 触碰事件;
+    /// </summary>
+    /// <param name="clickObject">点击的 GameObject</param>
+    public virtual void OnPress(GameObject clickObject)
+    {
 
-        }
+    }
 
-        /// <summary>
-        /// 释放事件;
-        /// </summary>
-        /// <param name="clickObject">点击的 GameObject</param>
-        public virtual void OnRelease(GameObject clickObject)
-        {
+    /// <summary>
+    /// 释放事件;
+    /// </summary>
+    /// <param name="clickObject">点击的 GameObject</param>
+    public virtual void OnRelease(GameObject clickObject)
+    {
 
-        }
+    }
 
-        /// <summary>
-        /// 获取根节点红绿点开放显示;
-        /// </summary>
-        /// <param name="args">返回红绿灯配置</param>
-        public virtual void OnGetRootHintSystem(params object[] args)
-        {
+    /// <summary>
+    /// 获取根节点红绿点开放显示;
+    /// </summary>
+    /// <param name="args">返回红绿灯配置</param>
+    public virtual void OnGetRootHintSystem(params object[] args)
+    {
 
-        }
+    }
 
-        //设置红绿点功能;
-        protected virtual void OnHintChange(params object[] args)
-        {
+    //设置红绿点功能;
+    protected virtual void OnHintChange(params object[] args)
+    {
 
-        }
     }
 }

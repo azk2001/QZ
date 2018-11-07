@@ -68,7 +68,7 @@ public class UnitController : MonoBehaviour
         _characterController = this.GetComponent<CharacterController>();
         transformCaChe = this.transform;
         mAnimator = this.GetComponentInChildren<Animator>();
-        rendererList = transformCaChe.Find("Model").GetComponentsInChildren<Renderer>();
+        rendererList = transformCaChe.Find("Modle").GetComponentsInChildren<Renderer>();
         SetCharacterControllerEnable(true);
         mAnimator.speed = 1;
         isMovePoint = false;
@@ -76,8 +76,7 @@ public class UnitController : MonoBehaviour
         directionCache = Vector3.zero;
         moveDirection = Vector3.zero;
         moveToPoint = Vector3.zero;
-
-        teamShadow.gameObject.SetActive(false);
+        
         ShowRenderer(true);
         CancelInvoke("DizzinessEnd");
     }

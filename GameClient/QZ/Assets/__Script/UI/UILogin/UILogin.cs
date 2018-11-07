@@ -64,17 +64,23 @@ public class UILogin : UIBase
 
                 PlayerPrefs.SetString("UserName", Input_userName.text);
                 PlayerPrefs.SetString("PassWord", Input_passWord.text);
+
+                C2SLoginMessage message = new C2SLoginMessage();
+                message.userName = Input_userName.text;
+                message.pwassword = Input_passWord.text;
+
+                BattleProtocolEvent.SendLogin(message);
+
                 break;
         }
 
 
     }
 
-    private void OnLoadFinish(int val)
+    public void OnLoadFinish()
     {
-        //        Debug.Log(val);
         UIManager.Instance.CloseUI(eUIName.UILogin);
-        UIManager.Instance.OpenUI(eUIName.UISelectServer);
+        UIManager.Instance.OpenUI(eUIName.UICreatePlayer);
     }
 
 

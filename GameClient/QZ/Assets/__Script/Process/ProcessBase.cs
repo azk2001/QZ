@@ -5,12 +5,12 @@ using System.Text;
 
 class ProcessBase
 {
-    protected virtual void OnBegin()
+    public virtual void OnBegin()
     {
 
     }
 
-    protected virtual void OnEnd()
+    public virtual void OnEnd()
     {
 
     }

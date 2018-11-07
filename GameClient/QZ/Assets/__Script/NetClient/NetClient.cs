@@ -1,5 +1,4 @@
-﻿using BattleClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -32,7 +31,7 @@ class NetClient :MonoBehaviour
 
         ClientBattle.Instance.NetConnect(ip, 8000, onConnect);
         BattleProtocol.InitProtocol();
-
+        ProcessManager.Instance.Init();
     }
 
     private void Update()
@@ -47,6 +46,6 @@ class NetClient :MonoBehaviour
 
     private void onConnect(bool flag)
     {
-        Debug.Log("连接返回结果：" + flag);
+        ProcessManager.Instance.Begin(ProcessType.processstart);
     }
 }

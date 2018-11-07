@@ -3,25 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class ProcessManager:SingleClass<ProcessManager>
+public enum ProcessType
 {
-    private Dictionary<string, ProcessBase> procDic = new Dictionary<string, ProcessBase>();
+    processstart,//开始流程
+}
+
+class ProcessManager : SingleClass<ProcessManager>
+{
+    private Dictionary<ProcessType, ProcessBase> procDic = new Dictionary<ProcessType, ProcessBase>();
+
+    public ProcessBase curProcess = null; //当前所在的流程;
 
     public void Init()
     {
-
+        ProcessStart processStart = new ProcessStart();
+        AddProcess(ProcessType.processstart, processStart);
     }
 
-    public ProcessBase GetProcess(string str)
+    public void AddProcess(ProcessType type, ProcessBase pb)
     {
-        if (procDic.ContainsKey(str))
+        if (procDic.ContainsKey(type) == false)
         {
-            return procDic[str];
+            procDic[type] = pb;
+        }
+    }
+
+    public void RemoveProcess(ProcessType type)
+    {
+        if (procDic.ContainsKey(type))
+        {
+            procDic.Remove(type);
+        }
+    }
+    public ProcessBase GetProcess(ProcessType type)
+    {
+        if (procDic.ContainsKey(type))
+        {
+            return procDic[type];
         }
 
         return null;
     }
 
+    //开始一个流程
+    public void Begin(ProcessType type)
+    {
+        //结束当前流程;
+        if(curProcess != null)
+        {
+            curProcess.OnEnd();
+        }
 
+        //运行下一个流程;
+        curProcess = GetProcess(type);
+        curProcess.OnBegin();
+    }
+
+    //结束一个流程
+    public void End(ProcessType type)
+    {
+
+    }
 
 }
