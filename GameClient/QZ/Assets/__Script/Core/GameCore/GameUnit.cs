@@ -23,12 +23,10 @@ public class GameUnit
     public GameUnitData gameUnitData = null;
     public int mGameUintId = 0;
     public List<BuffBase> buffs = new List<BuffBase>();     //当前身上的所有buff;
-    public List<int> skills = new List<int>();              //当前身上的所有技能ID;
+    public List<SkillBase> skills = new List<SkillBase>();  //当前身上的所有技能ID;
 
     public Transform prefabModel = null;
-
-    public HorseCarController mHorseCarController = null;
-
+    
     public bool isInvincible = false;	//是否无敌;
     public int campId = 0;              //阵营ID;
     public bool isDeading = false;      //是否在死亡过程中;
@@ -63,8 +61,7 @@ public class GameUnit
 
         SetColor(Color.white, 0);
         SetAlpha(1);
-
-        mUnitController.isMove = true;
+        
         killGameUnit = null;
 
         buffs.Clear();
@@ -113,15 +110,22 @@ public class GameUnit
         mUnitController.MoveDirection(dir * 0.5f);
     }
 
-    public void OnUpdate()
+    public void SetForward(Vector3 forward)
     {
-        if (buffs.Count > 0)
+        mUnitController.SetForward(forward);
+    }
+
+    public void OnUpdate(float deltaTime)
+    {
+        if(skills.Count >0)
         {
-            for (int i = buffs.Count - 1; i >= 0; i--)
+            for (int i = skills.Count - 1; i >= 0; i--)
             {
-                buffs[i].UpdateBuff(this);
+                skills[i].Update(deltaTime);
             }
+            
         }
+
     }
 
     public void OnCollisionStartEvent(Collider collision)// 当进入碰撞器
@@ -134,7 +138,6 @@ public class GameUnit
 
     public void OnCollisionEndEvent(Collider collision)// 当离开碰撞器
     {
-
         if (collision != null)
         {
 
@@ -147,31 +150,10 @@ public class GameUnit
         BuffController buffController = other.GetComponent<BuffController>();
         if (buffController != null)
         {
-            BuffBase buffBase = BuffManager.instance.GetBuff(buffController.buffStaticId);
+            BuffBase buffBase = BuffManager.Instance.GetBuff(buffController.uuid);
             if (buffBase != null)
             {
                 AddBuff(buffBase);
-            }
-        }
-
-        //碰撞到了死亡了的角色;
-        DeadEffectItem deadEffectItem = other.GetComponent<DeadEffectItem>();
-        if (deadEffectItem != null)
-        {
-            GameUnit gameUnit = GameUnitManager.Instance.GetGameUnit(deadEffectItem.mUnitController.gameUintId);
-            if (gameUnit != null && gameUnit != this)
-            {
-                if (gameUnit.campId == campId)
-                {
-                    gameUnit.isDeading = false;
-                    AudioManager.instance.Play(AudioPlayIDCollect.ad_rescue, prefabModel.transform.localPosition);
-                    gameUnit.StopDead();
-                    gameUnit.SetSpeed(gameUnitData.speed);
-                }
-                else
-                {
-                    gameUnit.EndDead();
-                }
             }
         }
     }
@@ -198,7 +180,7 @@ public class GameUnit
     {
         //获取释放成功技能;
         Vector3 v3 = mUnitController.transformCaChe.position;
-        bool isPlay = SkillManager.Instance.PlayLocalSkill(this, v3, skillId, gameUnitData);
+        bool isPlay = SkillManager.Instance.AddLocalSkill(this, v3, skillId);
         if (isPlay == false)
             return false;
 
@@ -226,7 +208,6 @@ public class GameUnit
     public void StopDead()
     {
         isDeading = false;
-        mUnitController.isMove = true;
         killGameUnit = null;
 
         PlayAnimation("runTree");
@@ -268,7 +249,7 @@ public class GameUnit
         isDeading = false;
 
         GameUnitManager.Instance.RemoveGameUnit(mGameUintId);
-        BattleUnitRoot.instance.DeSpwan(prefabModel);
+        BattleUnitRoot.Instance.DeSpwan(prefabModel);
 
         Reset();
 

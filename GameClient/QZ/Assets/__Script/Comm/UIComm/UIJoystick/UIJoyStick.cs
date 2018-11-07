@@ -49,7 +49,7 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
         transformCache = this.transform;
 
-        uiCamera = glob_data.uiCamera;
+        uiCamera = GlobData.uiCamera;
 
         tweener = transformCache.GetComponentsInChildren<DOTweenAnimation>();
 

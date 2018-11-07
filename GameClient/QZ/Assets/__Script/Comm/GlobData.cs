@@ -18,8 +18,9 @@ public delegate void VoidIntStringDelegate(int val, string arg);
 public delegate Vector3 Vector3Delegate();
 public delegate void VoidByteDelegate(byte[] arg);
 public delegate void VoidBoolDelegate(bool flag);
-
 public delegate void VoidStrBoolDelegate(string str, bool isTrue);
+public delegate void VoidColliderDelegate(Collider other);
+
 
 public enum eModleType
 {
@@ -29,23 +30,8 @@ public enum eModleType
     player = 100,
 }
 
-public static class glob_data
+public static class GlobData
 {
-    //    public static bool _is_demo = false;
-
-    public const string COMMFONTNAME = "font_simhei";
-    public const int playerId = 100001;
-
-    public const int playerCamp = 1;
-    public const int monsterCamp = 2;
-
-    public const string showPrefabLayer = "UIEffect";
-    public const string playerLayer = "Player";
-
-    public const int autoAIId = 1;
-    public const int pvpAutoAIId = 2;
-    // ---------------------------------------------------------------------
-
     private static Camera _uiCamera = null;
     public static Camera uiCamera
     {
@@ -132,14 +118,4 @@ public static class glob_data
         PlayerPrefs.SetInt("gameQuality", 3);
         PlayerPrefs.SetInt("playerNum", 10);
     }
-
-    public static int UUID
-    {
-        get
-        {
-            return _uid--;
-        }
-    }
-
-    private static int _uid = Int32.MaxValue;
 }

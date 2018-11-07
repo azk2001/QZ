@@ -2,110 +2,98 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BuffBase : BattleBase
+public class BuffBase
 {
 	public Transform buffPrefab = null;
-	public bool isInvincible = false;
 	public BuffController buffController = null;
 
-	public int mBuffStaticId = 0;
+	public int uuid = 0;
 	public int buffType = 0;
 	public Vector3 position;
-	public Vector2 markPosition;
 	private bool isRun = false;
-	private bool isUpdate = true;		//是否在检查Buff;
-	private cs_buff mBuffParam = null;
-	private float buffDataTime = 0;
-	private float invincibleDataTime = 0;
+	private cs_buff buffParam = null;
 
-	public bool InitConfig(int buffStaticId,cs_buff buffParam,Vector3 position )
+    private float takeDataTime = 0;
+
+    private GameUnit actor = null;  //触发者的游戏对象;
+
+    //开始创角buff;
+    public bool CreateBuff(int uuid,cs_buff buffParam,Vector3 position )
 	{
-		mBuffParam = buffParam;
-		mBuffStaticId = buffStaticId;
-		buffDataTime = 0;
+		this.buffParam = buffParam;
+		this.uuid = uuid;
 
-		isUpdate = true;
-		buffType = mBuffParam.buffId;
+        buffType = this.buffParam.buffId;
 
 		buffController = buffPrefab.GetComponent<BuffController> ();
-		buffController.buffStaticId = buffStaticId;
+		buffController.uuid = uuid;
 		buffController.buffTypeId = buffType;
 		buffPrefab.position = position;
 
 		this.position = position;
 
-		isInvincible = true;
-		invincibleDataTime = 0;
-
-		return OnInitConfig(mBuffParam.textParam);
+        TimeManager.Instance.Begin(this.buffParam.showTime, this.RemoveBuff);
+		return OnInitConfig(this.buffParam.textParam);
 	}
 	
-	public bool BeginBuff( GameUnit actor)
+    //buff开始生效;
+	public bool BeginBuff(GameUnit actor)
 	{
-		RemoveBuff ();
+        this.actor = actor;
+
+        RemoveBuff ();
 	
 		return OnBegin( actor );
 	}
 	
+    //buff效果结束;
 	public void EndBuff(GameUnit actor)
 	{
 		OnEnd(actor);
 	}
 	
-	public void UpdateBuff(GameUnit actor)
-	{
-		if (isRun == true)
-		{
-			UpdatePerDelta (actor);
-		}
-	}
-
+    //buff触发生效，执行心跳;
 	public void Update(float deltaTime)
 	{
-		invincibleDataTime += deltaTime;
+        if (isRun == false)
+            return;
+        
+        takeDataTime += deltaTime;
 
-		if (invincibleDataTime >= mBuffParam.invincibleTime) {
-			isInvincible=false;
-		}
+        if(takeDataTime > buffParam.invincibleTime)
+        {
+            EndBuff(this.actor);
+        }
 
-		if (isUpdate == false)
-			return;
-
-		buffDataTime += deltaTime;
-		if (buffDataTime > mBuffParam.showTime)
-		{
-			RemoveBuff();
-		}
-
-		OnUpdate (deltaTime);
+        OnUpdate(deltaTime);
 	}
 
-	public void RemoveBuff()
+    //删除原始场景上的buff显示特效;
+    public float RemoveBuff()
 	{
-		isUpdate = false;
-		BattleBuffRoot.instance.DeSpwan (buffPrefab);
-		BuffManager.instance.RemoveBuff (mBuffStaticId);
+		BattleBuffRoot.Instance.DeSpwan (buffPrefab);
+		BuffManager.Instance.RemoveBuff (uuid);
 
+        return -1;
 	}
 
-	protected virtual bool OnBegin(GameUnit actor)
+    //buff开始生效;
+    protected virtual bool OnBegin(GameUnit actor)
 	{
 		isRun = true;
 		return true;
 	}
-	
-	protected virtual void OnEnd(GameUnit actor)
+
+    //buff效果结束;
+    protected virtual void OnEnd(GameUnit actor)
 	{
 		isRun = false;
-	
-		if (isUpdate == true) 
-		{
-			RemoveBuff ();
-			actor.RemoveBuff(this);
-		}
-	}
 
-	protected virtual void UpdatePerDelta(GameUnit actor)
+        RemoveBuff();
+        actor.RemoveBuff(this);
+    }
+
+	protected virtual void OnUpdate(float deltaTime)
 	{
 
 	}
@@ -114,11 +102,5 @@ public class BuffBase : BattleBase
 	{
 		return true;
 	}
-
-	protected virtual void OnUpdate(float deltaTime)
-	{
-
-	}
-
-
+    
 }

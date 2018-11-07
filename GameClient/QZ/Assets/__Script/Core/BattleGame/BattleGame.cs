@@ -49,20 +49,20 @@ public class BattleGame : MonoBehaviour {
 
 
 	void Update () {
-		BuffManager.instance.Update ();
+		BuffManager.Instance.Update ();
 		TimeManager.Instance.Update ();
 	}
 
 	//战斗结束;
 	public void BattleEnd()
 	{
-		BuffManager.instance.RemoveAll ();
+		BuffManager.Instance.RemoveAll ();
 		GameUnitManager.Instance.RemoveAllGameUnit ();
-		PlayerController.instance.OnRemovePlayerController();
+		PlayerController.Instance.RemovePlayerController();
 		
-		BattleBuffRoot.instance.DeSpwanAll ();
+		BattleBuffRoot.Instance.DeSpwanAll ();
 		BattleEffectRoot.instance.DeSpwanAll ();
-		BattleUnitRoot.instance.DeSpwanAll ();
+		BattleUnitRoot.Instance.DeSpwanAll ();
 		UIBattleRoot.instance.DeSpwanAll ();
 	}
 

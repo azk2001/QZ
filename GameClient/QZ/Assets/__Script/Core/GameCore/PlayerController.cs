@@ -2,79 +2,59 @@ using UnityEngine;
 using System.Collections;
 
 //玩家控制脚本;
-public class PlayerController
+public class PlayerController : SingleClass<PlayerController>
 {
-    private static PlayerController _instance = null;
-    public static PlayerController instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new PlayerController();
-            }
-            return _instance;
-        }
-    }
 
     public GameUnit mGameUnit = null;
     public float aniTransSpeed = 5.0f;
-    private Vector3 moveDir = Vector3.zero;
 
-	public bool isInput = false;
+    private Vector3 moveDir = Vector3.zero;  //移动方向;
+    private bool isInput = false;
 
-    public void OnAddPlayerController(GameUnit gameUnit)
+    private Camera mainCamera
     {
-		isInput = true;
-        mGameUnit = gameUnit;
+        get
+        {
+            return Camera.main;
+        }
     }
 
-	public void OnRemovePlayerController()
-	{
-		if (mGameUnit == null)
-			return;
-		
-		mGameUnit.PlayRunAnimation (Vector3.zero);
-		mGameUnit = null;
+    private UIJoyStick joyStick
+    {
+        get
+        {
+            return UIJoyStick.Instance;
+        }
+    }
 
-	}
+    //添加一个玩家控制;
+    public void AddPlayerController(GameUnit gameUnit)
+    {
+        isInput = true;
+        mGameUnit = gameUnit;
 
-	private void DizzinessStart(int gameUintId)
-	{
-		if (gameUintId == mGameUnit.mGameUintId) 
-		{
-			isInput=true;
-		}
-	}
+        joyStick.OnDragEvent += OnJoystickEvent;
+    }
 
-	private void DizzinessEnd(int gameUintId)
-	{
-		
-	}
+    //移除一个玩家控制;
+    public void RemovePlayerController()
+    {
+        if (mGameUnit == null)
+            return;
 
-	private void PlayerStartDead(int gameUintId)
-	{
-		if (gameUintId == mGameUnit.mGameUintId) 
-		{
-			isInput=false;
-		}
-	}
+        mGameUnit.PlayRunAnimation(Vector3.zero);
+        mGameUnit = null;
 
-	private void PlayerStopDead(int gameUintId)
-	{
-		if (gameUintId == mGameUnit.mGameUintId) 
-		{
-			isInput=true;
-		}
-	}
+        joyStick.OnDragEvent -= OnJoystickEvent;
+    }
 
     private void OnJoystickEvent(Vector2 v2)
     {
         if (mGameUnit == null)
             return;
 
-		if (isInput == false)
-			return;
+        if (isInput == false)
+            return;
 
         v2 = v2.normalized;
 
@@ -86,8 +66,13 @@ public class PlayerController
         moveDir.x = v2.x;
         moveDir.z = v2.y;
 
-		//客服端直接移动;
-        mGameUnit.PlayRunAnimation (moveDir);
+        //客服端直接移动;
+        mGameUnit.PlayRunAnimation(moveDir);
+
+
+        //设置前向;
+        Vector3 forward = mGameUnit.mUnitController.transformCaChe.position - mainCamera.transform.position;
+        mGameUnit.SetForward(forward);
     }
 
     public bool OnClickButton(int val)
@@ -95,8 +80,8 @@ public class PlayerController
         if (mGameUnit == null)
             return false;
 
-		if (isInput == false)
-			return false;
+        if (isInput == false)
+            return false;
 
         ///发炸弹
 		return mGameUnit.OnSkill(val);

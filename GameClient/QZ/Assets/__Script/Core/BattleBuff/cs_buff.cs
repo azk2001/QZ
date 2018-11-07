@@ -8,8 +8,8 @@ public class cs_buff
 {
     public int      buffId { get; private set; }
     public int      prefabId;
-    public float    showTime;
-	public float	invincibleTime;				//无敌时间;
+    public float    showTime;                   //buff显示时间;
+	public float	invincibleTime;				//buff生效时长;
     public Dictionary<string,string> textParam;
 
     public static bool ContainsThis(int buffId)

@@ -3,24 +3,33 @@ using System.Collections;
 
 public class UnitController : MonoBehaviour
 {
-	public struct JumpParam
-	{
-		public float curDistance;
-		public float maxDistance;
-		public Vector3 forward;
-		public Vector3 toPosition;
-		public float speed;
+    public struct JumpParam
+    {
+        public float curDistance;
+        public float maxDistance;
+        public Vector3 forward;
+        public Vector3 toPosition;
+        public float speed;
+    }
 
-	}
+    public enum PlayerState
+    {
+        idle,   //站立状态;
+        run,    //奔跑状态;
+        jump,   //跳跃状态;
+        roll,   //翻滚状态;
+        fire,   //释放技能状态;
+        die,    //死亡状态;
+    }
+
 
     public float moveSpeed = 0.2f;
     public int gameUintId = 0;
 
-	public Transform teamShadow = null;
-	public Transform transformCaChe = null;
-	
-	public bool isMove = true;
-	public Vector2 markPosition = Vector2.zero;
+    public Transform teamShadow = null;         //队伍标志;
+    public Transform transformCaChe = null;     //角色;
+    
+    public Vector2 markPosition = Vector2.zero;
 
     private CharacterController _characterController = null;
     public CharacterController characterController
@@ -32,17 +41,15 @@ public class UnitController : MonoBehaviour
     }
 
     private Animator mAnimator = null;
-    private Vector3 moveDirection = Vector3.down;
+    private Vector3 moveDirection = Vector3.forward;
     private Vector3 directionCache = Vector3.zero;
     private Vector3 moveToDir = Vector3.zero;
-    private Vector3 moveToPosition = Vector3.zero;
-    private bool isMovePosition = false;
-    public bool isJump = false;
-    private float runValue = 0;
-    private Collider colliderTiem = null;
+    private Vector3 moveToPoint = Vector3.zero;
+    private bool isMovePoint = false;    //是否朝着某一点移动;
+    private PlayerState playerState = PlayerState.idle;
     private Renderer[] rendererList = null;
-	private JumpParam jumpParam;
-	private Transform curShadow =null;
+    private JumpParam jumpParam;
+    private Transform curShadow = null;
 
     void Awake()
     {
@@ -56,97 +63,102 @@ public class UnitController : MonoBehaviour
 
     public void Init()
     {
-		_characterController = this.GetComponent<CharacterController>();
+        playerState = PlayerState.idle;
+
+        _characterController = this.GetComponent<CharacterController>();
         transformCaChe = this.transform;
         mAnimator = this.GetComponentInChildren<Animator>();
         rendererList = transformCaChe.Find("Model").GetComponentsInChildren<Renderer>();
-		isMove = true;
-		SetCharacterControllerEnable (true);
-		mAnimator.speed = 1;
-		isMovePosition = false;
+        SetCharacterControllerEnable(true);
+        mAnimator.speed = 1;
+        isMovePoint = false;
 
-		directionCache = Vector3.zero;
-		moveDirection = Vector3.zero;
-		moveToPosition = Vector3.zero;
+        directionCache = Vector3.zero;
+        moveDirection = Vector3.zero;
+        moveToPoint = Vector3.zero;
 
-		teamShadow.gameObject.SetActive (false);
-		ShowRenderer (true);
-		CancelInvoke ("DizzinessEnd");
+        teamShadow.gameObject.SetActive(false);
+        ShowRenderer(true);
+        CancelInvoke("DizzinessEnd");
     }
 
     void Update()
     {
-
         if (_characterController == null)
             return;
 
+        //是否在地上;
         if (_characterController.isGrounded == false)
             moveDirection.y = -50;
         else
             moveDirection.y = 0;
 
-        if (isMovePosition == true)
+        if (isMovePoint == true)
         {
-            if (Vector3.Distance(transformCaChe.position, moveToPosition) > 0.2f)
+            if (Vector3.Distance(transformCaChe.position, moveToPoint) > 0.2f)
             {
-                moveToDir = moveToPosition - transformCaChe.position;
+                moveToDir = moveToPoint - transformCaChe.position;
                 MoveDirection(moveToDir * 8);
             }
             else
             {
-                isMovePosition = false;
+                isMovePoint = false;
                 MoveDirection(directionCache);
             }
         }
 
-		if (isJump == true)
-		{
-			Vector3 dar = jumpParam.forward * jumpParam.speed*Time.deltaTime;
-			
-			transformCaChe.Translate (dar);
-			
-			jumpParam.curDistance+=dar.magnitude;
-			
-			if (jumpParam.curDistance>jumpParam.maxDistance)
-			{
-				transformCaChe.position = jumpParam.toPosition;
-				
-				isMove = true;
-				isJump = false;
+        if (playerState == PlayerState.jump)
+        {
+            Vector3 dar = jumpParam.forward * jumpParam.speed * Time.deltaTime;
 
-				MoveDirection(moveDirection);
-			}
-		}
+            transformCaChe.Translate(dar);
 
-		if (isMove ==true && _characterController.enabled == true) {
-			_characterController.Move (moveDirection * moveSpeed * Time.deltaTime);
-		}
+            jumpParam.curDistance += dar.magnitude;
+
+            if (jumpParam.curDistance > jumpParam.maxDistance)
+            {
+                transformCaChe.position = jumpParam.toPosition;
+
+                playerState = PlayerState.idle;
+
+                MoveDirection(moveDirection);
+            }
+        }
+
+        if (playerState != PlayerState.jump && playerState != PlayerState.roll) 
+        {
+            if(_characterController.enabled == true)
+                _characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+        }
     }
 
-	public void SetTeamShadow(bool isFriend)
-	{
-		teamShadow.gameObject.SetActive (true);
-		if (isFriend == true) {
-			curShadow = teamShadow.Find ("shadow_friend");
-		} else {
-			curShadow = teamShadow.Find ("shadow_enemy");
-		}
-		curShadow.gameObject.SetActive (true);
+    public void SetTeamShadow(bool isFriend)
+    {
+        teamShadow.gameObject.SetActive(true);
+        if (isFriend == true)
+        {
+            curShadow = teamShadow.Find("shadow_friend");
+        }
+        else
+        {
+            curShadow = teamShadow.Find("shadow_enemy");
+        }
+        curShadow.gameObject.SetActive(true);
 
-		Transform isself = teamShadow.Find("isself");
-		isself.gameObject.SetActive(false);
-	}
+        Transform isself = teamShadow.Find("isself");
+        isself.gameObject.SetActive(false);
+    }
 
     //进入碰撞;
     void OnTriggerEnter(Collider other)
     {
-       
+
     }
 
     //离开碰撞;
     void OnTriggerExit(Collider other)
     {
-        
+
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -160,12 +172,6 @@ public class UnitController : MonoBehaviour
         Invoke("ColliderEnd", 0.1f);
     }
 
-    void ColliderEnd()
-    {
-       
-        colliderTiem = null;
-    }
-
     public void SetCharacterControllerEnable(bool isEnable)
     {
         if (_characterController == null)
@@ -177,20 +183,20 @@ public class UnitController : MonoBehaviour
         _characterController.enabled = isEnable;
     }
 
-    public void SetColor(Color color,float val)
+    public void SetColor(Color color, float val)
     {
-		return;
+        return;
 
         for (int i = 0, max = rendererList.Length; i < max; i++)
         {
             rendererList[i].material.SetColor("_RimColor", color);
-			rendererList[i].material.SetFloat("_RimParam", val);
-		}
-	}
+            rendererList[i].material.SetFloat("_RimParam", val);
+        }
+    }
 
     public void SetAlpha(float val)
     {
-		return;
+        return;
 
         for (int i = 0, max = rendererList.Length; i < max; i++)
         {
@@ -198,86 +204,89 @@ public class UnitController : MonoBehaviour
         }
     }
 
-	public void ShowRenderer(bool isShow)
-	{
-		return;
+    public void ShowRenderer(bool isShow)
+    {
+        return;
 
-		for (int i=0,max = rendererList.Length; i<max; i++) {
-			rendererList[i].enabled= isShow;
-		}
-	}
+        for (int i = 0, max = rendererList.Length; i < max; i++)
+        {
+            rendererList[i].enabled = isShow;
+        }
+    }
 
     public void SetPosition(Vector3 position)
     {
         transformCaChe.position = position;
     }
 
-	public void SetAngle(float angle)
-	{
-		transformCaChe.eulerAngles = new Vector3 (0, angle, 0);
-	}
-
-	public void JumpPosition(Vector3 toPosition)
+    public void SetAngle(float angle)
     {
-        isJump = true;
+        transformCaChe.eulerAngles = new Vector3(0, angle, 0);
+    }
 
-		Vector3 forward = (toPosition - transformCaChe.position).normalized;
+    public void JumpPosition(Vector3 toPosition)
+    {
+        playerState = PlayerState.jump;
 
-		SetForward(forward);
+        Vector3 forward = (toPosition - transformCaChe.position).normalized;
 
-		jumpParam = new JumpParam ();
-		jumpParam.forward = Vector3.forward;
-		jumpParam.maxDistance = Vector3.Distance (toPosition,transformCaChe.position);
-		jumpParam.curDistance = 0;
-		jumpParam.speed = 8.0f;
-		jumpParam.toPosition = toPosition;
+        SetForward(forward);
 
-		isMove = false;
+        jumpParam = new JumpParam();
+        jumpParam.forward = Vector3.forward;
+        jumpParam.maxDistance = Vector3.Distance(toPosition, transformCaChe.position);
+        jumpParam.curDistance = 0;
+        jumpParam.speed = 8.0f;
+        jumpParam.toPosition = toPosition;
+        
+    }
+
+    public void RollPosition(Vector3 toPosition)
+    {
+        playerState = PlayerState.roll;
+
+
     }
 
     //朝着指定方向移动
     public void MoveDirection(Vector3 direction)
     {
+        if (playerState == PlayerState.jump || playerState == PlayerState.roll)
+        {
+            return;
+        }
+
         moveDirection = direction.normalized;
 
-		if (isJump == true)
-			return;
-
-        SetForward(moveDirection);
+        //SetForward(moveDirection);
 
         if (direction.Equals(Vector3.zero))
         {
             directionCache = Vector3.zero;
+            playerState = PlayerState.idle;
         }
     }
 
     //朝着指定点移动
-    public void MoveToPosition(Vector3 position, Vector3 _directionCache = default(Vector3))
+    public void MoveToPoint(Vector3 point, Vector3 _directionCache = default(Vector3))
     {
+        if (playerState == PlayerState.jump || playerState == PlayerState.roll)
+        {
+            return;
+        }
+
+        playerState = PlayerState.run;
+
         directionCache = _directionCache;
-        isMovePosition = true;
-        position.y = transformCaChe.position.y;
-        moveToPosition = position;
+        isMovePoint = true;
+        point.y = transformCaChe.position.y;
+        moveToPoint = point;
 
     }
 
-	//不能控制;
-	public void DizzinessTime(float dizzinessTime)
-	{
-		isJump =false;
-		isMove =false;
-
-		CancelInvoke ("DizzinessEnd");
-		Invoke("DizzinessEnd",dizzinessTime);
-	}
-
-	private void DizzinessEnd()
-	{
-		isMove = true;
-	}
-
     public void StopMove()
     {
+        playerState = PlayerState.idle;
         directionCache = Vector3.zero;
         moveDirection = Vector3.zero;
     }
@@ -291,13 +300,13 @@ public class UnitController : MonoBehaviour
         }
     }
 
-	public void PlayAnimation(string aniName)
-	{
-		if (mAnimator == null)
-			return;
+    public void PlayAnimation(string aniName)
+    {
+        if (mAnimator == null)
+            return;
 
-		mAnimator.Play(aniName);
-	}
+        mAnimator.Play(aniName);
+    }
 
     public void PlayAnimation(string param, bool flag)
     {
@@ -323,15 +332,14 @@ public class UnitController : MonoBehaviour
         mAnimator.SetFloat(param, val);
     }
 
-	public void SetAnimationSpeed(float speed)
-	{
-		mAnimator.speed = speed;
-	}
+    public void SetAnimationSpeed(float speed)
+    {
+        mAnimator.speed = speed;
+    }
 
     public void RunAnimation(Vector3 v3)
     {
-        runValue = v3.magnitude;
-        PlayAnimation("MoveSpeed", runValue);
+        PlayAnimation("MoveSpeed", v3.magnitude);
     }
 
 }

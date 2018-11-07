@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class BuffController : MonoBehaviour {
 
-	public int buffStaticId = 0;
+	public int uuid = 0;
 	public int buffTypeId = 0;
-
 
 	private bool isMove = false;
 	private bool isStartMove = false;

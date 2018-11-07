@@ -4,44 +4,41 @@ using UnityEngine;
 
 public class SkillController : MonoBehaviour {
 
-	public OnTriggerEvent upEffect = null;
-	public OnTriggerEvent downEffect = null;
-	public OnTriggerEvent leftEffect = null;
-	public OnTriggerEvent rightEffect = null;
+    public SkillTrigger onFire = null;
 
-	private Vector2 mMarkPosition = Vector2.zero;
+    private Vector2 mMarkPosition = Vector2.zero;
 	private bool isCollider = false;
-	void Start () {
-		
-	}
 
-	public void Play (Vector2 markPosition, int upLength,int downLength,int leftLength,int rigthLength,float detectionTime)
+	void Start () {
+        if(onFire != null)
+        {
+            onFire.onTriggerEnter += OnFireTrigger;
+        }
+        
+    }
+
+	public void OnFire ()
 	{
 		isCollider = true;
-		mMarkPosition = markPosition;
 
-		upEffect.Init (upLength);
-		downEffect.Init (downLength);
-		leftEffect.Init (leftLength);
-		rightEffect.Init (rigthLength);
-
-		CancelInvoke ("DetectionTimeEnd");
-		Invoke ("DetectionTimeEnd", detectionTime);//检测碰撞时间;
 	}
 
-	void DetectionTimeEnd()
+    public void OnEnd()
 	{
 		isCollider = false;
 	}
 
-	void OnTrigger(Collider other) 
+	public void OnFireTrigger(Collider other) 
 	{
 		if (isCollider == false)
 			return;
+
+        //碰撞检测;
 	}
 
-	void OnDisable()
-	{
+    private void OnDestroy()
+    {
+        onFire.onTriggerEnter -= OnFireTrigger;
+    }
 
-	}
 }

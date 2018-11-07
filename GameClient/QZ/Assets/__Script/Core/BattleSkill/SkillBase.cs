@@ -14,62 +14,45 @@ public enum eOriginalType
 
 public class SkillBase
 {
-    public int mSkillStaticId = 0;			//技能唯一标示ID;
-    public GameUnit mGameUnit = null;
-    public Vector3 standardPosition = Vector3.zero;
-    public Vector2 markPosition = Vector2.zero;
-    public cs_skill skill = null;
-    public GameUnitData mGameUnitData = null;
+    public int uuid = 0;			            //技能唯一标示ID;
+    public GameUnit gameUnit = null;            //释放者对象;
+    public cs_skill skill = null;               //技能配置参数;
     public Dictionary<string, string> textParam;
     public Transform effectTransfrom = null;
-
-    public bool isSetMark = false;
-
-    public bool OnBegin(int skillStaticId, GameUnit gameUnit, Vector3 position, int skillId, GameUnitData gameUnitData)
+    
+    public bool Begin(int _uuid, GameUnit _gameUnit, Vector3 _position, int _skillId)
     {
-        isSetMark = false;
-
-        mSkillStaticId = skillStaticId;
-        mGameUnit = gameUnit;
-
+        uuid = _uuid;
+        gameUnit = _gameUnit;
+        skill = cs_skill.GetThis(_skillId);
 
         return OnBegin();
     }
 
-    public void StraightFire()
+    public void Update(float deltaTime)
     {
-        OnStraightFire();
+        OnUpdate(deltaTime);
     }
-
-
 
     protected virtual bool OnBegin()
     {
         return true;
     }
 
-    protected virtual float BeginEvent()
-    {
-        return -1;
-    }
-
     protected virtual float OnFire()
     {
-        ///爆炸声音
-        AudioManager.instance.Play(AudioPlayIDCollect.ad_bomb, effectTransfrom.localPosition);
-
         return -1;
     }
 
-    //直接释放;
-    protected virtual void OnStraightFire()
+    protected virtual void OnUpdate(float deltaTime)
     {
 
     }
+
 
     protected virtual void OnEnd(GameUnit actor)
     {
-        SkillManager.Instance.SkillEnd(this);
+        SkillManager.Instance.RemoveSkill(this);
     }
 }
 

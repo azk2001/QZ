@@ -45,10 +45,10 @@ public class UILookTransform : MonoBehaviour
         //Vector3 screenPoint = glob_data.WorldToUI(lookTrans.position);
         //screenPoint = screenPoint + offset;
 
-        rightUpPoint = glob_data.WorldToUI(lookTrans.position + neglectPoint);
+        rightUpPoint = GlobData.WorldToUI(lookTrans.position + neglectPoint);
         rightUpPoint = rightUpPoint + offset;
 
-        leftDownPoint = glob_data.WorldToUI(lookTrans.position - neglectPoint);
+        leftDownPoint = GlobData.WorldToUI(lookTrans.position - neglectPoint);
         leftDownPoint = leftDownPoint + offset;
 
         if (lastPoint.x < rightUpPoint.x)

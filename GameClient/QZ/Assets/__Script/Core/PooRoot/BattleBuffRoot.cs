@@ -1,24 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BattleBuffRoot 
+public class BattleBuffRoot : SingleClass<BattleBuffRoot>
 {
 	private string spwanPoolName = "BattleBuffRoot";
-
-	private static BattleBuffRoot _instance = null;
-
-	public static BattleBuffRoot instance 
-	{
-		get 
-		{
-			if(_instance == null)
-			{
-				_instance = new BattleBuffRoot();
-			}
-
-			return _instance;
-		}
-	}
 
 	private SpwanPool _spwanPool = null;
 	public SpwanPool spwanPool 
@@ -46,6 +31,7 @@ public class BattleBuffRoot
 	{
 		spwanPool.DeSpwanPrefab (trans);
 	}
+
 	public void DeSpwanAll()
 	{
 		spwanPool.DeSpwanAllPrefab ();

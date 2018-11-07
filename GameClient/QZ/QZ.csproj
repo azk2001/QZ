@@ -305,33 +305,21 @@
     <Compile Include="Assets\__Script\Core\Audio\AudioPlayIDCollect.cs" />
     <Compile Include="Assets\__Script\Core\BattleBase.cs" />
     <Compile Include="Assets\__Script\Core\BattleBuff\BuffBase.cs" />
-    <Compile Include="Assets\__Script\Core\BattleBuff\BuffBombUp.cs" />
     <Compile Include="Assets\__Script\Core\BattleBuff\BuffController.cs" />
     <Compile Include="Assets\__Script\Core\BattleBuff\BuffManager.cs" />
-    <Compile Include="Assets\__Script\Core\BattleBuff\BuffSpeedUp.cs" />
-    <Compile Include="Assets\__Script\Core\BattleBuff\BuffStrengthUp.cs" />
+    <Compile Include="Assets\__Script\Core\BattleBuff\Buff\BuffChangeSpeed.cs" />
     <Compile Include="Assets\__Script\Core\BattleBuff\cs_buff.cs" />
     <Compile Include="Assets\__Script\Core\BattleGame\BattleGame.cs" />
     <Compile Include="Assets\__Script\Core\BattleGame\cs_dungeon.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\BattleSkillInvincible.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\BattleSkillJump.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\BattleSkillManager.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\BattleSkillMoveBall.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\BattleSkillFire.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\BattleSkillTrap.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\BattlrSkillDragPlayer.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\BombController.cs" />
+    <Compile Include="Assets\__Script\Core\BattleSkill\Skill\SkillFire.cs" />
+    <Compile Include="Assets\__Script\Core\BattleSkill\SkillManager.cs" />
     <Compile Include="Assets\__Script\Core\BattleSkill\cs_skill.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\DeadEffectItem.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\MoveSkillPrefab.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\OnTriggerEvent.cs" />
+    <Compile Include="Assets\__Script\Core\BattleSkill\SkillTrigger.cs" />
     <Compile Include="Assets\__Script\Core\BattleSkill\SkillBase.cs" />
     <Compile Include="Assets\__Script\Core\BattleSkill\SkillController.cs" />
-    <Compile Include="Assets\__Script\Core\BattleSkill\SkillTrigger.cs" />
     <Compile Include="Assets\__Script\Core\GameCore\cs_player.cs" />
     <Compile Include="Assets\__Script\Core\GameCore\GameUnit.cs" />
     <Compile Include="Assets\__Script\Core\GameCore\GameUnitManager.cs" />
-    <Compile Include="Assets\__Script\Core\GameCore\HorseCarController.cs" />
     <Compile Include="Assets\__Script\Core\GameCore\PlayerController.cs" />
     <Compile Include="Assets\__Script\Core\GameCore\UnitController.cs" />
     <Compile Include="Assets\__Script\Core\PoolManager\PoolManager.cs" />
@@ -348,10 +336,12 @@
     <Compile Include="Assets\__Script\NetClient\BytesWriter.cs" />
     <Compile Include="Assets\__Script\NetClient\ClientBattle.cs" />
     <Compile Include="Assets\__Script\NetClient\Compress.cs" />
-    <Compile Include="Assets\__Script\NetClient\Program.cs" />
+    <Compile Include="Assets\__Script\NetClient\NetClient.cs" />
     <Compile Include="Assets\__Script\NetClient\ProtocolBattleManager.cs" />
     <Compile Include="Assets\__Script\NetClient\ProtocolSroc.cs" />
     <Compile Include="Assets\__Script\NetClient\SocketManager.cs" />
+    <Compile Include="Assets\__Script\Process\ProcessBase.cs" />
+    <Compile Include="Assets\__Script\Process\ProcessManager.cs" />
     <Compile Include="Assets\__Script\ResResources.cs" />
     <Compile Include="Assets\__Script\UI\UIGameFinish\GameFinishData.cs" />
     <Compile Include="Assets\__Script\UI\UIGameFinish\UIGameFinish.cs" />
@@ -378,6 +368,7 @@
     <None Include="Assets\__Script\Comm\UIComm\UIFlash\UIFlash.shader" />
     <None Include="Assets\__Script\Comm\UIComm\UIMask\Additive.shader" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
 </Project>

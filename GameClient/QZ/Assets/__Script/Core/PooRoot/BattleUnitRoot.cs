@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BattleUnitRoot :MonoBehaviour
+public class BattleUnitRoot : MonoBehaviour
 {
 	private string spwanPoolName = "BattleUnitRoot";
 
-	private static BattleUnitRoot _instance = null;
+	private static BattleUnitRoot instance = null;
     
-	public static BattleUnitRoot instance 
+	public static BattleUnitRoot Instance 
 	{
 		get 
 		{
-			return _instance;
+			return instance;
 		}
 	}
 
@@ -29,9 +29,7 @@ public class BattleUnitRoot :MonoBehaviour
 
 	void Awake()
 	{
-		_instance = this;
-
-
+		instance = this;
 	}
 
 	void Start()
