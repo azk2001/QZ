@@ -40,7 +40,7 @@ namespace BattleServer
                 }
             }
            
-            if (socket.Start(new IPEndPoint(IPAddress.Parse(ip), 9000)))
+            if (socket.Start(new IPEndPoint(IPAddress.Parse(ip), 8000)))
             {
                 if (mServerType == 1)
                     MyDebug.WriteLine("...开启跨服战斗服务器成功....");

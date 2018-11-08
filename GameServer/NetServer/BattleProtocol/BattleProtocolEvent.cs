@@ -15,6 +15,8 @@ namespace BattleServer
             C2SLoginMessage message = new C2SLoginMessage();
             message.Message(reader);
 
+            Console.WriteLine(message.userName + "   " + message.pwassword);
+
             AccountData data = AccountDataManager.GetAccount(message.userName);
 
             S2CLoginMessage s2cLoginMessage = new S2CLoginMessage();
