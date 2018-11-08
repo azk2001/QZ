@@ -301,6 +301,10 @@
       <Project>{CF977418-08C1-D44E-D04A-168F39972C50}</Project>
       <Name>QZ</Name>
     </ProjectReference>
+    <ProjectReference Include="QZ.unityproj">
+      <Project>{CF977418-08C1-D44E-D04A-168F39972C50}</Project>
+      <Name>QZ</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\__Script\Editor\ui_editor\BMFontEditor.cs" />
