@@ -3,109 +3,106 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-namespace GameMain
+public enum eScenceType
 {
-    public enum eScenceType
+    main,
+    battle,
+}
+
+class UIGameMain : UIBase
+{
+    public override eUIDepth uiDepth
     {
-        main,
-        battle,
+        get
+        {
+            return eUIDepth.ui_base;
+        }
     }
 
-    class UIGameMain : UIBase
+    public override bool showing
     {
-        public override eUIDepth uiDepth
+        get
         {
-            get
+            return true;
+        }
+    }
+
+    public static UIGameMain Instance = null;
+
+    private DOTweenAnimation tweenAnimation = null;
+
+    public override bool TweenAni
+    {
+        get
+        {
+            return false;
+        }
+    }
+
+    public DOTweenAnimation TweenAnimation
+    {
+        get
+        {
+            if (tweenAnimation == null)
             {
-                return eUIDepth.ui_base;
+                tweenAnimation = gameObject.GetComponent<DOTweenAnimation>();
             }
+            return tweenAnimation;
         }
+    }
 
-        public override bool showing
-        {
-            get
-            {
-                return true;
-            }
-        }
+    public override void OnAwake(GameObject obj)
+    {
 
-        public static UIGameMain Instance = null;
+        base.OnAwake(obj);
 
-        private DOTweenAnimation tweenAnimation = null;
+        Instance = this;
+    }
 
-        public override bool TweenAni
-        {
-            get
-            {
-                return false;
-            }
-        }
+    public override void OnInit()
+    {
+        base.OnInit();
 
-        public DOTweenAnimation TweenAnimation
-        {
-            get
-            {
-                if (tweenAnimation == null)
-                {
-                    tweenAnimation = gameObject.GetComponent<DOTweenAnimation>();
-                }
-                return tweenAnimation;
-            }
-        }
+    }
 
-        public override void OnAwake(GameObject obj)
-        {
+    public override void OnEnable()
+    {
+        base.OnEnable();
 
-            base.OnAwake(obj);
+    }
 
-            Instance = this;
-        }
+    public override void OnDisable()
+    {
+        base.OnDisable();
 
-        public override void OnInit()
-        {
-            base.OnInit();
-            
-        }
+    }
 
-        public override void OnEnable()
-        {
-            base.OnEnable();
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
 
-        }
+        Instance = null;
 
-        public override void OnDisable()
-        {
-            base.OnDisable();
 
-        }
+    }
 
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
+    public override void OnPress(GameObject clickObject)
+    {
+        base.OnPress(clickObject);
+    }
 
-            Instance = null;
+    public override void OnRelease(GameObject clickObject)
+    {
+        base.OnRelease(clickObject);
+    }
 
-          
-        }
+    public override void OnClick(GameObject clickObject)
+    {
+        base.OnClick(clickObject);
+    }
 
-        public override void OnPress(GameObject clickObject)
-        {
-            base.OnPress(clickObject);
-        }
-
-        public override void OnRelease(GameObject clickObject)
-        {
-            base.OnRelease(clickObject);
-        }
-
-        public override void OnClick(GameObject clickObject)
-        {
-            base.OnClick(clickObject);
-        }
-
-        protected override void OnHintChange(params object[] args)
-        {
-            base.OnHintChange(args);
-        }
+    protected override void OnHintChange(params object[] args)
+    {
+        base.OnHintChange(args);
     }
 }

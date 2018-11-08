@@ -12,6 +12,7 @@ public enum eUIName
     UILogin,
     UICreatePlayer,
     UISelectServer,
+    UIGameMain,
 }
 
 /// <summary>
@@ -44,6 +45,8 @@ public class UIManager : SingleClass<UIManager>
 
         allUIList.Add(eUIName.UILogin, new UILogin());
         allUIList.Add(eUIName.UICreatePlayer, new UICreatePlayer());
+        allUIList.Add(eUIName.UIGameMain, new UIGameMain());
+        
     }
 
     private Transform _uiParent = null;

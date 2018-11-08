@@ -58,11 +58,4 @@ class ProcessManager : SingleClass<ProcessManager>
         curProcess = GetProcess(type);
         curProcess.OnBegin();
     }
-
-    //结束一个流程
-    public void End(ProcessType type)
-    {
-
-    }
-
 }

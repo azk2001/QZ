@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UICreatePlayer : UIBase
@@ -45,21 +44,16 @@ public class UICreatePlayer : UIBase
     private UIElementList TableDesc = null;
 
     public string curName = "";
-
     public string randNames = "";
-
     private bool isMan = false;
 
-    private int[] resModleList = new int[2] { 102001, 102002 };
-    private Vector3[] birthPoint = new Vector3[2] { new Vector3(0.55f, 2.4f, -14.4f), new Vector3(0.55f, 2.4f, -14.4f) };
+    private string[] resModleList = new string[2] { "PlayerNan1", "PlayerNv1" };
 
     public UnitController mUnitControl = null;
-    public GameUnit gameUnit = null;
-    private int curModleId = 0;
+    private string curModleName = "";
 
     private Transform ManDesc = null;
     private Transform WomanDesc = null;
-
     private Transform curDesc = null;
 
     private Transform lastModle = null;
@@ -114,23 +108,20 @@ public class UICreatePlayer : UIBase
 
     public void RefreshUI()
     {
-        int modleId = resModleList[0];
         string prefabName = "";
         if (isMan)
         {
-            modleId = resModleList[0];
-            prefabName = "PlayerNan1";
+            prefabName = resModleList[0];
         }
         else
         {
-            modleId = resModleList[1];
-            prefabName = "PlayerNv1";
+            prefabName = resModleList[1];
         }
 
-        if (curModleId == modleId)
+        if (curModleName == prefabName)
             return;
 
-        curModleId = modleId;
+        curModleName = prefabName;
 
         AssetBundleLoadManager.Instance.LoadObject(prefabName, eLoadPriority.advanced, new object[] { }, OnLoadControlFinish);
     }
@@ -256,10 +247,10 @@ public class UICreatePlayer : UIBase
         base.OnClick(clickObject);
     }
 
-    private void OnLoadFinish(int val)
+    public void OnCreateFinish()
     {
         UIManager.Instance.CloseUI(eUIName.UICreatePlayer, false, true);
-        UIManager.Instance.OpenUI(eUIName.UISelectServer);
+        UIManager.Instance.OpenUI(eUIName.UIGameMain);
 
     }
 }

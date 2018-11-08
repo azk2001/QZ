@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 using System.Text;
 
-class ProcessStart : ProcessBase
+class ProcessMain:ProcessBase
 {
     public override void OnBegin()
     {
-
-        UIManager.Instance.OpenUI(eUIName.UILogin);
-
         base.OnBegin();
     }
 
