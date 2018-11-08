@@ -45,8 +45,16 @@ namespace BattleServer
             }
         }
 
+        public void InitDefault()
+        {
+            battleUnitData.speed = 7000;       //移动数度
+            battleUnitData.shield = 0;      //护盾
+            battleUnitData.harm = 0;        //伤害
+
+        }
+
         //第一步初始化玩家数据
-        public void InitData(BytesReader reader)
+        public void SetBytes(BytesReader reader)
         {
             basicsData.SetBytes(reader);                //网络战斗数据初始化数据;
             battleUnitData.SetBytes(reader);            //网络基础数据初始化数据;

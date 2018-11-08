@@ -62,7 +62,6 @@ namespace BattleServer
         public int uuid;        //唯一标识ID;
         public string name;     //名字;
         public int sex;         //性别;
-        public int job;         //职业;
         public int level;       //角色等级;
 
         public void SetBytes(BytesReader reader)

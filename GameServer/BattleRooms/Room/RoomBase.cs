@@ -44,10 +44,10 @@ namespace BattleServer
         public DateTime roomStartTime = DateTime.MinValue;      //房间战斗开始时间;
         public DateTime roomEndTime = DateTime.MinValue;        //房间战斗结束时间;
 
-        protected int mainPlayerUUID ;    //当前战斗中的主驱动AI玩家UUID;
+        protected int mainPlayerUUID ;          //当前战斗中的主驱动AI玩家UUID;
         protected DateTime pingTime;
         protected float dataTime = 0;
-        protected bool isPinging = false;  //是否在ping中;
+        protected bool isPinging = false;       //是否在ping中;
         protected float pingOutTime = 0;
         protected bool isStartRunRoom = false; //是否是第一次运行这个房间;
 
