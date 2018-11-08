@@ -381,6 +381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4909056101493074}
   - component: {fileID: 114569445506806236}
+  - component: {fileID: 143125406755379950}
   m_Layer: 0
   m_Name: PlayerNan3
   m_TagString: Untagged
@@ -1472,3 +1473,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.35601124, y: -0.04177445, z: -0.00013047457}
     m_Extent: {x: 1.2195629, y: 0.4444235, z: 1.0532975}
   m_DirtyAABB: 0
+--- !u!143 &143125406755379950
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1507006306349714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}

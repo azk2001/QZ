@@ -473,6 +473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4279292742766834}
   - component: {fileID: 114835250072255426}
+  - component: {fileID: 143222276956556974}
   m_Layer: 0
   m_Name: PlayerNv3
   m_TagString: Untagged
@@ -1472,3 +1473,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.34780023, y: -0.0010308325, z: -0.00013041496}
     m_Extent: {x: 1.2051579, y: 0.37391466, z: 1.0416963}
   m_DirtyAABB: 0
+--- !u!143 &143222276956556974
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592399335312898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}
