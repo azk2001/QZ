@@ -36,21 +36,21 @@ public class GameUnitManager : SingleClass<GameUnitManager>
         }
     }
 
-    public GameUnit CreateServerGameUnit(int gameUintId, GameUnitParam param, GameUnitData data)
+    public GameUnit CreateServerGameUnit(int uuid, GameUnitParam param, GameUnitData data)
     {
         GameUnit gameUnit = null;
-        if (gameUintDic.ContainsKey(gameUintId) == true)
+        if (gameUintDic.ContainsKey(uuid) == true)
         {
-            gameUnit = gameUintDic[gameUintId];
+            gameUnit = gameUintDic[uuid];
             gameUnit.gameUnitParam = param;
             gameUnit.gameUnitData = data;
         }
         else
         {
             gameUnit = new GameUnit();
-            gameUnit.Init(gameUintId, param, data);
+            gameUnit.Init(uuid, param, data);
 
-            gameUintDic[gameUintId] = gameUnit;
+            gameUintDic[uuid] = gameUnit;
         }
 
 

@@ -19,6 +19,9 @@ class ProcessManager : SingleClass<ProcessManager>
     {
         ProcessStart processStart = new ProcessStart();
         AddProcess(ProcessType.processstart, processStart);
+
+        ProcessMain processMain = new ProcessMain();
+        AddProcess(ProcessType.processmain, processMain);
     }
 
     public void AddProcess(ProcessType type, ProcessBase pb)

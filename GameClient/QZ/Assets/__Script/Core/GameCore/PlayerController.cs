@@ -33,6 +33,8 @@ public class PlayerController : SingleClass<PlayerController>
         isInput = true;
         mGameUnit = gameUnit;
 
+        CameraLookPlayer.Instance.targetTrans = gameUnit.mUnitController.transform;
+
         joyStick.OnDragEvent += OnJoystickEvent;
     }
 
@@ -66,6 +68,10 @@ public class PlayerController : SingleClass<PlayerController>
         moveDir.x = v2.x;
         moveDir.z = v2.y;
 
+        Debug.Log(moveDir);
+
+
+
         //客服端直接移动;
         mGameUnit.PlayRunAnimation(moveDir);
 
@@ -73,6 +79,30 @@ public class PlayerController : SingleClass<PlayerController>
         //设置前向;
         Vector3 forward = mGameUnit.mUnitController.transformCaChe.position - mainCamera.transform.position;
         mGameUnit.SetForward(forward);
+
+        float angle = Angle(Vector3.forward, moveDir);
+        if(moveDir.magnitude>0)
+        {
+            mGameUnit.mUnitController.RunAnimation(angle);
+        }
+        else
+        {
+            mGameUnit.mUnitController.RunAnimation(0);
+        }
+    }
+
+    private float Angle(Vector3 from, Vector3 to)
+    {
+
+        float angle = Vector3.Angle(from, to);
+        angle *= Mathf.Sign(Vector3.Cross(from, to).y);
+
+        if (angle < 0)
+        {
+            angle = 360 - Mathf.Abs(angle);
+        }
+
+        return angle;
     }
 
     public bool OnClickButton(int val)

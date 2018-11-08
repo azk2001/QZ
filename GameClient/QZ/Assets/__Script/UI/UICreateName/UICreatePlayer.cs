@@ -254,6 +254,11 @@ public class UICreatePlayer : UIBase
 
     public void OnCreateFinish()
     {
+        if (lastModle != null)
+        {
+            GameObject.Destroy(lastModle.gameObject);
+        }
+
         UIManager.Instance.CloseUI(eUIName.UICreatePlayer, false, true);
         UIManager.Instance.OpenUI(eUIName.UIGameMain);
 

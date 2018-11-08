@@ -40,6 +40,8 @@ public class GameUnit
         gameUnitParam = param;
         gameUnitData = data;
 
+        prefabModel = BattleUnitRoot.Instance.SpwanPrefab("PlayerNan1");
+
         mUnitController = prefabModel.GetComponent<UnitController>();
         mUnitController.Init();
         mUnitController.gameUintId = gameUintId;
@@ -57,7 +59,6 @@ public class GameUnit
 
     public void Reset()
     {
-        mUnitController.teamShadow.gameObject.SetActive(false);
 
         SetColor(Color.white, 0);
         SetAlpha(1);
@@ -106,8 +107,17 @@ public class GameUnit
 
     public void PlayRunAnimation(Vector3 dir)
     {
-        mUnitController.RunAnimation(dir);
         mUnitController.MoveDirection(dir * 0.5f);
+
+        if(dir.magnitude >0)
+        {
+            mUnitController.PlayAnimation("IsRun", true);
+        }
+        else
+        {
+            mUnitController.PlayAnimation("IsRun", false);
+        }
+
     }
 
     public void SetForward(Vector3 forward)

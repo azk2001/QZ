@@ -336,9 +336,10 @@ public class UnitController : MonoBehaviour
         mAnimator.speed = speed;
     }
 
-    public void RunAnimation(Vector3 v3)
+    public void RunAnimation(float angle)
     {
-        PlayAnimation("MoveSpeed", v3.magnitude);
+        PlayAnimation("moveTree");
+        PlayAnimation("MoveSpeed", angle);
     }
 
 }

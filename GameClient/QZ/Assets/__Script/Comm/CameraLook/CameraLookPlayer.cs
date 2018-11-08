@@ -34,7 +34,7 @@ class CameraLookPlayer : MonoBehaviour
 
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (isLook == false)
             return;
@@ -49,7 +49,7 @@ class CameraLookPlayer : MonoBehaviour
         Vector3 cameraForward = Quaternion.AngleAxis(eulerAngles, Vector3.up) * Vector3.forward;
 
         Vector3 tempPos = targetTrans.position - cameraForward * distance;
-        tempPos.y  = Mathf.Lerp(tempPos.y, curHight, 0.1f);
+        tempPos.y  = curHight;
 
         if ((tempPos.y - targetTrans.position.y) > maxHight)
         {

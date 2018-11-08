@@ -43,10 +43,14 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public bool isIgnoreOffset = true;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
+    }
 
+    private void Start()
+    {
+        
         transformCache = this.transform;
 
         uiCamera = GlobData.uiCamera;
