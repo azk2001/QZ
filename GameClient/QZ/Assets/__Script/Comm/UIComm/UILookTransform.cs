@@ -16,7 +16,6 @@ public class UILookTransform : MonoBehaviour
     public bool checkMyPlayer = false;
 
     private bool lastShow = true;
-    private float dis = 0;
 
     private float p = 0.2f;
     private float dataTime = 0;

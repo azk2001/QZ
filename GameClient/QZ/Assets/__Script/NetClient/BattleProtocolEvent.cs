@@ -44,6 +44,8 @@ public static class BattleProtocolEvent
         S2CCreatePlayerMessage message = new S2CCreatePlayerMessage();
         message.Message(reader);
 
+        NetPlayerManager.AddNetPlayer(message.netPlayer);
+
         UICreatePlayer createPlayer = UIManager.Instance.GetUIBase<UICreatePlayer>(eUIName.UICreatePlayer);
         createPlayer.OnCreateFinish();
 

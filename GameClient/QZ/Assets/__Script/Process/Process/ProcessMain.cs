@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using UnityEngine.SceneManagement;
 
-class ProcessMain:ProcessBase
+class ProcessMain : ProcessBase
 {
     public override void OnBegin()
     {
+        SceneManager.LoadScene("mainGame", LoadSceneMode.Single);
+
         base.OnBegin();
     }
 

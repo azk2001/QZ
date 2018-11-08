@@ -160,7 +160,12 @@ public class UICreatePlayer : UIBase
 
         byte sex = isMan == true ? (byte)1 : (byte)2;
 
-        CreatePlayerData.Instance.SendCreatePlayer(curName, sex, 0, 1);
+        C2SCreatePlayerMessage c2SCreatePlayer = new C2SCreatePlayerMessage();
+        c2SCreatePlayer.name = curName;
+        c2SCreatePlayer.sex = sex;
+        c2SCreatePlayer.level = 1;
+
+        BattleProtocolEvent.SendCreatePlayer(c2SCreatePlayer);
 
     }
 
@@ -252,6 +257,7 @@ public class UICreatePlayer : UIBase
         UIManager.Instance.CloseUI(eUIName.UICreatePlayer, false, true);
         UIManager.Instance.OpenUI(eUIName.UIGameMain);
 
+        ProcessManager.Instance.Begin(ProcessType.processmain);
     }
 }
 

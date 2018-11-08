@@ -74,26 +74,22 @@ public struct C2SCreatePlayerMessage
 
 public struct S2CCreatePlayerMessage
 {
-    public string name;         //角色名字
-    public int level;           //角色等级
-    public byte sex;            //角色性别  1男 2女
     public int isCreate;        //是否新号
+    public NetPlayer netPlayer; //角色信息
 
     public void Message(BytesReader reader)
     {
-        name = reader.ReadString(64);
-        name = name.Replace("\0", "");
-        level = reader.ReadInt();
-        sex = reader.ReadByte();
+        netPlayer = new NetPlayer();
         isCreate = reader.ReadInt();
+        netPlayer.SetBytes(reader);
     }
 
-    public void Message(BytesWriter writer)
+    public BytesWriter Message(BytesWriter writer)
     {
-        writer.WriteString(name, 64);
-        writer.WriteInt(level);
-        writer.WriteByte(sex);
         writer.WriteInt(isCreate);
+        netPlayer.GetBytes(writer);
+
+        return writer;
     }
 }
 

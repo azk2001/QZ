@@ -5,7 +5,8 @@ using System.Text;
 
 public enum ProcessType
 {
-    processstart,//开始流程
+    processstart,   //开始流程
+    processmain,    //主场景;
 }
 
 class ProcessManager : SingleClass<ProcessManager>

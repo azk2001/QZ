@@ -63,14 +63,4 @@ public class ProtocolBattleManager
     {
         mProtocolEventTable.Clear();
     }
-
-    internal static void AddListener(int s2C_StartGame, object , object receiveStartGame)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal static void AddListener(int s2C_StartBattle, object , object receiveStartBattle)
-    {
-        throw new NotImplementedException();
-    }
 }
