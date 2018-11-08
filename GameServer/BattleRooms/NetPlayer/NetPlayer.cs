@@ -36,12 +36,39 @@ namespace BattleServer
         {
             get
             {
-                return basicsData.roleData.uuid;
+                return basicsData.uuid;
             }
             set
             {
                 _uuid = value;
-                basicsData.roleData.uuid = value;
+                basicsData.uuid = value;
+            }
+        }
+
+        private byte _camp;
+        public byte camp
+        {
+            get
+            {
+                return _camp;
+            }
+            set
+            {
+                _camp = value;
+            }
+        }
+
+        //场景
+        private byte _isLoadFinish;
+        public byte isLoadFinish
+        {
+            get
+            {
+                return _isLoadFinish;
+            }
+            set
+            {
+                _isLoadFinish = value;
             }
         }
 

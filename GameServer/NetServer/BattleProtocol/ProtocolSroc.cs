@@ -169,7 +169,8 @@ namespace BattleServer
 
     public struct S2CCreateRoomMessage
     {
-        public RoomParam roomParam;   //房间参数;
+        public RoomParam roomParam;             //房间参数;
+        public List<PlayerParam> playerList;    //房间里面的角色信息;
 
         public BytesWriter Message(BytesWriter writer)
         {
@@ -207,26 +208,32 @@ namespace BattleServer
 
     public struct S2CAddRoomMessage
     {
+        public byte isInRoom;                   //是否能进入;
         public RoomParam roomParam;             //房间参数;
         public int playerCount;                 //角色数量;
         public List<PlayerParam> playerList;    //房间里面的角色信息;
 
         public BytesWriter Message(BytesWriter writer)
         {
-            writer.WriteString(roomParam.roomName, 64);
-            writer.WriteInt(roomParam.roomIndex);
-            writer.WriteByte(roomParam.roomType);
-            writer.WriteInt(playerCount);
+            writer.WriteByte(isInRoom); 
 
-            for (int i = 0, max = playerCount; i < max; i++)
+            if(isInRoom == 1)
             {
-                PlayerParam playerParam = playerList[i];
-                writer.WriteString(playerParam.playerName, 64);
-                writer.WriteInt(playerParam.level);
-                writer.WriteByte(playerParam.sex);
-                writer.WriteInt(playerParam.camp);
-                writer.WriteByte(playerParam.isOwner);
-                writer.WriteInt(playerParam.uuid);
+                writer.WriteString(roomParam.roomName, 64);
+                writer.WriteInt(roomParam.roomIndex);
+                writer.WriteByte(roomParam.roomType);
+                writer.WriteInt(playerCount);
+
+                for (int i = 0, max = playerCount; i < max; i++)
+                {
+                    PlayerParam playerParam = playerList[i];
+                    writer.WriteString(playerParam.playerName, 64);
+                    writer.WriteInt(playerParam.level);
+                    writer.WriteByte(playerParam.sex);
+                    writer.WriteInt(playerParam.camp);
+                    writer.WriteByte(playerParam.isOwner);
+                    writer.WriteInt(playerParam.uuid);
+                }
             }
 
             return writer;
@@ -234,43 +241,47 @@ namespace BattleServer
 
         public void Message(BytesReader reader)
         {
-            roomParam.roomName = reader.ReadString(64);
-            roomParam.roomName = roomParam.roomName.Replace("\0", "");
-            roomParam.roomIndex = reader.ReadInt();
-            roomParam.roomType = reader.ReadByte();
-
-            playerCount = reader.ReadInt();
-
-            playerList = new List<PlayerParam>();
-            for (int i = 0, max = playerCount; i < max; i++)
+            isInRoom = reader.ReadByte();
+            if(isInRoom == 1)
             {
-                PlayerParam playerParam = new PlayerParam();
-                playerParam.playerName = reader.ReadString(64);
-                playerParam.playerName = playerParam.playerName.Replace("\0", "");
-                playerParam.level = reader.ReadInt();
-                playerParam.sex = reader.ReadByte();
-                playerParam.camp = reader.ReadInt();
-                playerParam.isOwner = reader.ReadByte();
-                playerParam.uuid = reader.ReadInt();
+                roomParam.roomName = reader.ReadString(64);
+                roomParam.roomName = roomParam.roomName.Replace("\0", "");
+                roomParam.roomIndex = reader.ReadInt();
+                roomParam.roomType = reader.ReadByte();
 
-                playerList.Add(playerParam);
+                playerCount = reader.ReadInt();
+
+                playerList = new List<PlayerParam>();
+                for (int i = 0, max = playerCount; i < max; i++)
+                {
+                    PlayerParam playerParam = new PlayerParam();
+                    playerParam.playerName = reader.ReadString(64);
+                    playerParam.playerName = playerParam.playerName.Replace("\0", "");
+                    playerParam.level = reader.ReadInt();
+                    playerParam.sex = reader.ReadByte();
+                    playerParam.camp = reader.ReadInt();
+                    playerParam.isOwner = reader.ReadByte();
+                    playerParam.uuid = reader.ReadInt();
+
+                    playerList.Add(playerParam);
+                }
             }
         }
     }
 
     public struct C2SStartGameMessage
     {
-        public int uuid;
+        public int roomIndex;
         public BytesWriter Message(BytesWriter writer)
         {
-            writer.WriteInt(uuid);
+            writer.WriteInt(roomIndex);
 
             return writer;
         }
 
         public void Message(BytesReader reader)
         {
-            uuid = reader.ReadInt();
+            roomIndex = reader.ReadInt();
         }
     }
 

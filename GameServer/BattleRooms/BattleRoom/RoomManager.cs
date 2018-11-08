@@ -63,106 +63,28 @@ namespace BattleServer
         {
             RoomBase roomBase= GetRoomBase(roomIndex);
 
-            if (roomBase.roomState == RoomState.fighting)
-                return false;
+            return roomBase.PlayerInRoom(netPlayer);
 
-            if(roomBase.curPlayerNum >= roomBase.maxPlayerNum)
-                return false;
-
-
-
-            return true;
         }
 
+        // 网络玩家离开房间;
         public static bool NetPlayerOutRoom(int roomIndex, NetPlayer netPlayer)
         {
             RoomBase roomBase = GetRoomBase(roomIndex);
 
-            if (roomBase.roomState == RoomState.fighting)
-                return false;
-
-            if (roomBase.curPlayerNum >= roomBase.maxPlayerNum)
-                return false;
-
-
-
-            return true;
+            return roomBase.PlayerOutRoom(netPlayer);
         }
-
-
-
-
 
         public static List<NetPlayer> GetBattleRoomPlayerList(int roomIndex)
         {
-            List<NetPlayer> playerList = new List<NetPlayer>();
-
             RoomBase roomBase = GetRoomBase(roomIndex);
-
             if (roomBase != null)
             {
-                List<int> netPlayerList = roomBase.netPlayerList;
-
-                foreach (int uuid in netPlayerList)
-                {
-                    NetPlayer netPlayer = NetPlayerManager.GetNetPlayer(uuid);
-                    if (netPlayer != null)
-                    {
-                        playerList.Add(netPlayer);
-                    }
-                }
+                return roomBase.netPlayerList;
             }
-
-            return playerList;
+            return null;
         }
-        public static List<NetPlayer> GetBattleRoomPlayerListByRoomType(eGeneralMapType etype)
-        {
-            List<NetPlayer> playerList = new List<NetPlayer>();
-            Dictionary<int, RoomBase>.Enumerator ittroombase = mRoomList.GetEnumerator();
-            while(ittroombase.MoveNext())
-            {
-                RoomBase roomBase = ittroombase.Current.Value;
-                if (roomBase != null)
-                {
-                    List<int> netPlayerList = roomBase.netPlayerList;
-
-                    foreach (int uuid in netPlayerList)
-                    {
-                        NetPlayer netPlayer =NetPlayerManager.GetNetPlayer(uuid);
-                        if (netPlayer != null)
-                        {
-                            playerList.Add(netPlayer);
-                        }
-                    }
-                }
-            }
-
-            return playerList;
-        }
-
-
-        /// <summary>
-        /// 获取一个空闲的房间
-        /// </summary>
-        public static RoomBase GetBattleRoom(RoomState roomState)
-        {
-            RoomBase battleRoom = null;
-
-            foreach (RoomBase item in mRoomList.Values)
-            {
-                if (item.roomState == roomState)
-                {
-                    if (item.isRun == false)
-                    {
-                        battleRoom = item;
-                        break;
-                    }
-                }
-            }
-
-            return battleRoom;
-        }
-
+        
         public static void RemoveRoomBase(int roomIndex)
         {
             if (mRoomList.ContainsKey(roomIndex) == true)

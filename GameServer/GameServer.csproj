@@ -61,12 +61,13 @@
   <ItemGroup>
     <Compile Include="BattleRooms\AccountData\AccountData.cs" />
     <Compile Include="BattleRooms\AccountData\AccountDataManager.cs" />
+    <Compile Include="BattleRooms\BattleRoom\BattleRoom.cs" />
     <Compile Include="BattleRooms\NetPlayer\NetPlayerManager.cs" />
-    <Compile Include="BattleRooms\Room\RoomManager.cs" />
+    <Compile Include="BattleRooms\BattleRoom\RoomManager.cs" />
     <Compile Include="Config\TableData\chaosrcore_b.cs" />
     <Compile Include="Config\TableData\chaoticdata_b.cs" />
     <Compile Include="Config\TableData\battleroominit_b.cs" />
-    <Compile Include="BattleRooms\Room\RoomBase.cs" />
+    <Compile Include="BattleRooms\BattleRoom\RoomBase.cs" />
     <Compile Include="BattleRooms\NetPlayer\NetPlayerData.cs" />
     <Compile Include="BsVsClient\BattleCore\BattleCore.cs" />
     <Compile Include="BsVsClient\BattleCore\GameFinishData.cs" />
@@ -104,7 +105,7 @@
     <Compile Include="Config\TableData\TableManager.cs" />
     <Compile Include="Config\TableData\tab_file.cs" />
     <Compile Include="NetServer\BytesReader.cs" />
-    <Compile Include="NetServer\bytes_writer.cs" />
+    <Compile Include="NetServer\BytesWriter.cs" />
     <Compile Include="NetServer\Net\NetClientBase.cs" />
     <Compile Include="NetServer\Net\NetServerBase.cs" />
     <Compile Include="NetServer\Net\SocketManager.cs" />

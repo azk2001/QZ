@@ -41,27 +41,9 @@ namespace BattleServer
     //角色基础数据
     public class PlayerBasicsData
     {
-        public RoleData roleData = new RoleData();  //角色基础信息;
-
-        public void SetBytes(BytesReader reader)
-        {
-            roleData.SetBytes(reader);
-        }
-
-        public BytesWriter GetBytes(BytesWriter writer)
-        {
-            writer = roleData.GetBytes(writer);
-
-            return writer;
-        }
-    }
-
-    //角色属性信息;
-    public class RoleData
-    {
         public int uuid;        //唯一标识ID;
         public string name;     //名字;
-        public int sex;         //性别;
+        public byte sex;         //性别;
         public int level;       //角色等级;
 
         public void SetBytes(BytesReader reader)
@@ -69,19 +51,18 @@ namespace BattleServer
             uuid = reader.ReadInt();
             name = reader.ReadString(64);
             name = name.Replace("\0", string.Empty);
-            
-            sex = reader.ReadInt();
-            job = reader.ReadInt();
+
+            sex = reader.ReadByte();
         }
 
         public BytesWriter GetBytes(BytesWriter writer)
         {
             writer.WriteInt(uuid);
             writer.WriteString(name, 64);
-            writer.WriteInt(sex);
-            writer.WriteInt(job);
+            writer.WriteByte(sex);
 
             return writer;
         }
     }
+    
 }
