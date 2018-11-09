@@ -10,11 +10,11 @@ public class NetPlayer
     {
         get
         {
-            return basicsData.roleData.uuid;
+            return basicsData.uuid;
         }
         set
         {
-            basicsData.roleData.uuid = value;
+            basicsData.uuid = value;
         }
     }
 

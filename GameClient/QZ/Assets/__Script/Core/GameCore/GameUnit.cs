@@ -26,14 +26,12 @@ public class GameUnit
     public List<SkillBase> skills = new List<SkillBase>();  //当前身上的所有技能ID;
 
     public Transform prefabModel = null;
-    
+
     public bool isInvincible = false;	//是否无敌;
-    public int campId = 0;              //阵营ID;
     public bool isDeading = false;      //是否在死亡过程中;
 
-    private Transform deadEffect = null;
     private GameUnit killGameUnit = null;
-    
+
     public void Init(int gameUintId, GameUnitParam param, GameUnitData data)
     {
         mGameUintId = gameUintId;
@@ -46,8 +44,6 @@ public class GameUnit
         mUnitController.Init();
         mUnitController.gameUintId = gameUintId;
         mUnitController.transform.localEulerAngles = Vector3.zero;
-
-        campId = data.campId;
 
         SetSpeed(data.speed);
 
@@ -62,11 +58,10 @@ public class GameUnit
 
         SetColor(Color.white, 0);
         SetAlpha(1);
-        
+
         killGameUnit = null;
 
         buffs.Clear();
-
     }
 
     public void AddEventTrigger()
@@ -100,24 +95,40 @@ public class GameUnit
         mUnitController.ShowRenderer(isShow);
     }
 
+    //播放动画
     public void PlayAnimation(string aniname)
     {
         mUnitController.PlayAnimation(aniname);
     }
 
+    //设置角色朝着指定方向移动，并且播放移动动画;
     public void PlayRunAnimation(Vector3 dir)
     {
         mUnitController.MoveDirection(dir * 0.5f);
 
-        if(dir.magnitude >0)
+        if (dir.magnitude > 0)
         {
             mUnitController.PlayAnimation("IsRun", true);
+            float angle = Angle(Vector3.forward, dir);
+            mUnitController.RunAnimation(angle);
         }
         else
         {
             mUnitController.PlayAnimation("IsRun", false);
         }
+    }
 
+    private float Angle(Vector3 from, Vector3 to)
+    {
+        float angle = Vector3.Angle(from, to);
+        angle *= Mathf.Sign(Vector3.Cross(from, to).y);
+
+        if (angle < 0)
+        {
+            angle = 360 - Mathf.Abs(angle);
+        }
+
+        return angle;
     }
 
     public void SetForward(Vector3 forward)
@@ -127,18 +138,17 @@ public class GameUnit
 
     public void OnUpdate(float deltaTime)
     {
-        if(skills.Count >0)
+        if (skills.Count > 0)
         {
             for (int i = skills.Count - 1; i >= 0; i--)
             {
                 skills[i].Update(deltaTime);
             }
-            
         }
 
     }
 
-    public void OnCollisionStartEvent(Collider collision)// 当进入碰撞器
+    public void OnCollisionStartEvent(Collider collision)   //当进入碰撞器
     {
         if (collision != null)
         {
@@ -146,7 +156,7 @@ public class GameUnit
         }
     }
 
-    public void OnCollisionEndEvent(Collider collision)// 当离开碰撞器
+    public void OnCollisionEndEvent(Collider collision)     //当离开碰撞器
     {
         if (collision != null)
         {
@@ -177,82 +187,40 @@ public class GameUnit
     {
         buffs.Add(buff);
         buff.BeginBuff(this);
-
     }
 
     public void RemoveBuff(BuffBase buff)
     {
         buffs.Remove(buff);
-
     }
 
-    public bool OnSkill(int skillId)
+    public bool OnSkill(int skillIndex, bool isnFire = true)
     {
-        //获取释放成功技能;
-        Vector3 v3 = mUnitController.transformCaChe.position;
-        bool isPlay = SkillManager.Instance.AddLocalSkill(this, v3, skillId);
-        if (isPlay == false)
+        if (mUnitController.playerState == UnitController.PlayerState.roll)
             return false;
 
-        cs_skill skill = cs_skill.GetThis(skillId);
-
-        //客服端直接释放;
-        PlayAnimation(skill.aniName);
-
-        //碰撞只信任自己
-        AudioManager.instance.Play(AudioPlayIDCollect.ad_attck, v3);
+        if (isnFire == true)
+        {
+            skills[skillIndex].Begin(this);
+        }
+        else
+        {
+            skills[skillIndex].End();
+        }
 
         return true;
     }
 
-    public void OnSkillEnd()
+    public void OnSkillEnd(SkillBase skillBase)
     {
-
+        skills.Remove(skillBase);
     }
 
     public void StartDead(GameUnit killUnit)
     {
-
+        this.killGameUnit = killUnit;
     }
 
-    public void StopDead()
-    {
-        isDeading = false;
-        killGameUnit = null;
-
-        PlayAnimation("runTree");
-
-        if (deadEffect != null)
-        {
-            BattleEffectRoot.instance.DeSpwan(deadEffect);
-            deadEffect = null;
-        }
-
-    }
-
-    public float EndDead()
-    {
-        TimeManager.Instance.End(EndDead);
-
-        buffs.Clear();
-
-        mUnitController.StopMove();
-
-        RemoveEventTrigger();
-
-        PlayAnimation("die");
-
-        TimeManager.Instance.End(OnDelayDead);
-        TimeManager.Instance.Begin(1.5f, OnDelayDead);
-
-        if (deadEffect != null)
-        {
-            BattleEffectRoot.instance.DeSpwan(deadEffect);
-            deadEffect = null;
-        }
-
-        return -1;
-    }
 
     public float OnDelayDead()
     {

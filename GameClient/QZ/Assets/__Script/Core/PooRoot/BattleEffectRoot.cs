@@ -1,24 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BattleEffectRoot 
+public class BattleEffectRoot :SingleClass<BattleEffectRoot>
 {
 	private string spwanPoolName = "BattleEffectRoot";
-
-	private static BattleEffectRoot _instance = null;
-
-	public static BattleEffectRoot instance 
-	{
-		get 
-		{
-			if(_instance == null)
-			{
-				_instance = new BattleEffectRoot();
-			}
-
-			return _instance;
-		}
-	}
 
 	private SpwanPool _spwanPool = null;
 	public SpwanPool spwanPool 

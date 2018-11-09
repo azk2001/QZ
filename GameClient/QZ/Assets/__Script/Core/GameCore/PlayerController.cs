@@ -33,8 +33,9 @@ public class PlayerController : SingleClass<PlayerController>
         isInput = true;
         mGameUnit = gameUnit;
 
-        CameraLookPlayer.Instance.targetTrans = gameUnit.mUnitController.transform;
+        CameraLookPlayer.Instance.SetTarget(gameUnit.mUnitController.transform);
 
+        UIGameMain.Instance.OnFireEvent += OnClickButton;
         joyStick.OnDragEvent += OnJoystickEvent;
     }
 
@@ -47,6 +48,9 @@ public class PlayerController : SingleClass<PlayerController>
         mGameUnit.PlayRunAnimation(Vector3.zero);
         mGameUnit = null;
 
+        CameraLookPlayer.Instance.SetTarget(null);
+
+        UIGameMain.Instance.OnFireEvent -= OnClickButton;
         joyStick.OnDragEvent -= OnJoystickEvent;
     }
 
@@ -70,50 +74,47 @@ public class PlayerController : SingleClass<PlayerController>
 
         Debug.Log(moveDir);
 
-
-
         //客服端直接移动;
         mGameUnit.PlayRunAnimation(moveDir);
-
 
         //设置前向;
         Vector3 forward = mGameUnit.mUnitController.transformCaChe.position - mainCamera.transform.position;
         mGameUnit.SetForward(forward);
 
-        float angle = Angle(Vector3.forward, moveDir);
-        if(moveDir.magnitude>0)
-        {
-            mGameUnit.mUnitController.RunAnimation(angle);
-        }
-        else
-        {
-            mGameUnit.mUnitController.RunAnimation(0);
-        }
     }
 
-    private float Angle(Vector3 from, Vector3 to)
-    {
-
-        float angle = Vector3.Angle(from, to);
-        angle *= Mathf.Sign(Vector3.Cross(from, to).y);
-
-        if (angle < 0)
-        {
-            angle = 360 - Mathf.Abs(angle);
-        }
-
-        return angle;
-    }
-
-    public bool OnClickButton(int val)
+    //技能开火控制;
+    public void OnClickButton(int val)
     {
         if (mGameUnit == null)
-            return false;
+            return;
 
         if (isInput == false)
-            return false;
+            return;
 
-        ///发炸弹
-		return mGameUnit.OnSkill(val);
+        switch (val)
+        {
+            case 0:
+                {
+                    mGameUnit.OnSkill(0,false);
+                }
+                break;
+            case 1:
+                {
+                    mGameUnit.OnSkill(0, true);
+                }
+                break;
+            case 2:
+                {
+                    mGameUnit.OnSkill(1);
+                }
+                break;
+            case 3:
+                {
+                    mGameUnit.OnSkill(2);
+                }
+                break;
+        }
+
     }
 }

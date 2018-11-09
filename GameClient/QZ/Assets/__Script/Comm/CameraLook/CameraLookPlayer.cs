@@ -66,6 +66,11 @@ class CameraLookPlayer : MonoBehaviour
         transformCache.position = cameraPos;
     }
 
+    internal void SetTarget(Transform targetTrans)
+    {
+        this.targetTrans = targetTrans;
+    }
+
     private void OnEnable()
     {
 

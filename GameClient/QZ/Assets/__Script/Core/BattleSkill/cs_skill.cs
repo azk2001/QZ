@@ -7,7 +7,6 @@ public class cs_skill
     public int skillId;
 	public string icon;
     public int prefabId;
-	public float skillCastDelay;
 	public string aniName;
 	public float cdTime;
     public int type;
@@ -18,7 +17,6 @@ public class cs_skill
         skillId = file.GetContentInt("skillId");
         icon = file.GetContentStr("icon");
         prefabId = file.GetContentInt("prefabId");
-        skillCastDelay = file.GetContentFloat("skillCastDelay");
         aniName = file.GetContentStr("aniName");
         cdTime = file.GetContentFloat("cdTime");
         type = file.GetContentInt("type");

@@ -46,7 +46,15 @@ public class UnitController : MonoBehaviour
     private Vector3 moveToDir = Vector3.zero;
     private Vector3 moveToPoint = Vector3.zero;
     private bool isMovePoint = false;    //是否朝着某一点移动;
-    private PlayerState playerState = PlayerState.idle;
+    private PlayerState _playerState = PlayerState.idle;
+    public PlayerState playerState
+    {
+        get
+        {
+            return _playerState;
+        }
+    }
+
     private Renderer[] rendererList = null;
     private JumpParam jumpParam;
     private Transform curShadow = null;
@@ -63,7 +71,7 @@ public class UnitController : MonoBehaviour
 
     public void Init()
     {
-        playerState = PlayerState.idle;
+        _playerState = PlayerState.idle;
 
         _characterController = this.GetComponent<CharacterController>();
         transformCaChe = this.transform;
@@ -106,7 +114,7 @@ public class UnitController : MonoBehaviour
             }
         }
 
-        if (playerState == PlayerState.jump)
+        if (_playerState == PlayerState.jump)
         {
             Vector3 dar = jumpParam.forward * jumpParam.speed * Time.deltaTime;
 
@@ -118,13 +126,13 @@ public class UnitController : MonoBehaviour
             {
                 transformCaChe.position = jumpParam.toPosition;
 
-                playerState = PlayerState.idle;
+                _playerState = PlayerState.idle;
 
                 MoveDirection(moveDirection);
             }
         }
 
-        if (playerState != PlayerState.jump && playerState != PlayerState.roll) 
+        if (_playerState != PlayerState.jump && _playerState != PlayerState.roll) 
         {
             if(_characterController.enabled == true)
                 _characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
@@ -225,7 +233,7 @@ public class UnitController : MonoBehaviour
 
     public void JumpPosition(Vector3 toPosition)
     {
-        playerState = PlayerState.jump;
+        _playerState = PlayerState.jump;
 
         Vector3 forward = (toPosition - transformCaChe.position).normalized;
 
@@ -242,7 +250,7 @@ public class UnitController : MonoBehaviour
 
     public void RollPosition(Vector3 toPosition)
     {
-        playerState = PlayerState.roll;
+        _playerState = PlayerState.roll;
 
 
     }
@@ -250,7 +258,7 @@ public class UnitController : MonoBehaviour
     //朝着指定方向移动
     public void MoveDirection(Vector3 direction)
     {
-        if (playerState == PlayerState.jump || playerState == PlayerState.roll)
+        if (_playerState == PlayerState.jump || _playerState == PlayerState.roll)
         {
             return;
         }
@@ -262,19 +270,19 @@ public class UnitController : MonoBehaviour
         if (direction.Equals(Vector3.zero))
         {
             directionCache = Vector3.zero;
-            playerState = PlayerState.idle;
+            _playerState = PlayerState.idle;
         }
     }
 
     //朝着指定点移动
     public void MoveToPoint(Vector3 point, Vector3 _directionCache = default(Vector3))
     {
-        if (playerState == PlayerState.jump || playerState == PlayerState.roll)
+        if (_playerState == PlayerState.jump || _playerState == PlayerState.roll)
         {
             return;
         }
 
-        playerState = PlayerState.run;
+        _playerState = PlayerState.run;
 
         directionCache = _directionCache;
         isMovePoint = true;
@@ -285,7 +293,7 @@ public class UnitController : MonoBehaviour
 
     public void StopMove()
     {
-        playerState = PlayerState.idle;
+        _playerState = PlayerState.idle;
         directionCache = Vector3.zero;
         moveDirection = Vector3.zero;
     }

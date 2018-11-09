@@ -1,0 +1,9 @@
+skillId	icon	prefabId	skillCastDelay	aniName	cdTime	type	textParam
+1	skill_1	5000	0.1		0.0	1	showTime=0.5;delayTime=2.0;detectionTime=0.05;bombEffectId=7000
+2	skill_2	5000	0.3	skill1	3.0	2	showTime=0.5;delayTime=2.0;detectionTime=0.2;moveMarkPosition=3;bombEffectId=7000
+3	skill_3	7002	0.1	skill2	5.0	3	moveMarkPosition=5
+4	skill_4	7004	0.1	skill4	30.0	4	invincibleTime=1.5
+5	skill_5	7003	0.1	skill3	10.0	5	jumpMarkPosition=2
+6	skill_7	7003	0.1	skill3	10.0	6	changeSpeed=2;showTime=4
+7	skill_6	7003	0.5	skill3	20.0	7	maxLength=5;showTime=1;handEffectId=7008
+8	skill_8	7006	0.01	skill2	15.0	8	showTime=10;trapTime=2;trapEffectId=7006

@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
-public enum eOriginalType
-{
-    none,
-    player,
-    element,
-    buff,
-    bomb,
-}
-
 public class SkillBase
 {
-    public int uuid = 0;			            //技能唯一标示ID;
-    public GameUnit gameUnit = null;            //释放者对象;
-    public cs_skill skill = null;               //技能配置参数;
+    public GameUnit gameUnit = null;                //释放者对象;
+    public cs_skill skill = null;                   //技能配置参数;
     public Dictionary<string, string> textParam;
     public Transform effectTransfrom = null;
-    
-    public bool Begin(int _uuid, GameUnit _gameUnit, Vector3 _position, int _skillId)
+
+    public virtual void OnConfig(int _skillId)
     {
-        uuid = _uuid;
-        gameUnit = _gameUnit;
         skill = cs_skill.GetThis(_skillId);
+        textParam = skill.textParam;
+    }
+
+    public bool Begin(GameUnit _gameUnit)
+    {
+        gameUnit = _gameUnit;
 
         return OnBegin();
+    }
+
+    public void End()
+    {
+        OnEnd(gameUnit);
     }
 
     public void Update(float deltaTime)
@@ -41,6 +40,15 @@ public class SkillBase
 
     protected virtual float OnFire()
     {
+        //获取释放成功技能;
+        Vector3 v3 = gameUnit.mUnitController.transformCaChe.position;
+
+        //客服端直接释放;
+        gameUnit.PlayAnimation(skill.aniName);
+
+        //碰撞只信任自己
+        AudioManager.Instance.Play(AudioPlayIDCollect.ad_attck, v3);
+
         return -1;
     }
 
@@ -49,10 +57,9 @@ public class SkillBase
 
     }
 
-
     protected virtual void OnEnd(GameUnit actor)
     {
-        SkillManager.Instance.RemoveSkill(this);
+        
     }
 }
 

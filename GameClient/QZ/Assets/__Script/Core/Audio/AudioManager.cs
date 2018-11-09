@@ -2,21 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager
+public class AudioManager : SingleClass<AudioManager>
 {
-    private static AudioManager _instance = null;
-    public static AudioManager instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new AudioManager();
-            }
-            return _instance;
-        }
-    }
-
+    private float _backVolume = 1;
     public float BackVolume
     {
         get
@@ -31,11 +19,23 @@ public class AudioManager
 
     private Dictionary<int, AudioSource> allAudioDic = new Dictionary<int, AudioSource>();
 
-    private float _backVolume = 1;
-    public void Play(int id, Vector3 playPosition, bool isLoop = false)
+    public void Play(int id, Vector3 playPosition)
     {
-	
+        c_sfx sfx = c_sfx.GetThis(id);
+        AudioSource audioSource = null;
+        if (allAudioDic.ContainsKey(id) == false)
+        {
+            audioSource = Resources.Load<AudioSource>(sfx.fileName);
+            allAudioDic[id] = audioSource;
+        }
+        else
+        {
+            audioSource = allAudioDic[id];
+        }
+
+        AudioSource.PlayClipAtPoint(audioSource.clip, playPosition);
     }
+
     public void Stop(int id)
     {
         if (allAudioDic.ContainsKey(id) == true)
@@ -44,10 +44,11 @@ public class AudioManager
         }
     }
 
-	public void StopAllAudio()
-	{
-		foreach (var audio in allAudioDic) {
-			audio.Value.Stop();
-		}
-	}
+    public void StopAllAudio()
+    {
+        foreach (var audio in allAudioDic)
+        {
+            audio.Value.Stop();
+        }
+    }
 }

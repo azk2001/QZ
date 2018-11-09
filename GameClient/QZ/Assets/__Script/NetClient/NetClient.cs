@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using UnityEngine;
 
-class NetClient :MonoBehaviour
+class NetClient : MonoBehaviour
 {
     public static NetClient Instance = null;
 
@@ -32,6 +32,8 @@ class NetClient :MonoBehaviour
         ClientBattle.Instance.NetConnect(ip, 8000, onConnect);
         BattleProtocol.InitProtocol();
         ProcessManager.Instance.Init();
+
+        TableManager.Instance.AnalysisStartTable();
     }
 
     private void Update()

@@ -38,24 +38,6 @@ public class BattleUnitData : ICloneable
 //角色基础数据
 public class PlayerBasicsData
 {
-    public RoleData roleData = new RoleData();  //角色基础信息;
-
-    public void SetBytes(BytesReader reader)
-    {
-        roleData.SetBytes(reader);
-    }
-
-    public BytesWriter GetBytes(BytesWriter writer)
-    {
-        writer = roleData.GetBytes(writer);
-
-        return writer;
-    }
-}
-
-//角色属性信息;
-public class RoleData
-{
     public int uuid;        //唯一标识ID;
     public string name;     //名字;
     public int sex;         //性别;
