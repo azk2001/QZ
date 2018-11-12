@@ -21,14 +21,9 @@ public class TableManager : SingleClass<TableManager>
     {
         textAssetList = Resources.LoadAll<UnityEngine.Object>("Config");
         isLoadGameList = false;
-    }
 
-    private void OnLoadFinished(AssetBundleRequest bundleRequest, object[] pars)
-    {
-        textAssetList = bundleRequest.allAssets;
         AnalysisStartTable();
     }
-
 
     private UnityEngine.Object[] textAssetList = null;
     private int index = 0;

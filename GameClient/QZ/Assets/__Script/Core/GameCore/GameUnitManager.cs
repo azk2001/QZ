@@ -1,15 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUnitParam
-{
-    public int playerId = 0;
-}
 
-public class GameUnitData
+public class GameUnitData : ICloneable
 {
-    public string name;     //玩家名字;
+
     public int hp;          //玩家初始HP;
     public float speed;		//移动速度;
     public float atk;	    //攻击力;
@@ -20,6 +17,12 @@ public class GameUnitData
     public int maxSpeed = 0;
     public int maxAkt = 0;
     public int maxDefense = 0;
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
+
 }
 
 public class GameUnitManager : SingleClass<GameUnitManager>
@@ -36,19 +39,19 @@ public class GameUnitManager : SingleClass<GameUnitManager>
         }
     }
 
-    public GameUnit CreateServerGameUnit(int uuid, GameUnitParam param, GameUnitData data)
+    public GameUnit CreateServerGameUnit(int uuid, PlayerBasicsData _basicsData, GameUnitData data)
     {
         GameUnit gameUnit = null;
         if (gameUintDic.ContainsKey(uuid) == true)
         {
             gameUnit = gameUintDic[uuid];
-            gameUnit.gameUnitParam = param;
+            gameUnit.basicsData = _basicsData;
             gameUnit.gameUnitData = data;
         }
         else
         {
             gameUnit = new GameUnit();
-            gameUnit.Init(uuid, param, data);
+            gameUnit.Init(uuid, _basicsData, data);
 
             gameUintDic[uuid] = gameUnit;
         }
@@ -57,7 +60,7 @@ public class GameUnitManager : SingleClass<GameUnitManager>
         return gameUnit;
     }
 
-    public GameUnit CreateLocalGameUnit(GameUnitParam param, GameUnitData data)
+    public GameUnit CreateLocalGameUnit(PlayerBasicsData _basicsData, GameUnitData data)
     {
         int gameUintId = gameUintStaticId;
 
@@ -66,13 +69,13 @@ public class GameUnitManager : SingleClass<GameUnitManager>
         if (gameUintDic.ContainsKey(gameUintId) == true)
         {
             gameUnit = gameUintDic[gameUintId];
-            gameUnit.gameUnitParam = param;
+            gameUnit.basicsData = _basicsData;
             gameUnit.gameUnitData = data;
         }
         else
         {
             gameUnit = new GameUnit();
-            gameUnit.Init(gameUintId, param, data);
+            gameUnit.Init(gameUintId, _basicsData, data);
 
             gameUintDic[gameUintId] = gameUnit;
         }
@@ -110,6 +113,14 @@ public class GameUnitManager : SingleClass<GameUnitManager>
     public List<GameUnit> GetAllGameUnit()
     {
         return new List<GameUnit>(gameUintDic.Values);
+    }
+
+    public void OnUpdate(float deltaTime)
+    {
+        foreach(GameUnit gameUnit in gameUintDic.Values)
+        {
+            gameUnit.OnUpdate(deltaTime);
+        }
     }
 
 }

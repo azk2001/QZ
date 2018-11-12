@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class BattleGame : MonoBehaviour
+public class BattleScene : SceneBase
 {
 
-    public static BattleGame instance = null;
+    public static BattleScene instance = null;
 
     public GameUnit localGmeUnit = null;        //本地角色控制单位;
 
@@ -64,7 +64,7 @@ public class BattleGame : MonoBehaviour
         PlayerController.Instance.RemovePlayerController();
 
         BattleBuffRoot.Instance.DeSpwanAll();
-        BattleEffectRoot.instance.DeSpwanAll();
+        BattleEffectRoot.Instance.DeSpwanAll();
         BattleUnitRoot.Instance.DeSpwanAll();
         UIBattleRoot.instance.DeSpwanAll();
     }

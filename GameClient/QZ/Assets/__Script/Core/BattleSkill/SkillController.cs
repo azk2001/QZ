@@ -33,7 +33,7 @@ public class SkillController : MonoBehaviour
         if (isRun == false)
             return;
 
-        transformCache.Translate(Vector3.forward * speed * Time.deltaTime, Space.World);
+        transformCache.Translate(transformCache.forward * speed * Time.deltaTime, Space.World);
     }
 
     public void OnFire(Vector3 forward, float speed, float showTime)

@@ -44,7 +44,8 @@ public class SkillBase
         Vector3 v3 = gameUnit.mUnitController.transformCaChe.position;
 
         //客服端直接释放;
-        gameUnit.PlayAnimation(skill.aniName);
+        gameUnit.mUnitController.PlayAnimation(skill.aniName);
+        gameUnit.mUnitController.PlayAnimation("IsFire", true);
 
         //碰撞只信任自己
         AudioManager.Instance.Play(AudioPlayIDCollect.ad_attck, v3);
@@ -59,7 +60,7 @@ public class SkillBase
 
     protected virtual void OnEnd(GameUnit actor)
     {
-        
+        gameUnit.mUnitController.PlayAnimation("IsFire",false);
     }
 }
 

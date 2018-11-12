@@ -243,5 +243,8 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         }
     }
 
+    public void MoveCamera()
+    {
 
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// 战斗网络数据处理中心
@@ -44,12 +45,27 @@ public static class BattleProtocolEvent
         S2CCreatePlayerMessage message = new S2CCreatePlayerMessage();
         message.Message(reader);
 
-        NetPlayerManager.AddNetPlayer(message.netPlayer);
+        for(int i=0;i<message.playerCount;i++)
+        {
+            NetPlayerManager.AddNetPlayer(message.netPlayer[i]);
+        }
 
         UICreatePlayer createPlayer = UIManager.Instance.GetUIBase<UICreatePlayer>(eUIName.UICreatePlayer);
         createPlayer.OnCreateFinish();
 
     }
+
+    public static void ReceivePlayerInScene(BytesReader reader)
+    {
+        S2CPlayerInSceneMessage message = new S2CPlayerInSceneMessage();
+        message.Message(reader);
+
+        NetPlayerManager.AddNetPlayer(message.netPlayer);
+
+        GameSceneManager.Instance.curScene.PlayerInScene(message.netPlayer);
+
+    }
+    
 
     public static void SendGetRoom(C2SGetRoomMessage message)
     {
@@ -129,6 +145,23 @@ public static class BattleProtocolEvent
     {
         S2CPlayerMoveMessage message = new S2CPlayerMoveMessage();
         message.Message(reader);
+
+
+        GameUnit mGameUnit = GameUnitManager.Instance.GetGameUnit(message.uuid);
+
+        Vector3 forward = new Vector3(message.fx / 100.0f, message.fy / 100.0f, message.fz / 100.0f);
+        Vector3 moveDir = new Vector3(message.mx / 100.0f, message.my / 100.0f, message.mz / 100.0f);
+        Vector3 position = new Vector3(message.px / 100.0f, message.py / 100.0f, message.pz / 100.0f);
+
+        mGameUnit.SetForward(forward);
+
+        //客服端直接移动;
+        mGameUnit.PlayRunAnimation(moveDir);
+        
+        if(moveDir == Vector3.zero)
+        {
+            mGameUnit.mUnitController.MoveToPoint(position);
+        }
     }
 
     public static void SendPlayerSkill(C2SPlayerSkillMessage message)

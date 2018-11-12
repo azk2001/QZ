@@ -76,19 +76,50 @@ public struct C2SCreatePlayerMessage
 
 public struct S2CCreatePlayerMessage
 {
-    public NetPlayer netPlayer; //角色信息
     public int isCreate;        //是否新号
+    public int playerCount;     //网络玩家个数;
+    public List<NetPlayer> netPlayer; //角色信息
 
     public void Message(BytesReader reader)
     {
-        netPlayer = new NetPlayer();
         isCreate = reader.ReadInt();
-        netPlayer.SetBytes(reader);
+        playerCount = reader.ReadInt();
+        netPlayer = new List<NetPlayer>();
+        for (int i = 0; i < playerCount; i++)
+        {
+            NetPlayer np = new NetPlayer();
+            np.SetBytes(reader);
+            netPlayer.Add(np);
+
+        }
     }
 
     public BytesWriter Message(BytesWriter writer)
     {
         writer.WriteInt(isCreate);
+        writer.WriteInt(netPlayer.Count);
+
+        for (int i = 0; i < netPlayer.Count; i++)
+        {
+            netPlayer[i].GetBytes(writer);
+        }
+
+        return writer;
+    }
+}
+
+public struct S2CPlayerInSceneMessage
+{
+    public NetPlayer netPlayer; //角色信息
+
+    public void Message(BytesReader reader)
+    {
+        netPlayer = new NetPlayer();
+        netPlayer.SetBytes(reader);
+    }
+
+    public BytesWriter Message(BytesWriter writer)
+    {
         netPlayer.GetBytes(writer);
 
         return writer;
@@ -365,17 +396,26 @@ public struct S2CStartBattleMessage
 public struct C2SPlayerMoveMessage
 {
     public int uuid;
-    public int speed;   //移动速度;
-    public int angle;   //旋转角度;
-    public int px;    //位置x*100;
-    public int py;    //位置y*100;
-    public int pz;    //位置z*100;
+    public int fx;  //方向x;
+    public int fy;  //方向y;
+    public int fz;  //方向z;
+    public int mx;  //移动x*100;
+    public int my;  //移动y*100;
+    public int mz;  //移动z*100;
+    public int px;  //位置x*100;
+    public int py;  //位置y*100;
+    public int pz;  //位置z*100;
+
 
     public BytesWriter Message(BytesWriter writer)
     {
         writer.WriteInt(uuid);
-        writer.WriteInt(speed);
-        writer.WriteInt(angle);
+        writer.WriteInt(fx);
+        writer.WriteInt(fy);
+        writer.WriteInt(fz);
+        writer.WriteInt(mx);
+        writer.WriteInt(my);
+        writer.WriteInt(mz);
         writer.WriteInt(px);
         writer.WriteInt(py);
         writer.WriteInt(pz);
@@ -387,8 +427,12 @@ public struct C2SPlayerMoveMessage
     public void Message(BytesReader reader)
     {
         uuid = reader.ReadInt();
-        speed = reader.ReadInt();
-        angle = reader.ReadInt();
+        fx = reader.ReadInt();
+        fy = reader.ReadInt();
+        fz = reader.ReadInt();
+        mx = reader.ReadInt();
+        my = reader.ReadInt();
+        mz = reader.ReadInt();
         px = reader.ReadInt();
         py = reader.ReadInt();
         pz = reader.ReadInt();
@@ -398,17 +442,26 @@ public struct C2SPlayerMoveMessage
 public struct S2CPlayerMoveMessage
 {
     public int uuid;
-    public int speed;   //移动速度;
-    public int angle;   //旋转角度;
-    public int px;    //位置x*100;
-    public int py;    //位置y*100;
-    public int pz;    //位置z*100;
+    public int fx;  //方向x;
+    public int fy;  //方向y;
+    public int fz;  //方向z;
+    public int mx;  //移动x*100;
+    public int my;  //移动y*100;
+    public int mz;  //移动z*100;
+    public int px;  //位置x*100;
+    public int py;  //位置y*100;
+    public int pz;  //位置z*100;
+
 
     public BytesWriter Message(BytesWriter writer)
     {
         writer.WriteInt(uuid);
-        writer.WriteInt(speed);
-        writer.WriteInt(angle);
+        writer.WriteInt(fx);
+        writer.WriteInt(fy);
+        writer.WriteInt(fz);
+        writer.WriteInt(mx);
+        writer.WriteInt(my);
+        writer.WriteInt(mz);
         writer.WriteInt(px);
         writer.WriteInt(py);
         writer.WriteInt(pz);
@@ -420,8 +473,12 @@ public struct S2CPlayerMoveMessage
     public void Message(BytesReader reader)
     {
         uuid = reader.ReadInt();
-        speed = reader.ReadInt();
-        angle = reader.ReadInt();
+        fx = reader.ReadInt();
+        fy = reader.ReadInt();
+        fz = reader.ReadInt();
+        mx = reader.ReadInt();
+        my = reader.ReadInt();
+        mz = reader.ReadInt();
         px = reader.ReadInt();
         py = reader.ReadInt();
         pz = reader.ReadInt();

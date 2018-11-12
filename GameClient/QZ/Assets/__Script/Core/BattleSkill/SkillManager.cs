@@ -21,7 +21,7 @@ public class SkillManager : SingleClass<SkillManager>
 
     public Dictionary<int, SkillBase> allSkillBaseDic = new Dictionary<int, SkillBase>();
 
-    public void AddSkill(GameUnit gameUnit, Vector3 position, int skillId)
+    public void AddSkill(GameUnit gameUnit,int skillId)
     {
         int uuid = SkillManager.uuid;
 
@@ -30,6 +30,7 @@ public class SkillManager : SingleClass<SkillManager>
         SkillBase sb = (SkillBase)(System.Activator.CreateInstance(skillType[skillTypeId]));
         if (sb != null)
         {
+            sb.OnConfig(skillId);
             gameUnit.skills.Add(sb);
         }
     }

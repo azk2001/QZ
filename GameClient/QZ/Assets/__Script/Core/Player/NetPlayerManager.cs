@@ -33,5 +33,10 @@ public class NetPlayerManager
         return null;
     }
 
+    public static List<NetPlayer> GetAllNetPlayer()
+    {
+        return new List<NetPlayer>(netPlayerDic.Values);
+    }
+
 }
 

@@ -74,13 +74,40 @@ public class PlayerController : SingleClass<PlayerController>
 
         Debug.Log(moveDir);
 
-        //客服端直接移动;
-        mGameUnit.PlayRunAnimation(moveDir);
-
         //设置前向;
         Vector3 forward = mGameUnit.mUnitController.transformCaChe.position - mainCamera.transform.position;
         mGameUnit.SetForward(forward);
 
+        //客服端直接移动;
+        mGameUnit.PlayRunAnimation(moveDir);
+
+        C2SPlayerMoveMessage c2SPlayerMove = new C2SPlayerMoveMessage();
+        c2SPlayerMove.uuid = mGameUnit.basicsData.uuid;
+        c2SPlayerMove.fx = (int)(forward.x * 100);
+        c2SPlayerMove.fy = (int)(forward.y * 100);
+        c2SPlayerMove.fz = (int)(forward.z * 100);
+        c2SPlayerMove.mx = (int)(moveDir.x * 100);
+        c2SPlayerMove.my = (int)(moveDir.y * 100);
+        c2SPlayerMove.mz = (int)(moveDir.z * 100);
+        c2SPlayerMove.px = (int)(mGameUnit.mUnitController.transformCaChe.position.x * 100);
+        c2SPlayerMove.py = (int)(mGameUnit.mUnitController.transformCaChe.position.y * 100);
+        c2SPlayerMove.pz = (int)(mGameUnit.mUnitController.transformCaChe.position.z * 100);
+
+        BattleProtocolEvent.SendPlayerMove(c2SPlayerMove);
+
+    }
+
+    private float Angle(Vector3 from, Vector3 to)
+    {
+        float angle = Vector3.Angle(from, to);
+        angle *= Mathf.Sign(Vector3.Cross(from, to).y);
+
+        if (angle < 0)
+        {
+            angle = 360 - Mathf.Abs(angle);
+        }
+
+        return angle;
     }
 
     //技能开火控制;
@@ -96,7 +123,7 @@ public class PlayerController : SingleClass<PlayerController>
         {
             case 0:
                 {
-                    mGameUnit.OnSkill(0,false);
+                    mGameUnit.OnSkill(0, false);
                 }
                 break;
             case 1:

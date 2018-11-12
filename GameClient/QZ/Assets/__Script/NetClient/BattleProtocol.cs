@@ -7,6 +7,7 @@ public enum S2CBattleProtocol
     S2C_Connected,          //连接上
     S2C_Login,              //登录返回
     S2C_CreatePlayer,       //创建角色;
+    S2C_PlayerInScene,      //玩家进入房间;
     S2C_GetRoom,            //获取房间;
     S2C_CreateRoom,         //创建房间;
     S2C_AddRoom,            //添加房间;
@@ -30,6 +31,7 @@ public enum C2SBattleProtocol
 
     C2S_Login,              //登录
     C2S_CreatePlayer,       //创建角色;
+    C2S_PlayerInRoom,       //玩家进入房间;
     C2S_GetRoom,            //获取房间;
     C2S_CreateRoom,         //创建房间;
     C2S_AddRoom,            //添加房间;
@@ -60,6 +62,9 @@ public class BattleProtocol
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_Ping, ReceivePing);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_Login, BattleProtocolEvent.ReceiveLogin);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_CreatePlayer, BattleProtocolEvent.ReceiveCreatePlayer);
+        ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_PlayerInScene, BattleProtocolEvent.ReceivePlayerInScene);
+        
+
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_GetRoom, BattleProtocolEvent.ReceiveGetRoom);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_CreateRoom, BattleProtocolEvent.ReceiveCreateRoom);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_AddRoom, BattleProtocolEvent.ReceiveAddRoom);

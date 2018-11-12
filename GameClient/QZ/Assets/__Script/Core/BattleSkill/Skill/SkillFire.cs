@@ -18,13 +18,15 @@ public class SkillFire : SkillBase
 
 	protected override float OnFire()
 	{
-        Vector3 forward = Camera.main.transform.forward;
-        Transform fireTrans = BattleEffectRoot.Instance.SpwanPrefab("");
+        Vector3 forward = gameUnit.mUnitController.transform.forward;
+        Transform fireTrans = BattleEffectRoot.Instance.SpwanPrefab("Fire1");
         SkillController skillController = fireTrans.GetComponent<SkillController>();
-        skillController.OnFire(forward, 10, 2);
+        skillController.OnFire(forward, 30, 2);
         skillController.OnColliderEnter = OnColliderEventEnter;
+        fireTrans.position = gameUnit.mUnitController.transform.position+ gameUnit.mUnitController.transform.forward+Vector3.up;
+        base.OnFire();
 
-        return skill.cdTime;
+        return 0.3f;
 	}
 
     private void OnColliderEventEnter(Collider other)

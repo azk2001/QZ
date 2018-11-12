@@ -17,38 +17,24 @@ public class AudioManager : SingleClass<AudioManager>
         }
     }
 
-    private Dictionary<int, AudioSource> allAudioDic = new Dictionary<int, AudioSource>();
+    private Dictionary<int, AudioClip> allAudioDic = new Dictionary<int, AudioClip>();
 
     public void Play(int id, Vector3 playPosition)
     {
         c_sfx sfx = c_sfx.GetThis(id);
-        AudioSource audioSource = null;
+        AudioClip audioClip = null;
         if (allAudioDic.ContainsKey(id) == false)
         {
-            audioSource = Resources.Load<AudioSource>(sfx.fileName);
-            allAudioDic[id] = audioSource;
+            audioClip = Resources.Load<AudioClip>(sfx.path);
+            allAudioDic[id] = audioClip;
         }
         else
         {
-            audioSource = allAudioDic[id];
+            audioClip = allAudioDic[id];
         }
 
-        AudioSource.PlayClipAtPoint(audioSource.clip, playPosition);
+        AudioSource.PlayClipAtPoint(audioClip, playPosition);
     }
 
-    public void Stop(int id)
-    {
-        if (allAudioDic.ContainsKey(id) == true)
-        {
-            allAudioDic[id].Stop();
-        }
-    }
-
-    public void StopAllAudio()
-    {
-        foreach (var audio in allAudioDic)
-        {
-            audio.Value.Stop();
-        }
-    }
+   
 }

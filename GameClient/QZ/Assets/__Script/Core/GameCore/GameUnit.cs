@@ -19,7 +19,7 @@ public enum eBattleEvent
 public class GameUnit
 {
     public UnitController mUnitController = null;
-    public GameUnitParam gameUnitParam = null;
+    public PlayerBasicsData basicsData = null;
     public GameUnitData gameUnitData = null;
     public int mGameUintId = 0;
     public List<BuffBase> buffs = new List<BuffBase>();     //当前身上的所有buff;
@@ -32,13 +32,20 @@ public class GameUnit
 
     private GameUnit killGameUnit = null;
 
-    public void Init(int gameUintId, GameUnitParam param, GameUnitData data)
+    public void Init(int gameUintId, PlayerBasicsData _basicsData, GameUnitData data)
     {
         mGameUintId = gameUintId;
-        gameUnitParam = param;
+        basicsData = _basicsData;
         gameUnitData = data;
 
-        prefabModel = BattleUnitRoot.Instance.SpwanPrefab("PlayerNan1");
+        if(_basicsData.sex == 1)
+        {
+            prefabModel = BattleUnitRoot.Instance.SpwanPrefab("PlayerNan1");
+        }
+        else
+        {
+            prefabModel = BattleUnitRoot.Instance.SpwanPrefab("PlayerNv1");
+        }
 
         mUnitController = prefabModel.GetComponent<UnitController>();
         mUnitController.Init();

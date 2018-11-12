@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Text;
 
 
-class CameraLookPlayer : MonoBehaviour
+public class CameraLookPlayer : MonoBehaviour
 {
     public static CameraLookPlayer Instance = null;
 
@@ -44,35 +44,27 @@ class CameraLookPlayer : MonoBehaviour
 
         Vector3 lookPos = targetTrans.position + lookOffset;
 
-        transformCache.LookAt(lookPos);
 
         Vector3 cameraForward = Quaternion.AngleAxis(eulerAngles, Vector3.up) * Vector3.forward;
-
         Vector3 tempPos = targetTrans.position - cameraForward * distance;
-        tempPos.y  = curHight;
-
-        if ((tempPos.y - targetTrans.position.y) > maxHight)
+        if (curHight > maxHight)
         {
-            tempPos.y = targetTrans.position.y + maxHight;
+            curHight = maxHight;
+        }
+        if (curHight < minHight)
+        {
+            curHight = minHight;
         }
 
-        if ((tempPos.y - targetTrans.position.y) < minHight)
-        {
-            tempPos.y = targetTrans.position.y - minHight;
-        }
-
+        tempPos.y = targetTrans.position.y + curHight;
         cameraPos = tempPos;
 
         transformCache.position = cameraPos;
+        transformCache.LookAt(lookPos);
     }
 
     internal void SetTarget(Transform targetTrans)
     {
         this.targetTrans = targetTrans;
-    }
-
-    private void OnEnable()
-    {
-
     }
 }
