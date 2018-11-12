@@ -32,6 +32,9 @@ namespace BattleServer
             }
             return null;
         }
-
+        public static List<NetPlayer> GetNetPlayers()
+        {
+            return new List<NetPlayer>(netPlayerDic.Values);
+        }
     }
 }

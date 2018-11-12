@@ -1,9 +1,0 @@
-key	value
-chaosTimeNum	60
-chaosTimeRcore	20
-chaosKillComboNum	5
-chaosDeathNum	20
-chaosDeathTime	10
-chaosAddLifeTime	30
-chaosAddLifePercent	30
-chaosChangeSceneTime	10

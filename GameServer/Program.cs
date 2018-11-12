@@ -39,7 +39,10 @@ namespace BattleServer
                     }
                 }
             }
-           
+
+
+            Console.WriteLine("服务器启动成功：IP" + ip);
+
             if (socket.Start(new IPEndPoint(IPAddress.Parse(ip), 8000)))
             {
                 if (mServerType == 1)

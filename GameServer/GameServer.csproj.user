@@ -13,7 +13,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Project</StartAction>
-    <StartProgram>C:\Users\Administrator\Desktop\XXXX\BattleServer\bin\output\BattleServer.exe</StartProgram>
+    <StartProgram>
+    </StartProgram>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <StartAction>Program</StartAction>

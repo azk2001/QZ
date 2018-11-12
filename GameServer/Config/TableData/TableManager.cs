@@ -23,7 +23,7 @@ namespace BattleServer
 
         public void Init()
         {
-            AnalysisTable();
+
         }
 
 

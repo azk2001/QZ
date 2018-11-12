@@ -46,23 +46,44 @@ namespace BattleServer
             C2SCreatePlayerMessage c2SCreatePlayer = new C2SCreatePlayerMessage();
             c2SCreatePlayer.Message(reader);
 
+            Console.WriteLine("ReceiveCreatePlayer");
+
             NetPlayer netPlayer = new NetPlayer();
 
-            netPlayer.uuid = uuid;                                          //唯一标识ID;
-            netPlayer.basicsData.name = c2SCreatePlayer.name; ;    //名字;
-            netPlayer.basicsData.sex = c2SCreatePlayer.sex; ;      //性别;
-            netPlayer.basicsData.level = 1;                        //角色等级;
+            netPlayer.uuid = uuid;                                  //唯一标识ID;
+            netPlayer.basicsData.name = c2SCreatePlayer.name;       //名字;
+            netPlayer.basicsData.sex = c2SCreatePlayer.sex;         //性别;
+            netPlayer.basicsData.level = 1;                         //角色等级;
 
             NetPlayerManager.AddNetPlayer(netPlayer);
 
+            List<NetPlayer> netPlayers = NetPlayerManager.GetNetPlayers();
+
             S2CCreatePlayerMessage s2CCreatePlayer = new S2CCreatePlayerMessage();
-            s2CCreatePlayer.netPlayer = netPlayer;
+            s2CCreatePlayer.playerCount = netPlayers.Count;
+            s2CCreatePlayer.netPlayer = new List<NetPlayer>();
+            s2CCreatePlayer.netPlayer.AddRange(netPlayers);
             s2CCreatePlayer.isCreate = 1;
 
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_CreatePlayer);
 
             BattleProtocol.SendBytes(uuid, s2CCreatePlayer.Message(writer));
+
+            //通知玩家进入主城
+            ReceivePlayerInScene(netPlayer, uuid);
+        }
+
+        //通知玩家进入房间;
+        public static void ReceivePlayerInScene(NetPlayer netPlayer, int uuid)
+        {
+            S2CPlayerInSceneMessage s2cPlayerInScene = new S2CPlayerInSceneMessage();
+            s2cPlayerInScene.netPlayer = netPlayer;
+
+            writer.Clear();
+            writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerInScene);
+
+            BattleProtocol.SendBytes(uuid, s2cPlayerInScene.Message(writer), true, false);
         }
 
         public static void ReceiveGetRoom(BytesReader reader, int uuid)
@@ -187,7 +208,7 @@ namespace BattleServer
             s2CStartGame.playerCount = (byte)battleRoom.netPlayerList.Count;
 
             s2CStartGame.birthParamList = new List<PlayerBirthParam>();
-            foreach(NetPlayer nPlayer in battleRoom.netPlayerList)
+            foreach (NetPlayer nPlayer in battleRoom.netPlayerList)
             {
                 PlayerBirthParam birthParam = new PlayerBirthParam();
                 birthParam.camp = nPlayer.camp;
@@ -211,6 +232,25 @@ namespace BattleServer
 
         public static void ReceivePlayerMove(BytesReader reader, int uuid)
         {
+            C2SPlayerMoveMessage c2SPlayerMove = new C2SPlayerMoveMessage();
+            c2SPlayerMove.Message(reader);
+
+            S2CPlayerMoveMessage s2CPlayerMove = new S2CPlayerMoveMessage();
+            s2CPlayerMove.uuid = c2SPlayerMove.uuid;
+            s2CPlayerMove.px = c2SPlayerMove.fx;
+            s2CPlayerMove.py = c2SPlayerMove.fy;
+            s2CPlayerMove.pz = c2SPlayerMove.fz;
+            s2CPlayerMove.px = c2SPlayerMove.mx;
+            s2CPlayerMove.py = c2SPlayerMove.my;
+            s2CPlayerMove.pz = c2SPlayerMove.mz;
+            s2CPlayerMove.px = c2SPlayerMove.px;
+            s2CPlayerMove.py = c2SPlayerMove.py;
+            s2CPlayerMove.pz = c2SPlayerMove.pz;
+
+            writer.Clear();
+            writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerMove);
+
+            BattleProtocol.SendBytes(uuid, s2CPlayerMove.Message(writer), true, false);
 
         }
 
