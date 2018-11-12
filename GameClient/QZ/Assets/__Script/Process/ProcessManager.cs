@@ -7,6 +7,7 @@ public enum ProcessType
 {
     processstart,   //开始流程
     processmain,    //主场景;
+    processbattle,  //战斗场景;
 }
 
 class ProcessManager : SingleClass<ProcessManager>
@@ -22,6 +23,10 @@ class ProcessManager : SingleClass<ProcessManager>
 
         ProcessMain processMain = new ProcessMain();
         AddProcess(ProcessType.processmain, processMain);
+        
+        ProcessBattle processBattle = new ProcessBattle();
+        AddProcess(ProcessType.processbattle, processBattle);
+
     }
 
     public void AddProcess(ProcessType type, ProcessBase pb)

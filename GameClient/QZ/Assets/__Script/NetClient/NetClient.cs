@@ -51,6 +51,7 @@ class NetClient : MonoBehaviour
         ClientBattle.Instance.Update();
         TimeManager.Instance.Update();
         GameUnitManager.Instance.OnUpdate(Time.deltaTime);
+        BuffManager.Instance.Update();
     }
 
     private void OnDestroy()

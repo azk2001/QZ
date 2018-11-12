@@ -20,8 +20,9 @@ public class GameUnit
 {
     public UnitController mUnitController = null;
     public PlayerBasicsData basicsData = null;
-    public GameUnitData gameUnitData = null;
-    public int mGameUintId = 0;
+    public GameUnitData baseUnitData = null;
+    public GameUnitData runUnitData = null;
+    public int uuid = 0;
     public List<BuffBase> buffs = new List<BuffBase>();     //当前身上的所有buff;
     public List<SkillBase> skills = new List<SkillBase>();  //当前身上的所有技能ID;
 
@@ -32,13 +33,14 @@ public class GameUnit
 
     private GameUnit killGameUnit = null;
 
-    public void Init(int gameUintId, PlayerBasicsData _basicsData, GameUnitData data)
+    public void Init(int uuid, PlayerBasicsData _basicsData, GameUnitData data)
     {
-        mGameUintId = gameUintId;
+        this.uuid = uuid;
         basicsData = _basicsData;
-        gameUnitData = data;
+        baseUnitData = (GameUnitData)data.Clone();
+        runUnitData = (GameUnitData)data.Clone();
 
-        if(_basicsData.sex == 1)
+        if (_basicsData.sex == 1)
         {
             prefabModel = BattleUnitRoot.Instance.SpwanPrefab("PlayerNan1");
         }
@@ -49,7 +51,7 @@ public class GameUnit
 
         mUnitController = prefabModel.GetComponent<UnitController>();
         mUnitController.Init();
-        mUnitController.gameUintId = gameUintId;
+        mUnitController.gameUintId = uuid;
         mUnitController.transform.localEulerAngles = Vector3.zero;
 
         SetSpeed(data.speed);
@@ -81,9 +83,9 @@ public class GameUnit
 
     }
 
-    public void SetSpeed(float speed)
+    public void SetSpeed(int speed)
     {
-        gameUnitData.speed = speed;
+        baseUnitData.speed = speed;
         mUnitController.moveSpeed = speed;
     }
 
@@ -155,6 +157,13 @@ public class GameUnit
 
     }
 
+    public void OnHit(GameUnit killGameUnit)
+    {
+        runUnitData.hp -= killGameUnit.runUnitData.atk;
+
+
+    }
+
     public void OnCollisionStartEvent(Collider collision)   //当进入碰撞器
     {
         if (collision != null)
@@ -201,18 +210,48 @@ public class GameUnit
         buffs.Remove(buff);
     }
 
-    public bool OnSkill(int skillIndex, bool isnFire = true)
+    public bool OnSkill(int skillIndex)
     {
+        int val = 0;
+        bool isFire = true;
+        switch (skillIndex)
+        {
+            case 0:
+                {
+                    val = 0;
+                    isFire = true;
+                }
+                break;
+            case 1:
+                {
+                    val = 0;
+                    isFire = false;
+                }
+                break;
+            case 2:
+                {
+                    val = 1;
+                    isFire = true;
+                }
+                break;
+            case 3:
+                {
+                    val = 1;
+                    isFire = true;
+                }
+                break;
+        }
+
         if (mUnitController.playerState == UnitController.PlayerState.roll)
             return false;
 
-        if (isnFire == true)
+        if (isFire == true)
         {
-            skills[skillIndex].Begin(this);
+            skills[val].Begin(this);
         }
         else
         {
-            skills[skillIndex].End();
+            skills[val].End();
         }
 
         return true;
@@ -228,12 +267,11 @@ public class GameUnit
         this.killGameUnit = killUnit;
     }
 
-
-    public float OnDelayDead()
+    //在GameUnitManager里面调用回收;
+    public float OnDestory()
     {
         isDeading = false;
 
-        GameUnitManager.Instance.RemoveGameUnit(mGameUintId);
         BattleUnitRoot.Instance.DeSpwan(prefabModel);
 
         Reset();

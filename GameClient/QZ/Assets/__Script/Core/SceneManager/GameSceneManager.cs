@@ -39,6 +39,7 @@ class GameSceneManager : SingleClass<GameSceneManager>
             procDic.Remove(type);
         }
     }
+
     public SceneBase GetScene(SceneType type)
     {
         if (procDic.ContainsKey(type))
@@ -49,17 +50,38 @@ class GameSceneManager : SingleClass<GameSceneManager>
         return null;
     }
 
+    /// <summary>
+    /// 根据名字获取对应的场景;
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="sceneType">场景 名字</param>
+    /// <returns></returns>
+    public T GetScene<T>(SceneType sceneType) where T : SceneBase
+    {
+        T uiBase = null;
+
+        if (procDic.ContainsKey(sceneType))
+        {
+            uiBase = procDic[sceneType] as T;
+        }
+
+        return uiBase;
+    }
+
     //开始一个流程
     public void Begin(SceneType type)
+    {
+        //运行下一个流程;
+        curScene = GetScene(type);
+        curScene.OnBegin();
+    }
+
+    public void OnEnd()
     {
         //结束当前流程;
         if (curScene != null)
         {
             curScene.OnEnd();
         }
-
-        //运行下一个流程;
-        curScene = GetScene(type);
-        curScene.OnBegin();
     }
 }

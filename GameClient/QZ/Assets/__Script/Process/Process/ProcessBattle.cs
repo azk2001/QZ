@@ -7,11 +7,15 @@ class ProcessBattle : ProcessBase
 {
     public override void OnBegin()
     {
+        GameSceneManager.Instance.Begin(SceneType.battle);
+
         base.OnBegin();
     }
 
     public override void OnEnd()
     {
+        GameSceneManager.Instance.OnEnd();
+
         base.OnEnd();
     }
 }

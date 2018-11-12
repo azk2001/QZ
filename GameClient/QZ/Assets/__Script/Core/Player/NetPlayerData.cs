@@ -6,6 +6,7 @@ using System.Text;
 //角色战斗数据
 public class BattleUnitData : ICloneable
 {
+    public int camp = 0;        //阵营
     public int life = 0;        //血量
     public int speed = 0;       //移动数度
     public int shield = 0;      //护盾
@@ -13,6 +14,7 @@ public class BattleUnitData : ICloneable
 
     public void SetBytes(BytesReader reader)
     {
+        camp = reader.ReadInt();
         life = reader.ReadInt();
         speed = reader.ReadInt();
         shield = reader.ReadInt();
@@ -21,6 +23,7 @@ public class BattleUnitData : ICloneable
 
     public BytesWriter GetBytes(BytesWriter writer)
     {
+        writer.WriteInt(camp);
         writer.WriteInt(life);
         writer.WriteInt(speed);
         writer.WriteInt(shield);
@@ -40,7 +43,7 @@ public class PlayerBasicsData
 {
     public int uuid;        //唯一标识ID;
     public string name;     //名字;
-    public byte sex;         //性别;
+    public int sex;         //性别;
     public int level;       //角色等级;
 
     public void SetBytes(BytesReader reader)
@@ -48,15 +51,16 @@ public class PlayerBasicsData
         uuid = reader.ReadInt();
         name = reader.ReadString(64);
         name = name.Replace("\0", string.Empty);
-
-        sex = reader.ReadByte();
+        sex = reader.ReadInt();
+        level= reader.ReadInt();
     }
 
     public BytesWriter GetBytes(BytesWriter writer)
     {
         writer.WriteInt(uuid);
         writer.WriteString(name, 64);
-        writer.WriteByte(sex);
+        writer.WriteInt(sex);
+        writer.WriteInt(level);
 
         return writer;
     }

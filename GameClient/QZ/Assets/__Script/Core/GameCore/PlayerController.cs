@@ -119,28 +119,17 @@ public class PlayerController : SingleClass<PlayerController>
         if (isInput == false)
             return;
 
-        switch (val)
+        bool isSendSkill = mGameUnit.OnSkill(val);
+
+        if (isSendSkill == true)
         {
-            case 0:
-                {
-                    mGameUnit.OnSkill(0, false);
-                }
-                break;
-            case 1:
-                {
-                    mGameUnit.OnSkill(0, true);
-                }
-                break;
-            case 2:
-                {
-                    mGameUnit.OnSkill(1);
-                }
-                break;
-            case 3:
-                {
-                    mGameUnit.OnSkill(2);
-                }
-                break;
+            OnJoystickEvent(moveDir);
+
+            C2SPlayerSkillMessage c2SPlayerSkill = new C2SPlayerSkillMessage();
+            c2SPlayerSkill.uuid = mGameUnit.basicsData.uuid;
+            c2SPlayerSkill.skillIndex = val;
+
+            BattleProtocolEvent.SendPlayerSkill(c2SPlayerSkill);
         }
 
     }

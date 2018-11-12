@@ -12,6 +12,8 @@ class ProcessMain : ProcessBase
 
     public override void OnEnd()
     {
+        GameSceneManager.Instance.OnEnd();
+
         base.OnEnd();
     }
 }

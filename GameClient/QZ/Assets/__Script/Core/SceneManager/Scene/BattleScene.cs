@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.SceneManagement;
+using System;
 
 public class BattleScene : SceneBase
 {
-
     public static BattleScene instance = null;
 
     public GameUnit localGmeUnit = null;        //本地角色控制单位;
@@ -13,24 +13,112 @@ public class BattleScene : SceneBase
     public Dictionary<int, List<GameUnit>> battleUnitList = new Dictionary<int, List<GameUnit>>();
 
     public cs_dungeon curDungeonParam = null;
-    void Awake()
+
+    public override void OnBegin()
     {
-        instance = this;
+        SceneManager.LoadScene("battleGame");
+
+        base.OnBegin();
     }
 
-    void Start()
+    public void AddNetPlayer(S2CStartGameMessage message)
+    {
+        foreach (PlayerBirthParam param in message.birthParamList)
+        {
+            NetPlayer netPlayer = NetPlayerManager.GetNetPlayer(param.uuid);
+            netPlayer.battleUnitData.camp = param.camp;
+            PlayerInScene(netPlayer);
+        }
+
+        SendStartBattle();
+    }
+
+    public override void PlayerInScene(NetPlayer netPlayer)
+    {
+        GameUnitData unitData = new GameUnitData();
+        unitData.speed = 2;
+        GameUnit gameUnit = GameUnitManager.Instance.CreateServerGameUnit(netPlayer.uuid, netPlayer.basicsData, unitData);
+
+        SkillManager.Instance.AddSkill(gameUnit, 1);
+
+        if (BattleProtocol.UUID == netPlayer.uuid)
+        {
+            PlayerController.Instance.AddPlayerController(gameUnit);
+
+            LocalPlayer.Instance.netPlayer = netPlayer;
+            LocalPlayer.Instance.gameUnit = gameUnit;
+        }
+
+        base.PlayerInScene(netPlayer);
+    }
+
+    public override void PlayerOutScene(NetPlayer netPlayer)
+    {
+
+        base.PlayerOutScene(netPlayer);
+    }
+
+    public void AddGameUnit(int campId, GameUnit gameUnit)
+    {
+        if (battleUnitList.ContainsKey(campId) == false)
+        {
+            battleUnitList[campId] = new List<GameUnit>();
+        }
+        battleUnitList[campId].Add(gameUnit);
+    }
+
+    //战斗结束;
+    public void BattleEnd()
     {
 
     }
+
+    private void OnEndGame()
+    {
+
+    }
+
+    //发送场景准备完成;
+    private void SendStartBattle()
+    {
+        C2SStartBattleMessage c2SStartBattle = new C2SStartBattleMessage();
+        c2SStartBattle.uuid = BattleProtocol.UUID;
+
+        BattleProtocolEvent.SendStartBattle(c2SStartBattle);
+    }
+
+    public void ReceiveStartBattle(S2CStartBattleMessage message)
+    {
+        //可以开始战斗;
+        if(message.isStartBattle == 1)
+        {
+
+        }
+    }
+
+
+    public override void OnEnd()
+    {
+
+        BuffManager.Instance.RemoveAll();
+        GameUnitManager.Instance.RemoveAllGameUnit();
+        PlayerController.Instance.RemovePlayerController();
+
+        BattleBuffRoot.Instance.DeSpwanAll();
+        BattleEffectRoot.Instance.DeSpwanAll();
+        BattleUnitRoot.Instance.DeSpwanAll();
+        UIBattleRoot.instance.DeSpwanAll();
+
+        base.OnEnd();
+    }
+
+
 
     public void Init(int dungeonId)
     {
         battleUnitList.Clear();
 
-        // 随机播放战斗音乐
-        int index = Random.Range(0, AudioPlayIDCollect.ad_battleMusic.Length);
-        int id = AudioPlayIDCollect.ad_battleMusic[index];
-        AudioManager.Instance.Play(id, Vector3.zero);
+
 
     }
 
@@ -40,55 +128,4 @@ public class BattleScene : SceneBase
 
     }
 
-    public void AddBattleUnit(int campId, GameUnit gameUnit)
-    {
-        if (battleUnitList.ContainsKey(campId) == false)
-        {
-            battleUnitList[campId] = new List<GameUnit>();
-        }
-        battleUnitList[campId].Add(gameUnit);
-    }
-
-
-    void Update()
-    {
-        BuffManager.Instance.Update();
-        TimeManager.Instance.Update();
-    }
-
-    //战斗结束;
-    public void BattleEnd()
-    {
-        BuffManager.Instance.RemoveAll();
-        GameUnitManager.Instance.RemoveAllGameUnit();
-        PlayerController.Instance.RemovePlayerController();
-
-        BattleBuffRoot.Instance.DeSpwanAll();
-        BattleEffectRoot.Instance.DeSpwanAll();
-        BattleUnitRoot.Instance.DeSpwanAll();
-        UIBattleRoot.instance.DeSpwanAll();
-    }
-
-    private void OnEndGame()
-    {
-
-
-    }
-
-    public void ReturnScence()
-    {
-        ClearScence();
-
-    }
-
-    private void OnScenceLoadFinish(int dungeon)
-    {
-
-    }
-
-    //场景结束;
-    public void ClearScence()
-    {
-
-    }
 }

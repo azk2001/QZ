@@ -8,8 +8,8 @@ public class GameUnitData : ICloneable
 {
 
     public int hp;          //玩家初始HP;
-    public float speed;		//移动速度;
-    public float atk;	    //攻击力;
+    public int speed;		//移动速度;
+    public int atk;	        //攻击力;
     public int defense;     //防御力;
     public int campId;      //阵营ID;
 
@@ -45,40 +45,15 @@ public class GameUnitManager : SingleClass<GameUnitManager>
         if (gameUintDic.ContainsKey(uuid) == true)
         {
             gameUnit = gameUintDic[uuid];
-            gameUnit.basicsData = _basicsData;
-            gameUnit.gameUnitData = data;
         }
         else
         {
             gameUnit = new GameUnit();
-            gameUnit.Init(uuid, _basicsData, data);
-
             gameUintDic[uuid] = gameUnit;
         }
 
+        gameUnit.Init(uuid, _basicsData, data);
 
-        return gameUnit;
-    }
-
-    public GameUnit CreateLocalGameUnit(PlayerBasicsData _basicsData, GameUnitData data)
-    {
-        int gameUintId = gameUintStaticId;
-
-        GameUnit gameUnit = null;
-
-        if (gameUintDic.ContainsKey(gameUintId) == true)
-        {
-            gameUnit = gameUintDic[gameUintId];
-            gameUnit.basicsData = _basicsData;
-            gameUnit.gameUnitData = data;
-        }
-        else
-        {
-            gameUnit = new GameUnit();
-            gameUnit.Init(gameUintId, _basicsData, data);
-
-            gameUintDic[gameUintId] = gameUnit;
-        }
         return gameUnit;
     }
 
@@ -86,26 +61,30 @@ public class GameUnitManager : SingleClass<GameUnitManager>
     {
         foreach (var gu in gameUintDic)
         {
-            gu.Value.RemoveEventTrigger();
-            gu.Value.Reset();
+            RemoveGameUnit(gu.Value);
         }
         gameUintDic.Clear();
     }
 
-    public void RemoveGameUnit(int gameUintId)
+    public void RemoveGameUnit(GameUnit gameUnit)
     {
-        if (gameUintDic.ContainsKey(gameUintId) == true)
-        {
-            gameUintDic.Remove(gameUintId);
-        }
-
+        RemoveGameUnit(gameUnit.uuid);
     }
 
-    public GameUnit GetGameUnit(int gameUintId)
+    public void RemoveGameUnit(int uuid)
     {
-        if (gameUintDic.ContainsKey(gameUintId) == true)
+        if (gameUintDic.ContainsKey(uuid) == true)
         {
-            return gameUintDic[gameUintId];
+            gameUintDic[uuid].OnDestory();
+            gameUintDic.Remove(uuid);
+        }
+    }
+
+    public GameUnit GetGameUnit(int uuid)
+    {
+        if (gameUintDic.ContainsKey(uuid) == true)
+        {
+            return gameUintDic[uuid];
         }
         return null;
     }

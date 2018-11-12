@@ -81,6 +81,9 @@ public static class BattleProtocolEvent
     {
         S2CGetRoomMessage message = new S2CGetRoomMessage();
         message.Message(reader);
+
+        UIRoom uiRoom = UIManager.Instance.GetUIBase<UIRoom>(eUIName.UIRoom);
+        uiRoom.ReceiveGetRoom(message);
     }
 
     public static void SendCreateRoom(C2SCreateRoomMessage message)
@@ -97,6 +100,29 @@ public static class BattleProtocolEvent
     {
         S2CCreateRoomMessage message = new S2CCreateRoomMessage();
         message.Message(reader);
+
+        UIRoom uiRoom = UIManager.Instance.GetUIBase<UIRoom>( eUIName.UIRoom);
+        uiRoom.ReceiveCreateRoom(message);
+
+    }
+
+    public static void SendAddRoom(C2SAddRoomMessage message)
+    {
+        writer.Clear();
+        writer.WriteByte((byte)C2SBattleProtocol.C2S_AddRoom);
+
+        writer = message.Message(writer);
+
+        BattleProtocol.SendBytes(writer);
+    }
+
+    public static void ReceiveAddRoom(BytesReader reader)
+    {
+        S2CAddRoomMessage message = new S2CAddRoomMessage();
+        message.Message(reader);
+
+        UIRoom uiRoom = UIManager.Instance.GetUIBase<UIRoom>(eUIName.UIRoom);
+        uiRoom.ReceiveAddRoom(message);
     }
 
     public static void SendStartGame(C2SStartGameMessage message)
@@ -113,6 +139,11 @@ public static class BattleProtocolEvent
     {
         S2CStartGameMessage message = new S2CStartGameMessage();
         message.Message(reader);
+
+        ProcessManager.Instance.Begin(ProcessType.processbattle);
+
+        BattleScene battleScene = GameSceneManager.Instance.GetScene<BattleScene>(SceneType.battle);
+        battleScene.AddNetPlayer(message);
     }
 
     public static void SendStartBattle(C2SStartBattleMessage message)
@@ -129,6 +160,9 @@ public static class BattleProtocolEvent
     {
         S2CStartBattleMessage message = new S2CStartBattleMessage();
         message.Message(reader);
+
+        BattleScene battleScene = GameSceneManager.Instance.GetScene<BattleScene>(SceneType.battle);
+        battleScene.ReceiveStartBattle(message);
     }
 
     public static void SendPlayerMove(C2SPlayerMoveMessage message)
@@ -178,6 +212,13 @@ public static class BattleProtocolEvent
     {
         S2CPlayerSkillMessage message = new S2CPlayerSkillMessage();
         message.Message(reader);
+
+        GameUnit gameUnit = GameUnitManager.Instance.GetGameUnit(message.uuid);
+        if(gameUnit!=null)
+        {
+            gameUnit.OnSkill(message.skillIndex);
+        }
+
     }
 
     public static void SendPlayerHit(C2SPlayerHitMessage message)
@@ -248,22 +289,6 @@ public static class BattleProtocolEvent
     public static void ReceivePlayerDie(BytesReader reader)
     {
         S2CPlayerDieMessage message = new S2CPlayerDieMessage();
-        message.Message(reader);
-    }
-
-    public static void SendAddRoom(C2SAddRoomMessage message)
-    {
-        writer.Clear();
-        writer.WriteByte((byte)C2SBattleProtocol.C2S_AddRoom);
-
-        writer = message.Message(writer);
-
-        BattleProtocol.SendBytes(writer);
-    }
-
-    public static void ReceiveAddRoom(BytesReader reader)
-    {
-        S2CAddRoomMessage message = new S2CAddRoomMessage();
         message.Message(reader);
     }
     

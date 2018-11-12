@@ -13,6 +13,7 @@ public class MainScene : SceneBase
         {
             PlayerInScene(netPlayer);
         }
+
         base.OnBegin();
     }
 
@@ -27,14 +28,25 @@ public class MainScene : SceneBase
         if (BattleProtocol.UUID == netPlayer.uuid)
         {
             PlayerController.Instance.AddPlayerController(gameUnit);
+
+            LocalPlayer.Instance.netPlayer = netPlayer;
+            LocalPlayer.Instance.gameUnit = gameUnit;
         }
 
         base.PlayerInScene(netPlayer);
     }
 
+    public override void PlayerOutScene(NetPlayer netPlayer)
+    {
+        GameUnitManager.Instance.RemoveGameUnit(netPlayer.uuid);
+
+        base.PlayerOutScene(netPlayer);
+    }
 
     public override void OnEnd()
     {
+        GameUnitManager.Instance.RemoveAllGameUnit();
+
         base.OnEnd();
     }
 
