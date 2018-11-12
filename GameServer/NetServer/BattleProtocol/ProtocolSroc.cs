@@ -261,7 +261,7 @@ namespace BattleServer
                     PlayerParam playerParam = playerList[i];
                     writer.WriteString(playerParam.playerName, 64);
                     writer.WriteInt(playerParam.level);
-                    writer.WriteByte(playerParam.sex);
+                    writer.WriteInt(playerParam.sex);
                     writer.WriteInt(playerParam.camp);
                     writer.WriteByte(playerParam.isOwner);
                     writer.WriteInt(playerParam.uuid);
@@ -290,7 +290,7 @@ namespace BattleServer
                     playerParam.playerName = reader.ReadString(64);
                     playerParam.playerName = playerParam.playerName.Replace("\0", "");
                     playerParam.level = reader.ReadInt();
-                    playerParam.sex = reader.ReadByte();
+                    playerParam.sex = reader.ReadInt();
                     playerParam.camp = reader.ReadInt();
                     playerParam.isOwner = reader.ReadByte();
                     playerParam.uuid = reader.ReadInt();
@@ -350,6 +350,7 @@ namespace BattleServer
             for (int i = 0; i < playerCount; i++)
             {
                 PlayerBirthParam birthParam = new PlayerBirthParam();
+                birthParam.uuid = reader.ReadInt();
                 birthParam.name = reader.ReadString(64);
                 birthParam.name = birthParam.name.Replace("\0", "");
                 birthParam.isLoadFinish = reader.ReadByte();
@@ -491,25 +492,14 @@ namespace BattleServer
 
     public struct C2SPlayerSkillMessage
     {
+        //会先同步位置在同步技能;
         public int uuid;
-        public int skillId;     //释放技能id;
-        public int ax;          //技能朝向x*100;
-        public int ay;          //技能朝向y*100;
-        public int az;          //技能朝向z*100;
-        public int px;          //位置x*100;
-        public int py;          //位置y*100;
-        public int pz;          //位置z*100;
+        public int skillIndex;     //释放技能id;
 
         public BytesWriter Message(BytesWriter writer)
         {
             writer.WriteInt(uuid);
-            writer.WriteInt(skillId);
-            writer.WriteInt(ax);
-            writer.WriteInt(ay);
-            writer.WriteInt(az);
-            writer.WriteInt(px);
-            writer.WriteInt(py);
-            writer.WriteInt(pz);
+            writer.WriteInt(skillIndex);
 
             return writer;
         }
@@ -517,37 +507,20 @@ namespace BattleServer
         public void Message(BytesReader reader)
         {
             uuid = reader.ReadInt();
-            skillId = reader.ReadInt();
-            ax = reader.ReadInt();
-            ay = reader.ReadInt();
-            az = reader.ReadInt();
-            px = reader.ReadInt();
-            px = reader.ReadInt();
-            px = reader.ReadInt();
+            skillIndex = reader.ReadInt();
         }
     }
 
     public struct S2CPlayerSkillMessage
     {
+        //会先同步位置在同步技能;
         public int uuid;
-        public int skillId;     //释放技能id;
-        public int ax;          //技能朝向x*100;
-        public int ay;          //技能朝向y*100;
-        public int az;          //技能朝向z*100;
-        public int px;          //位置x*100;
-        public int py;          //位置y*100;
-        public int pz;          //位置z*100;
+        public int skillIndex;     //释放技能id;
 
         public BytesWriter Message(BytesWriter writer)
         {
             writer.WriteInt(uuid);
-            writer.WriteInt(skillId);
-            writer.WriteInt(ax);
-            writer.WriteInt(ay);
-            writer.WriteInt(az);
-            writer.WriteInt(px);
-            writer.WriteInt(py);
-            writer.WriteInt(pz);
+            writer.WriteInt(skillIndex);
 
             return writer;
         }
@@ -555,13 +528,7 @@ namespace BattleServer
         public void Message(BytesReader reader)
         {
             uuid = reader.ReadInt();
-            skillId = reader.ReadInt();
-            ax = reader.ReadInt();
-            ay = reader.ReadInt();
-            az = reader.ReadInt();
-            px = reader.ReadInt();
-            px = reader.ReadInt();
-            px = reader.ReadInt();
+            skillIndex = reader.ReadInt();
         }
     }
 
@@ -769,7 +736,7 @@ namespace BattleServer
     {
         public string playerName;   //名字;
         public int level;           //等级;
-        public byte sex;            //性别;
+        public int sex;            //性别;
         public int camp;            //正营;
         public byte isOwner;        //是否是房主;
         public int uuid;            //玩家唯一标识ID;
@@ -784,6 +751,7 @@ namespace BattleServer
 
     public class PlayerBirthParam
     {
+        public int uuid;
         public string name;
         public byte isLoadFinish;
         public byte camp;

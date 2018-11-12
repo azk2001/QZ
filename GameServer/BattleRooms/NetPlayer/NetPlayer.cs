@@ -58,17 +58,17 @@ namespace BattleServer
             }
         }
 
-        //场景
-        private byte _isLoadFinish;
-        public byte isLoadFinish
+        //场景是否已经加载完成，可以战斗
+        private byte _isStartBattle;
+        public byte isStartBattle
         {
             get
             {
-                return _isLoadFinish;
+                return _isStartBattle;
             }
             set
             {
-                _isLoadFinish = value;
+                _isStartBattle = value;
             }
         }
 

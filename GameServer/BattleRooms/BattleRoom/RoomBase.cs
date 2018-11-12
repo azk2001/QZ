@@ -35,7 +35,7 @@ namespace BattleServer
     /// </summary>
     public class RoomBase
     {
-        private List<NetPlayer> _netPlayerList = new List<NetPlayer>();           //房间里面的玩家信息;   uuid
+        private List<NetPlayer> _netPlayerList = new List<NetPlayer>();           //房间里面的玩家信息;
         public List<NetPlayer> netPlayerList
         {
             get
@@ -80,7 +80,7 @@ namespace BattleServer
 
             if (roomState == RoomState.fighting)
                 return false;
-            
+
             if (netPlayerList.Contains(netPlayer) == false)
             {
                 netPlayerList.Add(netPlayer);
@@ -105,7 +105,7 @@ namespace BattleServer
 
             if (roomState == RoomState.fighting)
                 return false;
-            
+
             if (netPlayerList.Contains(netPlayer) == true)
             {
                 netPlayerList.Remove(netPlayer);
@@ -115,6 +115,23 @@ namespace BattleServer
             netPlayer.SetRoomState(ePlayerRoomState.inLobby);
 
             return true;
+        }
+
+        //是否所有角色已经加载完成，可以战斗
+        public virtual bool allPlayerReady()
+        {
+            bool isReady = true;
+            foreach (NetPlayer netPlayer in _netPlayerList)
+            {
+                if (netPlayer.isStartBattle == 0)
+                {
+                    isReady = false;
+                    break;
+
+                }
+            }
+
+            return isReady;
         }
 
         //房间战斗初始化;
@@ -136,7 +153,7 @@ namespace BattleServer
         //房间心跳函数
         public virtual void Update(float deltaTime)
         {
-         
+
         }
 
     }

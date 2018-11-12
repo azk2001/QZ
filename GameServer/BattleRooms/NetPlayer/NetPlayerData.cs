@@ -43,7 +43,7 @@ namespace BattleServer
     {
         public int uuid;        //唯一标识ID;
         public string name;     //名字;
-        public byte sex;         //性别;
+        public int sex;         //性别;
         public int level;       //角色等级;
 
         public void SetBytes(BytesReader reader)
@@ -51,15 +51,16 @@ namespace BattleServer
             uuid = reader.ReadInt();
             name = reader.ReadString(64);
             name = name.Replace("\0", string.Empty);
-
-            sex = reader.ReadByte();
+            sex = reader.ReadInt();
+            level = reader.ReadInt();
         }
 
         public BytesWriter GetBytes(BytesWriter writer)
         {
             writer.WriteInt(uuid);
             writer.WriteString(name, 64);
-            writer.WriteByte(sex);
+            writer.WriteInt(sex);
+            writer.WriteInt(level);
 
             return writer;
         }

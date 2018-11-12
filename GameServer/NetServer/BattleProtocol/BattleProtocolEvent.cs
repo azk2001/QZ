@@ -123,6 +123,7 @@ namespace BattleServer
 
             BattleRoom battleRoom = new BattleRoom();
             RoomManager.AddRoom(battleRoom);
+            RoomManager.NetPlayerInRoom(battleRoom.roomIndex, netPlayer);
 
             battleRoom.ownerPlayer = netPlayer;
 
@@ -211,6 +212,7 @@ namespace BattleServer
             foreach (NetPlayer nPlayer in battleRoom.netPlayerList)
             {
                 PlayerBirthParam birthParam = new PlayerBirthParam();
+                birthParam.uuid = nPlayer.basicsData.uuid;
                 birthParam.camp = nPlayer.camp;
                 birthParam.isLoadFinish = 0;
                 birthParam.name = nPlayer.basicsData.name;
@@ -227,7 +229,21 @@ namespace BattleServer
 
         public static void ReceiveStartBattle(BytesReader reader, int uuid)
         {
+            C2SStartBattleMessage c2SStartBattle = new C2SStartBattleMessage();
+            c2SStartBattle.Message(reader);
 
+            NetPlayer netPlayer = NetPlayerManager.GetNetPlayer(c2SStartBattle.uuid);
+            netPlayer.isStartBattle = 1;
+            
+            RoomBase roomBase = RoomManager.GetRoomBase(netPlayer.roomIndex);
+
+            S2CStartBattleMessage s2CStartBattle = new S2CStartBattleMessage();
+            s2CStartBattle.isStartBattle =(byte)( roomBase.allPlayerReady() == true ? 1 : 0);
+
+            writer.Clear();
+            writer.WriteByte((byte)S2CBattleProtocol.S2C_StartBattle);
+
+            BattleProtocol.SendBytes(uuid, s2CStartBattle.Message(writer), true, true);
         }
 
         public static void ReceivePlayerMove(BytesReader reader, int uuid)
@@ -256,7 +272,17 @@ namespace BattleServer
 
         public static void ReceivePlayerSkill(BytesReader reader, int uuid)
         {
+            C2SPlayerSkillMessage c2SPlayerSkill = new C2SPlayerSkillMessage();
+            c2SPlayerSkill.Message(reader);
 
+            S2CPlayerSkillMessage s2CPlayerSkill = new S2CPlayerSkillMessage();
+            s2CPlayerSkill.uuid = c2SPlayerSkill.uuid;
+            s2CPlayerSkill.skillIndex = c2SPlayerSkill.skillIndex;
+
+            writer.Clear();
+            writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerSkill);
+
+            BattleProtocol.SendBytes(uuid, s2CPlayerSkill.Message(writer), true, false);
         }
 
         public static void ReceivePlayerHit(BytesReader reader, int uuid)
