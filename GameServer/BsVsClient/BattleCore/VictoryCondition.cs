@@ -152,7 +152,7 @@ namespace BattleServer
                     if (netPlayer.gameUnit == gameUnit)
                         isPlayerDeath = true;
 
-                    if (netPlayer.gameUnit.camp == gameUnit.camp)
+                    if (netPlayer.gameUnit.baseUnitData.camp == gameUnit.baseUnitData.camp)
                     {
                         if (isFinish == true && netPlayer.roomState == ePlayerRoomState.fighting)
                         {
@@ -163,7 +163,7 @@ namespace BattleServer
 
                 if (isPlayerDeath == true && isFinish == true)
                 {
-                    GameFinishData.Instance.OnGameFinish(battleCore, gameUnit.camp);
+                    GameFinishData.Instance.OnGameFinish(battleCore, (byte)gameUnit.baseUnitData.camp);
                     isRun = false;
 
                     return;
@@ -223,7 +223,7 @@ namespace BattleServer
                                 break;
                             }
 
-                            if (killParamList.Contains(killGameUnit.monsterId.ToString()) == true)
+                            if (killParamList.Contains(killGameUnit.modleId.ToString()) == true)
                             {
                                 starCondition.runParam++;
 
@@ -271,7 +271,7 @@ namespace BattleServer
                                 break;
                             }
 
-                            float eh = (elementGameUnit.curLife * 1.0f / elementGameUnit.maxLife * 1.0f) * 100;
+                            float eh = (elementGameUnit.runUnitData.life * 1.0f / elementGameUnit.baseUnitData.life * 1.0f) * 100;
                             int maxEh = elemenParamList[1].ToInt(100);
                             if (eh > maxEh)
                             {
@@ -290,8 +290,7 @@ namespace BattleServer
                                 break;
                             }
 
-
-                            float pm = (protectGameUnit.curLife * 1.0f / protectGameUnit.maxLife * 1.0f) * 100;
+                            float pm = (protectGameUnit.runUnitData.life * 1.0f / protectGameUnit.baseUnitData.life * 1.0f) * 100;
                             int maxPm = protectParamList[1].ToInt(100);
                             if (pm > maxPm)
                             {

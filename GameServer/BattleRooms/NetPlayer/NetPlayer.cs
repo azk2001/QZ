@@ -74,10 +74,7 @@ namespace BattleServer
 
         public void InitDefault()
         {
-            battleUnitData.speed = 7000;       //移动数度
-            battleUnitData.shield = 0;      //护盾
-            battleUnitData.harm = 0;        //伤害
-
+            battleUnitData.InitDefault();
         }
 
         //第一步初始化玩家数据

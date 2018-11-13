@@ -168,7 +168,7 @@ public static class BattleProtocolEvent
     public static void SendPlayerMove(C2SPlayerMoveMessage message)
     {
         writer.Clear();
-        writer.WriteByte((byte)C2SBattleProtocol.C2S_PlayerMove);
+        writer.WriteByte((byte)C2SBattleProtocol.C2S_PlayerRoll);
 
         writer = message.Message(writer);
 
@@ -190,12 +190,39 @@ public static class BattleProtocolEvent
         mGameUnit.SetForward(forward);
 
         //客服端直接移动;
-        mGameUnit.PlayRunAnimation(moveDir);
+        mGameUnit.MoveDirection(moveDir);
         
         if(moveDir == Vector3.zero)
         {
             mGameUnit.mUnitController.MoveToPoint(position);
         }
+    }
+
+    public static void SendPlayerRoll(C2SPlayerRollMessage message)
+    {
+        writer.Clear();
+        writer.WriteByte((byte)C2SBattleProtocol.C2S_PlayerRoll);
+
+        writer = message.Message(writer);
+
+        BattleProtocol.SendBytes(writer);
+    }
+
+    public static void ReceivePlayerRoll(BytesReader reader)
+    {
+        S2CPlayerRollMessage message = new S2CPlayerRollMessage();
+        message.Message(reader);
+
+
+        GameUnit mGameUnit = GameUnitManager.Instance.GetGameUnit(message.uuid);
+
+        Vector3 startPoint = new Vector3(message.sx / 100.0f, message.sy / 100.0f, message.sz / 100.0f);
+        Vector3 endPoint = new Vector3(message.ex / 100.0f, message.ey / 100.0f, message.ez / 100.0f);
+
+        mGameUnit.SetPosition(startPoint);
+        
+        mGameUnit.RollPoint(endPoint);
+        
     }
 
     public static void SendPlayerSkill(C2SPlayerSkillMessage message)
@@ -235,6 +262,11 @@ public static class BattleProtocolEvent
     {
         S2CPlayerHitMessage message = new S2CPlayerHitMessage();
         message.Message(reader);
+
+        GameUnit killGameUnit = GameUnitManager.Instance.GetGameUnit(message.killUUID);
+        GameUnit hitGameUnit = GameUnitManager.Instance.GetGameUnit(message.hitUUID);
+
+        hitGameUnit.OnHit(killGameUnit);
     }
 
     public static void SendPlayerAddBuff(C2SPlayerAddBuffMessage message)
@@ -246,7 +278,6 @@ public static class BattleProtocolEvent
 
         BattleProtocol.SendBytes(writer);
     }
-
 
     public static void ReceivePlayerAddBuff(BytesReader reader)
     {
@@ -290,6 +321,10 @@ public static class BattleProtocolEvent
     {
         S2CPlayerDieMessage message = new S2CPlayerDieMessage();
         message.Message(reader);
+
+        GameUnit killGameUnit = GameUnitManager.Instance.GetGameUnit(message.killUUID);
+        GameUnit hitGameUnit = GameUnitManager.Instance.GetGameUnit(message.hitUUID);
+        hitGameUnit.OnDead(killGameUnit);
     }
     
 }

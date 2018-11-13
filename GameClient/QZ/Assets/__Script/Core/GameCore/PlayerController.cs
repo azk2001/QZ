@@ -19,11 +19,19 @@ public class PlayerController : SingleClass<PlayerController>
         }
     }
 
-    private UIJoyStick joyStick
+    private UIMoveJoystick joyStick
     {
         get
         {
-            return UIJoyStick.Instance;
+            return UIMoveJoystick.Instance;
+        }
+    }
+
+    private UIRollJoystick rollJoystick
+    {
+        get
+        {
+            return UIRollJoystick.Instance;
         }
     }
 
@@ -36,7 +44,8 @@ public class PlayerController : SingleClass<PlayerController>
         CameraLookPlayer.Instance.SetTarget(gameUnit.mUnitController.transform);
 
         UIGameMain.Instance.OnFireEvent += OnClickButton;
-        joyStick.OnDragEvent += OnJoystickEvent;
+        joyStick.OnMoveDragEvent += OnMoveJoystickEvent;
+        rollJoystick.OnRollDragEvent += OnRollJoystickEvent;
     }
 
     //移除一个玩家控制;
@@ -45,16 +54,17 @@ public class PlayerController : SingleClass<PlayerController>
         if (mGameUnit == null)
             return;
 
-        mGameUnit.PlayRunAnimation(Vector3.zero);
+        mGameUnit.MoveDirection(Vector3.zero);
         mGameUnit = null;
 
         CameraLookPlayer.Instance.SetTarget(null);
 
         UIGameMain.Instance.OnFireEvent -= OnClickButton;
-        joyStick.OnDragEvent -= OnJoystickEvent;
+        joyStick.OnMoveDragEvent -= OnMoveJoystickEvent;
+        rollJoystick.OnRollDragEvent -= OnRollJoystickEvent;
     }
 
-    private void OnJoystickEvent(Vector2 v2)
+    private void OnMoveJoystickEvent(Vector2 v2)
     {
         if (mGameUnit == null)
             return;
@@ -79,13 +89,13 @@ public class PlayerController : SingleClass<PlayerController>
         mGameUnit.SetForward(forward);
 
         Vector3 newMoveDir = Quaternion.AngleAxis(Angle(Vector3.forward, moveDir), Vector3.up) * forward;
-        if(moveDir == Vector3.zero)
+        if (moveDir == Vector3.zero)
         {
             newMoveDir = Vector3.zero;
         }
 
         //客服端直接移动;
-        mGameUnit.PlayRunAnimation(newMoveDir);
+        mGameUnit.MoveDirection(newMoveDir);
 
         C2SPlayerMoveMessage c2SPlayerMove = new C2SPlayerMoveMessage();
         c2SPlayerMove.uuid = mGameUnit.basicsData.uuid;
@@ -100,7 +110,6 @@ public class PlayerController : SingleClass<PlayerController>
         c2SPlayerMove.pz = (int)(mGameUnit.mUnitController.transformCaChe.position.z * 100);
 
         BattleProtocolEvent.SendPlayerMove(c2SPlayerMove);
-
     }
 
     private float Angle(Vector3 from, Vector3 to)
@@ -129,7 +138,7 @@ public class PlayerController : SingleClass<PlayerController>
 
         if (isSendSkill == true)
         {
-            OnJoystickEvent(moveDir);
+            OnMoveJoystickEvent(moveDir);
 
             C2SPlayerSkillMessage c2SPlayerSkill = new C2SPlayerSkillMessage();
             c2SPlayerSkill.uuid = mGameUnit.basicsData.uuid;
@@ -137,6 +146,39 @@ public class PlayerController : SingleClass<PlayerController>
 
             BattleProtocolEvent.SendPlayerSkill(c2SPlayerSkill);
         }
+    }
 
+    public void OnRollJoystickEvent(Vector2 v2)
+    {
+        if (mGameUnit == null)
+            return;
+
+        if (isInput == false)
+            return;
+
+        if (v2 == Vector2.zero)
+            return;
+
+        Vector3 startPoint = mGameUnit.mUnitController.transformCaChe.position;
+        Vector3 forward = mGameUnit.mUnitController.transformCaChe.position - mainCamera.transform.position;
+        Vector3 dir = new Vector3(v2.x, 0, v2.y);
+
+        Vector3 moveForward = Quaternion.AngleAxis(Angle(Vector3.forward, dir), Vector3.up) * forward;
+
+        Vector3 endPoint = startPoint + moveForward.normalized * 1.5f;
+        
+        //客服端直接移动;
+        mGameUnit.RollPoint(endPoint);
+
+        C2SPlayerRollMessage c2SPlayerRoll = new C2SPlayerRollMessage();
+        c2SPlayerRoll.uuid = mGameUnit.basicsData.uuid;
+        c2SPlayerRoll.sx = (int)(startPoint.x * 100);
+        c2SPlayerRoll.sy = (int)(startPoint.y * 100);
+        c2SPlayerRoll.sz = (int)(startPoint.z * 100);
+        c2SPlayerRoll.ex = (int)(endPoint.x * 100);
+        c2SPlayerRoll.ey = (int)(endPoint.y * 100);
+        c2SPlayerRoll.ez = (int)(endPoint.z * 100);
+
+        BattleProtocolEvent.SendPlayerRoll(c2SPlayerRoll);
     }
 }

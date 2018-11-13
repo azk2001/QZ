@@ -321,7 +321,7 @@ namespace BattleServer
     {
         public byte isStartGame;
         public byte playerCount;
-        public List<PlayerBirthParam> birthParamList;
+        public List<NetPlayer> netPlayerList;
         public BytesWriter Message(BytesWriter writer)
         {
             writer.WriteByte(isStartGame);
@@ -330,14 +330,9 @@ namespace BattleServer
 
             for (int i = 0; i < playerCount; i++)
             {
-                PlayerBirthParam birthParam = birthParamList[i];
-                writer.WriteString(birthParam.name, 64);
-                writer.WriteByte(birthParam.isLoadFinish);
-                writer.WriteByte(birthParam.camp);
-                writer.WriteInt(birthParam.px);
-                writer.WriteInt(birthParam.pz);
+                NetPlayer birthParam = netPlayerList[i];
+                writer = birthParam.GetBytes(writer);
             }
-
 
             return writer;
         }
@@ -349,19 +344,10 @@ namespace BattleServer
 
             for (int i = 0; i < playerCount; i++)
             {
-                PlayerBirthParam birthParam = new PlayerBirthParam();
-                birthParam.uuid = reader.ReadInt();
-                birthParam.name = reader.ReadString(64);
-                birthParam.name = birthParam.name.Replace("\0", "");
-                birthParam.isLoadFinish = reader.ReadByte();
-                birthParam.camp = reader.ReadByte();
-                birthParam.px = reader.ReadInt();
-                birthParam.pz = reader.ReadInt();
-
-                birthParamList.Add(birthParam);
+                NetPlayer birthParam = new NetPlayer();
+                birthParam.SetBytes(reader);
+                netPlayerList.Add(birthParam);
             }
-
-
         }
     }
 
@@ -490,6 +476,76 @@ namespace BattleServer
         }
     }
 
+    public struct C2SPlayerRollMessage
+    {
+        public int uuid;
+        public int sx;  //开始点x*100;
+        public int sy;  //开始点y*100;
+        public int sz;  //开始点z*100;
+        public int ex;  //结束点x*100;
+        public int ey;  //结束点y*100;
+        public int ez;  //结束点z*100;
+
+        public BytesWriter Message(BytesWriter writer)
+        {
+            writer.WriteInt(uuid);
+            writer.WriteInt(sx);
+            writer.WriteInt(sy);
+            writer.WriteInt(sz);
+            writer.WriteInt(ex);
+            writer.WriteInt(ey);
+            writer.WriteInt(ez);
+
+            return writer;
+        }
+
+        public void Message(BytesReader reader)
+        {
+            uuid = reader.ReadInt();
+            sx = reader.ReadInt();
+            sy = reader.ReadInt();
+            sz = reader.ReadInt();
+            ex = reader.ReadInt();
+            ey = reader.ReadInt();
+            ez = reader.ReadInt();
+        }
+    }
+
+    public struct S2CPlayerRollMessage
+    {
+        public int uuid;
+        public int sx;  //开始点x*100;
+        public int sy;  //开始点y*100;
+        public int sz;  //开始点z*100;
+        public int ex;  //结束点x*100;
+        public int ey;  //结束点y*100;
+        public int ez;  //结束点z*100;
+
+        public BytesWriter Message(BytesWriter writer)
+        {
+            writer.WriteInt(uuid);
+            writer.WriteInt(sx);
+            writer.WriteInt(sy);
+            writer.WriteInt(sz);
+            writer.WriteInt(ex);
+            writer.WriteInt(ey);
+            writer.WriteInt(ez);
+
+            return writer;
+        }
+
+        public void Message(BytesReader reader)
+        {
+            uuid = reader.ReadInt();
+            sx = reader.ReadInt();
+            sy = reader.ReadInt();
+            sz = reader.ReadInt();
+            ex = reader.ReadInt();
+            ey = reader.ReadInt();
+            ez = reader.ReadInt();
+        }
+    }
+
     public struct C2SPlayerSkillMessage
     {
         //会先同步位置在同步技能;
@@ -534,41 +590,41 @@ namespace BattleServer
 
     public struct C2SPlayerHitMessage
     {
-        public int uuid;
-        public int hit;         //受伤;
+        public int hitUUID;
+        public int killUUID;
 
         public BytesWriter Message(BytesWriter writer)
         {
-            writer.WriteInt(uuid);
-            writer.WriteInt(hit);
+            writer.WriteInt(hitUUID);
+            writer.WriteInt(killUUID);
 
             return writer;
         }
 
         public void Message(BytesReader reader)
         {
-            uuid = reader.ReadInt();
-            hit = reader.ReadInt();
+            hitUUID = reader.ReadInt();
+            killUUID = reader.ReadInt();
         }
     }
 
     public struct S2CPlayerHitMessage
     {
-        public int uuid;
-        public int hit;         //受伤;
+        public int hitUUID;
+        public int killUUID;
 
         public BytesWriter Message(BytesWriter writer)
         {
-            writer.WriteInt(uuid);
-            writer.WriteInt(hit);
+            writer.WriteInt(hitUUID);
+            writer.WriteInt(killUUID);
 
             return writer;
         }
 
         public void Message(BytesReader reader)
         {
-            uuid = reader.ReadInt();
-            hit = reader.ReadInt();
+            hitUUID = reader.ReadInt();
+            killUUID = reader.ReadInt();
         }
     }
 
@@ -690,35 +746,41 @@ namespace BattleServer
 
     public struct C2SPlayerDieMessage
     {
-        public int uuid;
+        public int hitUUID;
+        public int killUUID;
 
         public BytesWriter Message(BytesWriter writer)
         {
-            writer.WriteInt(uuid);
+            writer.WriteInt(hitUUID);
+            writer.WriteInt(killUUID);
 
             return writer;
         }
 
         public void Message(BytesReader reader)
         {
-            uuid = reader.ReadInt();
+            hitUUID = reader.ReadInt();
+            killUUID = reader.ReadInt();
         }
     }
 
     public struct S2CPlayerDieMessage
     {
-        public int uuid;
+        public int hitUUID;
+        public int killUUID;
 
         public BytesWriter Message(BytesWriter writer)
         {
-            writer.WriteInt(uuid);
+            writer.WriteInt(hitUUID);
+            writer.WriteInt(killUUID);
 
             return writer;
         }
 
         public void Message(BytesReader reader)
         {
-            uuid = reader.ReadInt();
+            hitUUID = reader.ReadInt();
+            killUUID = reader.ReadInt();
         }
     }
 
@@ -747,15 +809,5 @@ namespace BattleServer
         public int buffId;          //buffid;
         public int px;              //位置x*100;
         public int pz;              //位置z*100;
-    }
-
-    public class PlayerBirthParam
-    {
-        public int uuid;
-        public string name;
-        public byte isLoadFinish;
-        public byte camp;
-        public int px;
-        public int pz;
     }
 }

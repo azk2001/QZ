@@ -115,7 +115,7 @@ public class UIManager : SingleClass<UIManager>
             if (curOpenUIList.Contains(uiName) == false)
                 curOpenUIList.Add(uiName);
 
-            EventListenerManager.Invoke(EventEnum.openUI, uiName);
+            EventListenerManager.Invoke(EventEnum.OPEN_UI, uiName);
         }
         else
         {
@@ -173,7 +173,7 @@ public class UIManager : SingleClass<UIManager>
         uiBase.OnInit();
         uiBase.OnEnable();
 
-        EventListenerManager.Invoke(EventEnum.openUI, uiName);
+        EventListenerManager.Invoke(EventEnum.OPEN_UI, uiName);
 
         if (uiBase.showing == false)
         {
@@ -267,7 +267,7 @@ public class UIManager : SingleClass<UIManager>
             curOpenUIName = eUIName.UnKnow;
         }
 
-        EventListenerManager.Invoke(EventEnum.closeUI, uiName);
+        EventListenerManager.Invoke(EventEnum.CLOSE_UI, uiName);
     }
 
 

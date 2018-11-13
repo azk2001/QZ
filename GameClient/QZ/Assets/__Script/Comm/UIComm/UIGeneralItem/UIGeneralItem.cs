@@ -87,11 +87,7 @@ public class UIGeneralItem : MonoBehaviour
     }
     private void OnClick()
     {
-        if (NeedClickTips)
-        {
-            //广播
-            EventListenerManager.Invoke(EventEnum.onclickItem, this);
-        }
+       
     }
     /// <summary>
     /// 选中标识

@@ -12,6 +12,16 @@ public class UnitController : MonoBehaviour
         public float speed;
     }
 
+    public struct RollParam
+    {
+        public float curDistance;
+        public float maxDistance;
+        public Vector3 forward;
+        public Vector3 toPosition;
+        public float speed;
+    }
+
+
     public enum PlayerState
     {
         idle,   //站立状态;
@@ -22,9 +32,8 @@ public class UnitController : MonoBehaviour
         die,    //死亡状态;
     }
 
-
     public float moveSpeed = 0.2f;
-    public int gameUintId = 0;
+    public int uuid = 0;
 
     public Transform teamShadow = null;         //队伍标志;
     public Transform transformCaChe = null;     //角色;
@@ -46,6 +55,7 @@ public class UnitController : MonoBehaviour
     private Vector3 moveToDir = Vector3.zero;
     private Vector3 moveToPoint = Vector3.zero;
     private bool isMovePoint = false;    //是否朝着某一点移动;
+
     private PlayerState _playerState = PlayerState.idle;
     public PlayerState playerState
     {
@@ -53,10 +63,16 @@ public class UnitController : MonoBehaviour
         {
             return _playerState;
         }
+        set
+        {
+            _playerState = value;
+        }
     }
 
     private Renderer[] rendererList = null;
     private JumpParam jumpParam;
+    private RollParam rollParam;
+
     private Transform curShadow = null;
 
     void Awake()
@@ -131,6 +147,25 @@ public class UnitController : MonoBehaviour
                 MoveDirection(moveDirection);
             }
         }
+
+        if (_playerState == PlayerState.roll)
+        {
+            Vector3 dar = rollParam.forward * rollParam.speed * Time.deltaTime;
+
+            transformCaChe.Translate(dar);
+
+            rollParam.curDistance += dar.magnitude;
+
+            if (rollParam.curDistance > rollParam.maxDistance)
+            {
+                transformCaChe.position = rollParam.toPosition;
+
+                _playerState = PlayerState.idle;
+
+                MoveDirection(moveDirection);
+            }
+        }
+
 
         if (_playerState != PlayerState.jump && _playerState != PlayerState.roll) 
         {
@@ -245,39 +280,68 @@ public class UnitController : MonoBehaviour
         jumpParam.curDistance = 0;
         jumpParam.speed = 8.0f;
         jumpParam.toPosition = toPosition;
-        
+
+        PlayAnimation("jump");
     }
 
     public void RollPosition(Vector3 toPosition)
     {
         _playerState = PlayerState.roll;
 
+        Vector3 forward = (toPosition - transformCaChe.position).normalized;
+        
+        rollParam = new RollParam();
+        rollParam.forward = toPosition - transformCaChe.position;
+        rollParam.maxDistance = Vector3.Distance(toPosition, transformCaChe.position);
+        rollParam.curDistance = 0;
+        rollParam.speed = 8.0f;
+        rollParam.toPosition = toPosition;
 
+        PlayAnimation("roll");
     }
 
     //朝着指定方向移动
     public void MoveDirection(Vector3 direction)
     {
-        if (_playerState == PlayerState.jump || _playerState == PlayerState.roll)
+        if (_playerState == PlayerState.jump || _playerState == PlayerState.roll || _playerState == PlayerState.die )
         {
             return;
         }
 
         moveDirection = direction.normalized;
 
-        //SetForward(moveDirection);
-
-        if (direction.Equals(Vector3.zero))
+        if (direction.Equals(Vector3.zero) == true)
         {
             directionCache = Vector3.zero;
             _playerState = PlayerState.idle;
+
+            PlayAnimation("IsRun", false);
         }
+        else
+        {
+            PlayAnimation("IsRun", true);
+            float angle = Angle(transformCaChe.forward, direction);
+            RunAnimation(angle);
+        }
+    }
+
+    private float Angle(Vector3 from, Vector3 to)
+    {
+        float angle = Vector3.Angle(from, to);
+        angle *= Mathf.Sign(Vector3.Cross(from, to).y);
+
+        if (angle < 0)
+        {
+            angle = 360 - Mathf.Abs(angle);
+        }
+
+        return angle;
     }
 
     //朝着指定点移动
     public void MoveToPoint(Vector3 point, Vector3 _directionCache = default(Vector3))
     {
-        if (_playerState == PlayerState.jump || _playerState == PlayerState.roll)
+        if (_playerState == PlayerState.jump || _playerState == PlayerState.roll || _playerState == PlayerState.die)
         {
             return;
         }

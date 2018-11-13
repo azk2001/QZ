@@ -49,6 +49,7 @@ namespace BattleServer
             Console.WriteLine("ReceiveCreatePlayer");
 
             NetPlayer netPlayer = new NetPlayer();
+            netPlayer.InitDefault();
 
             netPlayer.uuid = uuid;                                  //唯一标识ID;
             netPlayer.basicsData.name = c2SCreatePlayer.name;       //名字;
@@ -208,17 +209,13 @@ namespace BattleServer
             s2CStartGame.isStartGame = (byte)(netPlayer == battleRoom.ownerPlayer ? 1 : 0);
             s2CStartGame.playerCount = (byte)battleRoom.netPlayerList.Count;
 
-            s2CStartGame.birthParamList = new List<PlayerBirthParam>();
-            foreach (NetPlayer nPlayer in battleRoom.netPlayerList)
+            s2CStartGame.netPlayerList = new List<NetPlayer>();
+            s2CStartGame.netPlayerList.AddRange(battleRoom.netPlayerList);
+
+            foreach (NetPlayer sPlayer in battleRoom.netPlayerList)
             {
-                PlayerBirthParam birthParam = new PlayerBirthParam();
-                birthParam.uuid = nPlayer.basicsData.uuid;
-                birthParam.camp = nPlayer.camp;
-                birthParam.isLoadFinish = 0;
-                birthParam.name = nPlayer.basicsData.name;
-                birthParam.px = 0;
-                birthParam.pz = 0;
-                s2CStartGame.birthParamList.Add(birthParam);
+                sPlayer.gameUnit = GameUnitManager.AddGameUnit(sPlayer.uuid,sPlayer.roomIndex);
+                sPlayer.gameUnit.Init(sPlayer.battleUnitData, sPlayer.basicsData);
             }
 
             writer.Clear();
@@ -234,11 +231,11 @@ namespace BattleServer
 
             NetPlayer netPlayer = NetPlayerManager.GetNetPlayer(c2SStartBattle.uuid);
             netPlayer.isStartBattle = 1;
-            
+
             RoomBase roomBase = RoomManager.GetRoomBase(netPlayer.roomIndex);
 
             S2CStartBattleMessage s2CStartBattle = new S2CStartBattleMessage();
-            s2CStartBattle.isStartBattle =(byte)( roomBase.allPlayerReady() == true ? 1 : 0);
+            s2CStartBattle.isStartBattle = (byte)(roomBase.allPlayerReady() == true ? 1 : 0);
 
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_StartBattle);
@@ -270,6 +267,27 @@ namespace BattleServer
 
         }
 
+        public static void ReceivePlayerRoll(BytesReader reader, int uuid)
+        {
+            C2SPlayerRollMessage c2SPlayerRoll = new C2SPlayerRollMessage();
+            c2SPlayerRoll.Message(reader);
+
+            S2CPlayerRollMessage s2CPlayerRoll = new S2CPlayerRollMessage();
+            s2CPlayerRoll.uuid = c2SPlayerRoll.uuid;
+            s2CPlayerRoll.sx = c2SPlayerRoll.sx;
+            s2CPlayerRoll.sy = c2SPlayerRoll.sy;
+            s2CPlayerRoll.sz = c2SPlayerRoll.sz;
+            s2CPlayerRoll.ex = c2SPlayerRoll.ex;
+            s2CPlayerRoll.ey = c2SPlayerRoll.ey;
+            s2CPlayerRoll.ez = c2SPlayerRoll.ez;
+
+            writer.Clear();
+            writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerRoll);
+
+            BattleProtocol.SendBytes(uuid, s2CPlayerRoll.Message(writer), true, false);
+
+        }
+
         public static void ReceivePlayerSkill(BytesReader reader, int uuid)
         {
             C2SPlayerSkillMessage c2SPlayerSkill = new C2SPlayerSkillMessage();
@@ -287,7 +305,40 @@ namespace BattleServer
 
         public static void ReceivePlayerHit(BytesReader reader, int uuid)
         {
+            C2SPlayerHitMessage c2SPlayerHit = new C2SPlayerHitMessage();
+            c2SPlayerHit.Message(reader);
 
+            S2CPlayerHitMessage s2CPlayerHit = new S2CPlayerHitMessage();
+            s2CPlayerHit.hitUUID = c2SPlayerHit.hitUUID;
+            s2CPlayerHit.killUUID = c2SPlayerHit.killUUID;
+
+            NetPlayer killNetPlayer = NetPlayerManager.GetNetPlayer(s2CPlayerHit.killUUID);
+            NetPlayer hitNetPlayer = NetPlayerManager.GetNetPlayer(s2CPlayerHit.hitUUID);
+
+            hitNetPlayer.gameUnit.OnHit(killNetPlayer.gameUnit);
+
+            writer.Clear();
+            writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerHit);
+
+            BattleProtocol.SendBytes(uuid, s2CPlayerHit.Message(writer), true, true);
+
+            if (hitNetPlayer.gameUnit.runUnitData.life <0)
+            {
+                SendPlayerDie(killNetPlayer, hitNetPlayer, hitNetPlayer.uuid);
+            }
+        }
+
+        //服务器主动发送角色死亡信息;
+        private static void SendPlayerDie(NetPlayer killNetPlayer, NetPlayer hitNetPlayer,int uuid)
+        {
+            S2CPlayerDieMessage s2CPlayerDie = new S2CPlayerDieMessage();
+            s2CPlayerDie.hitUUID = hitNetPlayer.uuid;
+            s2CPlayerDie.killUUID = killNetPlayer.uuid;
+
+            writer.Clear();
+            writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerDie);
+
+            BattleProtocol.SendBytes(uuid, s2CPlayerDie.Message(writer), true, true);
         }
 
         public static void ReceivePlayerAddBuff(BytesReader reader, int uuid)

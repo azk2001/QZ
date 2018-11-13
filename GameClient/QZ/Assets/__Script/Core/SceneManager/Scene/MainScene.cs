@@ -19,9 +19,7 @@ public class MainScene : SceneBase
 
     public override void PlayerInScene(NetPlayer netPlayer)
     {
-        GameUnitData unitData = new GameUnitData();
-        unitData.speed = 2;
-        GameUnit gameUnit = GameUnitManager.Instance.CreateServerGameUnit(netPlayer.uuid, netPlayer.basicsData, unitData);
+        GameUnit gameUnit = GameUnitManager.Instance.CreateServerGameUnit(netPlayer.uuid, netPlayer.basicsData, netPlayer.battleUnitData);
 
         SkillManager.Instance.AddSkill(gameUnit, 1);
 

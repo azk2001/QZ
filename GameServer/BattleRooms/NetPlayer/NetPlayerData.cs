@@ -35,6 +35,15 @@ namespace BattleServer
             return writer;
         }
 
+        public void InitDefault()
+        {
+            camp = 0;
+            life = 100;
+            speed = 7000;
+            shield = 10;
+            harm = 20;
+        }
+
         public object Clone()
         {
             return MemberwiseClone();
@@ -49,6 +58,9 @@ namespace BattleServer
         public int sex;         //性别;
         public int level;       //角色等级;
 
+        public int px;          //位置X*100;
+        public int py;          //位置Y*100；
+
         public void SetBytes(BytesReader reader)
         {
             uuid = reader.ReadInt();
@@ -56,6 +68,8 @@ namespace BattleServer
             name = name.Replace("\0", string.Empty);
             sex = reader.ReadInt();
             level = reader.ReadInt();
+            px = reader.ReadInt();
+            py = reader.ReadInt();
         }
 
         public BytesWriter GetBytes(BytesWriter writer)
@@ -64,6 +78,8 @@ namespace BattleServer
             writer.WriteString(name, 64);
             writer.WriteInt(sex);
             writer.WriteInt(level);
+            writer.WriteInt(px);
+            writer.WriteInt(py);
 
             return writer;
         }

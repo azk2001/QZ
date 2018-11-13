@@ -46,6 +46,9 @@ public class PlayerBasicsData
     public int sex;         //性别;
     public int level;       //角色等级;
 
+    public int px;          //位置X*100;
+    public int py;          //位置Y*100；
+
     public void SetBytes(BytesReader reader)
     {
         uuid = reader.ReadInt();
@@ -53,6 +56,8 @@ public class PlayerBasicsData
         name = name.Replace("\0", string.Empty);
         sex = reader.ReadInt();
         level = reader.ReadInt();
+        px = reader.ReadInt();
+        py = reader.ReadInt();
     }
 
     public BytesWriter GetBytes(BytesWriter writer)
@@ -61,6 +66,8 @@ public class PlayerBasicsData
         writer.WriteString(name, 64);
         writer.WriteInt(sex);
         writer.WriteInt(level);
+        writer.WriteInt(px);
+        writer.WriteInt(py);
 
         return writer;
     }

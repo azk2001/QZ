@@ -415,7 +415,6 @@ public struct C2SPlayerMoveMessage
     public int py;  //位置y*100;
     public int pz;  //位置z*100;
 
-
     public BytesWriter Message(BytesWriter writer)
     {
         writer.WriteInt(uuid);
@@ -494,6 +493,76 @@ public struct S2CPlayerMoveMessage
     }
 }
 
+public struct C2SPlayerRollMessage
+{
+    public int uuid;
+    public int sx;  //开始点x*100;
+    public int sy;  //开始点y*100;
+    public int sz;  //开始点z*100;
+    public int ex;  //结束点x*100;
+    public int ey;  //结束点y*100;
+    public int ez;  //结束点z*100;
+
+    public BytesWriter Message(BytesWriter writer)
+    {
+        writer.WriteInt(uuid);
+        writer.WriteInt(sx);
+        writer.WriteInt(sy);
+        writer.WriteInt(sz);
+        writer.WriteInt(ex);
+        writer.WriteInt(ey);
+        writer.WriteInt(ez);
+
+        return writer;
+    }
+
+    public void Message(BytesReader reader)
+    {
+        uuid = reader.ReadInt();
+        sx = reader.ReadInt();
+        sy = reader.ReadInt();
+        sz = reader.ReadInt();
+        ex = reader.ReadInt();
+        ey = reader.ReadInt();
+        ez = reader.ReadInt();
+    }
+}
+
+public struct S2CPlayerRollMessage
+{
+    public int uuid;
+    public int sx;  //开始点x*100;
+    public int sy;  //开始点y*100;
+    public int sz;  //开始点z*100;
+    public int ex;  //结束点x*100;
+    public int ey;  //结束点y*100;
+    public int ez;  //结束点z*100;
+
+    public BytesWriter Message(BytesWriter writer)
+    {
+        writer.WriteInt(uuid);
+        writer.WriteInt(sx);
+        writer.WriteInt(sy);
+        writer.WriteInt(sz);
+        writer.WriteInt(ex);
+        writer.WriteInt(ey);
+        writer.WriteInt(ez);
+
+        return writer;
+    }
+
+    public void Message(BytesReader reader)
+    {
+        uuid = reader.ReadInt();
+        sx = reader.ReadInt();
+        sy = reader.ReadInt();
+        sz = reader.ReadInt();
+        ex = reader.ReadInt();
+        ey = reader.ReadInt();
+        ez = reader.ReadInt();
+    }
+}
+
 public struct C2SPlayerSkillMessage
 {
     //会先同步位置在同步技能;
@@ -538,41 +607,41 @@ public struct S2CPlayerSkillMessage
 
 public struct C2SPlayerHitMessage
 {
-    public int uuid;
-    public int hit;         //受伤;
+    public int hitUUID;
+    public int killUUID;
 
     public BytesWriter Message(BytesWriter writer)
     {
-        writer.WriteInt(uuid);
-        writer.WriteInt(hit);
+        writer.WriteInt(hitUUID);
+        writer.WriteInt(killUUID);
 
         return writer;
     }
 
     public void Message(BytesReader reader)
     {
-        uuid = reader.ReadInt();
-        hit = reader.ReadInt();
+        hitUUID = reader.ReadInt();
+        killUUID = reader.ReadInt();
     }
 }
 
 public struct S2CPlayerHitMessage
 {
-    public int uuid;
-    public int hit;         //受伤;
+    public int hitUUID;
+    public int killUUID;
 
     public BytesWriter Message(BytesWriter writer)
     {
-        writer.WriteInt(uuid);
-        writer.WriteInt(hit);
+        writer.WriteInt(hitUUID);
+        writer.WriteInt(killUUID);
 
         return writer;
     }
 
     public void Message(BytesReader reader)
     {
-        uuid = reader.ReadInt();
-        hit = reader.ReadInt();
+        hitUUID = reader.ReadInt();
+        killUUID = reader.ReadInt();
     }
 }
 
@@ -694,35 +763,41 @@ public struct S2CPlayerRefreshBuffMessage
 
 public struct C2SPlayerDieMessage
 {
-    public int uuid;
+    public int hitUUID;
+    public int killUUID;
 
     public BytesWriter Message(BytesWriter writer)
     {
-        writer.WriteInt(uuid);
+        writer.WriteInt(hitUUID);
+        writer.WriteInt(killUUID);
 
         return writer;
     }
 
     public void Message(BytesReader reader)
     {
-        uuid = reader.ReadInt();
+        hitUUID = reader.ReadInt();
+        killUUID = reader.ReadInt();
     }
 }
 
 public struct S2CPlayerDieMessage
 {
-    public int uuid;
+    public int hitUUID;
+    public int killUUID;
 
     public BytesWriter Message(BytesWriter writer)
     {
-        writer.WriteInt(uuid);
+        writer.WriteInt(hitUUID);
+        writer.WriteInt(killUUID);
 
         return writer;
     }
 
     public void Message(BytesReader reader)
     {
-        uuid = reader.ReadInt();
+        hitUUID = reader.ReadInt();
+        killUUID = reader.ReadInt();
     }
 }
 

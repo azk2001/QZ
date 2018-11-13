@@ -14,6 +14,7 @@ public enum S2CBattleProtocol
     S2C_StartGame,
     S2C_StartBattle,
     S2C_PlayerMove,
+    S2C_PlayerRoll,
     S2C_PlayerSkill,
     S2C_PlayerHit,
     S2C_PlayerAddBuff,
@@ -38,6 +39,7 @@ public enum C2SBattleProtocol
     C2S_StartGame,
     C2S_StartBattle,
     C2S_PlayerMove,
+    C2S_PlayerRoll,
     C2S_PlayerSkill,
     C2S_PlayerHit,
     C2S_PlayerAddBuff,
@@ -72,6 +74,8 @@ public class BattleProtocol
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_StartGame, BattleProtocolEvent.ReceiveStartGame);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_StartBattle, BattleProtocolEvent.ReceiveStartBattle);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_PlayerMove, BattleProtocolEvent.ReceivePlayerMove);
+        ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_PlayerRoll, BattleProtocolEvent.ReceivePlayerRoll);
+        
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_PlayerSkill, BattleProtocolEvent.ReceivePlayerSkill);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_PlayerHit, BattleProtocolEvent.ReceivePlayerHit);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_PlayerAddBuff, BattleProtocolEvent.ReceivePlayerAddBuff);

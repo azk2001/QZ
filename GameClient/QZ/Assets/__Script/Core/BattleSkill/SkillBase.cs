@@ -53,6 +53,20 @@ public class SkillBase
         return -1;
     }
 
+    //所有伤害统一入口;
+    protected virtual void OnHit(GameUnit hitGameUnit)
+    {
+        //伤害只信任自己;
+        if(hitGameUnit.uuid == BattleProtocol.UUID)
+        {
+            C2SPlayerHitMessage c2SPlayerHit = new C2SPlayerHitMessage();
+            c2SPlayerHit.hitUUID = hitGameUnit.uuid;
+            c2SPlayerHit.killUUID = this.gameUnit.uuid;
+
+            BattleProtocolEvent.SendPlayerHit(c2SPlayerHit);
+        }
+    }
+
     protected virtual void OnUpdate(float deltaTime)
     {
 

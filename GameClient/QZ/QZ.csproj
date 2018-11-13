@@ -13,12 +13,14 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2017.4.14f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -293,6 +295,8 @@
     <Compile Include="Assets\__Script\Comm\UIComm\UIGuide\UIGuideClick.cs" />
     <Compile Include="Assets\__Script\Comm\UIComm\UIJoystick\MoveCamera.cs" />
     <Compile Include="Assets\__Script\Comm\UIComm\UIJoystick\UIJoyStick.cs" />
+    <Compile Include="Assets\__Script\Comm\UIComm\UIJoystick\UIRollJoystick.cs" />
+    <Compile Include="Assets\__Script\Comm\UIComm\UIJoystick\UIMoveJoystick.cs" />
     <Compile Include="Assets\__Script\Comm\UIComm\UILookTransform.cs" />
     <Compile Include="Assets\__Script\Comm\UIComm\UILookUITransform.cs" />
     <Compile Include="Assets\__Script\Comm\UIComm\UIMail\OneMailContent.cs" />

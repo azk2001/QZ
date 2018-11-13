@@ -4,17 +4,23 @@ namespace BattleServer
 {
     public class GameUnitManager
     {
-        private static List<GameUnit> gameUnitList = new List<GameUnit>();
+        private static Dictionary<int, GameUnit> gameUnitList = new Dictionary<int, GameUnit>();
         private static Dictionary<int, List<GameUnit>> roomAllGameUnit = new Dictionary<int, List<GameUnit>>();
 
-        public static GameUnit AddGameUnit(GameUnit gameUnit,int roomIndex)
+        public static GameUnit AddGameUnit(int uuid, int roomIndex)
         {
-            if (gameUnitList.Contains(gameUnit) == false)
+            GameUnit gameUnit = null;
+            if (gameUnitList.ContainsKey(uuid) == false)
             {
-                gameUnitList.Add(gameUnit);
+                gameUnit = new GameUnit(uuid, roomIndex);
+                gameUnitList[uuid] = gameUnit;
+            }
+            else
+            {
+                gameUnit = gameUnitList[uuid];
             }
 
-            if(roomAllGameUnit.ContainsKey(roomIndex) ==false)
+            if (roomAllGameUnit.ContainsKey(roomIndex) == false)
             {
                 roomAllGameUnit[roomIndex] = new List<GameUnit>();
             }
@@ -24,20 +30,20 @@ namespace BattleServer
             return gameUnit;
         }
 
-        public static GameUnit GetGameUnit(int uid)
+        public static GameUnit GetGameUnit(int uuid)
         {
-            foreach (GameUnit gameUnit in gameUnitList)
+            GameUnit gameUnit = null;
+            if (gameUnitList.ContainsKey(uuid) == true)
             {
-                if (gameUnit.uid == uid)
-                    return gameUnit;
+                gameUnit = gameUnitList[uuid];
             }
 
-            return null;
+            return gameUnit;
         }
 
         public static List<GameUnit> GetGameUnitList()
         {
-            return gameUnitList;
+            return new List<GameUnit>(gameUnitList.Values);
         }
 
         public static List<GameUnit> GetRoomGameUnitList(int roomIndex)
@@ -57,26 +63,26 @@ namespace BattleServer
             {
                 if (roomGameUnitList.Count > 0)
                 {
-                    RemoveGameUnit(roomGameUnitList[i].uid);
+                    RemoveGameUnit(roomGameUnitList[i].uuid);
                 }
             }
 
             roomAllGameUnit.Remove(roomIndex);
         }
 
-        public static void RemoveGameUnit(int uid)
+        public static void RemoveGameUnit(int uuid)
         {
-            GameUnit gameUnit = GetGameUnit(uid);
+            GameUnit gameUnit = GetGameUnit(uuid);
 
-            if (gameUnit!=null)
+            if (gameUnit != null)
             {
-                gameUnitList.Remove(gameUnit);
+                gameUnitList.Remove(uuid);
 
                 List<GameUnit> roomGameUnitList = GetRoomGameUnitList(gameUnit.roomIndex);
 
-                for (int i = roomGameUnitList.Count - 1; i >=0; i--)
+                for (int i = roomGameUnitList.Count - 1; i >= 0; i--)
                 {
-                    if(roomGameUnitList[i].uid == uid)
+                    if (roomGameUnitList[i].uuid == uuid)
                     {
                         roomGameUnitList.Remove(roomGameUnitList[i]);
                         break;

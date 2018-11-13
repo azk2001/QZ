@@ -76,11 +76,11 @@ namespace BattleServer
             if (gameUnit.isDeath == true)
                 return false;
 
-            gameUnit.curLife -= dataLife;
+            gameUnit.runUnitData.life -= dataLife;
 
             victoryCondition.OnUnitReduceLife(killUid);
 
-            if (gameUnit.curLife <= 0)
+            if (gameUnit.runUnitData.life <= 0)
             {
                 GameUnitDeath(atkUid, killUid);
             }
@@ -171,18 +171,6 @@ namespace BattleServer
         public virtual void End()
         {
             isRun = false;
-        }
-
-        public static GameUnitNetData SetUnitNetData(GameUnit gameUnit, BattleUnitData battleUnitData, ElementGroup elementGroup)
-        {
-            
-            return null;
-        }
-
-        //发送当前房间里面的角色战斗数据
-        public List<GameUnitNetData> SendCurRoomPlayerData(byte camp)
-        {
-            return null;
         }
     }
 }

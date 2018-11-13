@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public enum eBattleEvent
 {
@@ -20,8 +21,8 @@ public class GameUnit
 {
     public UnitController mUnitController = null;
     public PlayerBasicsData basicsData = null;
-    public GameUnitData baseUnitData = null;
-    public GameUnitData runUnitData = null;
+    public BattleUnitData baseUnitData = null;
+    public BattleUnitData runUnitData = null;
     public int uuid = 0;
     public List<BuffBase> buffs = new List<BuffBase>();     //当前身上的所有buff;
     public List<SkillBase> skills = new List<SkillBase>();  //当前身上的所有技能ID;
@@ -33,12 +34,12 @@ public class GameUnit
 
     private GameUnit killGameUnit = null;
 
-    public void Init(int uuid, PlayerBasicsData _basicsData, GameUnitData data)
+    public void Init(int uuid, PlayerBasicsData _basicsData, BattleUnitData data)
     {
         this.uuid = uuid;
         basicsData = _basicsData;
-        baseUnitData = (GameUnitData)data.Clone();
-        runUnitData = (GameUnitData)data.Clone();
+        baseUnitData = (BattleUnitData)data.Clone();
+        runUnitData = (BattleUnitData)data.Clone();
 
         if (_basicsData.sex == 1)
         {
@@ -51,7 +52,7 @@ public class GameUnit
 
         mUnitController = prefabModel.GetComponent<UnitController>();
         mUnitController.Init();
-        mUnitController.gameUintId = uuid;
+        mUnitController.uuid = uuid;
         mUnitController.transform.localEulerAngles = Vector3.zero;
 
         SetSpeed(data.speed);
@@ -111,33 +112,15 @@ public class GameUnit
     }
 
     //设置角色朝着指定方向移动，并且播放移动动画;
-    public void PlayRunAnimation(Vector3 dir)
+    public void MoveDirection(Vector3 dir)
     {
         mUnitController.MoveDirection(dir * 0.5f);
-
-        if (dir.magnitude > 0)
-        {
-            mUnitController.PlayAnimation("IsRun", true);
-            float angle = Angle(mUnitController.transformCaChe.forward, dir);
-            mUnitController.RunAnimation(angle);
-        }
-        else
-        {
-            mUnitController.PlayAnimation("IsRun", false);
-        }
     }
 
-    private float Angle(Vector3 from, Vector3 to)
+
+    public void SetPosition(Vector3 position)
     {
-        float angle = Vector3.Angle(from, to);
-        angle *= Mathf.Sign(Vector3.Cross(from, to).y);
-
-        if (angle < 0)
-        {
-            angle = 360 - Mathf.Abs(angle);
-        }
-
-        return angle;
+        mUnitController.SetPosition(position);
     }
 
     public void SetForward(Vector3 forward)
@@ -159,25 +142,7 @@ public class GameUnit
 
     public void OnHit(GameUnit killGameUnit)
     {
-        runUnitData.hp -= killGameUnit.runUnitData.atk;
-
-
-    }
-
-    public void OnCollisionStartEvent(Collider collision)   //当进入碰撞器
-    {
-        if (collision != null)
-        {
-
-        }
-    }
-
-    public void OnCollisionEndEvent(Collider collision)     //当离开碰撞器
-    {
-        if (collision != null)
-        {
-
-        }
+        runUnitData.life -= killGameUnit.runUnitData.harm;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -192,11 +157,6 @@ public class GameUnit
                 AddBuff(buffBase);
             }
         }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-
     }
 
     public void AddBuff(BuffBase buff)
@@ -257,14 +217,27 @@ public class GameUnit
         return true;
     }
 
+    //翻滚
+    public void RollPoint(Vector3 toPoint)
+    {
+        mUnitController.RollPosition(toPoint);
+    }
+
     public void OnSkillEnd(SkillBase skillBase)
     {
         skills.Remove(skillBase);
     }
 
-    public void StartDead(GameUnit killUnit)
+    //角色死亡;
+    public void OnDead(GameUnit killUnit)
     {
+        mUnitController.playerState = UnitController.PlayerState.die;
+
+        isDeading = true;
         this.killGameUnit = killUnit;
+
+        PlayAnimation("die");
+        TimeManager.Instance.Begin(1, OnDestory);
     }
 
     //在GameUnitManager里面调用回收;
@@ -272,10 +245,12 @@ public class GameUnit
     {
         isDeading = false;
 
+        TimeManager.Instance.End(OnDestory);
         BattleUnitRoot.Instance.DeSpwan(prefabModel);
 
         Reset();
 
         return -1;
     }
+
 }

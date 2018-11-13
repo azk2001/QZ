@@ -17,6 +17,7 @@ namespace BattleServer
         S2C_StartGame,
         S2C_StartBattle,
         S2C_PlayerMove,
+        S2C_PlayerRoll,
         S2C_PlayerSkill,
         S2C_PlayerHit,
         S2C_PlayerAddBuff,
@@ -41,6 +42,7 @@ namespace BattleServer
         C2S_StartGame,
         C2S_StartBattle,
         C2S_PlayerMove,
+        C2S_PlayerRoll,
         C2S_PlayerSkill,
         C2S_PlayerHit,
         C2S_PlayerAddBuff,
@@ -71,6 +73,7 @@ namespace BattleServer
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_StartGame, BattleProtocolEvent.ReceiveStartGame);
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_StartBattle, BattleProtocolEvent.ReceiveStartBattle);
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_PlayerMove, BattleProtocolEvent.ReceivePlayerMove);
+            ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_PlayerRoll, BattleProtocolEvent.ReceivePlayerRoll);
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_PlayerSkill, BattleProtocolEvent.ReceivePlayerSkill);
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_PlayerHit, BattleProtocolEvent.ReceivePlayerHit);
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_PlayerAddBuff, BattleProtocolEvent.ReceivePlayerAddBuff);
