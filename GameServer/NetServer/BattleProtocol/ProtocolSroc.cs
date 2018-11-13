@@ -79,9 +79,9 @@ namespace BattleServer
 
     public struct S2CCreatePlayerMessage
     {
+        public int isCreate;        //是否新号
         public int playerCount;     //网络玩家个数;
         public List<NetPlayer> netPlayer; //角色信息
-        public int isCreate;        //是否新号
 
         public void Message(BytesReader reader)
         {

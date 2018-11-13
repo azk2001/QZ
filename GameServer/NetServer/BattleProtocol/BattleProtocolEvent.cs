@@ -253,12 +253,12 @@ namespace BattleServer
 
             S2CPlayerMoveMessage s2CPlayerMove = new S2CPlayerMoveMessage();
             s2CPlayerMove.uuid = c2SPlayerMove.uuid;
-            s2CPlayerMove.px = c2SPlayerMove.fx;
-            s2CPlayerMove.py = c2SPlayerMove.fy;
-            s2CPlayerMove.pz = c2SPlayerMove.fz;
-            s2CPlayerMove.px = c2SPlayerMove.mx;
-            s2CPlayerMove.py = c2SPlayerMove.my;
-            s2CPlayerMove.pz = c2SPlayerMove.mz;
+            s2CPlayerMove.fx = c2SPlayerMove.fx;
+            s2CPlayerMove.fy = c2SPlayerMove.fy;
+            s2CPlayerMove.fz = c2SPlayerMove.fz;
+            s2CPlayerMove.mx = c2SPlayerMove.mx;
+            s2CPlayerMove.my = c2SPlayerMove.my;
+            s2CPlayerMove.mz = c2SPlayerMove.mz;
             s2CPlayerMove.px = c2SPlayerMove.px;
             s2CPlayerMove.py = c2SPlayerMove.py;
             s2CPlayerMove.pz = c2SPlayerMove.pz;

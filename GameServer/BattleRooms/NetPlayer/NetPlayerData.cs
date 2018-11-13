@@ -9,6 +9,7 @@ namespace BattleServer
     //角色战斗数据
     public class BattleUnitData : ICloneable
     {
+        public int camp = 0;        //阵营
         public int life = 0;        //血量
         public int speed = 0;       //移动数度
         public int shield = 0;      //护盾
@@ -16,6 +17,7 @@ namespace BattleServer
 
         public void SetBytes(BytesReader reader)
         {
+            camp = reader.ReadInt();
             life = reader.ReadInt();
             speed = reader.ReadInt();
             shield = reader.ReadInt();
@@ -24,6 +26,7 @@ namespace BattleServer
 
         public BytesWriter GetBytes(BytesWriter writer)
         {
+            writer.WriteInt(camp);
             writer.WriteInt(life);
             writer.WriteInt(speed);
             writer.WriteInt(shield);
