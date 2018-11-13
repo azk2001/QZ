@@ -52,7 +52,7 @@ public class PlayerBasicsData
         name = reader.ReadString(64);
         name = name.Replace("\0", string.Empty);
         sex = reader.ReadInt();
-        level= reader.ReadInt();
+        level = reader.ReadInt();
     }
 
     public BytesWriter GetBytes(BytesWriter writer)

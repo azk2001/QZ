@@ -20,7 +20,7 @@ public static class TableBuilder
     {
         if (!File.Exists(filePath))
         {
-            MyDebug.LogError("filepath not exists : " + filePath);
+            Debug.LogError("filepath not exists : " + filePath);
             return;
         }
 

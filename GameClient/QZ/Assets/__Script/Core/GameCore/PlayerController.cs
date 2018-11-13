@@ -78,17 +78,23 @@ public class PlayerController : SingleClass<PlayerController>
         Vector3 forward = mGameUnit.mUnitController.transformCaChe.position - mainCamera.transform.position;
         mGameUnit.SetForward(forward);
 
+        Vector3 newMoveDir = Quaternion.AngleAxis(Angle(Vector3.forward, moveDir), Vector3.up) * forward;
+        if(moveDir == Vector3.zero)
+        {
+            newMoveDir = Vector3.zero;
+        }
+
         //客服端直接移动;
-        mGameUnit.PlayRunAnimation(moveDir);
+        mGameUnit.PlayRunAnimation(newMoveDir);
 
         C2SPlayerMoveMessage c2SPlayerMove = new C2SPlayerMoveMessage();
         c2SPlayerMove.uuid = mGameUnit.basicsData.uuid;
         c2SPlayerMove.fx = (int)(forward.x * 100);
         c2SPlayerMove.fy = (int)(forward.y * 100);
         c2SPlayerMove.fz = (int)(forward.z * 100);
-        c2SPlayerMove.mx = (int)(moveDir.x * 100);
-        c2SPlayerMove.my = (int)(moveDir.y * 100);
-        c2SPlayerMove.mz = (int)(moveDir.z * 100);
+        c2SPlayerMove.mx = (int)(newMoveDir.x * 100);
+        c2SPlayerMove.my = (int)(newMoveDir.y * 100);
+        c2SPlayerMove.mz = (int)(newMoveDir.z * 100);
         c2SPlayerMove.px = (int)(mGameUnit.mUnitController.transformCaChe.position.x * 100);
         c2SPlayerMove.py = (int)(mGameUnit.mUnitController.transformCaChe.position.y * 100);
         c2SPlayerMove.pz = (int)(mGameUnit.mUnitController.transformCaChe.position.z * 100);

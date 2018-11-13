@@ -118,7 +118,7 @@ public class GameUnit
         if (dir.magnitude > 0)
         {
             mUnitController.PlayAnimation("IsRun", true);
-            float angle = Angle(Vector3.forward, dir);
+            float angle = Angle(mUnitController.transformCaChe.forward, dir);
             mUnitController.RunAnimation(angle);
         }
         else
@@ -219,13 +219,13 @@ public class GameUnit
             case 0:
                 {
                     val = 0;
-                    isFire = true;
+                    isFire = false;
                 }
                 break;
             case 1:
                 {
                     val = 0;
-                    isFire = false;
+                    isFire = true;
                 }
                 break;
             case 2:
@@ -236,7 +236,7 @@ public class GameUnit
                 break;
             case 3:
                 {
-                    val = 1;
+                    val = 2;
                     isFire = true;
                 }
                 break;

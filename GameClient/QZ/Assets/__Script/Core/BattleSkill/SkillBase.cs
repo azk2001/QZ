@@ -60,7 +60,11 @@ public class SkillBase
 
     protected virtual void OnEnd(GameUnit actor)
     {
-        gameUnit.mUnitController.PlayAnimation("IsFire",false);
+        if(gameUnit != null)
+        {
+            gameUnit.mUnitController.PlayAnimation("IsFire", false);
+        }
+        
     }
 }
 
