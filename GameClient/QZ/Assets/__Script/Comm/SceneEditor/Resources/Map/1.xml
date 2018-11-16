@@ -1,0 +1,32 @@
+<XML>
+  <Element>
+    <Wave objectNeme="wave_1" curWave="1" lastWave="0" elementTriggerType="radius" sponsorWave="0" sponsorGroup="0" loopNum="1" position="-17.95;0;26.45" rotation="0;0;0" scale="1;1;1">
+      <ElementTriggerType radius="18.59" />
+      <Group enemyName="group_player_1" curWave="1" curGroup="1" loopNum="1" lastGroup="0" elementType="player" position="-16.62;0;34.29" rotation="0;0;0" scale="1;1;1" elementTriggerType="lastOutTime">
+        <ElementTriggerType lastOutTime="0" />
+        <ElementParam position="-16.62;0;31.29" rotation="0;0;0" scale="1;1;1" elementId="2222" eventKey="" />
+        <ElementParam position="0;0;0" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="" />
+      </Group>
+      <Group enemyName="group_monster_2" curWave="1" curGroup="2" loopNum="1" lastGroup="3" elementType="monster" position="0;0;0" rotation="0;0;0" scale="1;1;1" elementTriggerType="lastBossHp">
+        <ElementTriggerType lastBossHp="30" />
+        <ElementParam position="0;0;0" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="" />
+        <ElementParam position="0;0;0" rotation="0;0;0" scale="1;1;1" elementId="1" eventKey="" />
+      </Group>
+      <Group enemyName="group_monster_3" curWave="1" curGroup="3" loopNum="1" lastGroup="1" elementType="monster" position="0;0;0" rotation="0;0;0" scale="1;1;1" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="5" />
+        <ElementParam position="0;0;0" rotation="0;0;0" scale="1;1;1" elementId="1111" eventKey="" />
+      </Group>
+      <Group enemyName="group_monster_4" curWave="1" curGroup="4" loopNum="1" lastGroup="3" elementType="monster" position="0;0;0" rotation="0;0;0" scale="1;1;1" elementTriggerType="lastStartTime">
+        <ElementTriggerType lastStartTime="5" />
+        <ElementParam position="0;0;0" rotation="0;0;0" scale="1;1;1" elementId="11111111" eventKey="" />
+      </Group>
+    </Wave>
+    <Wave objectNeme="wave_2" curWave="2" lastWave="0" elementTriggerType="radius" sponsorWave="0" sponsorGroup="0" loopNum="1" position="0;0;0" rotation="0;0;0" scale="1;1;1">
+      <ElementTriggerType radius="5" />
+      <Group enemyName="group_monster_1" curWave="2" curGroup="1" loopNum="5" lastGroup="0" elementType="monster" position="0;0;0" rotation="0;0;0" scale="1;1;1" elementTriggerType="curStartTime">
+        <ElementTriggerType curStartTime="2" />
+        <ElementParam position="0;0;0" rotation="0;0;0" scale="1;1;1" elementId="11" eventKey="" />
+      </Group>
+    </Wave>
+  </Element>
+</XML>
