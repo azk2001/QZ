@@ -354,10 +354,5 @@ namespace GameServer
         {
 
         }
-
-        public static void ReceivePlayerDie(BytesReader reader, int uuid)
-        {
-
-        }
     }
 }
