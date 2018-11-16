@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
 
-namespace BattleServer
+namespace GameServer
 {
     public class ElementManager
     {

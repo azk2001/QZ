@@ -61,9 +61,10 @@
   <ItemGroup>
     <Compile Include="BattleRooms\AccountData\AccountData.cs" />
     <Compile Include="BattleRooms\AccountData\AccountDataManager.cs" />
-    <Compile Include="BattleRooms\BattleRoom\BattleRoom.cs" />
+    <Compile Include="BattleRooms\BattleRoom\Room\BattleRoom.cs" />
     <Compile Include="BattleRooms\NetPlayer\NetPlayerManager.cs" />
     <Compile Include="BattleRooms\BattleRoom\RoomManager.cs" />
+    <Compile Include="BsVsClient\BattleCore\Battle\SoloBattle.cs" />
     <Compile Include="Config\TableData\chaosrcore_b.cs" />
     <Compile Include="Config\TableData\chaoticdata_b.cs" />
     <Compile Include="Config\TableData\battleroominit_b.cs" />

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BattleServer
+namespace GameServer
 {
     //脚本开启 来计算是否触发;
     public class GroupBirthTrigger

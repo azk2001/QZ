@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 
-namespace BattleServer
+namespace GameServer
 {
     public class NetClientBase
     {

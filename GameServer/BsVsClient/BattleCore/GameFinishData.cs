@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace BattleServer
+namespace GameServer
 {
     public class GameFinishParam
     {
         public byte loseCamp = 0;
         public int star = 0;
-        // public List<ItemRes> rewardList = null;
     }
 
 

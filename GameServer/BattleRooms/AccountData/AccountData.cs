@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BattleServer
+namespace GameServer
 {
     public class AccountData
     {

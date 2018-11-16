@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BattleServer
+namespace GameServer
 {
     public delegate void VoidBoolDelegate(bool flag);
     public delegate void Callback<T>(T arg1);

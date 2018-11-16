@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BattleServer
+namespace GameServer
 {
     // -------------------事件添加在下面---------------------------
     public enum EventEnum

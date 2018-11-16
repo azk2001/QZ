@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 
-namespace BattleServer
+namespace GameServer
 {
     class Program
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BattleServer
+namespace GameServer
 {
     /// <summary>
     /// 副本通关条件判断;
@@ -109,7 +109,6 @@ namespace BattleServer
 
             CheckConditions(eStarConditionType.limitTime, dungeonRunTime);
             CheckConditions(eStarConditionType.existTime, dungeonRunTime);
-
         }
 
         public void OnUnitReduceLife(int uid)

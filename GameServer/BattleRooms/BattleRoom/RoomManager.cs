@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BattleServer
+namespace GameServer
 {
     /// <summary>
     /// 战斗服房间管理,一个游戏服务器对应一个战斗服务器

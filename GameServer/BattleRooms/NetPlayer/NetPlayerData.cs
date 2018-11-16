@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BattleServer
+namespace GameServer
 {
     //角色战斗数据
     public class BattleUnitData : ICloneable

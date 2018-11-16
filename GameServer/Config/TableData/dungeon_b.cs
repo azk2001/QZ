@@ -5,20 +5,6 @@ public enum eGeneralMapType
 {
     none = 0,
     mainCity = 1,               //主城
-    noviceLevel = 2,            //新手村
-    ordinaryMap = 3,            //常规地图
-    dungeonMap = 4,             //副本地图
-    battleCity = 5,             //原地副本
-    taskMap = 6,                //任务副本
-    exploreMap = 7,             //游历副本
-    petMap = 8,                 //宠物副本
-    homeCity = 9,               //府邸非战斗场景;
-    homeBattlePlayer = 10,      //府邸战斗玩家场景;
-    homeBattleNpc = 11,         //府邸战斗npc场景;
-    homeBattleAttack = 12,      //府邸战斗讨教场景;
-    arenaBattle = 13,           //擂台战斗场景
-    roadBattle = 14,            //侠客之路战斗场景
-    fightAlways = 15,           //一战到底战斗场景;
     pvpfightPK = 51,            //即时同步切磋副本;
     pvpFightTeam = 80,          //组队副本;
     pvpFightChaos = 81,         //多人副本乱斗模式;

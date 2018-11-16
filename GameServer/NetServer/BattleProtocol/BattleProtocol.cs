@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BattleServer
+namespace GameServer
 {
     public enum S2CBattleProtocol
     {
@@ -101,16 +101,16 @@ namespace BattleServer
 
         public static void ReceivePing(BytesReader reader, Int32 ClinetConnectId)
         {
-  
+
         }
 
-        public static void SendBytes(int uuid, BytesWriter writer,bool isAll = false,bool isMy = false)
-        { 
-            if(isAll == true)
+        public static void SendBytes(int uuid, BytesWriter writer, bool isAll = false, bool isMy = false)
+        {
+            if (isAll == true)
             {
                 foreach (NetPlayer sPlayer in NetPlayerManager.GetNetPlayers())
                 {
-                    if(isMy == false)
+                    if (isMy == false)
                     {
                         if (uuid == sPlayer.uuid)
                             continue;
@@ -124,6 +124,35 @@ namespace BattleServer
                 Program.SendMsgToClient(uuid, writer);
             }
         }
-        
+
+        public static void SendRoomByte(int roomIndex, int uuid, BytesWriter writer, bool isAll = false, bool isMy = false)
+        {
+
+            RoomBase roomBase = RoomManager.GetRoomBase(roomIndex);
+            if (roomBase != null)
+            {
+                if (isAll == true)
+                {
+                    foreach (NetPlayer sPlayer in roomBase.netPlayerList)
+                    {
+                        if (isMy == false)
+                        {
+                            if (uuid == sPlayer.uuid)
+                                continue;
+                        }
+
+                        Program.SendMsgToClient(sPlayer.uuid, writer);
+                    }
+                }
+                else
+                {
+                    Program.SendMsgToClient(uuid, writer);
+                }
+
+
+            }
+
+        }
+
     }
 }

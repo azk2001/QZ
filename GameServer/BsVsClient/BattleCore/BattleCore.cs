@@ -3,24 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BattleServer
+namespace GameServer
 {
     public class BattleCore
     {
 
-        public int roomIndex = 0;                           //房间ID;
-        public dungeon_b dungeonInfo;                       //关卡ID;
-        public ElementManager elementManager = null;        //当前这场战斗的刷怪器控制器;
-        public VictoryCondition victoryCondition = null;    //副本通关条件;
-        public RoomBase roomBase = null;                    //房间;
+        public int roomIndex = 0;                               //房间ID;
+        public dungeon_b dungeonInfo;                           //关卡ID;
+        public ElementGroup playerElement = null;               //角色出生点配置信息;
+        public VictoryCondition victoryCondition = null;        //副本通关条件;
+        protected ElementManager elementManager = null;         //当前这场战斗的刷怪器控制器;
+        protected RoomBase roomBase = null;                     //房间;
         protected float runDeltaTime = 0;
-        protected int dungeonRunTime = 0;                     //副本运行时间;
+        protected int dungeonRunTime = 0;                       //副本运行时间;
+        protected bool isRun = false;                          //房间是否运行;
+        protected List<NetPlayer> netPlayerList = new List<NetPlayer>();//网络玩家列表;
 
-        public bool isRun = false;
-
-        public ElementGroup playerElement = null; //角色出生点配置信息;
-
-        public virtual void Start(RoomBase roomBase, int dungeonId, int roomIndex)
+        /// <summary>
+        /// 初始化副本
+        /// </summary>
+        /// <param name="roomBase"></param>
+        /// <param name="dungeonId"></param>
+        /// <param name="roomIndex"></param>
+        public virtual void Init(RoomBase roomBase, int dungeonId, int roomIndex)
         {
             this.roomIndex = roomIndex;
             this.roomBase = roomBase;
@@ -38,6 +43,16 @@ namespace BattleServer
             LoadSaveMap.LoadMap(dungeonInfo.mapConfig, elementManager);
 
             victoryCondition.Start(this);
+
+            isRun = false;
+        }
+
+        /// <summary>
+        /// 开始战斗
+        /// </summary>
+        public virtual void StartBattle()
+        {
+            isRun = true;
         }
 
         /// <summary>
@@ -50,10 +65,13 @@ namespace BattleServer
                 return;
 
             elementManager.Update(deltaTime);
-
             RefreshRunTime(deltaTime);
         }
 
+        /// <summary>
+        /// 运行时间
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public virtual void RefreshRunTime(float deltaTime)
         {
             runDeltaTime += deltaTime;
@@ -62,27 +80,35 @@ namespace BattleServer
                 return;
 
             runDeltaTime -= 1;
-
             dungeonRunTime += 1;
 
             victoryCondition.OnDungeonRunTime(dungeonRunTime);
 
         }
 
-        public virtual bool ReduceLife(int atkUid, int killUid, int dataLife)
+        /// <summary>
+        /// 角色掉血
+        /// </summary>
+        /// <param name="atkUid"></param>
+        /// <param name="killUid"></param>
+        /// <param name="dataLife"></param>
+        /// <returns></returns>
+        public virtual bool ReduceLife(int hitUid, int atkUid)
         {
-            GameUnit gameUnit = GameUnitManager.GetGameUnit(killUid);
+            GameUnit gameUnit = GameUnitManager.GetGameUnit(hitUid);
 
             if (gameUnit.isDeath == true)
                 return false;
 
-            gameUnit.runUnitData.life -= dataLife;
+            gameUnit.OnHit(gameUnit);
 
-            victoryCondition.OnUnitReduceLife(killUid);
+            victoryCondition.OnUnitReduceLife(atkUid);
+
+            BattleProtocolEvent.SendPlayerHit(atkUid, hitUid);
 
             if (gameUnit.runUnitData.life <= 0)
             {
-                GameUnitDeath(atkUid, killUid);
+                GameUnitDeath(hitUid, atkUid);
             }
 
             return true;
@@ -91,7 +117,7 @@ namespace BattleServer
         //地图配置玩家出生;
         public virtual void BirthPlayerEvent(ElementGroup element)
         {
-           
+
         }
 
         public GameUnit CreateNetPlayer(NetPlayer netPlayer, ElementParam elementParam)
@@ -146,9 +172,9 @@ namespace BattleServer
         /// </summary>
         /// <param name="atkUid"></param>
         /// <param name="killUid"></param>
-        public virtual void GameUnitDeath(int atkUid, int killUid)
+        public virtual void GameUnitDeath(int atkUid, int hitUUID)
         {
-            return;
+            BattleProtocolEvent.SendPlayerDie(atkUid, hitUUID);
         }
 
         /// <summary>
@@ -157,20 +183,46 @@ namespace BattleServer
         /// <param name="netPlayer"></param>
         public virtual void InScene(NetPlayer netPlayer)
         {
-            return;
+            if (netPlayerList.Contains(netPlayer) == false)
+            {
+                netPlayerList.Add(netPlayer);
+            }
         }
 
         /// <summary>
         /// 游戏单位离开游戏（暂时规划成主动离开游戏）
         /// </summary>
-        public virtual void LeaveScene(int uid)
+        public virtual void LeaveScene(NetPlayer netPlayer)
         {
 
+            if (netPlayerList.Contains(netPlayer) == true)
+            {
+                netPlayerList.Remove(netPlayer);
+            }
         }
 
         public virtual void End()
         {
             isRun = false;
+        }
+
+        public static BattleCore CreateBattleCore(int battleType)
+        {
+            BattleCore battleCore = null;
+            switch(battleType)
+            {
+                case 1:
+                    {
+                        battleCore = new SoloBattle();
+                    }
+                    break;
+                case 2:
+                    {
+
+                    }
+                    break;
+            }
+            return battleCore;
         }
     }
 }

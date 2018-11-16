@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BattleServer
+namespace GameServer
 {
     /// <summary>
     /// 同步核心类(网络和游戏转发类)

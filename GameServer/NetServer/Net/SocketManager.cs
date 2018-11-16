@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace BattleServer
+namespace GameServer
 {
 
     public class SocketManager

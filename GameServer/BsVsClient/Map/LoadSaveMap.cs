@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System;
 
-namespace BattleServer
+namespace GameServer
 {
     public class LoadSaveMap
     {
@@ -109,7 +109,7 @@ namespace BattleServer
 
                                     elementGroup.elementType = (eElementType)System.Enum.Parse(typeof(eElementType), groupXml.GetAttribute("elementType"));
 
-
+                                    //玩家出生点;
                                     if(elementGroup.elementType == eElementType.player)
                                     {
                                         elementManager.battleCore.playerElement = elementGroup;

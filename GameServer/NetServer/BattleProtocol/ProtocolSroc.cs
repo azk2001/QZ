@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BattleServer
+namespace GameServer
 {
 
     public struct C2SLoginMessage
@@ -591,12 +591,12 @@ namespace BattleServer
     public struct C2SPlayerHitMessage
     {
         public int hitUUID;
-        public int killUUID;
+        public int atkUUID;
 
         public BytesWriter Message(BytesWriter writer)
         {
             writer.WriteInt(hitUUID);
-            writer.WriteInt(killUUID);
+            writer.WriteInt(atkUUID);
 
             return writer;
         }
@@ -604,19 +604,19 @@ namespace BattleServer
         public void Message(BytesReader reader)
         {
             hitUUID = reader.ReadInt();
-            killUUID = reader.ReadInt();
+            atkUUID = reader.ReadInt();
         }
     }
 
     public struct S2CPlayerHitMessage
     {
         public int hitUUID;
-        public int killUUID;
+        public int atkUUID;
 
         public BytesWriter Message(BytesWriter writer)
         {
             writer.WriteInt(hitUUID);
-            writer.WriteInt(killUUID);
+            writer.WriteInt(atkUUID);
 
             return writer;
         }
@@ -624,7 +624,7 @@ namespace BattleServer
         public void Message(BytesReader reader)
         {
             hitUUID = reader.ReadInt();
-            killUUID = reader.ReadInt();
+            atkUUID = reader.ReadInt();
         }
     }
 
@@ -767,12 +767,12 @@ namespace BattleServer
     public struct S2CPlayerDieMessage
     {
         public int hitUUID;
-        public int killUUID;
+        public int atkUUID;
 
         public BytesWriter Message(BytesWriter writer)
         {
             writer.WriteInt(hitUUID);
-            writer.WriteInt(killUUID);
+            writer.WriteInt(atkUUID);
 
             return writer;
         }
@@ -780,7 +780,7 @@ namespace BattleServer
         public void Message(BytesReader reader)
         {
             hitUUID = reader.ReadInt();
-            killUUID = reader.ReadInt();
+            atkUUID = reader.ReadInt();
         }
     }
 

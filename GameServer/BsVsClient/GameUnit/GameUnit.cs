@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BattleServer
+namespace GameServer
 {
     public class GameUnit
     {
@@ -64,9 +64,9 @@ namespace BattleServer
             }
         }
 
-        public void OnHit(GameUnit killGameUnit)
+        public void OnHit(GameUnit atkGameUnit)
         {
-            runUnitData.life -= killGameUnit.runUnitData.harm;
+            runUnitData.life -= atkGameUnit.runUnitData.harm;
         }
 
         public void Revive()

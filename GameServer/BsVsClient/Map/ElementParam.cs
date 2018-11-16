@@ -20,7 +20,7 @@ public enum eEventKye
     KillMonster,            //击杀怪物;
 }
 
-namespace BattleServer
+namespace GameServer
 {
     public class ElementParam
     {

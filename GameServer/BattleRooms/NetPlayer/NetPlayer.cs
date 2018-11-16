@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BattleServer
+namespace GameServer
 {
     public class NetPlayer
     {
@@ -55,20 +55,6 @@ namespace BattleServer
             set
             {
                 _camp = value;
-            }
-        }
-
-        //场景是否已经加载完成，可以战斗
-        private byte _isStartBattle;
-        public byte isStartBattle
-        {
-            get
-            {
-                return _isStartBattle;
-            }
-            set
-            {
-                _isStartBattle = value;
             }
         }
 

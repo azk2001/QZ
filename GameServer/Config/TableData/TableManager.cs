@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace BattleServer
+namespace GameServer
 {
     public class TableManager : SingleTon_Class<TableManager>
     {

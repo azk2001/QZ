@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BattleServer
+namespace GameServer
 {
     public class GameUnitManager
     {

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BattleServer
+namespace GameServer
 {
     public enum ePlayerRoomState
     {
         inLobby = 0,          //玩家在大厅;
         inRoom,             //在房间里面;（玩家进入房间）
-        sceneLoaded,        //场景加载完成;
         readyed,            //玩家准备完成，可以战斗了;
         fighting,           //战斗中;
         death,              //死亡;
@@ -49,12 +48,10 @@ namespace BattleServer
         public RoomType roomType = RoomType.oneFighting;            //房间类型;
 
         public NetPlayer ownerPlayer;        //房主游戏对象;
-
         public int roomIndex = 0;           //房间索引;
-
         public int maxPlayerNum = 6;        //最大可承载玩家数
-
         public bool isRun = false;          //当前房间是否在运行;
+        public BattleCore battleCore = null;                        //当前副本战役流程;
 
         //房间信息初始化;
         public virtual void Init(int roomIndex)
@@ -117,33 +114,76 @@ namespace BattleServer
             return true;
         }
 
+       
+
         //是否所有角色已经加载完成，可以战斗
         public virtual bool allPlayerReady()
         {
-            bool isReady = true;
-            foreach (NetPlayer netPlayer in _netPlayerList)
-            {
-                if (netPlayer.isStartBattle == 0)
-                {
-                    isReady = false;
-                    break;
+            ePlayerRoomState roomState = ePlayerRoomState.readyed;
 
-                }
+            foreach (NetPlayer item in netPlayerList)
+            {
+                if (item.roomState == ePlayerRoomState.outGame || item.roomState == ePlayerRoomState.offLine)
+                    continue;
+
+                roomState = item.roomState;
+
+                if (roomState != ePlayerRoomState.readyed)
+                    break;
             }
 
-            return isReady;
+            bool isSceneLoaded = (roomState == ePlayerRoomState.readyed);
+
+            return isSceneLoaded;
         }
 
         //房间战斗初始化;
-        public virtual void Start(int sceneId)
+        public virtual void StartScene()
         {
             isRun = true;
 
             roomState = RoomState.fighting;
         }
 
+        /// <summary>
+        /// 角色从服务器上加入战斗,这个时候客服端还没有吧资源加载完成;
+        /// </summary>
+        public virtual void PlayerInScene(NetPlayer netPlayer)
+        {
+
+        }
+
+        /// <summary>
+        /// 角色主动离开战斗场景（掉线，主动离开）;
+        /// </summary>
+        public virtual void PlayerLeaveScene(NetPlayer netPlayer)
+        {
+
+        }
+
+        /// <summary>
+        /// 设置玩家准备就绪（客服端资源加载完成），可以开始战斗;
+        /// </summary>
+        /// <param name="netPlayer"></param>
+        /// <param name="isReady"></param>
+        public virtual void SetPlayerReady(NetPlayer netPlayer, bool isReady)
+        {
+            if (netPlayer != null)
+            {
+                netPlayer.SetRoomState(ePlayerRoomState.readyed);
+            }
+        }
+
+        /// <summary>
+        /// 场景加载完成后调用,开启战斗
+        /// </summary>
+        public virtual void StartBattle()
+        {
+
+        }
+
         //房间结束
-        public virtual void End()
+        public virtual void EndScene()
         {
             roomState = RoomState.leisure;
 
@@ -155,6 +195,7 @@ namespace BattleServer
         {
 
         }
+        
 
     }
 }
