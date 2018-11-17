@@ -75,6 +75,15 @@ public static class TransformExtensionMethods
         }
     }
 
+    public static void ClearChild(this Transform transform)
+    {
+        for (int i = transform.childCount-1; i >=0 ; i--)
+        {
+            Transform child = transform.GetChild(i);
+            GameObject.Destroy(child);
+        }
+    }
+
     public static void SetLayers(this Transform transform, string layerName)
     {
         SetLayers(transform, LayerMask.NameToLayer(layerName));

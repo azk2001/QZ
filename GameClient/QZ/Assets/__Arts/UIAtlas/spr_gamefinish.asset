@@ -11,26 +11,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cbe4d0bb8eef494f991b6eae1e84cee, type: 3}
   m_Name: spr_gamefinish
   m_EditorClassIdentifier: 
-  spriteNum: 2
+  spriteNum: 33
   spriteList:
-  - name: artletter_win
-    sprite: {fileID: 21300000, guid: 7ffb4d2ab1ee568469263012eaeb325f, type: 3}
-    texture: {fileID: 2800000, guid: 7ffb4d2ab1ee568469263012eaeb325f, type: 3}
-  - name: artletter_defeated
-    sprite: {fileID: 21300000, guid: ec74b496175af3849ad3719330df4ea1, type: 3}
-    texture: {fileID: 2800000, guid: ec74b496175af3849ad3719330df4ea1, type: 3}
-  - name: img_diban
-    sprite: {fileID: 21300000, guid: 5b7c7604dc0ebed4b90cdbeb11747c30, type: 3}
-    texture: {fileID: 2800000, guid: 5b7c7604dc0ebed4b90cdbeb11747c30, type: 3}
-  - name: img_shenglidiban
-    sprite: {fileID: 21300000, guid: 15a3e44fa90c3b14b83ac762d310f9f6, type: 3}
-    texture: {fileID: 2800000, guid: 15a3e44fa90c3b14b83ac762d310f9f6, type: 3}
-  - name: img_shibaidiban
-    sprite: {fileID: 21300000, guid: c495acb4e3493a247adc3531998b7240, type: 3}
-    texture: {fileID: 2800000, guid: c495acb4e3493a247adc3531998b7240, type: 3}
-  - name: artletter_jianghulunjian
-    sprite: {fileID: 21300000, guid: 40a591932e118bf4dac34e9b3baa06fc, type: 3}
-    texture: {fileID: 2800000, guid: 40a591932e118bf4dac34e9b3baa06fc, type: 3}
-  - name: artletter_jiesuanwenzi
-    sprite: {fileID: 21300000, guid: 4078f385832012d40a9a5936504d0cd3, type: 3}
-    texture: {fileID: 2800000, guid: 4078f385832012d40a9a5936504d0cd3, type: 3}
+  - name: artletter_bianhua_jibai
+    sprite: {fileID: 21300000, guid: 05448ded524cf6343bb00cc2e0545ff5, type: 3}
+    texture: {fileID: 2800000, guid: 05448ded524cf6343bb00cc2e0545ff5, type: 3}
+  - name: img_bianhua_paopao_2
+    sprite: {fileID: 21300000, guid: 09ac0ec71ce1f8443a634cf9df8ba2e4, type: 3}
+    texture: {fileID: 2800000, guid: 09ac0ec71ce1f8443a634cf9df8ba2e4, type: 3}
+  - name: artletter_bianhua_mvp
+    sprite: {fileID: 21300000, guid: 9597c801ac0fb3c4697bc0dafe75ebc6, type: 3}
+    texture: {fileID: 2800000, guid: 9597c801ac0fb3c4697bc0dafe75ebc6, type: 3}
+  - name: artletter_bianhua_liansheng
+    sprite: {fileID: 21300000, guid: d31745db3c3b6a24cb5cbcee9341200f, type: 3}
+    texture: {fileID: 2800000, guid: d31745db3c3b6a24cb5cbcee9341200f, type: 3}
+  - name: img_jieguo_shengli
+    sprite: {fileID: 21300000, guid: 7fee046dfb48b7b4097018f6b0dc0c5c, type: 3}
+    texture: {fileID: 2800000, guid: 7fee046dfb48b7b4097018f6b0dc0c5c, type: 3}
+  - name: img_jiesuan_diren
+    sprite: {fileID: 21300000, guid: a307e8b421824cb4db6df2c7e624c6cc, type: 3}
+    texture: {fileID: 2800000, guid: a307e8b421824cb4db6df2c7e624c6cc, type: 3}
+  - name: img_jiesuan_taitoudi
+    sprite: {fileID: 21300000, guid: df95470eb006f864890e6548ac7d3aa0, type: 3}
+    texture: {fileID: 2800000, guid: df95470eb006f864890e6548ac7d3aa0, type: 3}
+  - name: artletter_jiesuan_
+    sprite: {fileID: 21300000, guid: 7c87ebebc1f6c674f992e42838fdefa2, type: 3}
+    texture: {fileID: 2800000, guid: 7c87ebebc1f6c674f992e42838fdefa2, type: 3}
+  - name: artletter_biaozhang_pohuaiwang
+    sprite: {fileID: 21300000, guid: c5dd1e42d3a0b334a909bef573aef85a, type: 3}
+    texture: {fileID: 2800000, guid: c5dd1e42d3a0b334a909bef573aef85a, type: 3}
+  - name: artletter_bianhua_cuihui
+    sprite: {fileID: 21300000, guid: 5e589c543b1f64844bbda1169db7bcec, type: 3}
+    texture: {fileID: 2800000, guid: 5e589c543b1f64844bbda1169db7bcec, type: 3}
+  - name: artletter_biaozhang_mvp
+    sprite: {fileID: 21300000, guid: 38de306f19d060640ac2df89eaf22074, type: 3}
+    texture: {fileID: 2800000, guid: 38de306f19d060640ac2df89eaf22074, type: 3}
+  - name: artletter_bianhua_duanwei
+    sprite: {fileID: 21300000, guid: 7a0affc194cb24f48addaa62c557a01c, type: 3}
+    texture: {fileID: 2800000, guid: 7a0affc194cb24f48addaa62c557a01c, type: 3}
+  - name: img_bianhua_jiantou
+    sprite: {fileID: 21300000, guid: 817f9a3a3b3613d4ea8f458f0662e538, type: 3}
+    texture: {fileID: 2800000, guid: 817f9a3a3b3613d4ea8f458f0662e538, type: 3}
+  - name: artletter_jiesuan_jiangli
+    sprite: {fileID: 21300000, guid: 9418321cc04a82f48aec12581ca8fb1c, type: 3}
+    texture: {fileID: 2800000, guid: 9418321cc04a82f48aec12581ca8fb1c, type: 3}
+  - name: artletter_bianhua_caoyue
+    sprite: {fileID: 21300000, guid: 44512b9dfca22364eaf20b78fc6d6f16, type: 3}
+    texture: {fileID: 2800000, guid: 44512b9dfca22364eaf20b78fc6d6f16, type: 3}
+  - name: artletter_jiesuan_jisha
+    sprite: {fileID: 21300000, guid: d67855f136ca83f4f9442f88722d5cb2, type: 3}
+    texture: {fileID: 2800000, guid: d67855f136ca83f4f9442f88722d5cb2, type: 3}
+  - name: artletter_jiesuan_pohuai
+    sprite: {fileID: 21300000, guid: 241692a3cd9260c4783ecb07db60caac, type: 3}
+    texture: {fileID: 2800000, guid: 241692a3cd9260c4783ecb07db60caac, type: 3}
+  - name: btn_jiesuan_jixu
+    sprite: {fileID: 21300000, guid: d74859b1baacaed4cb5acec4794acc18, type: 3}
+    texture: {fileID: 2800000, guid: d74859b1baacaed4cb5acec4794acc18, type: 3}
+  - name: img_bianhua_paopao_1
+    sprite: {fileID: 21300000, guid: d881be1ae1ad7374d868c6183febda20, type: 3}
+    texture: {fileID: 2800000, guid: d881be1ae1ad7374d868c6183febda20, type: 3}
+  - name: img_bianhua_paopao_3
+    sprite: {fileID: 21300000, guid: a87abcf0cc4cab1478cf87498e4bf976, type: 3}
+    texture: {fileID: 2800000, guid: a87abcf0cc4cab1478cf87498e4bf976, type: 3}
+  - name: img_biaozhang_jishawangdi
+    sprite: {fileID: 21300000, guid: ca7e7eac8a409ba46bc7d86113fbbb8e, type: 3}
+    texture: {fileID: 2800000, guid: ca7e7eac8a409ba46bc7d86113fbbb8e, type: 3}
+  - name: artletter_jiesuan_paiming
+    sprite: {fileID: 21300000, guid: 9f6d80f98b84bf44aa4883c5716e158d, type: 3}
+    texture: {fileID: 2800000, guid: 9f6d80f98b84bf44aa4883c5716e158d, type: 3}
+  - name: img_jieguo_pingju
+    sprite: {fileID: 21300000, guid: ea0daa46fdd8c004e9c2b77b9b35ee80, type: 3}
+    texture: {fileID: 2800000, guid: ea0daa46fdd8c004e9c2b77b9b35ee80, type: 3}
+  - name: img_biaozhang_biaotou
+    sprite: {fileID: 21300000, guid: 022a5de4b7a86174db8f21d84b1b1c28, type: 3}
+    texture: {fileID: 2800000, guid: 022a5de4b7a86174db8f21d84b1b1c28, type: 3}
+  - name: img_jieguo_shibai
+    sprite: {fileID: 21300000, guid: e576769cd778d424c910437f3df5f070, type: 3}
+    texture: {fileID: 2800000, guid: e576769cd778d424c910437f3df5f070, type: 3}
+  - name: img_biaozhang_pohuaiwangdi
+    sprite: {fileID: 21300000, guid: 30d3717abf3183a47bda312d0a10e21d, type: 3}
+    texture: {fileID: 2800000, guid: 30d3717abf3183a47bda312d0a10e21d, type: 3}
+  - name: artletter_bianhua_tisheng
+    sprite: {fileID: 21300000, guid: 7a61c9215e231e549a4b6cc1181d7112, type: 3}
+    texture: {fileID: 2800000, guid: 7a61c9215e231e549a4b6cc1181d7112, type: 3}
+  - name: artletter_biaozhang_jishawang
+    sprite: {fileID: 21300000, guid: 09e8e1e76ab330541874db0081549a78, type: 3}
+    texture: {fileID: 2800000, guid: 09e8e1e76ab330541874db0081549a78, type: 3}
+  - name: img_biaozhang_mvpdi
+    sprite: {fileID: 21300000, guid: 2029bedd28434e845aa5fd79fdb1092b, type: 3}
+    texture: {fileID: 2800000, guid: 2029bedd28434e845aa5fd79fdb1092b, type: 3}
+  - name: btn_jiesuan_xuanyao
+    sprite: {fileID: 21300000, guid: 57a7e2b35c383d149b39b9bc5693ebb4, type: 3}
+    texture: {fileID: 2800000, guid: 57a7e2b35c383d149b39b9bc5693ebb4, type: 3}
+  - name: img_jiesuan_ziji
+    sprite: {fileID: 21300000, guid: 7aa2ca0467c7aba4295faa9c8deec3a6, type: 3}
+    texture: {fileID: 2800000, guid: 7aa2ca0467c7aba4295faa9c8deec3a6, type: 3}
+  - name: artletter_bianhua_shengchang
+    sprite: {fileID: 21300000, guid: 4b2746fdddd4e2e42ad642fda530b2a8, type: 3}
+    texture: {fileID: 2800000, guid: 4b2746fdddd4e2e42ad642fda530b2a8, type: 3}
+  - name: img_jiesuan_duiyou
+    sprite: {fileID: 21300000, guid: 3a4f1800bd4c11141b3085d8c9e6ea72, type: 3}
+    texture: {fileID: 2800000, guid: 3a4f1800bd4c11141b3085d8c9e6ea72, type: 3}

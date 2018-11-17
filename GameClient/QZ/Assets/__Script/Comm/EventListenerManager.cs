@@ -10,7 +10,11 @@ public enum EventEnum
     CLOSE_UI,//关闭UI;
     LOCAL_PLAYER_STAER_MOVE_POINT,//本地玩家开始移动;
     LOCAL_PLAYER_END_MOVE_POINT,//本地玩家结束移动;
-
+    birthPlayer,
+    birthEvent,
+    birthObstruct,
+    birthMonster,
+    battleElementFinish,
 };
 
 

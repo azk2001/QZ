@@ -168,7 +168,7 @@ public static class BattleProtocolEvent
     public static void SendPlayerMove(C2SPlayerMoveMessage message)
     {
         writer.Clear();
-        writer.WriteByte((byte)C2SBattleProtocol.C2S_PlayerRoll);
+        writer.WriteByte((byte)C2SBattleProtocol.C2S_PlayerMove);
 
         writer = message.Message(writer);
 

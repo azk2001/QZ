@@ -20,7 +20,7 @@ public class EditorItem : EditorWindow
     {
         get
         {
-            return Application.dataPath + "/_config/map_config/";
+            return Application.dataPath + "/___Prefab/Config/Resources/MapConfig/";
         }
     }
     public static string xmlName = "";
@@ -172,7 +172,7 @@ public class EditorItem : EditorWindow
             }
             else
             {
-                LoadSaveMap.LoadMap(tmpxmlPath,"", false);
+                LoadSaveMap.LoadMap(tmpxmlPath, false);
 
                 EditorElementParam._elementIndex = LoadSaveMap.elementCount + 1;
 
