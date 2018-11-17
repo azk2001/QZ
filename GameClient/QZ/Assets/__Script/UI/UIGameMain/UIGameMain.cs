@@ -1,16 +1,9 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
-public enum eScenceType
-{
-    main,
-    battle,
-}
+public class UIGameMain : UIBase {
 
-class UIGameMain : UIBase
-{
     public override eUIDepth uiDepth
     {
         get
@@ -27,34 +20,16 @@ class UIGameMain : UIBase
         }
     }
 
-    public static UIGameMain Instance = null;
-
-    private DOTweenAnimation tweenAnimation = null;
-
-    public override bool TweenAni
+    private enum eObjectIndex
     {
-        get
-        {
-            return false;
-        }
+        modleParent,
     }
 
-    public DOTweenAnimation TweenAnimation
-    {
-        get
-        {
-            if (tweenAnimation == null)
-            {
-                tweenAnimation = gameObject.GetComponent<DOTweenAnimation>();
-            }
-            return tweenAnimation;
-        }
-    }
+    public UIGameMain Instance = null;
 
-    public VoidIntDelegate OnFireEvent;
+    public SpinWithMouse modleParent = null;
 
-    public UIButton btnOnFire = null;
-
+    private Transform prefabModel = null;
 
     public override void OnAwake(GameObject obj)
     {
@@ -62,98 +37,40 @@ class UIGameMain : UIBase
         base.OnAwake(obj);
 
         Instance = this;
-
-        btnOnFire = gameObjectList.GetUIComponent<UIButton>((int)1);
-
+        
+        modleParent = gameObjectList.GetUIComponent<SpinWithMouse>((int)eObjectIndex.modleParent);
     }
 
     public override void OnInit()
     {
         base.OnInit();
 
+        RefreshModle();
     }
 
-    public override void OnEnable()
+    public void RefreshModle()
     {
-        base.OnEnable();
+        string str = LocalPlayer.Instance.netPlayer.GetModleStr();
+        prefabModel = BattleUnitRoot.Instance.SpwanPrefab(str);
+        prefabModel.SetParent(modleParent.transform);
+        prefabModel.SetLayers("UI");
+        prefabModel.Reset();
+        prefabModel.localScale = Vector3.one*150;
+        prefabModel.localEulerAngles = Vector3.up * 180;
+        modleParent.target = prefabModel;
 
+        UnitController mUnitController = prefabModel.GetComponent<UnitController>();
+        mUnitController.Init();
+        mUnitController.SetCharacterControllerEnable(false);
     }
+
 
     public override void OnDisable()
     {
         base.OnDisable();
-
+   
+        BattleUnitRoot.Instance.DeSpwan(prefabModel);
+        
     }
 
-    public override void OnDestroy()
-    {
-        base.OnDestroy();
-
-        Instance = null;
-    }
-
-    public override void OnPress(GameObject clickObject)
-    {
-        base.OnPress(clickObject);
-
-        switch(clickObject.name)
-        {
-            case "btnOnFire":
-                {
-                    if(OnFireEvent!=null)
-                    {
-                        OnFireEvent(1);
-                    }
-                }
-                break;
-        }
-    }
-
-    public override void OnRelease(GameObject clickObject)
-    {
-        base.OnRelease(clickObject);
-
-        switch (clickObject.name)
-        {
-            case "btnOnFire":
-                {
-                    if (OnFireEvent != null)
-                    {
-                        OnFireEvent(0);
-                    }
-                }
-                break;
-        }
-    }
-
-    public override void OnClick(GameObject clickObject)
-    {
-        base.OnClick(clickObject);
-
-        switch (clickObject.name)
-        {
-            case "btnOnSkill1":
-                {
-                    if (OnFireEvent != null)
-                    {
-                        OnFireEvent(2);
-                    }
-                }
-                break;
-            case "btnOnSkill2":
-                {
-                    if (OnFireEvent != null)
-                    {
-                        OnFireEvent(3);
-                    }
-                }
-                break;
-        }
-
-    }
-
-    protected override void OnHintChange(params object[] args)
-    {
-        base.OnHintChange(args);
-    }
 }

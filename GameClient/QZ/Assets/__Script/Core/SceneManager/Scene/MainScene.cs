@@ -14,6 +14,8 @@ public class MainScene : SceneBase
             PlayerInScene(netPlayer);
         }
 
+        UIManager.Instance.OpenUI(eUIName.UIGameMain);
+
         base.OnBegin();
     }
 
@@ -25,7 +27,6 @@ public class MainScene : SceneBase
 
         if (BattleProtocol.UUID == netPlayer.uuid)
         {
-            PlayerController.Instance.AddPlayerController(gameUnit);
 
             LocalPlayer.Instance.netPlayer = netPlayer;
             LocalPlayer.Instance.gameUnit = gameUnit;

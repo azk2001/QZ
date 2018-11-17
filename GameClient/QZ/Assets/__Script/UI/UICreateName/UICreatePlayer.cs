@@ -260,7 +260,6 @@ public class UICreatePlayer : UIBase
         }
 
         UIManager.Instance.CloseUI(eUIName.UICreatePlayer, false, true);
-        UIManager.Instance.OpenUI(eUIName.UIGameMain);
 
         ProcessManager.Instance.Begin(ProcessType.processmain);
     }

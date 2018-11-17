@@ -32,4 +32,20 @@ public class NetPlayer
 
         return writer;
     }
+
+    //获取模型的名字;
+    public string GetModleStr()
+    {
+        string str = "";
+        if (basicsData.sex == 1)
+        {
+            str = "PlayerNan1";
+        }
+        else
+        {
+            str = "PlayerNan1";
+        }
+
+        return str;
+    }
 }

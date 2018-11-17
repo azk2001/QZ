@@ -13,6 +13,7 @@ public enum eUIName
     UICreatePlayer,
     UISelectServer,
     UIGameMain,
+    UIBattle,
     UIRoom,
 }
 
@@ -47,6 +48,7 @@ public class UIManager : SingleClass<UIManager>
         allUIList.Add(eUIName.UILogin, new UILogin());
         allUIList.Add(eUIName.UICreatePlayer, new UICreatePlayer());
         allUIList.Add(eUIName.UIGameMain, new UIGameMain());
+        allUIList.Add(eUIName.UIBattle, new UIBattle());
         allUIList.Add(eUIName.UIRoom, new UIRoom());
         
     }

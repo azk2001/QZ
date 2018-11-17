@@ -43,7 +43,7 @@ public class PlayerController : SingleClass<PlayerController>
 
         CameraLookPlayer.Instance.SetTarget(gameUnit.mUnitController.transform);
 
-        UIGameMain.Instance.OnFireEvent += OnClickButton;
+        UIBattle.Instance.OnFireEvent += OnClickButton;
         joyStick.OnMoveDragEvent += OnMoveJoystickEvent;
         rollJoystick.OnRollDragEvent += OnRollJoystickEvent;
     }
@@ -59,7 +59,7 @@ public class PlayerController : SingleClass<PlayerController>
 
         CameraLookPlayer.Instance.SetTarget(null);
 
-        UIGameMain.Instance.OnFireEvent -= OnClickButton;
+        UIBattle.Instance.OnFireEvent -= OnClickButton;
         joyStick.OnMoveDragEvent -= OnMoveJoystickEvent;
         rollJoystick.OnRollDragEvent -= OnRollJoystickEvent;
     }
