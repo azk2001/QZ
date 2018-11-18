@@ -78,7 +78,6 @@ namespace GameServer
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_PlayerHit, BattleProtocolEvent.ReceivePlayerHit);
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_PlayerAddBuff, BattleProtocolEvent.ReceivePlayerAddBuff);
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_PlayerRemoveBuff, BattleProtocolEvent.ReceivePlayerRemoveBuff);
-            ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_PlayerDie, BattleProtocolEvent.ReceivePlayerDie);
 
 
         }
