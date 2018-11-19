@@ -45,7 +45,7 @@ public static class BattleProtocolEvent
         S2CCreatePlayerMessage message = new S2CCreatePlayerMessage();
         message.Message(reader);
 
-        for(int i=0;i<message.playerCount;i++)
+        for (int i = 0; i < message.playerCount; i++)
         {
             NetPlayerManager.AddNetPlayer(message.netPlayer[i]);
         }
@@ -65,7 +65,7 @@ public static class BattleProtocolEvent
         GameSceneManager.Instance.curScene.PlayerInScene(message.netPlayer);
 
     }
-    
+
 
     public static void SendGetRoom(C2SGetRoomMessage message)
     {
@@ -101,7 +101,7 @@ public static class BattleProtocolEvent
         S2CCreateRoomMessage message = new S2CCreateRoomMessage();
         message.Message(reader);
 
-        UIRoom uiRoom = UIManager.Instance.GetUIBase<UIRoom>( eUIName.UIRoom);
+        UIRoom uiRoom = UIManager.Instance.GetUIBase<UIRoom>(eUIName.UIRoom);
         uiRoom.ReceiveCreateRoom(message);
 
     }
@@ -191,8 +191,8 @@ public static class BattleProtocolEvent
 
         //客服端直接移动;
         mGameUnit.MoveDirection(moveDir);
-        
-        if(moveDir == Vector3.zero)
+
+        if (moveDir == Vector3.zero)
         {
             mGameUnit.mUnitController.MoveToPoint(position);
         }
@@ -220,9 +220,9 @@ public static class BattleProtocolEvent
         Vector3 endPoint = new Vector3(message.ex / 100.0f, message.ey / 100.0f, message.ez / 100.0f);
 
         mGameUnit.SetPosition(startPoint);
-        
+
         mGameUnit.RollPoint(endPoint);
-        
+
     }
 
     public static void SendPlayerSkill(C2SPlayerSkillMessage message)
@@ -241,9 +241,12 @@ public static class BattleProtocolEvent
         message.Message(reader);
 
         GameUnit gameUnit = GameUnitManager.Instance.GetGameUnit(message.uuid);
-        if(gameUnit!=null)
+        if (gameUnit != null)
         {
-            gameUnit.OnSkill(message.skillIndex);
+            Vector3 position = new Vector3(message.px / 100.0f, message.py / 100.0f, message.pz / 100.0f);
+            Vector3 forward = new Vector3(message.fx / 100.0f, message.fy / 100.0f, message.fz / 100.0f);
+
+            gameUnit.OnSkill(message.skillIndex, forward);
         }
 
     }
@@ -326,5 +329,5 @@ public static class BattleProtocolEvent
         GameUnit hitGameUnit = GameUnitManager.Instance.GetGameUnit(message.hitUUID);
         hitGameUnit.OnDead(killGameUnit);
     }
-    
+
 }

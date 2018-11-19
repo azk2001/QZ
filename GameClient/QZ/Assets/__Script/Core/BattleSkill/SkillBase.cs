@@ -6,21 +6,28 @@ using System.Collections;
 public class SkillBase
 {
     public GameUnit gameUnit = null;                //释放者对象;
-    public cs_skill skill = null;                   //技能配置参数;
+    public skill_c skill = null;                   //技能配置参数;
     public Dictionary<string, string> textParam;
     public Transform effectTransfrom = null;
 
     public virtual void OnConfig(int _skillId)
     {
-        skill = cs_skill.GetThis(_skillId);
+        skill = skill_c.GetThis(_skillId);
         textParam = skill.textParam;
     }
 
-    public bool Begin(GameUnit _gameUnit)
+    /// <summary>
+    /// 开始释放技能
+    /// </summary>
+    /// <param name="_gameUnit">释放者</param>
+    /// <param name="position">初始化位置</param>
+    /// <param name="forward">技能方向</param>
+    /// <returns></returns>
+    public bool Begin(GameUnit _gameUnit, Vector3 position, Vector3 forward)
     {
         gameUnit = _gameUnit;
 
-        return OnBegin();
+        return OnBegin(position,forward);
     }
 
     public void End()
@@ -33,7 +40,7 @@ public class SkillBase
         OnUpdate(deltaTime);
     }
 
-    protected virtual bool OnBegin()
+    protected virtual bool OnBegin(Vector3 position, Vector3 forward)
     {
         return true;
     }

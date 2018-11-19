@@ -2,25 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cs_skill
+public class skill_c
 {
     public int skillId;
 	public string icon;
-    public int prefabId;
-	public string aniName;
 	public float cdTime;
     public int type;
-	public Dictionary<string,string> textParam;
+    public string aniName;
+    public string param;
+    public Dictionary<string,string> textParam;
 
-    private cs_skill(TabFileData.LineData file)
+    private skill_c(TabFileData.LineData file)
     {
         skillId = file.GetContentInt("skillId");
         icon = file.GetContentStr("icon");
-        prefabId = file.GetContentInt("prefabId");
-        aniName = file.GetContentStr("aniName");
         cdTime = file.GetContentFloat("cdTime");
+        aniName = file.GetContentStr("aniName");
         type = file.GetContentInt("type");
-        
+        string[] tempParam = file.GetContentStr("param").Split(';');
+
+        textParam = new Dictionary<string, string>();
+        foreach (string str in tempParam)
+        {
+            string[] s = str.Split('=');
+            if(s.Length == 2)
+            {
+                textParam[s[0]] = s[1];
+            }
+        }
+
     }
 
     public static bool ContainsThis(int skillId)
@@ -28,9 +38,9 @@ public class cs_skill
         return gInfoDic.ContainsKey(skillId);
     }
 
-    public static cs_skill GetThis(int skillId)
+    public static skill_c GetThis(int skillId)
     {
-        cs_skill cfg = null;
+        skill_c cfg = null;
         gInfoDic.TryGetValue(skillId,out cfg);
         if (cfg == null)
             Debug.LogError("cs_skill table found no skillId: " + skillId);
@@ -50,12 +60,12 @@ public class cs_skill
             }
             else
             {
-                cs_skill info = new cs_skill(data);
+                skill_c info = new skill_c(data);
                 gInfoDic.Add(id, info);
             }
         }
     }
 
-    public static readonly Dictionary<int, cs_skill> gInfoDic = new Dictionary<int, cs_skill>();
+    public static readonly Dictionary<int, skill_c> gInfoDic = new Dictionary<int, skill_c>();
 
 }

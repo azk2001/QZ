@@ -1,0 +1,6 @@
+mapId	mapName	mapType	sceneName	backMusic	icon	timeLimit	lastMapId	comReward	victoryConditions	starConditions	mapConfig
+10000	刘家集	1	LJJ	1001	icon	300	0	0	3,100,1,100秒内通关;	1,100,1,100秒内通关;1,100,1,100秒内通关;	10001
+10001	刘家集	5	LJJ	1001	icon	300	0	0	3,,0,杀死所有野猴;	3,,0,杀死山贼头领;3,,0,杀死山贼头领;	10001
+10002	刘家集	5	LJJ	1001	icon	300	0	0	3,,0,杀死所有士兵;	3,,0,杀死山贼头领;3,,0,杀死山贼头领;	10002
+10003	刘家集	5	LJJ	1001	icon	300	0	0	3,,0,杀死所有地痞;	3,,0,杀死山贼头领;3,,0,杀死山贼头领;	10003
+10004	刘家集	5	LJJ	1001	icon	300	0	0	3,,0,杀死铁面侠;	3,,0,杀死山贼头领;3,,0,杀死山贼头领;	10004

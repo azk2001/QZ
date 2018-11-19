@@ -170,7 +170,7 @@ public class GameUnit
         buffs.Remove(buff);
     }
 
-    public bool OnSkill(int skillIndex)
+    public bool OnSkill(int skillIndex,Vector3 forward)
     {
         int val = 0;
         bool isFire = true;
@@ -207,7 +207,7 @@ public class GameUnit
 
         if (isFire == true)
         {
-            skills[val].Begin(this);
+            skills[val].Begin(this,mUnitController.transformCaChe.position, forward);
         }
         else
         {

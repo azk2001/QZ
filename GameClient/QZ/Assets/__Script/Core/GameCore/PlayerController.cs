@@ -4,7 +4,6 @@ using System.Collections;
 //玩家控制脚本;
 public class PlayerController : SingleClass<PlayerController>
 {
-
     public GameUnit mGameUnit = null;
     public float aniTransSpeed = 5.0f;
 
@@ -35,6 +34,30 @@ public class PlayerController : SingleClass<PlayerController>
         }
     }
 
+    private UIAtkJoystick atkJoystick
+    {
+        get
+        {
+            return UIAtkJoystick.Instance;
+        }
+    }
+
+    private UISkill1Joystick skill1Joystick
+    {
+        get
+        {
+            return UISkill1Joystick.Instance;
+        }
+    }
+
+    private UISkill2Joystick skill2Joystick
+    {
+        get
+        {
+            return UISkill2Joystick.Instance;
+        }
+    }
+
     //添加一个玩家控制;
     public void AddPlayerController(GameUnit gameUnit)
     {
@@ -43,9 +66,11 @@ public class PlayerController : SingleClass<PlayerController>
 
         CameraLookPlayer.Instance.SetTarget(gameUnit.mUnitController.transform);
 
-        UIBattle.Instance.OnFireEvent += OnClickButton;
         joyStick.OnMoveDragEvent += OnMoveJoystickEvent;
         rollJoystick.OnRollDragEvent += OnRollJoystickEvent;
+        atkJoystick.OnFireEvent += OnFireEvent;
+        skill1Joystick.OnFireEvent += OnFireEvent;
+        skill2Joystick.OnFireEvent += OnFireEvent;
     }
 
     //移除一个玩家控制;
@@ -59,9 +84,11 @@ public class PlayerController : SingleClass<PlayerController>
 
         CameraLookPlayer.Instance.SetTarget(null);
 
-        UIBattle.Instance.OnFireEvent -= OnClickButton;
         joyStick.OnMoveDragEvent -= OnMoveJoystickEvent;
         rollJoystick.OnRollDragEvent -= OnRollJoystickEvent;
+        atkJoystick.OnFireEvent -= OnFireEvent;
+        skill1Joystick.OnFireEvent -= OnFireEvent;
+        skill2Joystick.OnFireEvent -= OnFireEvent;
     }
 
     private void OnMoveJoystickEvent(Vector2 v2)
@@ -126,7 +153,7 @@ public class PlayerController : SingleClass<PlayerController>
     }
 
     //技能开火控制;
-    public void OnClickButton(int val)
+    public void OnFireEvent(int val, Vector3 forward)
     {
         if (mGameUnit == null)
             return;
@@ -134,7 +161,7 @@ public class PlayerController : SingleClass<PlayerController>
         if (isInput == false)
             return;
 
-        bool isSendSkill = mGameUnit.OnSkill(val);
+        bool isSendSkill = mGameUnit.OnSkill(val, forward);
 
         if (isSendSkill == true)
         {
@@ -143,6 +170,12 @@ public class PlayerController : SingleClass<PlayerController>
             C2SPlayerSkillMessage c2SPlayerSkill = new C2SPlayerSkillMessage();
             c2SPlayerSkill.uuid = mGameUnit.basicsData.uuid;
             c2SPlayerSkill.skillIndex = val;
+            c2SPlayerSkill.px = (int)(mGameUnit.mUnitController.transformCaChe.position.x * 100);
+            c2SPlayerSkill.py = (int)(mGameUnit.mUnitController.transformCaChe.position.y * 100);
+            c2SPlayerSkill.pz = (int)(mGameUnit.mUnitController.transformCaChe.position.z * 100);
+            c2SPlayerSkill.fx = (int)(forward.x * 100);
+            c2SPlayerSkill.fy = (int)(forward.y * 100);
+            c2SPlayerSkill.fz = (int)(forward.z * 100);
 
             BattleProtocolEvent.SendPlayerSkill(c2SPlayerSkill);
         }
@@ -166,7 +199,7 @@ public class PlayerController : SingleClass<PlayerController>
         Vector3 moveForward = Quaternion.AngleAxis(Angle(Vector3.forward, dir), Vector3.up) * forward;
 
         Vector3 endPoint = startPoint + moveForward.normalized * 1.5f;
-        
+
         //客服端直接移动;
         mGameUnit.RollPoint(endPoint);
 

@@ -70,7 +70,7 @@ public class TableManager : SingleClass<TableManager>
         switch (name)
         {
             case "cs_skill":
-                cs_skill.LoadTxt(data);
+                skill_c.LoadTxt(data);
                 break;
             case "c_sfx":
                 c_sfx.LoadTxt(data);

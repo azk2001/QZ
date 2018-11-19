@@ -51,7 +51,6 @@ class UIBattle : UIBase
         }
     }
     
-    public VoidIntDelegate OnFireEvent;
 
     public UIButton btnOnFire = null;
 
@@ -88,66 +87,6 @@ class UIBattle : UIBase
         base.OnDestroy();
 
         Instance = null;
-    }
-
-    public override void OnPress(GameObject clickObject)
-    {
-        base.OnPress(clickObject);
-
-        switch(clickObject.name)
-        {
-            case "btnOnFire":
-                {
-                    if(OnFireEvent!=null)
-                    {
-                        OnFireEvent(1);
-                    }
-                }
-                break;
-        }
-    }
-
-    public override void OnRelease(GameObject clickObject)
-    {
-        base.OnRelease(clickObject);
-
-        switch (clickObject.name)
-        {
-            case "btnOnFire":
-                {
-                    if (OnFireEvent != null)
-                    {
-                        OnFireEvent(0);
-                    }
-                }
-                break;
-        }
-    }
-
-    public override void OnClick(GameObject clickObject)
-    {
-        base.OnClick(clickObject);
-
-        switch (clickObject.name)
-        {
-            case "btnOnSkill1":
-                {
-                    if (OnFireEvent != null)
-                    {
-                        OnFireEvent(2);
-                    }
-                }
-                break;
-            case "btnOnSkill2":
-                {
-                    if (OnFireEvent != null)
-                    {
-                        OnFireEvent(3);
-                    }
-                }
-                break;
-        }
-
     }
 
     protected override void OnHintChange(params object[] args)
