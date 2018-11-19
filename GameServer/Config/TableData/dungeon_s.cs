@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public enum eGeneralMapType
+public enum eMapType
 {
     none = 0,
     mainCity = 1,               //主城
@@ -59,36 +59,39 @@ public class StarCondition
     }
 }
 
-public class dungeon_b
+public class dungeon_s
 {
-    private static readonly Dictionary<int, dungeon_b> gInfoDic = new Dictionary<int, dungeon_b>();
-    private static readonly List<dungeon_b> gInfoList = new List<dungeon_b>();
+    private static readonly Dictionary<int, dungeon_s> gInfoDic = new Dictionary<int, dungeon_s>();
+    private static readonly List<dungeon_s> gInfoList = new List<dungeon_s>();
     private static readonly List<int> battleIdList = new List<int>();                                               //普通章节ID; 
-    private static readonly Dictionary<int, List<dungeon_b>> battleDic = new Dictionary<int, List<dungeon_b>>();    //普通关卡副本;
+    private static readonly Dictionary<int, List<dungeon_s>> battleDic = new Dictionary<int, List<dungeon_s>>();    //普通关卡副本;
     public readonly int mapId;
-    public readonly string name;
-    public readonly int levelLimit;
-    public readonly eGeneralMapType generalMap;
-    public readonly int linemaxPlayers;
-    public readonly int birthPointType;
+    public readonly string mapName;
+    public readonly string sceneName;
+    public readonly string icon;
+    public readonly int backMusic;
+    public readonly eMapType mapType;
     public readonly int mapConfig;
     public readonly int timeLimit;
+    public readonly int lastMapId;
+    public readonly string comReward;
     public readonly List<StarCondition> victoryConditionsList;
     public readonly List<StarCondition> starConditionsList;
 
-    private dungeon_b(tab_file_data.line_data file)
+    private dungeon_s(TabFileData.LineData file)
     {
-        mapId = file.get_content_int("mapId");
-        name = file.get_content_str("name");
-        levelLimit = file.get_content_int("levelLimit");
-        generalMap = (eGeneralMapType)file.get_content_int("generalMap");
-        linemaxPlayers = file.get_content_int("linemaxPlayers");
-        birthPointType = file.get_content_int("birthPointType");
-        mapConfig = file.get_content_int("mapConfig");
-        timeLimit = file.get_content_int("timeLimit");
-
-        string victoryConditions = file.get_content_str("victoryConditions");
-        string starConditions = file.get_content_str("starConditions");
+        mapId = file.GetContentInt("mapId");
+        mapName = file.GetContentStr("mapName");
+        sceneName = file.GetContentStr("sceneName");
+        icon = file.GetContentStr("icon");
+        timeLimit = file.GetContentInt("timeLimit");
+        backMusic = file.GetContentInt("backMusic");
+        mapType = (eMapType)file.GetContentInt("mapType");
+        mapConfig = file.GetContentInt("mapConfig");
+        comReward = file.GetContentStr("comReward");
+        lastMapId = file.GetContentInt("lastMapId");
+        string victoryConditions = file.GetContentStr("victoryConditions");
+        string starConditions = file.GetContentStr("starConditions");
 
         victoryConditionsList = new List<StarCondition>();
         starConditionsList = new List<StarCondition>();
@@ -133,7 +136,7 @@ public class dungeon_b
     }
 
 
-    public static dungeon_b Get(int MapID)
+    public static dungeon_s Get(int MapID)
     {
         if (gInfoDic.ContainsKey(MapID))
             return gInfoDic[MapID];
@@ -141,33 +144,25 @@ public class dungeon_b
         return null;
     }
 
-    public static List<dungeon_b> GetList()
+    public static List<dungeon_s> GetList()
     {
         return gInfoList;
     }
 
-    public static List<dungeon_b> GetChapterList(int chapterId)
+    public static void LoadTxt(TabFileData file)
     {
-        if (battleDic.ContainsKey(chapterId) == true)
-            return battleDic[chapterId];
-
-        return null;
-    }
-
-    public static void LoadTxt(tab_file_data file)
-    {
-        List<tab_file_data.line_data> list = file.get_line_data();
+        List<TabFileData.LineData> list = file.GetLineData();
         for (int i = 0, max = list.Count; i < max; i++)
         {
-            tab_file_data.line_data data = list[i];
-            int id = data.get_content_int("mapId");
+            TabFileData.LineData data = list[i];
+            int id = data.GetContentInt("mapId");
             if (gInfoDic.ContainsKey(id))
             {
                 MyDebug.WriteLine("dungeon_c配置表id重复:" + id);
             }
             else
             {
-                dungeon_b info = new dungeon_b(data);
+                dungeon_s info = new dungeon_s(data);
                 gInfoDic.Add(id, info);
                 gInfoList.Add(info);
             }

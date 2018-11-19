@@ -32,7 +32,7 @@ namespace GameServer
             isStartRunRoom = true;
 
             battleCore = BattleCore.CreateBattleCore(1);
-            battleCore.Init(this, sceneId, roomIndex);
+            battleCore.Init(sceneId, roomIndex);
 
             foreach(NetPlayer sPlayer in netPlayerList)
             {

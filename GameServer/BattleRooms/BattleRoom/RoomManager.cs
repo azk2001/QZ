@@ -21,12 +21,7 @@ namespace GameServer
 
         public static void Init()
         {
-            List<battleroominit_b> roomInitList = battleroominit_b.GetList();
 
-            for (int i = 0, max = roomInitList.Count; i < max; i++)
-            {
-                battleroominit_b battleroominit = roomInitList[i];
-            }
         }
 
 

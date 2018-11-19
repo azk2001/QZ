@@ -9,11 +9,10 @@ namespace GameServer
     {
 
         public int roomIndex = 0;                               //房间ID;
-        public dungeon_b dungeonInfo;                           //关卡ID;
+        public dungeon_s dungeonInfo;                           //关卡ID;
         public ElementGroup playerElement = null;               //角色出生点配置信息;
         public VictoryCondition victoryCondition = null;        //副本通关条件;
         protected ElementManager elementManager = null;         //当前这场战斗的刷怪器控制器;
-        protected RoomBase roomBase = null;                     //房间;
         protected float runDeltaTime = 0;
         protected int dungeonRunTime = 0;                       //副本运行时间;
         protected bool isRun = false;                          //房间是否运行;
@@ -25,10 +24,8 @@ namespace GameServer
         /// <param name="roomBase"></param>
         /// <param name="dungeonId"></param>
         /// <param name="roomIndex"></param>
-        public virtual void Init(RoomBase roomBase, int dungeonId, int roomIndex)
+        public virtual void Init(int dungeonId, int roomIndex)
         {
-            this.roomIndex = roomIndex;
-            this.roomBase = roomBase;
             this.roomIndex = roomIndex;
 
             victoryCondition = new VictoryCondition();
@@ -38,7 +35,7 @@ namespace GameServer
 
             dungeonRunTime = 0;
 
-            dungeonInfo = dungeon_b.Get(dungeonId);
+            dungeonInfo = dungeon_s.Get(dungeonId);
 
             LoadSaveMap.LoadMap(dungeonInfo.mapConfig, elementManager);
 

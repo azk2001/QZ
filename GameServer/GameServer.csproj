@@ -65,13 +65,11 @@
     <Compile Include="BattleRooms\NetPlayer\NetPlayerManager.cs" />
     <Compile Include="BattleRooms\BattleRoom\RoomManager.cs" />
     <Compile Include="BsVsClient\BattleCore\Battle\SoloBattle.cs" />
-    <Compile Include="Config\TableData\chaosrcore_b.cs" />
-    <Compile Include="Config\TableData\chaoticdata_b.cs" />
-    <Compile Include="Config\TableData\battleroominit_b.cs" />
     <Compile Include="BattleRooms\BattleRoom\RoomBase.cs" />
     <Compile Include="BattleRooms\NetPlayer\NetPlayerData.cs" />
     <Compile Include="BsVsClient\BattleCore\BattleCore.cs" />
     <Compile Include="BsVsClient\BattleCore\GameFinishData.cs" />
+    <Compile Include="Config\TableData\TableFile.cs" />
     <Compile Include="NetServer\BattleProtocol\BattleProtocol.cs" />
     <Compile Include="NetServer\BattleProtocol\BattleProtocolEvent.cs" />
     <Compile Include="NetServer\BattleProtocol\ProtocolBattleManager.cs" />
@@ -99,12 +97,8 @@
     <Compile Include="BsVsClient\System\Transform.cs" />
     <Compile Include="BsVsClient\System\Vector3.cs" />
     <Compile Include="BsVsClient\SingleTon_Class.cs" />
-    <Compile Include="Config\TableData\dungeon_b.cs" />
-    <Compile Include="Config\TableData\horoscopeatt_b.cs" />
-    <Compile Include="Config\TableData\monster_b.cs" />
-    <Compile Include="Config\TableData\monsterrevise_b.cs" />
+    <Compile Include="Config\TableData\dungeon_s.cs" />
     <Compile Include="Config\TableData\TableManager.cs" />
-    <Compile Include="Config\TableData\tab_file.cs" />
     <Compile Include="NetServer\BytesReader.cs" />
     <Compile Include="NetServer\BytesWriter.cs" />
     <Compile Include="NetServer\Net\NetClientBase.cs" />
@@ -132,7 +126,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\output\Config\MapConfig\1001.xml" />
+    <Content Include="bin\output\Config\Config\dungeon_s.txt" />
+    <Content Include="bin\output\Config\MapConfig\10001.xml" />
     <Content Include="bin\output\GameServer.exe" />
     <Content Include="bin\output\GameServer.pdb" />
     <Content Include="bin\output\OverGameServer.exe" />

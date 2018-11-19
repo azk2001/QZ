@@ -15,7 +15,7 @@ namespace GameServer
         public bool isRun = false;
         private bool isVictory = false;
 
-        private dungeon_b dungeonInfo = null;
+        private dungeon_s dungeonInfo = null;
         private BattleCore battleCore = null;
 
         public void AddConditions(List<StarCondition> victoryConditionsList)
@@ -141,7 +141,7 @@ namespace GameServer
             bool isPlayerDeath = false;
             bool isFinish = true;
 
-            if(battleCore.dungeonInfo.generalMap != eGeneralMapType.pvpFightChaos)
+            if(battleCore.dungeonInfo.mapType != eMapType.pvpFightChaos)
             {
                 List<NetPlayer> netPlayerList = RoomManager.GetBattleRoomPlayerList(roomIndex);
                 for (int i = 0, max = netPlayerList.Count; i < max; i++)

@@ -9,9 +9,9 @@ namespace GameServer
     class SoloBattle : BattleCore
     {
 
-        public override void Init(RoomBase roomBase, int dungeonId, int roomIndex)
+        public override void Init(int dungeonId, int roomIndex)
         {
-            base.Init(roomBase, dungeonId, roomIndex);
+            base.Init(dungeonId, roomIndex);
         }
 
         public override void InScene(NetPlayer netPlayer)

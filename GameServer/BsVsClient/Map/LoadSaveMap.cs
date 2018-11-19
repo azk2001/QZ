@@ -10,7 +10,7 @@ namespace GameServer
     public class LoadSaveMap
     {
         public static VoidBoolDelegate OnLoadFinishEvent;
-        private static string xmlPath = "/Config/MapXml/{0}.xml";
+        private static string xmlPath = "/Config/MapConfig/{0}.xml";
 
         public static bool LoadMap(int mapConfig, ElementManager elementManager)
         {

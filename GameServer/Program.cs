@@ -11,7 +11,7 @@ namespace GameServer
         public static SocketManager socket = null;
 
         private static List<RoomBase> roomList = new List<RoomBase>();
-        private static float fpsUpdateTime = 0.5f;
+        private static float deltaTime = 0.5f;
 
         static void Main(string[] args)
         {
@@ -62,12 +62,20 @@ namespace GameServer
 
             System.Timers.Timer gameUpdateTime = new System.Timers.Timer();
             gameUpdateTime.Elapsed += new System.Timers.ElapsedEventHandler(GameUpdate);
-            gameUpdateTime.Interval = 500;
+            gameUpdateTime.Interval = deltaTime*1000;
             gameUpdateTime.AutoReset = true;
             gameUpdateTime.Enabled = true;
             gameUpdateTime.Start();
 
+            //BattleRoom roomBase = new BattleRoom();
+            //RoomManager.AddRoom(roomBase);
+            //roomBase.sceneId = 10001;
+            //roomBase.StartScene();
+            //roomBase.StartBattle();
+
+
             ClientUpdate();
+            
         }
 
         public static void ClientUpdate()
@@ -89,7 +97,7 @@ namespace GameServer
             {
                 for (int i = roomList.Count - 1; i >= 0; i--)
                 {
-                    roomList[i].Update(fpsUpdateTime);
+                    roomList[i].Update(deltaTime);
                 }
             }
         }

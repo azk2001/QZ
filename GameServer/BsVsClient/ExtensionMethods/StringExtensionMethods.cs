@@ -1,7 +1,7 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 public static class StringExtensionMethods
 {
+
     //int相关
     public static bool TryToInt(this string that, out int value)
     {
@@ -26,8 +26,8 @@ public static class StringExtensionMethods
             int v = that[index] - '0';
 
 #if SAFEMODE
-            if (v < 0 || v > 9)
-                return false;
+                if(v < 0 || v > 9)
+                    return false;
 #endif
 
             tempValue = tempValue * 10 + v;
@@ -59,8 +59,8 @@ public static class StringExtensionMethods
             int v = that[index] - '0';
 
 #if SAFEMODE
-            if (v < 0 || v > 9)
-                return defValue;
+                if(v < 0 || v > 9)
+                    return defValue;
 #endif
 
             value = value * 10 + v;
@@ -79,7 +79,7 @@ public static class StringExtensionMethods
     }
 
     //float相关
-    public static bool TryToDouble(this string that, out double value)
+    public static bool TryToFloat(this string that, out float value)
     {
         //            float value;
         //            if (string.IsNullOrEmpty(that) || !float.TryParse(that, out value))
@@ -114,8 +114,8 @@ public static class StringExtensionMethods
                 {
                     v = that[index] - '0';
 #if SAFEMODE
-                    if (v < 0 || v > 9)
-                        return false;
+                        if(v < 0 || v > 9)
+                            return false;
 #endif
                     value2 = value2 * 10 + v;
                     ++index;
@@ -128,8 +128,8 @@ public static class StringExtensionMethods
             v = c - '0';
 
 #if SAFEMODE
-            if (v < 0 || v > 9)
-                return false;
+                if(v < 0 || v > 9)
+                    return false;
 #endif
 
             tempValue = tempValue * 10 + v;
@@ -172,8 +172,8 @@ public static class StringExtensionMethods
                 {
                     v = that[index] - '0';
 #if SAFEMODE
-                    if (v < 0 || v > 9)
-                        return defValue;
+                        if(v < 0 || v > 9)
+                            return defValue;
 #endif
                     value2 = value2 * 10 + v;
                     ++index;
@@ -185,8 +185,8 @@ public static class StringExtensionMethods
             v = c - '0';
 
 #if SAFEMODE
-            if (v < 0 || v > 9)
-                return defValue;
+                if(v < 0 || v > 9)
+                    return defValue;
 #endif
 
             value = value * 10 + v;
