@@ -138,7 +138,7 @@ namespace GameServer
             PlayerParam playerParam = new PlayerParam();
             playerParam.camp = netPlayer.camp;
             playerParam.isOwner = 1;
-            playerParam.level = netPlayer.basicsData.level; 
+            playerParam.level = netPlayer.basicsData.level;
             playerParam.playerName = netPlayer.basicsData.name;
             playerParam.sex = netPlayer.basicsData.sex;
             playerParam.uuid = netPlayer.uuid;
@@ -189,7 +189,7 @@ namespace GameServer
             roomParam.roomType = (byte)battleRoom.roomType;
 
             s2CAddRoom.roomParam = roomParam;
-            
+
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_AddRoom);
 
@@ -296,6 +296,12 @@ namespace GameServer
             S2CPlayerSkillMessage s2CPlayerSkill = new S2CPlayerSkillMessage();
             s2CPlayerSkill.uuid = c2SPlayerSkill.uuid;
             s2CPlayerSkill.skillIndex = c2SPlayerSkill.skillIndex;
+            s2CPlayerSkill.px = c2SPlayerSkill.px;
+            s2CPlayerSkill.py = c2SPlayerSkill.py;
+            s2CPlayerSkill.pz = c2SPlayerSkill.pz;
+            s2CPlayerSkill.fx = c2SPlayerSkill.fx;
+            s2CPlayerSkill.fy = c2SPlayerSkill.fy;
+            s2CPlayerSkill.fz = c2SPlayerSkill.fz;
 
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerSkill);
@@ -333,7 +339,7 @@ namespace GameServer
         }
 
         //服务器主动发送角色死亡信息;
-        public static void SendPlayerDie(int atkUUID,int hitUUID)
+        public static void SendPlayerDie(int atkUUID, int hitUUID)
         {
             S2CPlayerDieMessage s2CPlayerDie = new S2CPlayerDieMessage();
             s2CPlayerDie.hitUUID = hitUUID;

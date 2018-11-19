@@ -551,11 +551,24 @@ namespace GameServer
         //会先同步位置在同步技能;
         public int uuid;
         public int skillIndex;     //释放技能id;
+        public int px;             //位置x*100;
+        public int py;             //位置y*100;
+        public int pz;             //位置z*100;
+        public int fx;             //方向x*100;
+        public int fy;             //方向y*100;
+        public int fz;             //方向z*100;
+
 
         public BytesWriter Message(BytesWriter writer)
         {
             writer.WriteInt(uuid);
             writer.WriteInt(skillIndex);
+            writer.WriteInt(px);
+            writer.WriteInt(py);
+            writer.WriteInt(pz);
+            writer.WriteInt(fx);
+            writer.WriteInt(fy);
+            writer.WriteInt(fz);
 
             return writer;
         }
@@ -564,6 +577,12 @@ namespace GameServer
         {
             uuid = reader.ReadInt();
             skillIndex = reader.ReadInt();
+            px = reader.ReadInt();
+            py = reader.ReadInt();
+            pz = reader.ReadInt();
+            fx = reader.ReadInt();
+            fy = reader.ReadInt();
+            fz = reader.ReadInt();
         }
     }
 
@@ -572,11 +591,24 @@ namespace GameServer
         //会先同步位置在同步技能;
         public int uuid;
         public int skillIndex;     //释放技能id;
+        public int px;             //位置x*100;
+        public int py;             //位置y*100;
+        public int pz;             //位置z*100;
+        public int fx;             //方向x*100;
+        public int fy;             //方向y*100;
+        public int fz;             //方向z*100;
+
 
         public BytesWriter Message(BytesWriter writer)
         {
             writer.WriteInt(uuid);
             writer.WriteInt(skillIndex);
+            writer.WriteInt(px);
+            writer.WriteInt(py);
+            writer.WriteInt(pz);
+            writer.WriteInt(fx);
+            writer.WriteInt(fy);
+            writer.WriteInt(fz);
 
             return writer;
         }
@@ -585,6 +617,12 @@ namespace GameServer
         {
             uuid = reader.ReadInt();
             skillIndex = reader.ReadInt();
+            px = reader.ReadInt();
+            py = reader.ReadInt();
+            pz = reader.ReadInt();
+            fx = reader.ReadInt();
+            fy = reader.ReadInt();
+            fz = reader.ReadInt();
         }
     }
 
