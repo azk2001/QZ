@@ -73,4 +73,15 @@ public class UIGameMain : UIBase {
         
     }
 
+    public override void OnClick(GameObject clickObject)
+    {
+        switch(clickObject.name)
+        {
+            case "Btn_Custom":
+                UIManager.Instance.OpenUI(eUIName.UIRoomList);
+                break;
+        }
+
+        base.OnClick(clickObject);
+    }
 }

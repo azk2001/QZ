@@ -10,8 +10,8 @@ public class TableManager : SingleClass<TableManager>
     //其实界面加载配置表
     private static Dictionary<string, int> loadStartList = new Dictionary<string, int>()
         {
-            {"cs_skill", 1},
-            { "c_sfx",1},
+            {"skill_c", 1},
+            {"c_sfx",1},
         };
 
 
@@ -69,7 +69,7 @@ public class TableManager : SingleClass<TableManager>
     {
         switch (name)
         {
-            case "cs_skill":
+            case "skill_c":
                 skill_c.LoadTxt(data);
                 break;
             case "c_sfx":

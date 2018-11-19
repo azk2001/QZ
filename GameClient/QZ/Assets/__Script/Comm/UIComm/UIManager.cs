@@ -15,6 +15,7 @@ public enum eUIName
     UIGameMain,
     UIBattle,
     UIRoom,
+    UIRoomList,
 }
 
 /// <summary>
@@ -50,7 +51,8 @@ public class UIManager : SingleClass<UIManager>
         allUIList.Add(eUIName.UIGameMain, new UIGameMain());
         allUIList.Add(eUIName.UIBattle, new UIBattle());
         allUIList.Add(eUIName.UIRoom, new UIRoom());
-        
+        allUIList.Add(eUIName.UIRoomList, new UIRoomList());
+
     }
 
     private Transform _uiParent = null;
