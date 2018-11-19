@@ -116,8 +116,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="bin\Debug\BattleServer.exe.config" />
-    <None Include="bin\Release\BattleServer.exe.config" />
+    <None Include="bin\output\GameServer.exe.config" />
+    <None Include="bin\output\OverGameServer.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -131,43 +131,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="bin\Debug\BattleServer.exe" />
-    <Content Include="bin\Debug\BattleServer.pdb" />
-    <Content Include="bin\Debug\bs.xml" />
-    <Content Include="bin\Debug\Config\MapXml\160001.xml" />
-    <Content Include="bin\Debug\Config\MapXml\510003.xml" />
-    <Content Include="bin\Debug\Config\MapXml\800001.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="bin\Debug\Config\MapXml\800002.xml" />
-    <Content Include="bin\Debug\Config\MapXml\810001.xml" />
-    <Content Include="bin\Debug\Config\Txt\battleroominit_b.txt" />
-    <Content Include="bin\Debug\Config\Txt\chaosrcore_b.txt" />
-    <Content Include="bin\Debug\Config\Txt\chaoticdata_b.txt" />
-    <Content Include="bin\Debug\Config\Txt\dungeon_b.txt" />
-    <Content Include="bin\Debug\Config\Txt\horoscopeatt_b.txt" />
-    <Content Include="bin\Debug\Config\Txt\monsterrevise_b.txt" />
-    <Content Include="bin\Debug\Config\Txt\monster_b.txt" />
-    <Content Include="bin\Debug\obs.xml" />
-    <Content Include="bin\Release\BattleServer.exe" />
-    <Content Include="bin\Release\BattleServer.pdb" />
-    <Content Include="bin\Release\bs.xml" />
-    <Content Include="bin\Release\Config\MapXml\160001.xml" />
-    <Content Include="bin\Release\Config\MapXml\510003.xml" />
-    <Content Include="bin\Release\Config\MapXml\800001.xml" />
-    <Content Include="bin\Release\Config\MapXml\800002.xml" />
-    <Content Include="bin\Release\Config\MapXml\810001.xml" />
-    <Content Include="bin\Release\Config\Txt\battleroominit_b.txt" />
-    <Content Include="bin\Release\Config\Txt\chaosrcore_b.txt" />
-    <Content Include="bin\Release\Config\Txt\chaoticdata_b.txt" />
-    <Content Include="bin\Release\Config\Txt\dungeon_b.txt" />
-    <Content Include="bin\Release\Config\Txt\horoscopeatt_b.txt" />
-    <Content Include="bin\Release\Config\Txt\monsterrevise_b.txt" />
-    <Content Include="bin\Release\Config\Txt\monster_b.txt" />
-    <Content Include="Config\MapXml\510003.xml" />
-    <Content Include="Config\MapXml\800001.xml" />
+    <Content Include="bin\output\Config\MapConfig\1001.xml" />
+    <Content Include="bin\output\GameServer.exe" />
+    <Content Include="bin\output\GameServer.pdb" />
+    <Content Include="bin\output\OverGameServer.exe" />
+    <Content Include="bin\output\OverGameServer.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
