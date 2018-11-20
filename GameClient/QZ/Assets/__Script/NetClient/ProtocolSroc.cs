@@ -145,7 +145,6 @@ public struct C2SGetRoomMessage
 
 public struct S2CGetRoomMessage
 {
-
     public int roomCount;                   //房间个数;
     public List<RoomParam> roomParamList;   //房间参数;
 

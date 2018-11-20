@@ -81,9 +81,8 @@ public static class BattleProtocolEvent
     {
         S2CGetRoomMessage message = new S2CGetRoomMessage();
         message.Message(reader);
-
-        UIRoom uiRoom = UIManager.Instance.GetUIBase<UIRoom>(eUIName.UIRoom);
-        uiRoom.ReceiveGetRoom(message);
+        
+        UIRoomList.ReceiveGetRoom(message);
     }
 
     public static void SendCreateRoom(C2SCreateRoomMessage message)

@@ -78,10 +78,22 @@ public class UIGameMain : UIBase {
         switch(clickObject.name)
         {
             case "Btn_Custom":
-                UIManager.Instance.OpenUI(eUIName.UIRoomList);
+                {
+                    SendGetRoom();
+                }
                 break;
         }
 
         base.OnClick(clickObject);
+    }
+
+
+    public void SendGetRoom()
+    {
+        C2SGetRoomMessage c2SGetRoom = new C2SGetRoomMessage();
+        c2SGetRoom.uuid = BattleProtocol.UUID;
+
+        BattleProtocolEvent.SendGetRoom(c2SGetRoom);
+
     }
 }
