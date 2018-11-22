@@ -1,0 +1,2 @@
+skillId	icon	cdTime	type	param
+1	ttt	0.5	1	ttt
