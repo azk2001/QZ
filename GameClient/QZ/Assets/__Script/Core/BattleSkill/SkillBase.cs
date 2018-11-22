@@ -12,7 +12,7 @@ public class SkillBase
 
     public virtual void OnConfig(int _skillId)
     {
-        skill = skill_c.GetThis(_skillId);
+        skill = skill_c.Get(_skillId);
         textParam = skill.textParam;
     }
 

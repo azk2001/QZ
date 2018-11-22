@@ -43,7 +43,7 @@ public class PlayerBasicsData
 {
     public int uuid;        //唯一标识ID;
     public string name;     //名字;
-    public int sex;         //性别;
+    public int modleId;         //模型Id;
     public int level;       //角色等级;
 
     public int px;          //位置X*100;
@@ -54,7 +54,7 @@ public class PlayerBasicsData
         uuid = reader.ReadInt();
         name = reader.ReadString(64);
         name = name.Replace("\0", string.Empty);
-        sex = reader.ReadInt();
+        modleId = reader.ReadInt();
         level = reader.ReadInt();
         px = reader.ReadInt();
         py = reader.ReadInt();
@@ -64,7 +64,7 @@ public class PlayerBasicsData
     {
         writer.WriteInt(uuid);
         writer.WriteString(name, 64);
-        writer.WriteInt(sex);
+        writer.WriteInt(modleId);
         writer.WriteInt(level);
         writer.WriteInt(px);
         writer.WriteInt(py);

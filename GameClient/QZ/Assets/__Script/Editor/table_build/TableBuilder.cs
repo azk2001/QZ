@@ -79,7 +79,7 @@ public static class TableBuilder
         cfgInfo.AppendLine("\r\n");
 
         //添加构造方法;
-        cfgInfo.AppendLine("        private " + fileName + "( tab_file_data.line_data file)");
+        cfgInfo.AppendLine("        private " + fileName + "( TabFileData.LineData file)");
         cfgInfo.AppendLine("        {");
         for (int i = 0, max = keysList.Length; i < max; ++i)
         {
@@ -87,13 +87,13 @@ public static class TableBuilder
             switch (str)
             {
                 case "int":
-                    cfgInfo.AppendLine("            " + keysList[i] + "= file.get_content_int(\"" + keysList[i] + "\");");
+                    cfgInfo.AppendLine("            " + keysList[i] + "= file.GetContentInt(\"" + keysList[i] + "\");");
                     break;
                 case "float":
-                    cfgInfo.AppendLine("            " + keysList[i] + "= file.get_content_float(\"" + keysList[i] + "\");");
+                    cfgInfo.AppendLine("            " + keysList[i] + "= file.GetContentFloat(\"" + keysList[i] + "\");");
                     break;
                 case "string":
-                    cfgInfo.AppendLine("            " + keysList[i] + "= file.get_content_str(\"" + keysList[i] + "\");");
+                    cfgInfo.AppendLine("            " + keysList[i] + "= file.GetContentStr(\"" + keysList[i] + "\");");
                     break;
             }
 
@@ -122,23 +122,23 @@ public static class TableBuilder
         cfgInfo.AppendLine("\r\n");
 
         //添加获取方法;
-        cfgInfo.AppendLine("        public static void LoadTxt(tab_file_data file)");
+        cfgInfo.AppendLine("        public static void LoadTxt(TabFileData file)");
         cfgInfo.AppendLine("        {");
-        cfgInfo.AppendLine("            List<tab_file_data.line_data> list = file.get_line_data();");
+        cfgInfo.AppendLine("            List<TabFileData.LineData> list = file.GetLineData();");
         cfgInfo.AppendLine("            for (int i = 0, max = list.Count; i < max; i++)");
         cfgInfo.AppendLine("            {");
-        cfgInfo.AppendLine("                tab_file_data.line_data data = list[i];");
+        cfgInfo.AppendLine("                TabFileData.LineData data = list[i];");
 
         switch (keyType)
         {
             case "int":
-                cfgInfo.AppendLine("                " + keyType + " id = data.get_content_int(\"" + keysList[0] + "\");");
+                cfgInfo.AppendLine("                " + keyType + " id = data.GetContentInt(\"" + keysList[0] + "\");");
                 break;
             case "float":
-                cfgInfo.AppendLine("                " + keyType + " id = data.get_content_float(\"" + keysList[0] + "\");");
+                cfgInfo.AppendLine("                " + keyType + " id = data.GetContentFloat(\"" + keysList[0] + "\");");
                 break;
             case "string":
-                cfgInfo.AppendLine("                " + keyType + " id = data.get_content_str(\"" + keysList[0] + "\");");
+                cfgInfo.AppendLine("                " + keyType + " id = data.GetContentStr(\"" + keysList[0] + "\");");
                 break;
         }
        

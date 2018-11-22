@@ -1,0 +1,7 @@
+playerId	icon	resName	life	speed	shield	harm
+1	ttt	PlayerNan1	100	7000	1	10
+2	ttt	PlayerNan2	100	7000	1	10
+3	ttt	PlayerNan3	100	7000	1	10
+4	ttt	PlayerNv1	100	7000	1	10
+5	ttt	PlayerNv2	100	7000	1	10
+6	ttt	PlayerNv3	100	7000	1	10

@@ -41,13 +41,12 @@ public class GameUnit
         baseUnitData = (BattleUnitData)data.Clone();
         runUnitData = (BattleUnitData)data.Clone();
 
-        if (_basicsData.sex == 1)
+        //还需要考虑怪物的模型初始化;
+
+        player_c player = player_c.Get(_basicsData.modleId);
+        if (player!=null)
         {
-            prefabModel = BattleUnitRoot.Instance.SpwanPrefab("PlayerNan1");
-        }
-        else
-        {
-            prefabModel = BattleUnitRoot.Instance.SpwanPrefab("PlayerNv1");
+            prefabModel = BattleUnitRoot.Instance.SpwanPrefab(player.resName);
         }
 
         mUnitController = prefabModel.GetComponent<UnitController>();
@@ -60,6 +59,8 @@ public class GameUnit
         Reset();
 
         AddEventTrigger();
+
+        SetPosition(new Vector3(_basicsData.px / 100.0f, 0, _basicsData.py / 100.0f));
     }
 
 

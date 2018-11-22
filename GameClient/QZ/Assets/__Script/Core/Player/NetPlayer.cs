@@ -37,13 +37,10 @@ public class NetPlayer
     public string GetModleStr()
     {
         string str = "";
-        if (basicsData.sex == 1)
+        player_c player = player_c.Get(basicsData.modleId);
+        if (player != null)
         {
-            str = "PlayerNan1";
-        }
-        else
-        {
-            str = "PlayerNan1";
+            str = player.resName;
         }
 
         return str;

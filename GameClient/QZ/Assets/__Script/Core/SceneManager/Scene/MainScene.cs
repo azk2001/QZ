@@ -8,17 +8,12 @@ public class MainScene : SceneBase
     {
         SceneManager.LoadScene("mainGame");
 
-        List<NetPlayer> netPlayers = NetPlayerManager.GetAllNetPlayer();
-        foreach(NetPlayer netPlayer in netPlayers)
-        {
-            PlayerInScene(netPlayer);
-        }
-
         UIManager.Instance.OpenUI(eUIName.UIGameMain);
 
         base.OnBegin();
     }
 
+    //在这儿可以理解进入房间;
     public override void PlayerInScene(NetPlayer netPlayer)
     {
         GameUnit gameUnit = GameUnitManager.Instance.CreateServerGameUnit(netPlayer.uuid, netPlayer.basicsData, netPlayer.battleUnitData);
@@ -27,14 +22,15 @@ public class MainScene : SceneBase
 
         if (BattleProtocol.UUID == netPlayer.uuid)
         {
-
-            LocalPlayer.Instance.netPlayer = netPlayer;
             LocalPlayer.Instance.gameUnit = gameUnit;
+
+            PlayerController.Instance.AddPlayerController(gameUnit);
         }
 
         base.PlayerInScene(netPlayer);
     }
 
+    //在这儿可以理解为离开房间;
     public override void PlayerOutScene(NetPlayer netPlayer)
     {
         GameUnitManager.Instance.RemoveGameUnit(netPlayer.uuid);

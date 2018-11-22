@@ -260,8 +260,6 @@ public class UICreatePlayer : UIBase
         }
 
         UIManager.Instance.CloseUI(eUIName.UICreatePlayer, false, true);
-
-        ProcessManager.Instance.Begin(ProcessType.processmain);
     }
 }
 

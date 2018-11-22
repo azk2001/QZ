@@ -45,10 +45,8 @@ public static class BattleProtocolEvent
         S2CCreatePlayerMessage message = new S2CCreatePlayerMessage();
         message.Message(reader);
 
-        for (int i = 0; i < message.playerCount; i++)
-        {
-            NetPlayerManager.AddNetPlayer(message.netPlayer[i]);
-        }
+        NetPlayerManager.AddNetPlayer(message.netPlayer);
+        LocalPlayer.Instance.netPlayer = message.netPlayer;
 
         UICreatePlayer createPlayer = UIManager.Instance.GetUIBase<UICreatePlayer>(eUIName.UICreatePlayer);
         createPlayer.OnCreateFinish();
@@ -62,10 +60,9 @@ public static class BattleProtocolEvent
 
         NetPlayerManager.AddNetPlayer(message.netPlayer);
 
-        GameSceneManager.Instance.curScene.PlayerInScene(message.netPlayer);
-
+        //跳转场景到主城;
+        ProcessManager.Instance.Begin(ProcessType.processmain);
     }
-
 
     public static void SendGetRoom(C2SGetRoomMessage message)
     {
@@ -82,7 +79,7 @@ public static class BattleProtocolEvent
         S2CGetRoomMessage message = new S2CGetRoomMessage();
         message.Message(reader);
         
-        UIRoomList.ReceiveGetRoom(message);
+        UIRoomListData.ReceiveGetRoom(message);
     }
 
     public static void SendCreateRoom(C2SCreateRoomMessage message)
@@ -100,8 +97,7 @@ public static class BattleProtocolEvent
         S2CCreateRoomMessage message = new S2CCreateRoomMessage();
         message.Message(reader);
 
-        UIRoom uiRoom = UIManager.Instance.GetUIBase<UIRoom>(eUIName.UIRoom);
-        uiRoom.ReceiveCreateRoom(message);
+        UIRoomListData.ReceiveCreateRoom(message);
 
     }
 
@@ -120,8 +116,7 @@ public static class BattleProtocolEvent
         S2CAddRoomMessage message = new S2CAddRoomMessage();
         message.Message(reader);
 
-        UIRoom uiRoom = UIManager.Instance.GetUIBase<UIRoom>(eUIName.UIRoom);
-        uiRoom.ReceiveAddRoom(message);
+        UIRoomListData.ReceiveAddRoom(message);
     }
 
     public static void SendStartGame(C2SStartGameMessage message)

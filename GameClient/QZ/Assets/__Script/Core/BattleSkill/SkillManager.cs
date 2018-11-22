@@ -25,7 +25,7 @@ public class SkillManager : SingleClass<SkillManager>
     {
         int uuid = SkillManager.uuid;
 
-        int skillTypeId = skill_c.GetThis(skillId).type;
+        int skillTypeId = skill_c.Get(skillId).type;
 
         SkillBase sb = (SkillBase)(System.Activator.CreateInstance(skillType[skillTypeId]));
         if (sb != null)

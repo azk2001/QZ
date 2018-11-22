@@ -50,8 +50,8 @@ public class UIGameMain : UIBase {
 
     public void RefreshModle()
     {
-        string str = LocalPlayer.Instance.netPlayer.GetModleStr();
-        prefabModel = BattleUnitRoot.Instance.SpwanPrefab(str);
+        string resName = LocalPlayer.Instance.netPlayer.GetModleStr();
+        prefabModel = BattleUnitRoot.Instance.SpwanPrefab(resName);
         prefabModel.SetParent(modleParent.transform);
         prefabModel.SetLayers("UI");
         prefabModel.Reset();
