@@ -8,7 +8,7 @@ public class PlayerController : SingleClass<PlayerController>
     public float aniTransSpeed = 5.0f;
 
     private Vector3 moveDir = Vector3.zero;  //移动方向;
-    private bool isInput = false;
+    public bool isInput = false;
 
     private Camera mainCamera
     {

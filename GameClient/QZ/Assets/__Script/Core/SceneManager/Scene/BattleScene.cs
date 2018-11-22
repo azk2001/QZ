@@ -12,11 +12,13 @@ public class BattleScene : SceneBase
 
     public Dictionary<int, List<GameUnit>> battleUnitList = new Dictionary<int, List<GameUnit>>();
 
-    public cs_dungeon curDungeonParam = null;
+    public dungeon_c curDungeonParam = null;
 
     public override void OnBegin()
     {
         SceneManager.LoadScene("battleGame");
+
+        UIManager.Instance.OpenUI(eUIName.UIBattle);
 
         base.OnBegin();
     }
@@ -42,6 +44,7 @@ public class BattleScene : SceneBase
         if (BattleProtocol.UUID == netPlayer.uuid)
         {
             PlayerController.Instance.AddPlayerController(gameUnit);
+            PlayerController.Instance.isInput = false;
 
             LocalPlayer.Instance.netPlayer = netPlayer;
             LocalPlayer.Instance.gameUnit = gameUnit;
@@ -54,15 +57,6 @@ public class BattleScene : SceneBase
     {
 
         base.PlayerOutScene(netPlayer);
-    }
-
-    public void AddGameUnit(int campId, GameUnit gameUnit)
-    {
-        if (battleUnitList.ContainsKey(campId) == false)
-        {
-            battleUnitList[campId] = new List<GameUnit>();
-        }
-        battleUnitList[campId].Add(gameUnit);
     }
 
     //战斗结束;
@@ -88,12 +82,11 @@ public class BattleScene : SceneBase
     public void ReceiveStartBattle(S2CStartBattleMessage message)
     {
         //可以开始战斗;
-        if(message.isStartBattle == 1)
+        if (message.isStartBattle == 1)
         {
-
+            PlayerController.Instance.isInput = true;
         }
     }
-
 
     public override void OnEnd()
     {
@@ -110,14 +103,9 @@ public class BattleScene : SceneBase
         base.OnEnd();
     }
 
-
-
     public void Init(int dungeonId)
     {
         battleUnitList.Clear();
-
-
-
     }
 
     //本地玩家创建完成;
