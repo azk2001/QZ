@@ -61,9 +61,7 @@ namespace GameServer
             List<NetPlayer> netPlayers = NetPlayerManager.GetNetPlayers();
 
             S2CCreatePlayerMessage s2CCreatePlayer = new S2CCreatePlayerMessage();
-            s2CCreatePlayer.playerCount = netPlayers.Count;
-            s2CCreatePlayer.netPlayer = new List<NetPlayer>();
-            s2CCreatePlayer.netPlayer.AddRange(netPlayers);
+            s2CCreatePlayer.netPlayer = netPlayer;
             s2CCreatePlayer.isCreate = 1;
 
             writer.Clear();
@@ -135,16 +133,8 @@ namespace GameServer
 
             s2CCreateRoom.roomParam = roomParam;
 
-            PlayerParam playerParam = new PlayerParam();
-            playerParam.camp = netPlayer.camp;
-            playerParam.isOwner = 1;
-            playerParam.level = netPlayer.basicsData.level;
-            playerParam.playerName = netPlayer.basicsData.name;
-            playerParam.sex = netPlayer.basicsData.sex;
-            playerParam.uuid = netPlayer.uuid;
-
-            s2CCreateRoom.playerList = new List<PlayerParam>();
-            s2CCreateRoom.playerList.Add(playerParam);
+            s2CCreateRoom.playerList = new List<NetPlayer>();
+            s2CCreateRoom.playerList.Add(netPlayer);
 
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_CreateRoom);
@@ -158,42 +148,40 @@ namespace GameServer
             c2SAddRoom.Message(reader);
 
             NetPlayer netPlayer = NetPlayerManager.GetNetPlayer(uuid);
-
             RoomBase battleRoom = RoomManager.GetRoomBase(c2SAddRoom.roomIndex);
-
             bool isInRoom = battleRoom.PlayerInRoom(netPlayer);
 
             S2CAddRoomMessage s2CAddRoom = new S2CAddRoomMessage();
             s2CAddRoom.isInRoom = (byte)(isInRoom ? 1 : 0);
-
-            s2CAddRoom.playerCount = battleRoom.netPlayerList.Count;
-
-            s2CAddRoom.playerList = new List<PlayerParam>();
-
-            foreach (NetPlayer nPlayer in battleRoom.netPlayerList)
-            {
-                PlayerParam playerParam = new PlayerParam();
-                playerParam.camp = nPlayer.camp;
-                playerParam.isOwner = (byte)(battleRoom.ownerPlayer == nPlayer ? 1 : 0);
-                playerParam.level = nPlayer.basicsData.level; ;
-                playerParam.playerName = nPlayer.basicsData.name;
-                playerParam.sex = nPlayer.basicsData.sex;
-                playerParam.uuid = nPlayer.uuid;
-
-                s2CAddRoom.playerList.Add(playerParam);
-            }
-
+            
             RoomParam roomParam = new RoomParam();
             roomParam.roomIndex = battleRoom.roomIndex;
             roomParam.roomName = battleRoom.roomName;
             roomParam.roomType = (byte)battleRoom.roomType;
-
             s2CAddRoom.roomParam = roomParam;
 
-            writer.Clear();
-            writer.WriteByte((byte)S2CBattleProtocol.S2C_AddRoom);
+            //发送其他玩家有人进入房间;
+            {
+                s2CAddRoom.playerCount = 1;
+                s2CAddRoom.playerList = new List<NetPlayer>();
 
-            BattleProtocol.SendBytes(uuid, s2CAddRoom.Message(writer));
+                s2CAddRoom.playerList.Add(netPlayer);
+
+                writer.Clear();
+                writer.WriteByte((byte)S2CBattleProtocol.S2C_AddRoom);
+                BattleProtocol.SendRoomByte(battleRoom.roomIndex, uuid, s2CAddRoom.Message(writer), true, false);
+            }
+
+            //发送给自己，房间里面有多少玩家，包括自己;
+            {
+                s2CAddRoom.playerCount = battleRoom.netPlayerList.Count;
+                s2CAddRoom.playerList = battleRoom.netPlayerList;
+
+                writer.Clear();
+                writer.WriteByte((byte)S2CBattleProtocol.S2C_AddRoom);
+                BattleProtocol.SendBytes(uuid, s2CAddRoom.Message(writer));
+            }           
+
         }
 
         public static void ReceiveStartGame(BytesReader reader, int uuid)
@@ -260,7 +248,7 @@ namespace GameServer
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerMove);
 
-            BattleProtocol.SendBytes(uuid, s2CPlayerMove.Message(writer), true, false);
+            BattleProtocol.SendRoomByte(netPlayer.roomIndex,uuid, s2CPlayerMove.Message(writer), true, false);
 
         }
 
@@ -284,7 +272,7 @@ namespace GameServer
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerRoll);
 
-            BattleProtocol.SendBytes(uuid, s2CPlayerRoll.Message(writer), true, false);
+            BattleProtocol.SendRoomByte(netPlayer.roomIndex,uuid, s2CPlayerRoll.Message(writer), true, false);
 
         }
 
@@ -292,6 +280,8 @@ namespace GameServer
         {
             C2SPlayerSkillMessage c2SPlayerSkill = new C2SPlayerSkillMessage();
             c2SPlayerSkill.Message(reader);
+
+            NetPlayer netPlayer = NetPlayerManager.GetNetPlayer(c2SPlayerSkill.uuid);
 
             S2CPlayerSkillMessage s2CPlayerSkill = new S2CPlayerSkillMessage();
             s2CPlayerSkill.uuid = c2SPlayerSkill.uuid;
@@ -306,7 +296,7 @@ namespace GameServer
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerSkill);
 
-            BattleProtocol.SendBytes(uuid, s2CPlayerSkill.Message(writer), true, false);
+            BattleProtocol.SendRoomByte(netPlayer.roomIndex, uuid, s2CPlayerSkill.Message(writer), true, false);
         }
 
         public static void ReceivePlayerHit(BytesReader reader, int uuid)
@@ -321,13 +311,14 @@ namespace GameServer
             if (roomBase != null)
             {
                 roomBase.battleCore.ReduceLife(c2SPlayerHit.atkUUID, c2SPlayerHit.hitUUID);
-
             }
         }
 
         //发送玩家受伤
         public static void SendPlayerHit(int atkUUID, int hitUUID)
         {
+            NetPlayer netPlayer = NetPlayerManager.GetNetPlayer(hitUUID);
+
             S2CPlayerHitMessage s2CPlayerHit = new S2CPlayerHitMessage();
             s2CPlayerHit.hitUUID = hitUUID;
             s2CPlayerHit.atkUUID = atkUUID;
@@ -335,12 +326,14 @@ namespace GameServer
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerHit);
 
-            BattleProtocol.SendBytes(hitUUID, s2CPlayerHit.Message(writer), true, true);
+            BattleProtocol.SendRoomByte(netPlayer.roomIndex, hitUUID, s2CPlayerHit.Message(writer), true, true);
         }
 
         //服务器主动发送角色死亡信息;
         public static void SendPlayerDie(int atkUUID, int hitUUID)
         {
+            NetPlayer netPlayer = NetPlayerManager.GetNetPlayer(hitUUID);
+
             S2CPlayerDieMessage s2CPlayerDie = new S2CPlayerDieMessage();
             s2CPlayerDie.hitUUID = hitUUID;
             s2CPlayerDie.atkUUID = atkUUID;
@@ -348,7 +341,7 @@ namespace GameServer
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerDie);
 
-            BattleProtocol.SendBytes(hitUUID, s2CPlayerDie.Message(writer), true, true);
+            BattleProtocol.SendRoomByte(netPlayer.roomIndex, hitUUID, s2CPlayerDie.Message(writer), true, true);
         }
 
         public static void ReceivePlayerAddBuff(BytesReader reader, int uuid)

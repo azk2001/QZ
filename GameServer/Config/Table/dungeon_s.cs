@@ -8,7 +8,7 @@ public enum eMapType
     pvpfightPK = 51,            //即时同步切磋副本;
     pvpFightTeam = 80,          //组队副本;
     pvpFightChaos = 81,         //多人副本乱斗模式;
-    pvpfight1V1 =  82,          //1V1天梯
+    pvpfight1V1 = 82,          //1V1天梯
 }
 
 public enum eStarConditionType

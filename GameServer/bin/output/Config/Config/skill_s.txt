@@ -1,2 +1,2 @@
-skillId	icon	cdTime	type	param
-1	ttt	0.5	1	ttt
+skillId	icon	cdTime	type	aniName	param
+1	ttt	0.5	1	atk1	muzzleEffectName=Fire1;bulletEffectName=Fire1;moveSpeed=40;showTime=3

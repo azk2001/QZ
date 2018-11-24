@@ -18,9 +18,6 @@ namespace GameServer
         {
             base.InScene(netPlayer);
 
-            //添加角色;
-            netPlayer.gameUnit = GameUnitManager.AddGameUnit(netPlayer.uuid, netPlayer.roomIndex);
-
             ElementParam elementList = playerElement.elementParamList[netPlayerList.Count - 1];
             netPlayer.gameUnit.position = elementList.transform.position;
 

@@ -70,6 +70,10 @@
     <Compile Include="BsVsClient\BattleCore\BattleCore.cs" />
     <Compile Include="BsVsClient\BattleCore\GameFinishData.cs" />
     <Compile Include="Config\TableData\TableFile.cs" />
+    <Compile Include="Config\Table\dungeon_s.cs" />
+    <Compile Include="Config\Table\player_s.cs" />
+    <Compile Include="Config\Table\sfx_s.cs" />
+    <Compile Include="Config\Table\skill_s.cs" />
     <Compile Include="NetServer\BattleProtocol\BattleProtocol.cs" />
     <Compile Include="NetServer\BattleProtocol\BattleProtocolEvent.cs" />
     <Compile Include="NetServer\BattleProtocol\ProtocolBattleManager.cs" />
@@ -97,7 +101,6 @@
     <Compile Include="BsVsClient\System\Transform.cs" />
     <Compile Include="BsVsClient\System\Vector3.cs" />
     <Compile Include="BsVsClient\SingleTon_Class.cs" />
-    <Compile Include="Config\TableData\dungeon_s.cs" />
     <Compile Include="Config\TableData\TableManager.cs" />
     <Compile Include="NetServer\BytesReader.cs" />
     <Compile Include="NetServer\BytesWriter.cs" />
@@ -127,6 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\output\Config\Config\dungeon_s.txt" />
+    <Content Include="bin\output\Config\Config\player_s.txt" />
+    <Content Include="bin\output\Config\Config\sfx_s.txt" />
+    <Content Include="bin\output\Config\Config\skill_s.txt" />
     <Content Include="bin\output\Config\MapConfig\10001.xml" />
     <Content Include="bin\output\GameServer.exe" />
     <Content Include="bin\output\GameServer.pdb" />

@@ -11,7 +11,10 @@ namespace GameServer
     {
         private List<List<string>> loadList = new List<List<string>>
         {
-                new List<string>(){ "dungeon_s", "1"},                
+                new List<string>(){ "dungeon_s", "1"},
+                new List<string>(){ "player_s", "1"},
+                new List<string>(){ "sfx_s", "1"},
+                new List<string>(){ "skill_s", "1"},
         };
 
         public void Init()
@@ -37,7 +40,6 @@ namespace GameServer
 
                 LoadTxt(strList[0], data);
             }
-
         }
 
 
@@ -47,6 +49,15 @@ namespace GameServer
             {
                 case "dungeon_s":
                     dungeon_s.LoadTxt(data);
+                    break;
+                case "player_s":
+                    player_s.LoadTxt(data);
+                    break;
+                case "sfx_s":
+                    sfx_s.LoadTxt(data);
+                    break;
+                case "skill_s":
+                    skill_s.LoadTxt(data);
                     break;
             }
 

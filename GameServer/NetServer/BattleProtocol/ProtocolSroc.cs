@@ -80,32 +80,21 @@ namespace GameServer
     public struct S2CCreatePlayerMessage
     {
         public int isCreate;        //是否新号
-        public int playerCount;     //网络玩家个数;
-        public List<NetPlayer> netPlayer; //角色信息
+        public NetPlayer netPlayer; //角色信息
 
         public void Message(BytesReader reader)
         {
             isCreate = reader.ReadInt();
-            playerCount = reader.ReadInt();
-            netPlayer = new List<NetPlayer>();
-            for(int i=0; i< playerCount;i++ )
-            {
-                NetPlayer np = new NetPlayer();
-                np.SetBytes(reader);
-                netPlayer.Add(np);
+            NetPlayer np = new NetPlayer();
+            np.SetBytes(reader);
+            netPlayer = np;
 
-            }
         }
 
         public BytesWriter Message(BytesWriter writer)
         {
             writer.WriteInt(isCreate);
-            writer.WriteInt(netPlayer.Count);
-
-            for (int i = 0; i < netPlayer.Count; i++)
-            {
-                netPlayer[i].GetBytes(writer);
-            }
+            netPlayer.GetBytes(writer);
 
             return writer;
         }
@@ -202,23 +191,36 @@ namespace GameServer
     public struct S2CCreateRoomMessage
     {
         public RoomParam roomParam;             //房间参数;
-        public List<PlayerParam> playerList;    //房间里面的角色信息;
+        public int playerCount;                 //玩家个数;
+        public List<NetPlayer> playerList;    //房间里面的角色信息;
 
         public BytesWriter Message(BytesWriter writer)
         {
-            writer.WriteString(roomParam.roomName, 64);
-            writer.WriteInt(roomParam.roomIndex);
-            writer.WriteByte(roomParam.roomType);
+            roomParam.Message(writer);
 
+            writer.WriteInt(playerList.Count);
+           
+            for (int i = 0,max = playerList.Count; i < max; i++)
+            {
+                playerList[i].GetBytes(writer);
+            }
             return writer;
         }
 
         public void Message(BytesReader reader)
         {
-            roomParam.roomName = reader.ReadString(64);
-            roomParam.roomName = roomParam.roomName.Replace("\0", "");
-            roomParam.roomIndex = reader.ReadInt();
-            roomParam.roomType = reader.ReadByte();
+            roomParam.Message(reader);
+            playerCount = reader.ReadInt();
+
+            playerList = new List<NetPlayer>();
+            for(int i=0;i<playerCount;i++)
+            {
+                NetPlayer netPlayer = new NetPlayer();
+                netPlayer.SetBytes(reader);
+
+                playerList.Add(netPlayer);
+            }
+
         }
     }
 
@@ -243,13 +245,13 @@ namespace GameServer
         public byte isInRoom;                   //是否能进入;
         public RoomParam roomParam;             //房间参数;
         public int playerCount;                 //角色数量;
-        public List<PlayerParam> playerList;    //房间里面的角色信息;
+        public List<NetPlayer> playerList;      //房间里面的角色信息;
 
         public BytesWriter Message(BytesWriter writer)
         {
-            writer.WriteByte(isInRoom); 
+            writer.WriteByte(isInRoom);
 
-            if(isInRoom == 1)
+            if (isInRoom == 1)
             {
                 writer.WriteString(roomParam.roomName, 64);
                 writer.WriteInt(roomParam.roomIndex);
@@ -258,13 +260,8 @@ namespace GameServer
 
                 for (int i = 0, max = playerCount; i < max; i++)
                 {
-                    PlayerParam playerParam = playerList[i];
-                    writer.WriteString(playerParam.playerName, 64);
-                    writer.WriteInt(playerParam.level);
-                    writer.WriteInt(playerParam.sex);
-                    writer.WriteInt(playerParam.camp);
-                    writer.WriteByte(playerParam.isOwner);
-                    writer.WriteInt(playerParam.uuid);
+                    NetPlayer nPlayer = new NetPlayer();
+                    nPlayer.GetBytes(writer);
                 }
             }
 
@@ -274,7 +271,7 @@ namespace GameServer
         public void Message(BytesReader reader)
         {
             isInRoom = reader.ReadByte();
-            if(isInRoom == 1)
+            if (isInRoom == 1)
             {
                 roomParam.roomName = reader.ReadString(64);
                 roomParam.roomName = roomParam.roomName.Replace("\0", "");
@@ -283,19 +280,13 @@ namespace GameServer
 
                 playerCount = reader.ReadInt();
 
-                playerList = new List<PlayerParam>();
+                playerList = new List<NetPlayer>();
                 for (int i = 0, max = playerCount; i < max; i++)
                 {
-                    PlayerParam playerParam = new PlayerParam();
-                    playerParam.playerName = reader.ReadString(64);
-                    playerParam.playerName = playerParam.playerName.Replace("\0", "");
-                    playerParam.level = reader.ReadInt();
-                    playerParam.sex = reader.ReadInt();
-                    playerParam.camp = reader.ReadInt();
-                    playerParam.isOwner = reader.ReadByte();
-                    playerParam.uuid = reader.ReadInt();
+                    NetPlayer netPlayer = new NetPlayer();
+                    netPlayer.SetBytes(reader);
 
-                    playerList.Add(playerParam);
+                    playerList.Add(netPlayer);
                 }
             }
         }
@@ -830,16 +821,24 @@ namespace GameServer
         public string roomName;         //房间名字;
         public int roomIndex;           //房间ID;
         public byte roomType;           //房间类型; 1单人赛 2组队赛
-    }
 
-    public class PlayerParam
-    {
-        public string playerName;   //名字;
-        public int level;           //等级;
-        public int sex;            //性别;
-        public int camp;            //正营;
-        public byte isOwner;        //是否是房主;
-        public int uuid;            //玩家唯一标识ID;
+        public BytesWriter Message(BytesWriter writer)
+        {
+            writer.WriteString(roomName, 64);
+            writer.WriteInt(roomIndex);
+            writer.WriteByte(roomType);
+
+            return writer;
+        }
+
+        public void Message(BytesReader reader)
+        {
+            roomName = reader.ReadString(64);
+            roomName = roomName.Replace("\0", "");
+            roomIndex = reader.ReadInt();
+            roomType = reader.ReadByte();
+        }
+
     }
 
     public class RefreshBuffParam

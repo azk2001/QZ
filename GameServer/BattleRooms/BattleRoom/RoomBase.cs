@@ -44,14 +44,14 @@ namespace GameServer
         }
 
         public string roomName = "11.11天猫购物";                       //房间名字;
-        public RoomState roomState = RoomState.leisure;             //当前房间状态;
-        public RoomType roomType = RoomType.oneFighting;            //房间类型;
+        public RoomState roomState = RoomState.leisure;                 //当前房间状态;
+        public RoomType roomType = RoomType.oneFighting;                //房间类型;
 
-        public NetPlayer ownerPlayer;        //房主游戏对象;
-        public int roomIndex = 0;           //房间索引;
-        public int maxPlayerNum = 6;        //最大可承载玩家数
-        public bool isRun = false;          //当前房间是否在运行;
-        public BattleCore battleCore = null;                        //当前副本战役流程;
+        public NetPlayer ownerPlayer;           //房主游戏对象;
+        public int roomIndex = 0;               //房间索引;
+        public int maxPlayerNum = 6;            //最大可承载玩家数
+        public bool isRun = false;              //当前房间是否在运行;
+        public BattleCore battleCore = null;    //当前副本战役流程;
 
         //房间信息初始化;
         public virtual void Init(int roomIndex)
@@ -89,6 +89,11 @@ namespace GameServer
             MyDebug.WriteLine("PlayerInRoom roomIndex:" + roomIndex + "  uid:" + netPlayer.uuid);
 
             roomState = RoomState.ready;
+
+            //添加角色;
+            netPlayer.gameUnit = GameUnitManager.AddGameUnit(netPlayer.uuid, netPlayer.roomIndex);
+            netPlayer.basicsData.px = 0;
+            netPlayer.basicsData.py = 0;
 
             return true;
         }
