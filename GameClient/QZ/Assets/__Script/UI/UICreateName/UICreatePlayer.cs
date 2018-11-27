@@ -54,7 +54,6 @@ public class UICreatePlayer : UIBase
 
     private Transform ManDesc = null;
     private Transform WomanDesc = null;
-    private Transform curDesc = null;
 
     private Transform lastModle = null;
 
@@ -121,29 +120,22 @@ public class UICreatePlayer : UIBase
         if (curModleName == prefabName)
             return;
 
-        curModleName = prefabName;
-
-        AssetBundleLoadManager.Instance.LoadObject(prefabName, eLoadPriority.advanced, new object[] { }, OnLoadControlFinish);
-    }
-
-    private void OnLoadControlFinish(UnityEngine.Object obj, object[] pars)
-    {
-        if(lastModle!= null)
+        if (lastModle != null)
         {
-            GameObject.Destroy(lastModle.gameObject);
+            BattleUnitRoot.Instance.DeSpwan(lastModle);
         }
 
-        GameObject go = (GameObject)GameObject.Instantiate<Object>(obj);
+        curModleName = prefabName;
+
+        Transform prefab = BattleUnitRoot.Instance.SpwanPrefab(prefabName);
         
-        go.SetActive(true);
-        go.transform.Reset();
-        go.transform.localEulerAngles = Vector3.up * 180;
+        prefab.transform.Reset();
+        prefab.transform.localEulerAngles = Vector3.up * 180;
 
-        PrafabParent.target = go.transform;
+        PrafabParent.target = prefab.transform;
 
-        lastModle = go.transform;
+        lastModle = prefab;
     }
-
 
     public void RandomName()
     {
@@ -228,14 +220,14 @@ public class UICreatePlayer : UIBase
                 RandomName();
 
                 break;
-            case "btn_nan":
+            case "btn_table_1":
 
                 isMan = true;
 
                 RefreshUI();
 
                 break;
-            case "btn_nv":
+            case "btn_table_2":
 
                 isMan = false;
 

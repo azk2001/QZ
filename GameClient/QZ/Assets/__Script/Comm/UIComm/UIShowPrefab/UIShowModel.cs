@@ -81,13 +81,6 @@ public class UIShowModel : MonoBehaviour
         }
     }
 
-    //public GameObject ShowPrefab(UnitControler unitCtrl, int uid = 0, Vector3 localPosition = default(Vector3), Vector3 localAngle = default(Vector3), float size = 1, string layerName = "UI")
-    //{
-    //    unitCtrl.play("custom_idle");
-    //    return ShowPrefab(unitCtrl.trans_root.gameObject, uid, localPosition, localAngle, size, layerName);
-    //}
-
-
     /// <summary>
     /// 显示模型到UI上;
     /// </summary>
