@@ -55,7 +55,6 @@ public class BattleScene : SceneBase
 
     public override void PlayerOutScene(NetPlayer netPlayer)
     {
-
         base.PlayerOutScene(netPlayer);
     }
 

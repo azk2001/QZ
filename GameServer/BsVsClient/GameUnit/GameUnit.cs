@@ -5,6 +5,13 @@ using System.Text;
 
 namespace GameServer
 {
+    public enum GameUnitType
+    {
+        none,
+        player,
+        monster,
+    }
+
     public class GameUnit
     {
         //初始化数据
@@ -14,7 +21,9 @@ namespace GameServer
         public PlayerBasicsData basicsData = null;
         public BattleUnitData baseUnitData = null;
         public BattleUnitData runUnitData = null;
-                
+
+        public GameUnitType unitType = GameUnitType.none;
+
         //运行时数据
         public Vector3 position;    //游戏单位当前的位置点;扩大了1000倍的int类型;
 

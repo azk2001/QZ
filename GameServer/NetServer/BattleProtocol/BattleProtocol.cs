@@ -24,7 +24,7 @@ namespace GameServer
         S2C_PlayerRemoveBuff,
         S2C_PlayerRefreshBuff,
         S2C_PlayerDie,
-
+        S2C_GameFinish,
 
         Count,
     }
@@ -48,6 +48,7 @@ namespace GameServer
         C2S_PlayerAddBuff,
         C2S_PlayerRemoveBuff,
         C2S_PlayerDie,
+        C2S_GameFinish,
 
         Count,
     }
@@ -62,9 +63,6 @@ namespace GameServer
             Program.socket.ReceiveClientData += OnReceiveMsg;
 
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_Ping, ReceivePing);
-            ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_Login, BattleProtocolEvent.ReceiveLogin);
-
-
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_Login, BattleProtocolEvent.ReceiveLogin);
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_CreatePlayer, BattleProtocolEvent.ReceiveCreatePlayer);
             ProtocolBattleManager.AddListener((int)C2SBattleProtocol.C2S_GetRoom, BattleProtocolEvent.ReceiveGetRoom);

@@ -21,6 +21,7 @@ public enum S2CBattleProtocol
     S2C_PlayerRemoveBuff,
     S2C_PlayerRefreshBuff,
     S2C_PlayerDie,
+    S2C_GameFinish,
 
     Count,
 }
@@ -44,6 +45,7 @@ public enum C2SBattleProtocol
     C2S_PlayerAddBuff,
     C2S_PlayerRemoveBuff,
     C2S_PlayerDie,
+    C2S_GameFinish,
 
     Count,
 }
@@ -81,11 +83,8 @@ public class BattleProtocol
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_PlayerRemoveBuff, BattleProtocolEvent.ReceivePlayerRemoveBuff);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_PlayerRefreshBuff, BattleProtocolEvent.ReceivePlayerRefreshBuff);
         ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_PlayerDie, BattleProtocolEvent.ReceivePlayerDie);
-        
-        
-        
+        ProtocolBattleManager.AddListener((int)S2CBattleProtocol.S2C_GameFinish, BattleProtocolEvent.ReceiveGameFinish);
 
-        
     }
 
 

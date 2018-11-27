@@ -353,5 +353,15 @@ namespace GameServer
         {
 
         }
+
+
+        public static void SendGameFinish(S2CGameFinishMessage s2CGameFinish)
+        {
+
+            writer.Clear();
+            writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerDie);
+
+            BattleProtocol.SendRoomByte(s2CGameFinish.roomIndex, 0, s2CGameFinish.Message(writer), true, true);
+        }
     }
 }

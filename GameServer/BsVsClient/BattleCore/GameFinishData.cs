@@ -3,34 +3,34 @@ using System.Collections.Generic;
 
 namespace GameServer
 {
-    public class GameFinishParam
-    {
-        public byte loseCamp = 0;
-        public int star = 0;
-    }
-
-
-    public class LadderFinishData
-    {
-        public int serverId;
-        public byte isWin;
-        public string uuid;
-        public string name;
-        public string rivalName;
-    }
-
 
     public class GameFinishData : SingleTon_Class<GameFinishData>
     {
-        public GameFinishParam finishParam = new GameFinishParam();
 
         private List<string> winUUIDList = new List<string>();
         private List<string> loseUUIDList = new List<string>();
-        private List<LadderFinishData> ladderFinishList = new List<LadderFinishData>();
 
         public void OnGameFinish(BattleCore battleCore, byte loseCamp)
         {
-          
+
+            S2CGameFinishMessage s2CGameFinish = new S2CGameFinishMessage();
+            s2CGameFinish.dungeonId = battleCore.dungeonInfo.mapId;
+            s2CGameFinish.loseCamp = loseCamp;
+            s2CGameFinish.roomIndex = battleCore.roomIndex;
+
+            switch (battleCore.dungeonInfo.mapType)
+            {
+                case eMapType.pvpfight1V1:
+
+
+
+                    break;
+                case eMapType.pvpFightChaos:
+
+                    break;
+            }
+
+            BattleProtocolEvent.SendGameFinish(s2CGameFinish);
         }
     }
 }

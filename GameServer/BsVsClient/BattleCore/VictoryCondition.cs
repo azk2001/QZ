@@ -131,27 +131,31 @@ namespace GameServer
             CheckConditions(eStarConditionType.killAllMonster, null);
         }
 
-        public void OnUnitDeath(int roomIndex, int uid)
+        public void OnUnitDeath(int roomIndex, int atkUUID , int hitUUID)
         {
             if (isRun == false)
                 return;
 
-            GameUnit gameUnit = GameUnitManager.GetGameUnit(uid);
+            GameUnit atkUnit = GameUnitManager.GetGameUnit(atkUUID);
+            GameUnit hitUnit = GameUnitManager.GetGameUnit(hitUUID);
 
             bool isPlayerDeath = false;
             bool isFinish = true;
 
             if(battleCore.dungeonInfo.mapType != eMapType.pvpFightChaos)
             {
-                List<NetPlayer> netPlayerList = RoomManager.GetBattleRoomPlayerList(roomIndex);
-                for (int i = 0, max = netPlayerList.Count; i < max; i++)
+                if(atkUnit.unitType == GameUnitType.player)
                 {
-                    NetPlayer netPlayer = netPlayerList[i];
+                    isPlayerDeath = true;
+                }
 
-                    if (netPlayer.gameUnit == gameUnit)
-                        isPlayerDeath = true;
-
-                    if (netPlayer.gameUnit.baseUnitData.camp == gameUnit.baseUnitData.camp)
+                RoomBase roomBase = RoomManager.GetRoomBase(roomIndex);
+                
+                for (int i = 0, max = roomBase.netPlayerList.Count; i < max; i++)
+                {
+                    NetPlayer netPlayer = roomBase.netPlayerList[i];
+                    
+                    if (netPlayer.gameUnit.baseUnitData.camp == atkUnit.baseUnitData.camp)
                     {
                         if (isFinish == true && netPlayer.roomState == ePlayerRoomState.fighting)
                         {
@@ -162,22 +166,21 @@ namespace GameServer
 
                 if (isPlayerDeath == true && isFinish == true)
                 {
-                    GameFinishData.Instance.OnGameFinish(battleCore, (byte)gameUnit.baseUnitData.camp);
+                    GameFinishData.Instance.OnGameFinish(battleCore, (byte)atkUnit.baseUnitData.camp);
                     isRun = false;
 
                     return;
                 }
             }
+
+            CheckConditions(eStarConditionType.killMonster, hitUnit);
+            CheckConditions(eStarConditionType.killPlayer, hitUnit);
             
-
-            CheckConditions(eStarConditionType.killMonster, gameUnit);
-
         }
 
         public void OnGameUnitBirth(int uid)
         {
             GameUnit gameUnit = GameUnitManager.GetGameUnit(uid);
-
             CheckConditions(eStarConditionType.endElementHp, gameUnit);
         }
 
@@ -186,7 +189,7 @@ namespace GameServer
         {
             bool isFnish = true;
             bool isVictory = true;
-
+            byte loseCamp = 0;
             for (int i = 0, max = conditionsList.Count; i < max; i++)
             {
                 StarCondition starCondition = conditionsList[i];
@@ -205,6 +208,7 @@ namespace GameServer
                             if (curLimitTime < maxLimitTime)
                             {
                                 starCondition.isFinish = true;
+                                loseCamp = GlobalData.pvpMonsterCamp;
                             }
 
                             starCondition.runParam = curLimitTime;
@@ -229,6 +233,7 @@ namespace GameServer
                                 if (killParamList[0].ToInt(1000) <= starCondition.runParam)
                                 {
                                     starCondition.isFinish = true;
+                                    loseCamp = GlobalData.pvpMonsterCamp;
                                 }
                             }
 
@@ -248,6 +253,7 @@ namespace GameServer
                             if (curExistTime > maxExistTime)
                             {
                                 starCondition.isFinish = true;
+                                loseCamp = GlobalData.pvpMonsterCamp;
                             }
 
                             starCondition.runParam = curExistTime;
@@ -275,6 +281,7 @@ namespace GameServer
                             if (eh > maxEh)
                             {
                                 starCondition.isFinish = true;
+                                loseCamp = GlobalData.pvpMonsterCamp;
                             }
                             break;
                         case eStarConditionType.protectMonster:     //6保护怪物血量;
@@ -294,11 +301,45 @@ namespace GameServer
                             if (pm > maxPm)
                             {
                                 starCondition.isFinish = true;
+                                loseCamp = GlobalData.pvpMonsterCamp;
                             }
 
                             break;
                         case eStarConditionType.ignoreMonster:      //7忽略怪物;
 
+                            break;
+                        case eStarConditionType.killPlayer:         //击杀指定敌人次数
+                            {
+                                GameUnit gameUnit = par as GameUnit;
+                                if (starCondition.deathNum.ContainsKey(gameUnit.uuid) == false)
+                                    starCondition.deathNum[gameUnit.uuid] = 0;
+
+                                starCondition.deathNum[gameUnit.uuid]++;
+                                int dethNum = starCondition.param.ToInt(0);
+
+                                if (starCondition.deathNum[gameUnit.uuid] >= dethNum)
+                                {
+                                    starCondition.isFinish = true;
+                                    loseCamp = (byte)gameUnit.baseUnitData.camp;
+                                }
+                            }
+                            break;
+                        case eStarConditionType.killCamp:       //击杀指定正营;
+                            {
+                                GameUnit playerGameUnit = par as GameUnit;
+                                int camp = playerGameUnit.baseUnitData.camp;
+                                if (starCondition.deathCamp.ContainsKey(camp) == false)
+                                    starCondition.deathCamp[camp] = 0;
+
+                                starCondition.deathCamp[camp]++;
+
+                                int dethNum = starCondition.param.ToInt(0);
+                                if (starCondition.deathCamp[camp] >= dethNum)
+                                {
+                                    starCondition.isFinish = true;
+                                    loseCamp = (byte)camp;
+                                }
+                            }
                             break;
                     }
                 }
@@ -316,7 +357,7 @@ namespace GameServer
 
                 this.isVictory = isVictory;
 
-                GameFinishData.Instance.OnGameFinish(battleCore, GlobalData.pvpMonsterCamp);
+                GameFinishData.Instance.OnGameFinish(battleCore,loseCamp);
             }
 
             return isVictory;

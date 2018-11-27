@@ -134,11 +134,10 @@ public static class BattleProtocolEvent
         S2CStartGameMessage message = new S2CStartGameMessage();
         message.Message(reader);
 
-        ProcessManager.Instance.Begin(ProcessType.processbattle);
+        UIRoomData.ReceiveStartGame(message);
 
-        BattleScene battleScene = GameSceneManager.Instance.GetScene<BattleScene>(SceneType.battle);
-        battleScene.AddNetPlayer(message);
     }
+
 
     public static void SendStartBattle(C2SStartBattleMessage message)
     {
@@ -322,6 +321,14 @@ public static class BattleProtocolEvent
         GameUnit killGameUnit = GameUnitManager.Instance.GetGameUnit(message.killUUID);
         GameUnit hitGameUnit = GameUnitManager.Instance.GetGameUnit(message.hitUUID);
         hitGameUnit.OnDead(killGameUnit);
+    }
+
+
+    public static void ReceiveGameFinish(BytesReader reader)
+    {
+        S2CGameFinishMessage s2CGameFinish = new S2CGameFinishMessage();
+
+        GameFinishData.Instance.ReceiveGameFinish(s2CGameFinish);
     }
 
 }

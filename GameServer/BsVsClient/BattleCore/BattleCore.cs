@@ -167,11 +167,13 @@ namespace GameServer
         /// <summary>
         /// 游戏单位死亡;
         /// </summary>
-        /// <param name="atkUid"></param>
+        /// <param name="atkUUID"></param>
         /// <param name="killUid"></param>
-        public virtual void GameUnitDeath(int atkUid, int hitUUID)
+        public virtual void GameUnitDeath(int atkUUID, int hitUUID)
         {
-            BattleProtocolEvent.SendPlayerDie(atkUid, hitUUID);
+            BattleProtocolEvent.SendPlayerDie(atkUUID, hitUUID);
+
+            victoryCondition.OnUnitDeath(roomIndex, atkUUID, hitUUID);
         }
 
         /// <summary>

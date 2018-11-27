@@ -4,11 +4,9 @@ using System.Collections.Generic;
 public enum eMapType
 {
     none = 0,
-    mainCity = 1,               //主城
-    pvpfightPK = 51,            //即时同步切磋副本;
-    pvpFightTeam = 80,          //组队副本;
-    pvpFightChaos = 81,         //多人副本乱斗模式;
-    pvpfight1V1 = 82,          //1V1天梯
+    mainCity = 1,              //主城
+    pvpfight1V1 = 2,           //1V1;
+    pvpFightChaos = 3,         //多人乱斗模式;
 }
 
 public enum eStarConditionType
@@ -20,13 +18,8 @@ public enum eStarConditionType
     endElementHp,       //5角色血量;          param：0|80           参数0表示玩家，其他模型填怪物ID;  80表示血量的百分比;
     protectMonster,     //6保护怪物血量;      param:10001|80        10001保护怪物ID, 80保护怪物的血量百分比; 
     ignoreMonster,      //7忽略怪物;          暂时没有做;
-}
-
-public enum eDungeonType
-{
-    common = 1, // 1是普通关卡，
-    elite = 2,  //2是精英关卡，
-    boss = 3,   //3是boss,
+    killPlayer,         //8击杀对方玩家       param:10              敌人死亡次数
+    killCamp,           //9击杀对方正营       param:10              敌人死亡次数
 }
 
 //星级条件
@@ -43,6 +36,8 @@ public class StarCondition
     public bool isFinish = false;  //是否已经完成;
     public int runParam = 0;        //运行时参数;
 
+    public Dictionary<int, int> deathNum = new Dictionary<int, int>(); //记录击杀玩家次数
+    public Dictionary<int, int> deathCamp = new Dictionary<int, int>(); //记录击杀正营次数
     public StarCondition Clone()
     {
         StarCondition star = new StarCondition();
@@ -54,6 +49,8 @@ public class StarCondition
         star.isVictory = this.isVictory;
         star.isFinish = this.isFinish;
         star.runParam = this.runParam;
+        star.deathNum = this.deathNum;
+        star.deathCamp = this.deathCamp;
 
         return star;
     }

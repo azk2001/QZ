@@ -813,7 +813,56 @@ namespace GameServer
         }
     }
 
+    public class S2CGameFinishMessage
+    {
+        public class Finish1V1
+        {
+        }
 
+        public int roomIndex;
+        public int loseCamp;   //失败正营Id
+        public int dungeonId;  //关卡id
+
+        public Finish1V1 finish1v1 = new Finish1V1();  // 1v1参数
+
+        public BytesWriter Message(BytesWriter writer)
+        {
+            writer.WriteInt(loseCamp);
+            writer.WriteInt(dungeonId);
+
+            dungeon_s dungeon = dungeon_s.Get(dungeonId);
+
+            switch(dungeon.mapType)
+            {
+                case eMapType.pvpfight1V1:
+
+                    break;
+                case eMapType.pvpFightChaos:
+
+                    break;
+            }
+
+            return writer;
+        }
+
+        public void Message(BytesReader reader)
+        {
+            loseCamp = reader.ReadInt();
+            dungeonId = reader.ReadInt();
+
+            dungeon_s dungeon = dungeon_s.Get(dungeonId);
+
+            switch (dungeon.mapType)
+            {
+                case eMapType.pvpfight1V1:
+
+                    break;
+                case eMapType.pvpFightChaos:
+
+                    break;
+            }
+        }
+    }
     //---------------------------------下面是数据结构;
 
     public class RoomParam
