@@ -661,7 +661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1934794570176494
 GameObject:
   m_ObjectHideFlags: 1
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  gameUintId: 0
+  uuid: 0
   teamShadow: {fileID: 0}
   transformCaChe: {fileID: 0}
   markPosition: {x: 0, y: 0}

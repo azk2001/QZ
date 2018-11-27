@@ -21,6 +21,9 @@ namespace Werewolf.StatusIndicators.Components {
 	/// Apply this to the GameObject which holds all your Splats. Make sure the origin is correctly centered at the base of the Character.
 	/// </summary>
 	public class SplatManager : MonoBehaviour {
+
+        public static SplatManager Instance = null;
+
 		/// <summary>
 		/// Determines whether the cursor should be hidden when a Splat is showing.
 		/// </summary>
@@ -78,8 +81,13 @@ namespace Werewolf.StatusIndicators.Components {
 			RangeIndicators.ToList().ForEach(x => x.gameObject.SetActive(false));
 		}
 
-		// This Update method and the "HideCursor" variable can be deleted if you do not need this functionality
-		void Update() {
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+        // This Update method and the "HideCursor" variable can be deleted if you do not need this functionality
+        void Update() {
 			if(HideCursor) {
 				if(CurrentSpellIndicator != null)
 					Cursor.visible = false;

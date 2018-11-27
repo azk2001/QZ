@@ -12,6 +12,8 @@ public class TableManager : SingleClass<TableManager>
         {
             {"skill_c", 1},
             {"c_sfx",1},
+            {"dungeon_c",1},
+            {"player_c",1},
         };
 
 
@@ -74,6 +76,12 @@ public class TableManager : SingleClass<TableManager>
                 break;
             case "c_sfx":
                 c_sfx.LoadTxt(data);
+                break;
+            case "player_c":
+                player_c.LoadTxt(data);
+                break;
+            case "dungeon_c":
+                dungeon_c.LoadTxt(data);
                 break;
         }
 

@@ -21,20 +21,32 @@ class UIRoomList : UIBase
         }
     }
 
+    private enum eObjectIndex
+    {
+        ModleParent,
+    }
+
+
     public static UIRoomList Instance = null;
 
     public static S2CGetRoomMessage message;
+    private UIShowModel showModel = null;
+    private Transform prefabModel = null;
 
     public override void OnAwake(GameObject obj)
     {
         Instance = this;
         base.OnAwake(obj);
 
+        showModel = gameObjectList.GetUIComponent<UIShowModel>((int)eObjectIndex.ModleParent);
+
     }
 
     public override void OnInit()
     {
         base.OnInit();
+
+        RefreshModle();
     }
 
     public override void OnEnable()
@@ -43,10 +55,27 @@ class UIRoomList : UIBase
 
     }
 
+    public void RefreshModle()
+    {
+        string resName = LocalPlayer.Instance.netPlayer.GetModleStr();
+        prefabModel = BattleUnitRoot.Instance.SpwanPrefab(resName);
+        showModel.ShowPrefab(prefabModel.gameObject, 0, Vector3.up * -1, Vector3.up * 180, 1.45f);
+
+        UnitController mUnitController = prefabModel.GetComponent<UnitController>();
+        mUnitController.Init();
+        mUnitController.SetCharacterControllerEnable(false);
+        mUnitController.enabled = false;
+    }
+
+
     public override void OnDisable()
     {
         base.OnDisable();
+
+        BattleUnitRoot.Instance.DeSpwan(prefabModel);
+
         Instance = null;
+
     }
 
     public override void OnDestroy()
@@ -75,9 +104,9 @@ class UIRoomList : UIBase
 
     public override void OnClick(GameObject clickObject)
     {
-        base.OnClick(clickObject); 
+        base.OnClick(clickObject);
 
-        switch(clickObject.name)
+        switch (clickObject.name)
         {
             case "Btn_CreateRoom":
                 {
@@ -87,12 +116,12 @@ class UIRoomList : UIBase
             case "Btn_AddRoom":
                 {
                     int roomIndex = 0;
-                   UIRoomListData. SendAddRoom(roomIndex);
+                    UIRoomListData.SendAddRoom(roomIndex);
                 }
                 break;
         }
     }
 
-   
+
 
 }

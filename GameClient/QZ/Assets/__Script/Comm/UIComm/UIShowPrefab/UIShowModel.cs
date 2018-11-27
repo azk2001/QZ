@@ -98,37 +98,41 @@ public class UIShowModel : MonoBehaviour
     /// <returns></returns>
     public GameObject ShowPrefab(GameObject effectPrefab, int uid = 0, Vector3 localPosition = default(Vector3), Vector3 localAngle = default(Vector3), float size = 1, string layerName = "UI")
     {
+        effectGO = effectPrefab;
+
         offsetVector.x += 100;
         localPosition.z = 100;
         if (rtCamera == null)
         {
+            
             GameObject cameraObj = new GameObject("UIEffectCamera");
             rtCamera = cameraObj.AddComponent<Camera>();
             renderTexture = new RenderTexture((int)rectTransform.sizeDelta.x, (int)rectTransform.sizeDelta.y, 24);
             renderTexture.antiAliasing = 4;
             rtCamera.clearFlags = CameraClearFlags.SolidColor;
             rtCamera.backgroundColor = new Color();
-            rtCamera.cullingMask = 0;
+            rtCamera.cullingMask =1<< LayerMask.NameToLayer(layerName);
             rtCamera.orthographic = true;
             rtCamera.orthographicSize = size;
-
             rtCamera.targetTexture = renderTexture;
             RawImage.texture = renderTexture;
 
             cameraObj.transform.position = offsetVector;
 
-            GameObject.DontDestroyOnLoad(cameraObj);
-        }
+            effectGO.transform.SetParent(cameraObj.transform);
+            effectGO.transform.Reset();
+            effectGO.transform.localPosition = localPosition;
+            effectGO.transform.localEulerAngles = localAngle;
+            effectGO.transform.SetLayers(layerName);
 
-        if (localPosition.Equals(default(Vector3)) == false)
-        {
-            this.localPosition = localPosition;
+            GameObject.DontDestroyOnLoad(cameraObj);
+
+            if(rotate)
+            {
+                Swm.target = effectPrefab.transform;
+            }
         }
-        if (localAngle.Equals(default(Vector3)) == false)
-        {
-            this.localEulerAngles = localAngle;
-        }
-       
+        
         return effectGO;
     }
 
@@ -136,6 +140,7 @@ public class UIShowModel : MonoBehaviour
     {
         if (effectGO != null)
         {
+            BattleUnitRoot.Instance.DeSpwan(effectGO.transform);
             effectGO = null;
         }
 

@@ -99,10 +99,10 @@ public class UIManager : SingleClass<UIManager>
         UIBase uiBase = allUIList[uiName];
 
         //如果当前已经在缓存加载不是常显UI,当前需要打开的UI也不是常显UI就直接返回了
-        if (abNameLoading != eUIName.UnKnow && uiBase.showing == false)
-        {
-            return;
-        }
+        //if (abNameLoading != eUIName.UnKnow && uiBase.showing == false)
+        //{
+        //    return;
+        //}
 
         //如果当前打开过UI就把当前打开的UI关闭，重新打开新的UI;
         if (uiBase.showing == false && curOpenUIName != eUIName.UnKnow)

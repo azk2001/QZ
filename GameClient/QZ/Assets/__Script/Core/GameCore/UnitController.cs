@@ -100,9 +100,10 @@ public class UnitController : MonoBehaviour
         directionCache = Vector3.zero;
         moveDirection = Vector3.zero;
         moveToPoint = Vector3.zero;
-        
+
+        this.enabled = true;
+
         ShowRenderer(true);
-        CancelInvoke("DizzinessEnd");
     }
 
     void Update()

@@ -20,9 +20,7 @@ public class MoveCamera : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         MovePlayer(Vector2.zero);
     }
 
-    public CameraLookPlayer lookPlayer = null;
-
-    // Use this for initialization
+    private CameraLookPlayer lookPlayer = null;
     void Start () {
 		if(lookPlayer == null)
         {

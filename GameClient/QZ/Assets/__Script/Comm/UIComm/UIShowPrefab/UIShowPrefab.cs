@@ -108,13 +108,11 @@ public class UIShowPrefab : MonoBehaviour
     /// <returns></returns>
     public GameObject ShowPrefab(GameObject effectPrefab, int uid = 0, Vector3 localPosition = default(Vector3), Vector3 localAngle = default(Vector3), float size = 170f, string layerName = "UI")
     {
-        
         localPosition.z = -300;
         if (localPosition.Equals(default(Vector3)) == false)
         {
             this.localPosition = localPosition;
         }
-
 
         if (localAngle.Equals(default(Vector3)) == false)
         {

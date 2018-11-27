@@ -26,8 +26,8 @@ public class UIGameMain : UIBase {
     }
 
     public UIGameMain Instance = null;
-
-    public SpinWithMouse modleParent = null;
+    
+    private UIShowModel showPrefab = null;
 
     private Transform prefabModel = null;
 
@@ -38,7 +38,7 @@ public class UIGameMain : UIBase {
 
         Instance = this;
         
-        modleParent = gameObjectList.GetUIComponent<SpinWithMouse>((int)eObjectIndex.modleParent);
+        showPrefab = gameObjectList.GetUIComponent<UIShowModel>((int)eObjectIndex.modleParent);
     }
 
     public override void OnInit()
@@ -52,16 +52,12 @@ public class UIGameMain : UIBase {
     {
         string resName = LocalPlayer.Instance.netPlayer.GetModleStr();
         prefabModel = BattleUnitRoot.Instance.SpwanPrefab(resName);
-        prefabModel.SetParent(modleParent.transform);
-        prefabModel.SetLayers("UI");
-        prefabModel.Reset();
-        prefabModel.localScale = Vector3.one*150;
-        prefabModel.localEulerAngles = Vector3.up * 180;
-        modleParent.target = prefabModel;
+        showPrefab.ShowPrefab(prefabModel.gameObject, 0, Vector3.up * -1, Vector3.up * 180, 1.45f);
 
         UnitController mUnitController = prefabModel.GetComponent<UnitController>();
         mUnitController.Init();
         mUnitController.SetCharacterControllerEnable(false);
+        mUnitController.enabled = false;
     }
 
 
