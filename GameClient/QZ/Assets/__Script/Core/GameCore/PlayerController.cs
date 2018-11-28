@@ -66,11 +66,11 @@ public class PlayerController : SingleClass<PlayerController>
 
         CameraLookPlayer.Instance.SetTarget(gameUnit.mUnitController.transform);
 
-        joyStick.OnMoveDragEvent += OnMoveJoystickEvent;
-        rollJoystick.OnRollDragEvent += OnRollJoystickEvent;
-        atkJoystick.OnFireEvent += OnFireEvent;
-        skill1Joystick.OnFireEvent += OnFireEvent;
-        skill2Joystick.OnFireEvent += OnFireEvent;
+        if (joyStick != null) joyStick.OnMoveDragEvent += OnMoveJoystickEvent;
+        if (rollJoystick != null) rollJoystick.OnRollDragEvent += OnRollJoystickEvent;
+        if (atkJoystick != null) atkJoystick.OnFireEvent += OnFireEvent;
+        if (skill1Joystick != null) skill1Joystick.OnFireEvent += OnFireEvent;
+        if (skill2Joystick != null) skill2Joystick.OnFireEvent += OnFireEvent;
     }
 
     //移除一个玩家控制;
@@ -84,11 +84,11 @@ public class PlayerController : SingleClass<PlayerController>
 
         CameraLookPlayer.Instance.SetTarget(null);
 
-        joyStick.OnMoveDragEvent -= OnMoveJoystickEvent;
-        rollJoystick.OnRollDragEvent -= OnRollJoystickEvent;
-        atkJoystick.OnFireEvent -= OnFireEvent;
-        skill1Joystick.OnFireEvent -= OnFireEvent;
-        skill2Joystick.OnFireEvent -= OnFireEvent;
+        if (joyStick != null) joyStick.OnMoveDragEvent -= OnMoveJoystickEvent;
+        if (rollJoystick != null) rollJoystick.OnRollDragEvent -= OnRollJoystickEvent;
+        if (atkJoystick != null) atkJoystick.OnFireEvent -= OnFireEvent;
+        if (skill1Joystick != null) skill1Joystick.OnFireEvent -= OnFireEvent;
+        if (skill2Joystick != null) skill2Joystick.OnFireEvent -= OnFireEvent;
     }
 
     private void OnMoveJoystickEvent(Vector2 v2)

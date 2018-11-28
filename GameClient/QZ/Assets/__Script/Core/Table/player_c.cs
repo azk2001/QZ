@@ -14,7 +14,7 @@ public class player_c
     public readonly int speed;
     public readonly int shield;
     public readonly int harm;
-
+    public readonly int skillId;
 
     private player_c(TabFileData.LineData file)
     {
@@ -25,6 +25,8 @@ public class player_c
         speed = file.GetContentInt("speed");
         shield = file.GetContentInt("shield");
         harm = file.GetContentInt("harm");
+        skillId = file.GetContentInt("skillId");
+
     }
 
 

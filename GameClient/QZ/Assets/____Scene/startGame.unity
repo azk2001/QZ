@@ -317,7 +317,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 207243540}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -501,7 +501,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967007
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -519,8 +519,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 448953589}
-  m_LocalRotation: {x: 0.1391833, y: -0, z: -0, w: 0.9902667}
-  m_LocalPosition: {x: 0, y: 50, z: -33}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -4.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 223671907}
@@ -612,7 +612,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 192.168.0.114
 --- !u!222 &586299524
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: 192.168.0.114
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1832,8 +1832,13 @@ MonoBehaviour:
   spwanPoolName: BattleEffectRoot
   layerName: 
   startSpwanList:
-  - {fileID: 1322060996497518, guid: 9168837871def6448aa2fc3402193e83, type: 2}
-  startSpwanCount: 03000000
+  - {fileID: 1943552080681310, guid: 4c928c846426aa94b84c5bdb6647594d, type: 2}
+  - {fileID: 1008048687969642, guid: 1253258addd0d284ca25775a71b3138f, type: 2}
+  - {fileID: 1626320168593640, guid: 26260e71c07b857418f5950e0bacb578, type: 2}
+  - {fileID: 1213308983968464, guid: 990ca14a255336b479e356941fca3f2b, type: 2}
+  - {fileID: 1422513358528126, guid: d0dc18a4ee8b8c744a3c42147a1b8336, type: 2}
+  - {fileID: 1652315173219744, guid: a3e7a2d3d39bb0e45b6a838d9c114859, type: 2}
+  startSpwanCount: 030000000300000003000000030000000300000003000000
 --- !u!1 &1665249824
 GameObject:
   m_ObjectHideFlags: 0

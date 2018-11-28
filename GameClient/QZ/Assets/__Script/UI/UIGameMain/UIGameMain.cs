@@ -16,7 +16,7 @@ public class UIGameMain : UIBase {
     {
         get
         {
-            return true;
+            return false;
         }
     }
 
@@ -64,8 +64,11 @@ public class UIGameMain : UIBase {
     public override void OnDisable()
     {
         base.OnDisable();
-   
-        BattleUnitRoot.Instance.DeSpwan(prefabModel);
+
+        if(prefabModel !=null)
+        {
+            BattleUnitRoot.Instance.DeSpwan(prefabModel);
+        }
         
     }
 

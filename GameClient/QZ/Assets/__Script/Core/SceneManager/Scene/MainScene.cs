@@ -18,7 +18,9 @@ public class MainScene : SceneBase
     {
         GameUnit gameUnit = GameUnitManager.Instance.CreateServerGameUnit(netPlayer.uuid, netPlayer.basicsData, netPlayer.battleUnitData);
 
-        SkillManager.Instance.AddSkill(gameUnit, 1);
+        player_c playerInfo = player_c.Get(netPlayer.basicsData.modleId);
+
+        SkillManager.Instance.AddSkill(gameUnit, playerInfo.skillId);
 
         if (BattleProtocol.UUID == netPlayer.uuid)
         {

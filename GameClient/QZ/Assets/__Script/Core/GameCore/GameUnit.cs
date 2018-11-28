@@ -49,6 +49,7 @@ public class GameUnit
             prefabModel = BattleUnitRoot.Instance.SpwanPrefab(player.resName);
         }
 
+        prefabModel.SetLayers("Player");
         mUnitController = prefabModel.GetComponent<UnitController>();
         mUnitController.Init();
         mUnitController.uuid = uuid;
@@ -88,7 +89,7 @@ public class GameUnit
     public void SetSpeed(int speed)
     {
         baseUnitData.speed = speed;
-        mUnitController.moveSpeed = speed;
+        mUnitController.moveSpeed = speed/1000.0f;
     }
 
     public void SetColor(Color color, float val = 0.5f)

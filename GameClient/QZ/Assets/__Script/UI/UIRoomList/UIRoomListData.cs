@@ -40,6 +40,7 @@ class UIRoomListData
     public static void ReceiveCreateRoom(S2CCreateRoomMessage message)
     {
         UIRoomList.Instance.RefreshCreateRoom(message);
+        UIManager.Instance.OpenUI(eUIName.UIRoom);
 
         for (int i=0,max = message.playerCount;i<max;i++)
         {
@@ -48,7 +49,7 @@ class UIRoomListData
             GameSceneManager.Instance.curScene.PlayerInScene(netPlayer);
         }
 
-        UIManager.Instance.OpenUI(eUIName.UIRoom);
+       
     }
 
     public static void ReceiveAddRoom(S2CAddRoomMessage message)

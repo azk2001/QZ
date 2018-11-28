@@ -211,6 +211,7 @@ public struct S2CCreateRoomMessage
 
     public void Message(BytesReader reader)
     {
+        roomParam = new RoomParam();
         roomParam.Message(reader);
         playerCount = reader.ReadInt();
 

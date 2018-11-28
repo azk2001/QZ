@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - UICamera
+  - World
+  - Target
+  - FX
   layers:
   - Default
   - TransparentFX
@@ -15,7 +18,7 @@ TagManager:
   - 
   - 
   - UICamera
-  - 
+  - Player
   - 
   - 
   - 

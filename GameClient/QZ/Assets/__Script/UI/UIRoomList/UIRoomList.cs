@@ -72,7 +72,10 @@ class UIRoomList : UIBase
     {
         base.OnDisable();
 
-        BattleUnitRoot.Instance.DeSpwan(prefabModel);
+        if (prefabModel != null)
+        {
+            BattleUnitRoot.Instance.DeSpwan(prefabModel);
+        }
 
         Instance = null;
 
@@ -93,7 +96,7 @@ class UIRoomList : UIBase
     //创建房间列表;
     public void RefreshCreateRoom(S2CCreateRoomMessage message)
     {
-
+        UIManager.Instance.CloseUI(eUIName.UIRoomList, false, false);
     }
 
     //加入房间列表;
@@ -117,6 +120,11 @@ class UIRoomList : UIBase
                 {
                     int roomIndex = 0;
                     UIRoomListData.SendAddRoom(roomIndex);
+                }
+                break;
+            case "Btn_Return":
+                {
+                    UIManager.Instance.CloseUI(eUIName.UIRoomList);
                 }
                 break;
         }
