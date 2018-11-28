@@ -29,7 +29,8 @@ class UIRoomList : UIBase
 
     public static UIRoomList Instance = null;
 
-    public static S2CGetRoomMessage message;
+    public static int addRoomIndex = 0;
+    public static S2CGetRoomMessage s2cGetRoom;
     private UIShowModel showModel = null;
     private Transform prefabModel = null;
 
@@ -96,13 +97,15 @@ class UIRoomList : UIBase
     //创建房间列表;
     public void RefreshCreateRoom(S2CCreateRoomMessage message)
     {
+        addRoomIndex = message.roomParam.roomIndex;
         UIManager.Instance.CloseUI(eUIName.UIRoomList, false, false);
     }
 
     //加入房间列表;
     public void RefreshAddRoom(S2CAddRoomMessage message)
     {
-
+        addRoomIndex = message.roomParam.roomIndex;
+        UIManager.Instance.CloseUI(eUIName.UIRoomList, false, false);
     }
 
     public override void OnClick(GameObject clickObject)

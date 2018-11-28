@@ -18,8 +18,6 @@ public class BattleScene : SceneBase
     {
         SceneManager.LoadScene("battleGame");
 
-        UIManager.Instance.OpenUI(eUIName.UIBattle);
-
         base.OnBegin();
     }
 
@@ -45,6 +43,8 @@ public class BattleScene : SceneBase
 
         if (BattleProtocol.UUID == netPlayer.uuid)
         {
+            UIManager.Instance.OpenUI(eUIName.UIBattle);
+
             PlayerController.Instance.AddPlayerController(gameUnit);
             PlayerController.Instance.isInput = false;
 

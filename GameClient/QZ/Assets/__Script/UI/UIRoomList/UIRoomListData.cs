@@ -10,7 +10,7 @@ class UIRoomListData
     //返回获取队伍列表;
     public static void ReceiveGetRoom(S2CGetRoomMessage message)
     {
-        UIRoomList.message = message;
+        UIRoomList.s2cGetRoom = message;
         if (UIRoomList.Instance == null)
         {
             UIManager.Instance.OpenUI(eUIName.UIRoomList);

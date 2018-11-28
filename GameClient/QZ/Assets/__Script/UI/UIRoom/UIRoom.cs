@@ -32,12 +32,17 @@ public class UIRoom : UIBase
     {
         switch(clickObject.name)
         {
-            case "":
-
+            case "Btn_StartGame":
+                SendStartGame();
                 break;
         }
 
         base.OnClick(clickObject);
     }
 
+
+    public void SendStartGame()
+    {
+        UIRoomData.SendStartGame(UIRoomList.addRoomIndex);
+    }
 }
