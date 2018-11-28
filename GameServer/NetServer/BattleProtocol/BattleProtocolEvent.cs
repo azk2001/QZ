@@ -82,7 +82,7 @@ namespace GameServer
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerInScene);
 
-            BattleProtocol.SendBytes(uuid, s2cPlayerInScene.Message(writer), true, false);
+            BattleProtocol.SendBytes(uuid, s2cPlayerInScene.Message(writer), false, true);
         }
 
         public static void ReceiveGetRoom(BytesReader reader, int uuid)

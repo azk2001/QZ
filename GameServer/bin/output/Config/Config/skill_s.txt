@@ -1,2 +1,3 @@
 skillId	icon	cdTime	type	aniName	param
-1	ttt	0.5	1	atk1	muzzleEffectName=Fire1;bulletEffectName=Fire1;moveSpeed=40;showTime=3
+1	ttt	0.2	1	atk1	muzzleEffectName=bullet_com_qiangkou_1;bulletEffectName=bullet_com_zidan_1;moveSpeed=40;showTime=3
+2	ttt	0.3	1	atk1	muzzleEffectName=bullet_com_qiangkou_2;bulletEffectName=bullet_com_zidan_2;moveSpeed=40;showTime=3
