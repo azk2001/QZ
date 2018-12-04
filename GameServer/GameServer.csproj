@@ -133,7 +133,7 @@
     <Content Include="bin\output\Config\Config\player_s.txt" />
     <Content Include="bin\output\Config\Config\sfx_s.txt" />
     <Content Include="bin\output\Config\Config\skill_s.txt" />
-    <Content Include="bin\output\Config\MapConfig\10001.xml" />
+    <Content Include="bin\output\Config\MapConfig\10000.xml" />
     <Content Include="bin\output\GameServer.exe" />
     <Content Include="bin\output\GameServer.pdb" />
     <Content Include="bin\output\OverGameServer.exe" />

@@ -173,8 +173,8 @@ namespace GameServer
                 }
             }
 
-            CheckConditions(eStarConditionType.killMonster, hitUnit);
-            CheckConditions(eStarConditionType.killPlayer, hitUnit);
+            CheckConditions(eStarConditionType.killMonster, hitUnit, atkUnit);
+            CheckConditions(eStarConditionType.killPlayer, hitUnit, atkUnit);
             
         }
 
@@ -185,7 +185,7 @@ namespace GameServer
         }
 
 
-        private bool CheckConditions(eStarConditionType conditionType, object par)
+        private bool CheckConditions(eStarConditionType conditionType, object par1,object par2 = null)
         {
             bool isFnish = true;
             bool isVictory = true;
@@ -203,7 +203,7 @@ namespace GameServer
                         case eStarConditionType.limitTime:          //1规定时间;
 
                             int maxLimitTime = starCondition.param.ToInt(0);
-                            int curLimitTime = (int)par;
+                            int curLimitTime = (int)par1;
 
                             if (curLimitTime < maxLimitTime)
                             {
@@ -215,7 +215,7 @@ namespace GameServer
                             break;
                         case eStarConditionType.killMonster:        //2击杀指定怪物;
 
-                            GameUnit killGameUnit = par as GameUnit;
+                            GameUnit killGameUnit = par1 as GameUnit;
 
 
                             string[] killParamList = starCondition.param.Split('|');   // param: 5|10001|10002
@@ -248,7 +248,7 @@ namespace GameServer
                         case eStarConditionType.existTime:          //4生存时间; (只能用于通关条件)
 
                             int maxExistTime = starCondition.param.ToInt(0);
-                            int curExistTime = (int)par;
+                            int curExistTime = (int)par1;
 
                             if (curExistTime > maxExistTime)
                             {
@@ -261,7 +261,7 @@ namespace GameServer
                             break;
                         case eStarConditionType.endElementHp:        //5血量;
 
-                            GameUnit elementGameUnit = par as GameUnit;
+                            GameUnit elementGameUnit = par1 as GameUnit;
 
                             string[] elemenParamList = starCondition.param.Split('|');   // param：0|80  10001|80
 
@@ -286,7 +286,7 @@ namespace GameServer
                             break;
                         case eStarConditionType.protectMonster:     //6保护怪物血量;
 
-                            GameUnit protectGameUnit = par as GameUnit;
+                            GameUnit protectGameUnit = par1 as GameUnit;
 
                             string[] protectParamList = starCondition.param.Split('|');   // param:10001|80 
 
@@ -310,7 +310,7 @@ namespace GameServer
                             break;
                         case eStarConditionType.killPlayer:         //击杀指定敌人次数
                             {
-                                GameUnit gameUnit = par as GameUnit;
+                                GameUnit gameUnit = par1 as GameUnit;
                                 if (starCondition.deathNum.ContainsKey(gameUnit.uuid) == false)
                                     starCondition.deathNum[gameUnit.uuid] = 0;
 
@@ -326,18 +326,33 @@ namespace GameServer
                             break;
                         case eStarConditionType.killCamp:       //击杀指定正营;
                             {
-                                GameUnit playerGameUnit = par as GameUnit;
-                                int camp = playerGameUnit.baseUnitData.camp;
-                                if (starCondition.deathCamp.ContainsKey(camp) == false)
-                                    starCondition.deathCamp[camp] = 0;
+                                GameUnit hitUnit = par1 as GameUnit;
+                                GameUnit atkUnit = par2 as GameUnit;
 
-                                starCondition.deathCamp[camp]++;
+                                if (starCondition.deathNum.ContainsKey(hitUnit.uuid) == false)
+                                    starCondition.deathNum[hitUnit.uuid] = 0;
+                                starCondition.deathNum[hitUnit.uuid]++;
+
+                                int hitCamp = hitUnit.baseUnitData.camp;
+                                if (starCondition.deathCamp.ContainsKey(hitCamp) == false)
+                                    starCondition.deathCamp[hitCamp] = 0;
+                                starCondition.deathCamp[hitCamp]++;
+
+                                if (starCondition.atkNum.ContainsKey(atkUnit.uuid) == false)
+                                    starCondition.atkNum[atkUnit.uuid] = 0;
+                                starCondition.atkNum[atkUnit.uuid]++;
+
+                                int atkCamp = atkUnit.baseUnitData.camp;
+                                if (starCondition.atkCamp.ContainsKey(atkCamp) == false)
+                                    starCondition.atkCamp[atkCamp] = 0;
+                                starCondition.atkCamp[atkCamp]++;
+
 
                                 int dethNum = starCondition.param.ToInt(0);
-                                if (starCondition.deathCamp[camp] >= dethNum)
+                                if (starCondition.deathCamp[hitCamp] >= dethNum)
                                 {
                                     starCondition.isFinish = true;
-                                    loseCamp = (byte)camp;
+                                    loseCamp = (byte)hitCamp;
                                 }
                             }
                             break;

@@ -36,8 +36,12 @@ public class StarCondition
     public bool isFinish = false;  //是否已经完成;
     public int runParam = 0;        //运行时参数;
 
-    public Dictionary<int, int> deathNum = new Dictionary<int, int>(); //记录击杀玩家次数
-    public Dictionary<int, int> deathCamp = new Dictionary<int, int>(); //记录击杀正营次数
+    public Dictionary<int, int> deathNum = new Dictionary<int, int>(); //记录死亡玩家次数
+    public Dictionary<int, int> deathCamp = new Dictionary<int, int>(); //记录死亡阵营次数
+
+    public Dictionary<int, int> atkNum = new Dictionary<int, int>(); //记录击杀玩家次数
+    public Dictionary<int, int> atkCamp = new Dictionary<int, int>(); //记录击杀正营次数
+
     public StarCondition Clone()
     {
         StarCondition star = new StarCondition();
@@ -51,6 +55,8 @@ public class StarCondition
         star.runParam = this.runParam;
         star.deathNum = this.deathNum;
         star.deathCamp = this.deathCamp;
+        star.atkNum = this.atkNum;
+        star.atkCamp = this.atkCamp;
 
         return star;
     }

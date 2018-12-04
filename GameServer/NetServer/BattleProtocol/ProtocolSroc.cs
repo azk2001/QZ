@@ -333,6 +333,7 @@ namespace GameServer
             isStartGame = reader.ReadByte();
             playerCount = reader.ReadByte();
 
+            netPlayerList = new List<NetPlayer>();
             for (int i = 0; i < playerCount; i++)
             {
                 NetPlayer birthParam = new NetPlayer();

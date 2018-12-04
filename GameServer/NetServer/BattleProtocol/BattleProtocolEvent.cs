@@ -203,7 +203,7 @@ namespace GameServer
             writer.Clear();
             writer.WriteByte((byte)S2CBattleProtocol.S2C_StartGame);
 
-            BattleProtocol.SendBytes(uuid, s2CStartGame.Message(writer));
+            BattleProtocol.SendRoomByte(c2SStartGame.roomIndex, uuid, s2CStartGame.Message(writer), true, true);
         }
 
         public static void ReceiveStartBattle(BytesReader reader, int uuid)

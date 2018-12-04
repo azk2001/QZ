@@ -6,7 +6,7 @@ namespace GameServer
     class BattleRoom : RoomBase
     {
       
-        public int sceneId = 0;                     //当前副本场景ID;
+        public int sceneId = 10000;                     //当前副本场景ID;
         protected bool isPinging = false;           //是否在ping中;
         protected float pingOutTime = 0;
         protected bool isStartRunRoom = false;      //是否是第一次运行这个房间;

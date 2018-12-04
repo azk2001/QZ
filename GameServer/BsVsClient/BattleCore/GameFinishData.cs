@@ -22,10 +22,10 @@ namespace GameServer
             {
                 case eMapType.pvpfight1V1:
 
-
-
+                    
                     break;
                 case eMapType.pvpFightChaos:
+
 
                     break;
             }
