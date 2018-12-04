@@ -626,7 +626,7 @@
     <None Include="Assets\___Prefab\Config\Resources\Config\player_c.txt" />
     <None Include="Assets\___Prefab\Config\Resources\Config\sfx_c.txt" />
     <None Include="Assets\___Prefab\Config\Resources\Config\skill_c.txt" />
-    <None Include="Assets\___Prefab\Config\Resources\MapConfig\1001.xml" />
+    <None Include="Assets\___Prefab\Config\Resources\MapConfig\10000.xml" />
     <None Include="Assets\___Prefab\Modle\Resources\UIShowPrefab\Default No-Alpha.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

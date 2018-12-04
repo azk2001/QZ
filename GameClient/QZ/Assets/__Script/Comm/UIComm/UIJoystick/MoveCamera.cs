@@ -33,9 +33,9 @@ public class MoveCamera : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         if (lookPlayer == null)
             return;
 
-        lookPlayer.eulerAngles += offset.x; 
-        lookPlayer.curHight += offset.y*0.05f; 
-  
+        lookPlayer.eulerAngles += offset.x*0.5f; 
+        lookPlayer.curHight += offset.y*0.02f;
 
+        lookPlayer.SetPlayerForward();
     }
 }

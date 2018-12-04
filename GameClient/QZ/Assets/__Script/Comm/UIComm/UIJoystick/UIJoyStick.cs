@@ -11,7 +11,7 @@ public enum eJoyStickDrogType
     onEnd = 3,
 }
 
-public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler,IPointerEnterHandler,IPointerExitHandler
 {
   
     public float radius = 0f;
@@ -125,5 +125,14 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             touchImage.right = touchImage.anchoredPosition;
         }
     }
-    
+
+    public virtual void OnPointerEnter(PointerEventData eventData)
+    {
+
+    }
+
+    public virtual void OnPointerExit(PointerEventData eventData)
+    {
+
+    }
 }

@@ -1393,9 +1393,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  gameUintId: 0
+  uuid: 0
   teamShadow: {fileID: 0}
   transformCaChe: {fileID: 0}
+  fireTrans: {fileID: 4200832529545530}
   markPosition: {x: 0, y: 0}
 --- !u!137 &137836622091048998
 SkinnedMeshRenderer:

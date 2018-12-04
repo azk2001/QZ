@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/____Scene/mainGame.unity
     guid: 1cb042d79d378a946a32ff97f3cc1c0a
+  - enabled: 1
+    path: Assets/____Scene/battleGame.unity
+    guid: 3f533398250d46f40b6e46c5ba80f3ac

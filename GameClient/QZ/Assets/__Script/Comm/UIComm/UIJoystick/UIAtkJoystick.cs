@@ -12,24 +12,29 @@ class UIAtkJoystick : UIJoyStick
         Instance = this;
     }
 
-    public override void OnBeginDrag(PointerEventData eventData)
+
+    public override void OnPointerEnter(PointerEventData eventData)
     {
-        base.OnBeginDrag(eventData);
+        if (isActiveJoyStick == false)
+            return;
+
+        isDrag = true;
+
+        base.OnPointerEnter(eventData);
 
         if (OnFireEvent != null)
         {
             OnFireEvent(1, Vector3.zero);
         }
-
     }
 
-    public override void OnEndDrag(PointerEventData eventData)
+    public override void OnPointerExit(PointerEventData eventData)
     {
         if (OnFireEvent != null)
         {
-            OnFireEvent(1, Vector3.zero);
+            OnFireEvent(0, Vector3.zero);
         }
 
-        base.OnEndDrag(eventData);
+        base.OnPointerExit(eventData);
     }
 }

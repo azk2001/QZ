@@ -22,6 +22,10 @@ public class AudioManager : SingleClass<AudioManager>
     public void Play(int id, Vector3 playPosition)
     {
         c_sfx sfx = c_sfx.GetThis(id);
+
+        if (sfx == null)
+            return;
+
         AudioClip audioClip = null;
         if (allAudioDic.ContainsKey(id) == false)
         {

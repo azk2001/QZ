@@ -1396,6 +1396,7 @@ MonoBehaviour:
   uuid: 0
   teamShadow: {fileID: 0}
   transformCaChe: {fileID: 0}
+  fireTrans: {fileID: 4864411155130592}
   markPosition: {x: 0, y: 0}
 --- !u!137 &137571520391385584
 SkinnedMeshRenderer:

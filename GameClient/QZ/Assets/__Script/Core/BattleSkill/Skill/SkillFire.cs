@@ -21,7 +21,8 @@ public class SkillFire : SkillBase
 
     protected override bool OnBegin(Vector3 position, Vector3 forward)
     {
-        OnFire();
+        //Ãß«¿ ±º‰
+        //OnFire();
        
         TimeManager.Instance.Begin(skill.cdTime, OnFire);
 
@@ -30,15 +31,20 @@ public class SkillFire : SkillBase
 
     protected override float OnFire()
     {
-        Transform muzzleTrans = BattleEffectRoot.Instance.SpwanPrefab(muzzleEffectName);
+        Transform muzzleTrans = BattleEffectRoot.Instance.SpwanPrefab(muzzleEffectName,2);
+        muzzleTrans.SetParent(gameUnit.mUnitController.transformCaChe);
+        muzzleTrans.Reset();
+        muzzleTrans.transform.position = gameUnit.mUnitController.fireTrans.position;
 
 
-        Vector3 forward = gameUnit.mUnitController.transform.forward;
+        Vector3 forward = gameUnit.mUnitController.fireTrans.position - CameraLookPlayer.Instance.transform.position;
         Transform bulletTrans = BattleEffectRoot.Instance.SpwanPrefab(bulletEffectName);
         SkillController skillController = bulletTrans.GetComponent<SkillController>();
         skillController.OnFire(forward, moveSpeed, showTime);
         skillController.OnColliderEnter = OnColliderEventEnter;
-        bulletTrans.position = gameUnit.mUnitController.transform.position + gameUnit.mUnitController.transform.forward + Vector3.up;
+        bulletTrans.position = gameUnit.mUnitController.fireTrans.position;
+        
+
         base.OnFire();
 
         return skill.cdTime;

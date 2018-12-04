@@ -23,10 +23,8 @@ public class BattleScene : SceneBase
 
     public void AddNetPlayer(S2CStartGameMessage message)
     {
-        foreach (PlayerBirthParam param in message.birthParamList)
+        foreach (NetPlayer netPlayer in message.netPlayerList)
         {
-            NetPlayer netPlayer = NetPlayerManager.GetNetPlayer(param.uuid);
-            netPlayer.battleUnitData.camp = param.camp;
             PlayerInScene(netPlayer);
         }
 

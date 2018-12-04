@@ -315,7 +315,7 @@ public struct S2CStartGameMessage
 {
     public byte isStartGame;
     public byte playerCount;
-    public List<PlayerBirthParam> birthParamList;
+    public List<NetPlayer> netPlayerList;
     public BytesWriter Message(BytesWriter writer)
     {
         writer.WriteByte(isStartGame);
@@ -324,15 +324,9 @@ public struct S2CStartGameMessage
 
         for (int i = 0; i < playerCount; i++)
         {
-            PlayerBirthParam birthParam = birthParamList[i];
-            writer.WriteInt(birthParam.uuid);
-            writer.WriteString(birthParam.name, 64);
-            writer.WriteByte(birthParam.isLoadFinish);
-            writer.WriteByte(birthParam.camp);
-            writer.WriteInt(birthParam.px);
-            writer.WriteInt(birthParam.pz);
+            NetPlayer birthParam = netPlayerList[i];
+            writer = birthParam.GetBytes(writer);
         }
-
 
         return writer;
     }
@@ -341,22 +335,13 @@ public struct S2CStartGameMessage
     {
         isStartGame = reader.ReadByte();
         playerCount = reader.ReadByte();
-
+        netPlayerList = new List<NetPlayer>();
         for (int i = 0; i < playerCount; i++)
         {
-            PlayerBirthParam birthParam = new PlayerBirthParam();
-            birthParam.uuid = reader.ReadInt();
-            birthParam.name = reader.ReadString(64);
-            birthParam.name = birthParam.name.Replace("\0", "");
-            birthParam.isLoadFinish = reader.ReadByte();
-            birthParam.camp = reader.ReadByte();
-            birthParam.px = reader.ReadInt();
-            birthParam.pz = reader.ReadInt();
-
-            birthParamList.Add(birthParam);
+            NetPlayer birthParam = new NetPlayer();
+            birthParam.SetBytes(reader);
+            netPlayerList.Add(birthParam);
         }
-
-
     }
 }
 

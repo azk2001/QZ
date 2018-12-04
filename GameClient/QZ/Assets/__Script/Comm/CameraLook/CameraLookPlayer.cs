@@ -63,8 +63,20 @@ public class CameraLookPlayer : MonoBehaviour
         transformCache.LookAt(lookPos);
     }
 
-    internal void SetTarget(Transform targetTrans)
+    public void SetTarget(Transform targetTrans)
     {
         this.targetTrans = targetTrans;
+    }
+
+    public void SetPlayerForward()
+    {
+        if (this.targetTrans != null)
+        {
+            Vector3 foeward = targetTrans.position - transformCache.position;
+            foeward.y = 0;
+            foeward = foeward.normalized;
+
+            this.targetTrans.forward = foeward;
+        }
     }
 }

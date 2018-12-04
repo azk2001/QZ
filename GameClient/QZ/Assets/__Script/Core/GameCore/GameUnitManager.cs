@@ -40,7 +40,7 @@ public class GameUnitManager : SingleClass<GameUnitManager>
     {
         foreach (var gu in gameUintDic)
         {
-            RemoveGameUnit(gu.Value);
+            gu.Value.OnDestory();
         }
         gameUintDic.Clear();
     }

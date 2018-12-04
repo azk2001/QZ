@@ -22,7 +22,6 @@ class UIRollJoystick : UIJoyStick
         if (curDelta.magnitude > offsetRadius)
         {
             OnRollDragEvent(curDelta.normalized);
-
         }
 
         base.OnEndDrag(eventData);

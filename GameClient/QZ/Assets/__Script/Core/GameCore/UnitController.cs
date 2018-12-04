@@ -37,7 +37,9 @@ public class UnitController : MonoBehaviour
 
     public Transform teamShadow = null;         //队伍标志;
     public Transform transformCaChe = null;     //角色;
-    
+
+    public Transform fireTrans = null;
+
     public Vector2 markPosition = Vector2.zero;
 
     private CharacterController _characterController = null;
