@@ -4,25 +4,31 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-class SkillBagBall : SkillBase
+class SkillAerolite : SkillBase
 {
     public float moveSpeed;         //移动速度;
-    public float showTime;          //移动最大时间;
-    public string effectName;       //特效名字;
+    public float fiireRadius;       //爆炸半径;
+    public float dropTime;          //掉落下来时间;
+
+    public string dropEffectName;   //掉落特效名字;
+    public string fireEffectName;   //爆炸特效名字;
 
     public override void OnConfig(int _skillId)
     {
         base.OnConfig(_skillId);
 
         moveSpeed = textParam["moveSpeed"].ToFloat(0);
-        showTime = textParam["showTime"].ToFloat(0);
-        effectName = textParam["effectName"];
+        dropTime = textParam["dropTime"].ToFloat(0);
+
+        dropEffectName = textParam["dropEffectName"];
+        fireEffectName = textParam["fireEffectName"];
     }
 
-    protected override bool OnBegin(Vector3 position,Vector3 forward)
+
+    protected override bool OnBegin(Vector3 position, Vector3 forward)
     {
 
-        base.OnBegin(position,forward);
+        base.OnBegin(position, forward);
 
         return true;
     }

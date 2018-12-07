@@ -36,7 +36,7 @@ public class BuffBase
 		return OnInitConfig(this.buffParam.textParam);
 	}
 	
-    //buff开始生效;
+    //buff效果开始;
 	public bool BeginBuff(GameUnit actor)
 	{
         this.actor = actor;
@@ -68,7 +68,7 @@ public class BuffBase
         OnUpdate(deltaTime);
 	}
 
-    //删除原始场景上的buff显示特效;
+    //删除场景上的buff显示特效;
     public float RemoveBuff()
 	{
 		BattleBuffRoot.Instance.DeSpwan (buffPrefab);
