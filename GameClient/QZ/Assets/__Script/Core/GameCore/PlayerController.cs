@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Werewolf.StatusIndicators.Components;
 
 //玩家控制脚本;
 public class PlayerController : SingleClass<PlayerController>
@@ -66,6 +67,8 @@ public class PlayerController : SingleClass<PlayerController>
 
         CameraLookPlayer.Instance.SetTarget(gameUnit.mUnitController.transform);
 
+        SplatManager.Instance.targetPoint = gameUnit.mUnitController.transform;
+
         if (joyStick != null) joyStick.OnMoveDragEvent += OnMoveJoystickEvent;
         if (rollJoystick != null) rollJoystick.OnRollDragEvent += OnRollJoystickEvent;
         if (atkJoystick != null) atkJoystick.OnFireEvent += OnFireEvent;
@@ -83,6 +86,7 @@ public class PlayerController : SingleClass<PlayerController>
         mGameUnit = null;
 
         CameraLookPlayer.Instance.SetTarget(null);
+        SplatManager.Instance.targetPoint = null;
 
         if (joyStick != null) joyStick.OnMoveDragEvent -= OnMoveJoystickEvent;
         if (rollJoystick != null) rollJoystick.OnRollDragEvent -= OnRollJoystickEvent;
@@ -198,7 +202,7 @@ public class PlayerController : SingleClass<PlayerController>
 
         Vector3 moveForward = Quaternion.AngleAxis(Angle(Vector3.forward, dir), Vector3.up) * forward;
 
-        Vector3 endPoint = startPoint + moveForward.normalized * 1.5f;
+        Vector3 endPoint = startPoint + moveForward.normalized * 2f;
 
         //客服端直接移动;
         mGameUnit.RollPoint(endPoint);

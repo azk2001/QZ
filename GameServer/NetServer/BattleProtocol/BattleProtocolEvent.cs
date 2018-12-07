@@ -54,6 +54,7 @@ namespace GameServer
             netPlayer.uuid = uuid;                                  //唯一标识ID;
             netPlayer.basicsData.name = c2SCreatePlayer.name;       //名字;
             netPlayer.basicsData.sex = c2SCreatePlayer.sex;         //性别;
+            netPlayer.basicsData.modleId = c2SCreatePlayer.sex;     //模型ID;
             netPlayer.basicsData.level = 1;                         //角色等级;
 
             NetPlayerManager.AddNetPlayer(netPlayer);

@@ -155,24 +155,42 @@ public class UnitController : MonoBehaviour
         {
             Vector3 dar = rollParam.forward * rollParam.speed * Time.deltaTime;
 
-            transformCaChe.Translate(dar);
-
             rollParam.curDistance += dar.magnitude;
 
             if (rollParam.curDistance > rollParam.maxDistance)
             {
-                transformCaChe.position = rollParam.toPosition;
+                //  transformCaChe.position = rollParam.toPosition;
 
-                _playerState = PlayerState.idle;
+                float angle = mAnimator.transform.localEulerAngles.y;
+                if(angle>180)
+                {
+                    angle = angle - 360;
+                }
 
-                MoveDirection(moveDirection);
+                Vector3 angles = new Vector3(0, Mathf.Lerp(angle, 0, 0.1f), 0);
+                mAnimator.transform.localEulerAngles = angles;
+
+                if (Mathf.Abs(angle) < 3f)
+                {
+                    mAnimator.transform.localEulerAngles = Vector3.zero;
+                    _playerState = PlayerState.idle;
+                    MoveDirection(moveDirection);
+                }
             }
+            else
+            {
+                mAnimator.transform.forward = rollParam.forward;
+
+                if (_characterController.enabled == true)
+                    _characterController.Move(dar);
+            }
+
         }
 
 
-        if (_playerState != PlayerState.jump && _playerState != PlayerState.roll) 
+        if (_playerState != PlayerState.jump && _playerState != PlayerState.roll)
         {
-            if(_characterController.enabled == true)
+            if (_characterController.enabled == true)
                 _characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
         }
     }
@@ -281,7 +299,7 @@ public class UnitController : MonoBehaviour
         jumpParam.forward = Vector3.forward;
         jumpParam.maxDistance = Vector3.Distance(toPosition, transformCaChe.position);
         jumpParam.curDistance = 0;
-        jumpParam.speed = 8.0f;
+        jumpParam.speed = 3.0f;
         jumpParam.toPosition = toPosition;
 
         PlayAnimation("jump");
@@ -292,12 +310,13 @@ public class UnitController : MonoBehaviour
         _playerState = PlayerState.roll;
 
         Vector3 forward = (toPosition - transformCaChe.position).normalized;
-        
+        forward.y = 0;
+
         rollParam = new RollParam();
-        rollParam.forward = toPosition - transformCaChe.position;
+        rollParam.forward = forward;
         rollParam.maxDistance = Vector3.Distance(toPosition, transformCaChe.position);
         rollParam.curDistance = 0;
-        rollParam.speed = 8.0f;
+        rollParam.speed = 6.0f;
         rollParam.toPosition = toPosition;
 
         PlayAnimation("roll");
@@ -306,7 +325,7 @@ public class UnitController : MonoBehaviour
     //朝着指定方向移动
     public void MoveDirection(Vector3 direction)
     {
-        if (_playerState == PlayerState.jump || _playerState == PlayerState.roll || _playerState == PlayerState.die )
+        if (_playerState == PlayerState.jump || _playerState == PlayerState.roll || _playerState == PlayerState.die)
         {
             return;
         }

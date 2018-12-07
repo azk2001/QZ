@@ -53,7 +53,7 @@ namespace GameServer
         public string name;     //名字;
         public int sex;         //性别;
         public int level;       //角色等级;
-
+        public int modleId;     //模型ID;
         public int px;          //位置X*100;
         public int py;          //位置Y*100；
 
@@ -64,6 +64,7 @@ namespace GameServer
             name = name.Replace("\0", string.Empty);
             sex = reader.ReadInt();
             level = reader.ReadInt();
+            modleId = reader.ReadInt();
             px = reader.ReadInt();
             py = reader.ReadInt();
         }
@@ -74,6 +75,7 @@ namespace GameServer
             writer.WriteString(name, 64);
             writer.WriteInt(sex);
             writer.WriteInt(level);
+            writer.WriteInt(modleId);
             writer.WriteInt(px);
             writer.WriteInt(py);
 

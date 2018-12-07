@@ -79,4 +79,10 @@ public class CameraLookPlayer : MonoBehaviour
             this.targetTrans.forward = foeward;
         }
     }
+
+    public Vector3 GetFireForward()
+    {
+        return transformCache.forward;
+    }
+
 }

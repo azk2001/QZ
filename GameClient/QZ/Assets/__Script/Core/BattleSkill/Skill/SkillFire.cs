@@ -37,7 +37,7 @@ public class SkillFire : SkillBase
         muzzleTrans.transform.position = gameUnit.mUnitController.fireTrans.position;
 
 
-        Vector3 forward = gameUnit.mUnitController.fireTrans.position - CameraLookPlayer.Instance.transform.position;
+        Vector3 forward = CameraLookPlayer.Instance.GetFireForward();
         Transform bulletTrans = BattleEffectRoot.Instance.SpwanPrefab(bulletEffectName);
         SkillController skillController = bulletTrans.GetComponent<SkillController>();
         skillController.OnFire(forward, moveSpeed, showTime);

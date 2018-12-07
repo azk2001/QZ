@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 116875267}
   - component: {fileID: 116875266}
   - component: {fileID: 116875265}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,10 +538,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTrans: {fileID: 0}
-  lookOffset: {x: 0, y: 2, z: 0}
-  maxHight: 5
+  lookOffset: {x: 0, y: 2.7, z: 0}
+  maxHight: 4
   minHight: 0
-  distance: 7.5
+  distance: 3.5
   eulerAngles: 0
   curHight: 30
   isLook: 1
@@ -2120,6 +2120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HideCursor: 1
+  targetPoint: {fileID: 0}
 --- !u!1 &1959970832
 GameObject:
   m_ObjectHideFlags: 0

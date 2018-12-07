@@ -41,6 +41,7 @@ namespace Werewolf.StatusIndicators.Components {
 		}
 
 		public override void Update() {
+            return;
 			if(Manager != null) {
 				Vector3 v = FlattenVector(Get3DMousePosition()) - Manager.transform.position;
 				if(v != Vector3.zero) {
@@ -50,6 +51,20 @@ namespace Werewolf.StatusIndicators.Components {
 				ArrowHead.transform.localPosition = new Vector3(0, (Scale * 0.5f) + ArrowHeadDistance() - 0.12f, 0);
 			}
 		}
+
+        public void SetAngle(Vector3 toPosition)
+        {
+            if (Manager != null)
+            {
+                Vector3 v = FlattenVector(toPosition) - Manager.transform.position;
+                if (v != Vector3.zero)
+                {
+                    Manager.transform.rotation = Quaternion.LookRotation(v);
+                }
+                Scale = Mathf.Clamp((toPosition - Manager.transform.position).magnitude, MinimumRange, Range - ArrowHeadDistance()) * 2;
+                ArrowHead.transform.localPosition = new Vector3(0, (Scale * 0.5f) + ArrowHeadDistance() - 0.12f, 0);
+            }
+        }
 
 		public override void OnValueChanged() {
 			base.OnValueChanged();

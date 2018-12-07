@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using Werewolf.StatusIndicators.Components;
 
 public enum eJoyStickDrogType
 {
@@ -99,6 +100,7 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
         PlayTweener(false);
 
+        HideShowLine();
     }
 
     private void PlayTweener(bool isForward)
@@ -135,4 +137,28 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     {
 
     }
+
+    protected void HideShowLine()
+    {
+        if(SplatManager.Instance!=null)
+        {
+            SplatManager.Instance.CancelSpellIndicator();
+            SplatManager.Instance.CancelRangeIndicator();
+            SplatManager.Instance.CancelStatusIndicator();
+        }
+    }
+
+    protected float Angle(Vector3 from, Vector3 to)
+    {
+        float angle = Vector3.Angle(from, to);
+        angle *= Mathf.Sign(Vector3.Cross(from, to).y);
+
+        if (angle < 0)
+        {
+            angle = 360 - Mathf.Abs(angle);
+        }
+
+        return angle;
+    }
+
 }
