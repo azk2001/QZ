@@ -12,7 +12,6 @@ class UIAtkJoystick : UIJoyStick
         Instance = this;
     }
 
-
     public override void OnPointerEnter(PointerEventData eventData)
     {
         if (isActiveJoyStick == false)

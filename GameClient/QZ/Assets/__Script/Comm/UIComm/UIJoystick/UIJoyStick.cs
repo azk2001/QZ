@@ -21,7 +21,8 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public RectTransform joyStickParent = null;
     public RectTransform touchImage = null;
-
+    public UIImage uiIcon = null;
+    public UIImage uiCD = null;
 
     private Camera uiCamera = null;
     private DOTweenAnimation[] tweener = null;
@@ -35,8 +36,15 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     protected bool isDrag = false;
 
     public bool isActiveJoyStick = true;
-
     public bool isIgnoreOffset = true;
+
+    public skill_c skillInfo = null; //当前技能的信息;
+    public bool isCDing = false;        //技能是否在cd中;
+
+    private void Awake()
+    {
+        touchImage.gameObject.SetActive(false);
+    }
 
     private void Start()
     {
@@ -48,6 +56,29 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         tweener = transformCache.GetComponentsInChildren<DOTweenAnimation>();
 
         isDrag = true;
+    }
+
+    public virtual void OnBeginDrag(PointerEventData eventData)
+    {
+        if (isActiveJoyStick == false)
+            return;
+
+        touchImage.gameObject.SetActive(true);
+
+        isDrag = true;
+
+        offsetPosition = uiCamera.ScreenToWorldPoint(eventData.position);
+        offsetPosition.z = 0;
+        touchImage.position = offsetPosition;
+
+        if (touchImage.anchoredPosition.magnitude > radius)
+        {
+            touchImage.anchoredPosition = touchImage.anchoredPosition.normalized * radius;
+        }
+
+        PlayTweener(true);
+
+        RefreshAngle();
     }
 
     public virtual void OnDrag(PointerEventData eventData)
@@ -71,27 +102,6 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         RefreshAngle();
     }
 
-    public virtual void OnBeginDrag(PointerEventData eventData)
-    {
-        if (isActiveJoyStick == false)
-            return;
-
-        isDrag = true;
-
-        offsetPosition = uiCamera.ScreenToWorldPoint(eventData.position);
-        offsetPosition.z = 0;
-        touchImage.position = offsetPosition;
-
-        if (touchImage.anchoredPosition.magnitude > radius)
-        {
-            touchImage.anchoredPosition = touchImage.anchoredPosition.normalized * radius;
-        }
-
-        PlayTweener(true);
-
-        RefreshAngle();
-    }
-
     public virtual void OnEndDrag(PointerEventData eventData)
     {
         isDrag = false;
@@ -101,6 +111,8 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         PlayTweener(false);
 
         HideShowLine();
+
+        touchImage.gameObject.SetActive(false);
     }
 
     private void PlayTweener(bool isForward)
@@ -159,6 +171,20 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         }
 
         return angle;
+    }
+
+    //让技能在cd中
+    public void CheckCD()
+    {
+        if (isCDing == true)
+            return;
+
+        isCDing = true;
+
+        Tweener tweener = DOTween.To(() => uiCD.fillAmount, x => uiCD.fillAmount = x, 0, skillInfo.cdTime);
+        tweener.OnComplete(() => {
+            isCDing = false;
+        });
     }
 
 }

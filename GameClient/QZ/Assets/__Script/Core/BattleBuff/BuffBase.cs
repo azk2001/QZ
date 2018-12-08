@@ -35,38 +35,45 @@ public class BuffBase
         TimeManager.Instance.Begin(this.buffParam.showTime, this.RemoveBuff);
 		return OnInitConfig(this.buffParam.textParam);
 	}
-	
+
+    protected virtual bool OnInitConfig(Dictionary<string, string> textParam)
+    {
+        return true;
+    }
+
     //buff效果开始;
-	public bool BeginBuff(GameUnit actor)
+    public virtual bool OnBegin(GameUnit actor)
 	{
         this.actor = actor;
 
         RemoveBuff ();
-	
-		return OnBegin( actor );
-	}
+
+        isRun = true;
+        return true;
+    }
 	
     //buff效果结束;
-	public void EndBuff(GameUnit actor)
+	public virtual void OnEnd(GameUnit actor)
 	{
-		OnEnd(actor);
-	}
-	
+        isRun = false;
+
+        RemoveBuff();
+        actor.RemoveBuff(this);
+    }
+
     //buff触发生效，执行心跳;
-	public void Update(float deltaTime)
-	{
+    public virtual void Update(float deltaTime)
+    {
         if (isRun == false)
             return;
-        
+
         takeDataTime += deltaTime;
 
-        if(takeDataTime > buffParam.invincibleTime)
+        if (takeDataTime > buffParam.invincibleTime)
         {
-            EndBuff(this.actor);
+            OnEnd(this.actor);
         }
-
-        OnUpdate(deltaTime);
-	}
+    }
 
     //删除场景上的buff显示特效;
     public float RemoveBuff()
@@ -75,32 +82,6 @@ public class BuffBase
 		BuffManager.Instance.RemoveBuff (uuid);
 
         return -1;
-	}
-
-    //buff开始生效;
-    protected virtual bool OnBegin(GameUnit actor)
-	{
-		isRun = true;
-		return true;
-	}
-
-    //buff效果结束;
-    protected virtual void OnEnd(GameUnit actor)
-	{
-		isRun = false;
-
-        RemoveBuff();
-        actor.RemoveBuff(this);
-    }
-
-	protected virtual void OnUpdate(float deltaTime)
-	{
-
-	}
-
-	protected virtual bool OnInitConfig(Dictionary<string,string> textParam)
-	{
-		return true;
 	}
     
 }

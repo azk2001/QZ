@@ -6,7 +6,7 @@ using System.Collections;
 public class SkillBase
 {
     public GameUnit gameUnit = null;                //释放者对象;
-    public skill_c skill = null;                   //技能配置参数;
+    public skill_c skill = null;                    //技能配置参数;
     public Dictionary<string, string> textParam;
     public Transform effectTransfrom = null;
 

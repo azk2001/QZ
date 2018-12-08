@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.4.14f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -337,6 +339,7 @@
     <Compile Include="Assets\__Script\Core\BattleBuff\BuffManager.cs" />
     <Compile Include="Assets\__Script\Core\BattleBuff\cs_buff.cs" />
     <Compile Include="Assets\__Script\Core\BattleCore\BattleCore.cs" />
+    <Compile Include="Assets\__Script\Core\BattleSkill\Skill\SkillAerolite.cs" />
     <Compile Include="Assets\__Script\Core\BattleSkill\Skill\SkillBagBall.cs" />
     <Compile Include="Assets\__Script\Core\BattleSkill\Skill\SkillFire.cs" />
     <Compile Include="Assets\__Script\Core\BattleSkill\SkillBase.cs" />

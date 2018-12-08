@@ -10,6 +10,8 @@ public class skill_c
     public readonly int skillId;
     public readonly string icon;
     public readonly float cdTime;
+    public readonly float conjureRadius;  //施法半径
+    public readonly float fireRadius;    //爆炸半径
     public readonly int type;
     public readonly string aniName;
     public readonly Dictionary<string,string> textParam = new Dictionary<string, string>();
@@ -20,6 +22,8 @@ public class skill_c
         skillId = file.GetContentInt("skillId");
         icon = file.GetContentStr("icon");
         cdTime = file.GetContentFloat("cdTime");
+        conjureRadius = file.GetContentFloat("conjureRadius");
+        fireRadius = file.GetContentFloat("fireRadius");
         type = file.GetContentInt("type");
         aniName = file.GetContentStr("aniName");
         string[] param = file.GetContentStr("param").Split(';');

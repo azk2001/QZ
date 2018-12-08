@@ -164,7 +164,7 @@ public class GameUnit
     public void AddBuff(BuffBase buff)
     {
         buffs.Add(buff);
-        buff.BeginBuff(this);
+        buff.OnBegin(this);
     }
 
     public void RemoveBuff(BuffBase buff)

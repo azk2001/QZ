@@ -23,7 +23,7 @@ public class BuffChangeSpeed : BuffBase
 		return base.OnBegin (actor);
 	}
 
-	protected override void OnUpdate (float deltaTime)
+	protected override void Update (float deltaTime)
 	{
 		
 		base.Update (deltaTime);
