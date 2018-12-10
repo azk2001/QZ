@@ -52,15 +52,12 @@ namespace Werewolf.StatusIndicators.Components {
 			}
 		}
 
-        public void SetAngle(Vector3 toPosition)
+        public override void SetAngle(Vector3 toPosition)
         {
+            base.SetAngle(toPosition);
+
             if (Manager != null)
             {
-                Vector3 v = FlattenVector(toPosition) - Manager.transform.position;
-                if (v != Vector3.zero)
-                {
-                    Manager.transform.rotation = Quaternion.LookRotation(v);
-                }
                 Scale = Mathf.Clamp((toPosition - Manager.transform.position).magnitude, MinimumRange, Range - ArrowHeadDistance()) * 2;
                 ArrowHead.transform.localPosition = new Vector3(0, (Scale * 0.5f) + ArrowHeadDistance() - 0.12f, 0);
             }

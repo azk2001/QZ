@@ -738,10 +738,10 @@ namespace GameServer
         }
     }
 
-    public struct S2CPlayerRefreshBuffMessage
+    public struct S2CRefreshBuffMessage
     {
         public int buffCount;
-        public List<RefreshBuffParam> buffIdList;
+        public List<RefreshBuffParam> buffList;
 
         public BytesWriter Message(BytesWriter writer)
         {
@@ -749,7 +749,7 @@ namespace GameServer
 
             for (int i = 0; i < buffCount; i++)
             {
-                RefreshBuffParam buffParam = buffIdList[i];
+                RefreshBuffParam buffParam = buffList[i];
                 writer.WriteInt(buffParam.buffId);
                 writer.WriteInt(buffParam.px);
                 writer.WriteInt(buffParam.pz);
@@ -761,14 +761,14 @@ namespace GameServer
         public void Message(BytesReader reader)
         {
             buffCount = reader.ReadInt();
-            buffIdList = new List<RefreshBuffParam>();
+            buffList = new List<RefreshBuffParam>();
             for (int i = 0; i < buffCount; i++)
             {
                 RefreshBuffParam buffParam = new RefreshBuffParam();
                 buffParam.buffId = reader.ReadInt();
                 buffParam.px = reader.ReadInt();
                 buffParam.pz = reader.ReadInt();
-                buffIdList.Add(buffParam);
+                buffList.Add(buffParam);
 
             }
         }
@@ -813,6 +813,7 @@ namespace GameServer
             atkUUID = reader.ReadInt();
         }
     }
+    
 
     public class S2CGameFinishMessage
     {

@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using Werewolf.StatusIndicators.Components;
 
 class UISkill1Joystick : UIJoyStick
 {
     public static UISkill1Joystick Instance = null;
 
     public VoidIntVector3Delegate OnFireEvent = null;
+
+    private AngleMissile angleMissile = null;
+    private LineMissile lineMissile = null;
 
     private void Awake()
     {
@@ -21,7 +25,7 @@ class UISkill1Joystick : UIJoyStick
     {
         if (OnFireEvent!=null)
         {
-            OnFireEvent(2,curDelta.normalized);
+            OnFireEvent(GlobData.skill1Index, curDelta.normalized);
         }
 
         base.OnEndDrag(eventData);

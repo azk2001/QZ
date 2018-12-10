@@ -7,8 +7,7 @@ public class BuffManager : SingleClass<BuffManager>
 
     public Dictionary<int, System.Type> buffType = new Dictionary<int, System.Type>()
     {
-        {1,typeof(BuffChangeSpeed)},		//速度变化;
-
+        {1,typeof(BuffChangeSpeed)},//速度变化;
 	};
 
 
@@ -28,7 +27,7 @@ public class BuffManager : SingleClass<BuffManager>
     public BuffBase AddLocalBuff(int buffId, Vector3 position)
     {
         int uuid = BuffManager.uuid;
-        cs_buff buffParam = cs_buff.GetThis(buffId);
+        buff_c buffParam = buff_c.Get(buffId);
 
         BuffBase bb = (BuffBase)(System.Activator.CreateInstance(buffType[buffId]));
         if (bb != null)
@@ -44,7 +43,7 @@ public class BuffManager : SingleClass<BuffManager>
 
     public BuffBase AddServerBuff(int uuid, int buffId, Vector3 position)
     {
-        cs_buff buffParam = cs_buff.GetThis(buffId);
+        buff_c buffParam = buff_c.Get(buffId);
 
         BuffBase bb = (BuffBase)(System.Activator.CreateInstance(buffType[buffId]));
         if (bb != null)

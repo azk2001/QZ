@@ -38,7 +38,7 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public bool isActiveJoyStick = true;
     public bool isIgnoreOffset = true;
 
-    public skill_c skillInfo = null; //当前技能的信息;
+    public skill_c skillInfo = null;    //当前技能的信息;
     public bool isCDing = false;        //技能是否在cd中;
 
     private void Awake()
@@ -174,10 +174,10 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     }
 
     //让技能在cd中
-    public void CheckCD()
+    public bool CheckCD()
     {
         if (isCDing == true)
-            return;
+            return  false;
 
         isCDing = true;
 
@@ -185,6 +185,8 @@ public class UIJoyStick : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         tweener.OnComplete(() => {
             isCDing = false;
         });
+
+        return true;
     }
 
 }

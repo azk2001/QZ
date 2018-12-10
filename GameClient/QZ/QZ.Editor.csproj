@@ -436,6 +436,7 @@
     <None Include="Assets\__Script\Comm\SceneEditor\Resources\Map\123.xml" />
     <None Include="Assets\__Script\Comm\UIComm\UIFlash\UIFlash.shader" />
     <None Include="Assets\__Script\Comm\UIComm\UIMask\Additive.shader" />
+    <None Include="Assets\___Prefab\Config\Resources\Config\buff_c.txt" />
     <None Include="Assets\___Prefab\Config\Resources\Config\dungeon_c.txt" />
     <None Include="Assets\___Prefab\Config\Resources\Config\player_c.txt" />
     <None Include="Assets\___Prefab\Config\Resources\Config\sfx_c.txt" />

@@ -8,7 +8,7 @@ class UIRollJoystick : UIJoyStick
 
     public VoidVector2Delegate OnRollDragEvent = null;
 
-    private LineMissile lineMissile = null;
+    private AngleMissile angleMissile= null;
 
     private void Awake()
     {
@@ -17,9 +17,9 @@ class UIRollJoystick : UIJoyStick
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        SplatManager.Instance.SelectSpellIndicator("Line");
+        SplatManager.Instance.SelectSpellIndicator("Direction");
 
-        lineMissile = SplatManager.Instance.CurrentSpellIndicator as LineMissile;
+        angleMissile = SplatManager.Instance.CurrentSpellIndicator as AngleMissile;
 
         base.OnBeginDrag(eventData);
     }
@@ -31,17 +31,14 @@ class UIRollJoystick : UIJoyStick
         if (v2.magnitude > offsetRadius)
         {
             v2 = v2.normalized;
-            Vector3 startPoint = target.position;
-            Vector3 forward = target.forward;
+
             Vector3 dir = new Vector3(v2.x, 0, v2.y);
+            Vector3 moveForward = Quaternion.AngleAxis(Angle(Vector3.forward, dir), Vector3.up) * target.forward;
+            Vector3 endPoint = target.position + moveForward.normalized * 1.5f;
 
-            Vector3 moveForward = Quaternion.AngleAxis(Angle(Vector3.forward, dir), Vector3.up) * forward;
-
-            Vector3 endPoint = startPoint + moveForward.normalized * 1.5f;
-
-            if (lineMissile != null)
+            if (angleMissile != null)
             {
-                lineMissile.SetAngle(endPoint);
+                angleMissile.SetAngle(endPoint);
             }
         }
 

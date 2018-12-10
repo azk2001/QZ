@@ -139,7 +139,6 @@ public class GameUnit
                 skills[i].Update(deltaTime);
             }
         }
-
     }
 
     public void OnHit(GameUnit killGameUnit)
@@ -223,6 +222,13 @@ public class GameUnit
     public void RollPoint(Vector3 toPoint)
     {
         mUnitController.RollPosition(toPoint);
+    }
+
+    //添加一个技能
+    public void AddSkill(int skillId)
+    {
+        SkillBase sb = SkillManager.Instance.AddSkill(skillId);
+        skills.Add(sb);
     }
 
     public void OnSkillEnd(SkillBase skillBase)

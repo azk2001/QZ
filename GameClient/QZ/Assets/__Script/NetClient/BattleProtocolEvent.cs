@@ -301,6 +301,12 @@ public static class BattleProtocolEvent
     {
         S2CPlayerRefreshBuffMessage message = new S2CPlayerRefreshBuffMessage();
         message.Message(reader);
+
+        for (int i = 0; i < message.buffCount; i++)
+        {
+            RefreshBuffParam param= message.buffIdList[i];
+            BuffManager.Instance.AddLocalBuff(param.buffId, new Vector3(param.px, 0, param.pz));
+        }
     }
 
     public static void SendPlayerDie(C2SPlayerDieMessage message)

@@ -17,19 +17,19 @@ public class BuffChangeSpeed : BuffBase
         return base.OnInitConfig (textParam);
 	}
 
-	protected override bool OnBegin (GameUnit actor)
+	public override bool OnBegin (GameUnit actor)
 	{
 
 		return base.OnBegin (actor);
 	}
 
-	protected override void Update (float deltaTime)
+    public override void Update (float deltaTime)
 	{
 		
 		base.Update (deltaTime);
 	}
 
-	protected override void OnEnd (GameUnit actor)
+    public override void OnEnd (GameUnit actor)
 	{
 		
 		base.OnEnd (actor);

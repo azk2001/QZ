@@ -108,10 +108,31 @@ namespace Werewolf.StatusIndicators.Components {
 		public virtual void Update() {
 		}
 
-		/// <summary>
-		/// For updating the Splat whenever a value is changed.
-		/// </summary>
-		public virtual void OnValueChanged() {
+        public virtual void SetAngle(Vector3 toPosition)
+        {
+            if (Manager != null)
+            {
+                Vector3 v = FlattenVector(toPosition) - Manager.transform.position;
+                if (v != Vector3.zero)
+                {
+                    Manager.transform.rotation = Quaternion.LookRotation(v);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get the vector that is on the same y position as the subject to get a more accurate angle.
+        /// </summary>
+        /// <param name="target">The target point which we are trying to adjust against</param>
+        protected Vector3 FlattenVector(Vector3 target)
+        {
+            return new Vector3(target.x, Manager.transform.position.y, target.z);
+        }
+
+        /// <summary>
+        /// For updating the Splat whenever a value is changed.
+        /// </summary>
+        public virtual void OnValueChanged() {
 			ProjectorScaler.Resize(Projectors, Scaling, scale, width);
 			UpdateProgress(progress);
 		}

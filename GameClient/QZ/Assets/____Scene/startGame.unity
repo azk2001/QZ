@@ -1021,7 +1021,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 886900616}
   m_LocalRotation: {x: 0, y: -0.000000021073422, z: 0.000000021073426, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: -0}
+  m_LocalPosition: {x: 0, y: 1.9, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2024315434}
@@ -1036,12 +1036,12 @@ Projector:
   m_GameObject: {fileID: 886900616}
   m_Enabled: 1
   serializedVersion: 2
-  m_NearClipPlane: -5
+  m_NearClipPlane: -2.44
   m_FarClipPlane: 5
   m_FieldOfView: 30
-  m_AspectRatio: 0.625
+  m_AspectRatio: 1.25
   m_Orthographic: 1
-  m_OrthographicSize: 2
+  m_OrthographicSize: 1
   m_Material: {fileID: 2100000, guid: bf6bd11dee7cc1940b8d4703e11e8339, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -1161,9 +1161,9 @@ Projector:
   m_NearClipPlane: -5
   m_FarClipPlane: 5
   m_FieldOfView: 30
-  m_AspectRatio: 0.8
+  m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 6.5
+  m_OrthographicSize: 2.5
   m_Material: {fileID: 2100000, guid: f96f98a7d8c014143a1563c44fca2484, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -1786,7 +1786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progress: 0
-  scale: 13
+  scale: 5
   width: 0
   RangeIndicator: {fileID: 0}
   range: 5
@@ -1881,9 +1881,9 @@ Projector:
   m_NearClipPlane: -5
   m_FarClipPlane: 5
   m_FieldOfView: 30
-  m_AspectRatio: 0.625
+  m_AspectRatio: 1.25
   m_Orthographic: 1
-  m_OrthographicSize: 2
+  m_OrthographicSize: 1
   m_Material: {fileID: 2100000, guid: e9be260d44b0b8641856c026f2149739, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -1945,7 +1945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progress: 0
-  scale: 7
+  scale: 7.06
   width: 0
   ProgressSteps: 60
 --- !u!114 &1698319799
@@ -2012,7 +2012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progress: 0
-  scale: 10
+  scale: 5.88
   width: 0
   DefaultScale: 7
 --- !u!114 &1803297471
@@ -2055,7 +2055,7 @@ Projector:
   m_FieldOfView: 30
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 5
+  m_OrthographicSize: 2.94
   m_Material: {fileID: 2100000, guid: 226a731cdf7df3e4f88b9566c6c90a69, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -2328,7 +2328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progress: 0
-  scale: 4
+  scale: 2
   width: 2.5
   RangeIndicator: {fileID: 1803297470}
   range: 10

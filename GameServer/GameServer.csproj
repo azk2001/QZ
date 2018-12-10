@@ -69,6 +69,7 @@
     <Compile Include="BattleRooms\NetPlayer\NetPlayerData.cs" />
     <Compile Include="BsVsClient\BattleCore\BattleCore.cs" />
     <Compile Include="BsVsClient\BattleCore\GameFinishData.cs" />
+    <Compile Include="BsVsClient\Buff\BuffManager.cs" />
     <Compile Include="Config\TableData\TableFile.cs" />
     <Compile Include="Config\Table\dungeon_s.cs" />
     <Compile Include="Config\Table\player_s.cs" />

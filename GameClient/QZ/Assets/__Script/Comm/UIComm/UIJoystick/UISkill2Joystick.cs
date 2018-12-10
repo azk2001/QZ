@@ -21,7 +21,7 @@ class UISkill2Joystick : UIJoyStick
     {
         if (OnFireEvent != null)
         {
-            OnFireEvent(3, curDelta.normalized);
+            OnFireEvent(GlobData.skill2Index, curDelta.normalized);
         }
 
         base.OnEndDrag(eventData);

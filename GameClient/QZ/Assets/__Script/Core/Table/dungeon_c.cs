@@ -70,6 +70,9 @@ public class dungeon_c
     public readonly string sceneName;
     public readonly int backMusic;
     public readonly string icon;
+    public readonly int buffDropTime;
+    public readonly int width;
+    public readonly int height;
     public readonly int timeLimit;
     public readonly int lastMapId;
     public readonly string comReward;
@@ -82,6 +85,9 @@ public class dungeon_c
         mapName = file.GetContentStr("mapName");
         sceneName = file.GetContentStr("sceneName");
         icon = file.GetContentStr("icon");
+        buffDropTime = file.GetContentInt("buffDropTime");
+        width = file.GetContentInt("width");
+        height = file.GetContentInt("height");
         timeLimit = file.GetContentInt("timeLimit");
         backMusic = file.GetContentInt("backMusic");
         mapType = (eMapType)file.GetContentInt("mapType");

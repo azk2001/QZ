@@ -15,6 +15,7 @@ namespace GameServer
         protected ElementManager elementManager = null;         //当前这场战斗的刷怪器控制器;
         protected float runDeltaTime = 0;
         protected int dungeonRunTime = 0;                       //副本运行时间;
+        protected float buffDropTime = 0;                       //Buff掉落下来的间隔时间;
         protected bool isRun = false;                          //房间是否运行;
         protected List<NetPlayer> netPlayerList = new List<NetPlayer>();//网络玩家列表;
 
@@ -63,6 +64,7 @@ namespace GameServer
 
             elementManager.Update(deltaTime);
             RefreshRunTime(deltaTime);
+            BuffDropRunTime(deltaTime);
         }
 
         /// <summary>
@@ -82,6 +84,36 @@ namespace GameServer
             victoryCondition.OnDungeonRunTime(dungeonRunTime);
 
         }
+
+        /// <summary>
+        /// Buff掉落时间
+        /// </summary>
+        /// <param name="deltaTime"></param>
+        public virtual void BuffDropRunTime(float deltaTime)
+        {
+            buffDropTime += deltaTime;
+
+            if (buffDropTime < dungeonInfo.buffDropTime)
+                return;
+
+            buffDropTime = 0;
+
+            List<RefreshBuffParam> buffList = new List<RefreshBuffParam>();
+            for (int i=0,max = 5;i<max;i++)
+            {
+                RefreshBuffParam param = new RefreshBuffParam();
+                param.buffId = BuffManager.instance.RandomBuff();
+                param.px = Random.Range(0, dungeonInfo.width);
+                param.pz = Random.Range(0, dungeonInfo.height);
+
+                buffList.Add(param);
+            }
+
+            BattleProtocolEvent.SendRefeshBuff(roomIndex, buffList);
+
+        }
+
+        
 
         /// <summary>
         /// 角色掉血

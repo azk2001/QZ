@@ -37,7 +37,7 @@ public class BattleScene : SceneBase
 
         player_c playerInfo = player_c.Get(netPlayer.basicsData.modleId);
 
-        SkillManager.Instance.AddSkill(gameUnit, playerInfo.skillId);
+        gameUnit.AddSkill(playerInfo.skillId);
 
         if (BattleProtocol.UUID == netPlayer.uuid)
         {

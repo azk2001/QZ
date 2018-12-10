@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.4.14f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -334,10 +332,10 @@
     <Compile Include="Assets\__Script\Core\Audio\c_sfx.cs" />
     <Compile Include="Assets\__Script\Core\BattleBase.cs" />
     <Compile Include="Assets\__Script\Core\BattleBuff\Buff\BuffChangeSpeed.cs" />
+    <Compile Include="Assets\__Script\Core\BattleBuff\buff_c.cs" />
     <Compile Include="Assets\__Script\Core\BattleBuff\BuffBase.cs" />
     <Compile Include="Assets\__Script\Core\BattleBuff\BuffController.cs" />
     <Compile Include="Assets\__Script\Core\BattleBuff\BuffManager.cs" />
-    <Compile Include="Assets\__Script\Core\BattleBuff\cs_buff.cs" />
     <Compile Include="Assets\__Script\Core\BattleCore\BattleCore.cs" />
     <Compile Include="Assets\__Script\Core\BattleSkill\Skill\SkillAerolite.cs" />
     <Compile Include="Assets\__Script\Core\BattleSkill\Skill\SkillBagBall.cs" />
@@ -625,6 +623,7 @@
     <None Include="Assets\__Script\Comm\SceneEditor\Resources\Map\123.xml" />
     <None Include="Assets\__Script\Comm\UIComm\UIFlash\UIFlash.shader" />
     <None Include="Assets\__Script\Comm\UIComm\UIMask\Additive.shader" />
+    <None Include="Assets\___Prefab\Config\Resources\Config\buff_c.txt" />
     <None Include="Assets\___Prefab\Config\Resources\Config\dungeon_c.txt" />
     <None Include="Assets\___Prefab\Config\Resources\Config\player_c.txt" />
     <None Include="Assets\___Prefab\Config\Resources\Config\sfx_c.txt" />

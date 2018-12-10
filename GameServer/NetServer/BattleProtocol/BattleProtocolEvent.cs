@@ -345,6 +345,20 @@ namespace GameServer
             BattleProtocol.SendRoomByte(netPlayer.roomIndex, hitUUID, s2CPlayerDie.Message(writer), true, true);
         }
 
+        //服务器发送刷新buff
+        public static void SendRefeshBuff(int roomIndex, List<RefreshBuffParam> buffList)
+        {
+            S2CRefreshBuffMessage s2CRefreshBuff = new S2CRefreshBuffMessage();
+            s2CRefreshBuff.buffCount = buffList.Count;
+            s2CRefreshBuff.buffList = buffList;
+
+            writer.Clear();
+            writer.WriteByte((byte)S2CBattleProtocol.S2C_PlayerRefreshBuff);
+
+            BattleProtocol.SendRoomByte(roomIndex, 0, s2CRefreshBuff.Message(writer), true, true);
+        }
+
+
         public static void ReceivePlayerAddBuff(BytesReader reader, int uuid)
         {
 

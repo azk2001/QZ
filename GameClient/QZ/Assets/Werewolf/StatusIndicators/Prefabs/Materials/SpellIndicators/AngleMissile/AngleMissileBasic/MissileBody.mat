@@ -52,7 +52,7 @@ Material:
     - _DistortX: 0.05
     - _DistortY: 0.1
     - _ExpandAmount: 0.351
-    - _Fill: 0.6786971
+    - _Fill: 0
     - _FillAmount: -0.0016666667
     - _Offset: 0.24422462
     - _OffsetX: 0

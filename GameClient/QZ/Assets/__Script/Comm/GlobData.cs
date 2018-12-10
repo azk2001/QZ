@@ -32,6 +32,12 @@ public enum eModleType
 
 public static class GlobData
 {
+    public static int atkEndIndex = 0;
+    public static int atkFireIndex = 1;
+    public static int skill1Index = 2;
+    public static int skill2Index = 3;
+
+
     private static Camera _uiCamera = null;
     public static Camera uiCamera
     {

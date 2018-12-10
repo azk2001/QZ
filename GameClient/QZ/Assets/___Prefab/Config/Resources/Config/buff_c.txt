@@ -1,0 +1,2 @@
+buffId	icon	prefabName	showTime	type	param
+1	ttt	buff_1	15	1	ttt

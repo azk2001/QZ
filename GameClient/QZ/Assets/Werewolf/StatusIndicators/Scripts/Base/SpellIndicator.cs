@@ -55,14 +55,6 @@ namespace Werewolf.StatusIndicators.Components {
 		}
 
 		/// <summary>
-		/// Get the vector that is on the same y position as the subject to get a more accurate angle.
-		/// </summary>
-		/// <param name="target">The target point which we are trying to adjust against</param>
-		protected Vector3 FlattenVector(Vector3 target) {
-			return new Vector3(target.x, Manager.transform.position.y, target.z);
-		}
-
-		/// <summary>
 		/// Scale Range Indicator to be same as Splat Range.
 		/// </summary>
 		private void UpdateRangeIndicatorSize() {

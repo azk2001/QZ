@@ -75,6 +75,9 @@ public class dungeon_s
     public readonly int backMusic;
     public readonly eMapType mapType;
     public readonly int mapConfig;
+    public readonly int buffDropTime;
+    public readonly int width;
+    public readonly int height;
     public readonly int timeLimit;
     public readonly int lastMapId;
     public readonly string comReward;
@@ -91,6 +94,9 @@ public class dungeon_s
         backMusic = file.GetContentInt("backMusic");
         mapType = (eMapType)file.GetContentInt("mapType");
         mapConfig = file.GetContentInt("mapConfig");
+        buffDropTime = file.GetContentInt("buffDropTime");
+        width = file.GetContentInt("width");
+        height = file.GetContentInt("height");
         comReward = file.GetContentStr("comReward");
         lastMapId = file.GetContentInt("lastMapId");
         string victoryConditions = file.GetContentStr("victoryConditions");

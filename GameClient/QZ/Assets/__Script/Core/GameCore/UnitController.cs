@@ -174,7 +174,7 @@ public class UnitController : MonoBehaviour
                 {
                     mAnimator.transform.localEulerAngles = Vector3.zero;
                     _playerState = PlayerState.idle;
-                    MoveDirection(moveDirection);
+                    MoveDirection(Vector3.zero);
                 }
             }
             else

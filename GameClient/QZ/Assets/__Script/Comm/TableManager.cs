@@ -83,6 +83,8 @@ public class TableManager : SingleClass<TableManager>
             case "dungeon_c":
                 dungeon_c.LoadTxt(data);
                 break;
+            case "buff_c":
+                break;
         }
 
     }

@@ -8,26 +8,26 @@ public class BuffBase
 	public BuffController buffController = null;
 
 	public int uuid = 0;
-	public int buffType = 0;
+	public int buffId = 0;
 	public Vector3 position;
 	private bool isRun = false;
-	private cs_buff buffParam = null;
+	private buff_c buffParam = null;
 
     private float takeDataTime = 0;
 
     private GameUnit actor = null;  //触发者的游戏对象;
 
     //开始创角buff;
-    public bool CreateBuff(int uuid,cs_buff buffParam,Vector3 position )
+    public bool CreateBuff(int uuid,buff_c buffParam,Vector3 position )
 	{
 		this.buffParam = buffParam;
 		this.uuid = uuid;
 
-        buffType = this.buffParam.buffId;
-
+        buffId = this.buffParam.buffId;
+         
 		buffController = buffPrefab.GetComponent<BuffController> ();
 		buffController.uuid = uuid;
-		buffController.buffTypeId = buffType;
+		buffController.buffId = buffId;
 		buffPrefab.position = position;
 
 		this.position = position;
@@ -69,7 +69,7 @@ public class BuffBase
 
         takeDataTime += deltaTime;
 
-        if (takeDataTime > buffParam.invincibleTime)
+        if (takeDataTime > buffParam.showTime)
         {
             OnEnd(this.actor);
         }

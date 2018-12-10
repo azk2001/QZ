@@ -23,7 +23,7 @@ class UIAtkJoystick : UIJoyStick
 
         if (OnFireEvent != null)
         {
-            OnFireEvent(1, Vector3.zero);
+            OnFireEvent(GlobData.atkFireIndex, Vector3.zero);
         }
     }
 
@@ -31,7 +31,7 @@ class UIAtkJoystick : UIJoyStick
     {
         if (OnFireEvent != null)
         {
-            OnFireEvent(0, Vector3.zero);
+            OnFireEvent(GlobData.atkEndIndex, Vector3.zero);
         }
 
         base.OnPointerExit(eventData);

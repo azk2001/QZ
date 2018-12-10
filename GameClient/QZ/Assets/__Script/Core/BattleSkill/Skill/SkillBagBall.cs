@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+//一个变大的球
 class SkillBagBall : SkillBase
 {
     public float moveSpeed;         //移动速度;
@@ -21,7 +22,6 @@ class SkillBagBall : SkillBase
 
     protected override bool OnBegin(Vector3 position,Vector3 forward)
     {
-
         base.OnBegin(position,forward);
 
         return true;

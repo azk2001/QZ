@@ -27,12 +27,19 @@ namespace Werewolf.StatusIndicators.Components {
 		// Methods
 
 		public override void Update() {
-			if(Manager != null) {
+            return;
+            if (Manager != null) {
 				Vector3 v = FlattenVector(Get3DMousePosition()) - Manager.transform.position;
 				if(v != Vector3.zero) {
 					Manager.transform.rotation = Quaternion.LookRotation(v);
 				}
 			}
 		}
-	}
+
+        public override void SetAngle(Vector3 toPosition)
+        {
+            base.SetAngle(toPosition);
+        }
+
+    }
 }

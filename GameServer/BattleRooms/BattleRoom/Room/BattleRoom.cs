@@ -73,7 +73,14 @@ namespace GameServer
         /// <returns></returns>
         public override bool allPlayerReady()
         {
-            return base.allPlayerReady();
+            bool allReady = base.allPlayerReady();
+
+            if(allReady)
+            {
+                StartBattle();
+            }
+
+            return allReady;
         }
         
         public override void SetPlayerReady(NetPlayer netPlayer, bool isReady)

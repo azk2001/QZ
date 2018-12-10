@@ -17,11 +17,13 @@ public class SkillManager : SingleClass<SkillManager>
     public Dictionary<int, System.Type> skillType = new Dictionary<int, System.Type>()
     {
         {1,typeof(SkillFire)},		//普通 释放炸弹;
+        {2,typeof(SkillAerolite)},  //像地上砸火球;
+        {3,typeof(SkillBagBall)},   //像一个方向发射一个超大球;
 	};
 
     public Dictionary<int, SkillBase> allSkillBaseDic = new Dictionary<int, SkillBase>();
 
-    public void AddSkill(GameUnit gameUnit,int skillId)
+    public SkillBase AddSkill(int skillId)
     {
         int uuid = SkillManager.uuid;
 
@@ -31,7 +33,7 @@ public class SkillManager : SingleClass<SkillManager>
         if (sb != null)
         {
             sb.OnConfig(skillId);
-            gameUnit.skills.Add(sb);
         }
+        return sb;
     }
 }

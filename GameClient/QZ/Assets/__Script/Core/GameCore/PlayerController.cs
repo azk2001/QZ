@@ -185,6 +185,7 @@ public class PlayerController : SingleClass<PlayerController>
         }
     }
 
+    //翻滚
     public void OnRollJoystickEvent(Vector2 v2)
     {
         if (mGameUnit == null)

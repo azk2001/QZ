@@ -1,2 +1,2 @@
-mapId	mapName	mapType	sceneName	backMusic	icon	timeLimit	lastMapId	comReward	victoryConditions	starConditions	mapConfig
-10000	1V1对打	1	battleScene	10000	1001	icon	300	0	0	8,10,1,击杀对手10次;	1,100,1,100秒内通关;1,100,1,100秒内通关;
+mapId	mapName	mapType	sceneName	mapConfig	backMusic	icon	buffDropTime	width	height	timeLimit	lastMapId	comReward	victoryConditions	starConditions
+10000	1V1对打	1	battleScene	10000	1001	icon	15	50	50	300	0	0	8,10,1,击杀对手10次;	1,100,1,100秒内通关;1,100,1,100秒内通关;
